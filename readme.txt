@@ -11,6 +11,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 A Rapid Development Framework for WordPress.
 == Description ==
 
-C O M I N G    S O O N<br><br>
+Coming Soon<br><br>
 
 Learn more at <a href="http://piklist.com">Piklist.com</a>
