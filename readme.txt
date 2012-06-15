@@ -11,22 +11,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 A Rapid Development Framework for WordPress.
 == Description ==
 
-Piklist is the developers best friend. A rapid development framework for WordPress that will let you concentrate on the main focus of your plugin or theme, and let Piklist handle everything else.
+C O M I N G    S O O N<br><br>
 
-Piklist makes it easy to:
-* Build Fields for Settings page, widgets, Custom Post Types, Custom Taxonomies, User Profiles, with minimal code.
-* Conditionally show fields (or their values), based on Post Status and/or User Role.
-* Define Custom Post Statuses
-* <a href="http://piklist.com">and more...</a>
-
-== Installation ==
-
-* Install and active Piklist like any other plugin.
-* DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
-* USERS: Install Piklist so other themes and plugins can take advantage of Piklist functionality.
-
-
-== Changelog ==
-
-= 0.5.0 =
-* Initial release!
+Learn more at <a href="http://piklist.com">Piklist.com</a>
