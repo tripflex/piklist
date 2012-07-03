@@ -200,6 +200,7 @@ class PikList
     
     foreach ($paths as $display => $path)
     {   
+      $path .= $display == 'theme' ? '/piklist' : '';
       $files = self::get_directory_list($path . '/parts/' . $folder);
       foreach ($files as $part)
       {

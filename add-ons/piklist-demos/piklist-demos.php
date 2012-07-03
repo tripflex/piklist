@@ -31,11 +31,11 @@ Author URI: http://piklist.com/
           'label' => 'New'
           ,'public' => true
         )
-        ,'estimate' => array(
+        ,'demo' => array(
           'label' => 'Demo'
           ,'public' => true
         )
-        ,'quote' => array(
+        ,'tutorial' => array(
           'label' => 'Tutorial'
           ,'public' => true
         )

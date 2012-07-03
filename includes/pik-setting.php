@@ -85,7 +85,7 @@ class PikList_Setting
           self::$active_section = $section;
           
           ob_start();
-            
+
             include ($section['path'] . '/parts/' . $section['folder'] . '/' . $section['part']);
             
             $output = trim(ob_get_contents());

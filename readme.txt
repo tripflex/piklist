@@ -3,7 +3,7 @@ Contributors: piklist
 Tags: framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.4
 Requires at least: 3.3.2
-Stable tag: 0.5.0
+Stable tag: 0.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,8 +73,8 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   color picker
 *   add more
 
-**Choose a content type for your field (You can even mix-n-match on one form)**
 
+**Choose a content type for your field (You can even mix-n-match on one form)**
 *   post
 *   post_meta
 *   comment
@@ -85,7 +85,6 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   user_meta
 
 **Mix Field and Content types (i.e. Taxonomies as radio buttons)**
-
 *   Hide/Show based on another form field. 
 *   Hide/Show based on the post status.
 *   Hide/Show based on the users capability.
@@ -97,6 +96,11 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.5.1 =
+*   Updated Status Ranges
+*   Fixed Directory Parse Bug
+
 
 = 0.5.0 =
 *   Initial release!
