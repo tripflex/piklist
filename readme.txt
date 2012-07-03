@@ -99,7 +99,6 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
-=======
 = 0.5.2 =
 *   Fixed Conditional Tag for Style Loading
 *   Fixed Add-On Registration
