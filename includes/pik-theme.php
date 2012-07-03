@@ -108,7 +108,7 @@ class PikList_Theme
           
             if (isset($asset['condition']))
             {
-              $wp_scripts->add_data($asset['handle'], 'conditional', $asset['condition']);
+              $wp_styles->add_data($asset['handle'], 'conditional', $asset['condition']);
             }
           }
           

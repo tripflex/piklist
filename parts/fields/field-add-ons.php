@@ -6,40 +6,43 @@
   $values = array_keys($choices);
   for ($index = 0; $index < count($choices); $index++):
     $active = (!is_array($value) && $value == $values[$index]) || (is_array($value) && in_array($values[$index], $value));
+    if (!piklist_add_on::$available_add_ons[$values[$index]]['plugin']):
 ?>
     
-  <div class="piklist-field-add-on">  
+    <div class="piklist-field-add-on">  
   
-    <h3>
-      <?php echo piklist_add_on::$available_add_ons[$values[$index]]['Name']; ?>
-    </h3>
+      <h3>
+        <?php echo piklist_add_on::$available_add_ons[$values[$index]]['Name']; ?>
+      </h3>
     
-    <p>
-      <?php echo piklist_add_on::$available_add_ons[$values[$index]]['Description']; ?>
-    </p>
+      <p>
+        <?php echo piklist_add_on::$available_add_ons[$values[$index]]['Description']; ?>
+      </p>
     
-    <input 
-      type="checkbox"
-      id="<?php echo piklist_form::get_field_id($field, $scope, $index); ?>" 
-      name="<?php echo piklist_form::get_field_name($field, $scope, $index); ?>"
-      value="<?php echo $values[$index]; ?>"
-      <?php echo $active ? 'checked="checked"' : ''; ?>
-      <?php echo piklist_form::attributes_to_string($attributes); ?>
-    />
+      <input 
+        type="checkbox"
+        id="<?php echo piklist_form::get_field_id($field, $scope, $index); ?>" 
+        name="<?php echo piklist_form::get_field_name($field, $scope, $index); ?>"
+        value="<?php echo $values[$index]; ?>"
+        <?php echo $active ? 'checked="checked"' : ''; ?>
+        <?php echo piklist_form::attributes_to_string($attributes); ?>
+      />
     
-    <a href="#<?php echo piklist::dashes(piklist_add_on::$available_add_ons[$values[$index]]['Name']); ?>" class="button<?php echo $active ? '' : '-primary'; ?> piklist-field-add-on-button">
-      <?php _e($active ? 'Disable' : 'Activate'); ?>
-    </a>
-
-    <?php if (isset($settings[$values[$index]])): ?>
-      
-      <a href="<?php echo admin_url('admin.php?page=' . $values[$index]); ?>" class="button piklist-field-add-on-button-settings">
-        <?php _e('Settings'); ?>
+      <a href="#<?php echo piklist::dashes(piklist_add_on::$available_add_ons[$values[$index]]['Name']); ?>" class="button<?php echo $active ? '' : '-primary'; ?> piklist-field-add-on-button">
+        <?php _e($active ? 'Disable' : 'Activate'); ?>
       </a>
+
+      <?php if (isset($settings[$values[$index]])): ?>
       
-    <?php endif; ?>
+        <a href="<?php echo admin_url('admin.php?page=' . $values[$index]); ?>" class="button piklist-field-add-on-button-settings">
+          <?php _e('Settings'); ?>
+        </a>
+      
+      <?php endif; ?>
     
-  </div>
+    </div>
+  
+  <?php endif; ?>
 
 <?php endfor; ?>
 

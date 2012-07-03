@@ -953,18 +953,12 @@ class PikList_Form
               break;
             }
 
-            foreach (self::$fields['post_meta'] as $field)
-            {
-              if (!$field['display'])
-              {
-                delete_post_meta($ids['post'], $field['field']);
-              }
-            }
-
             foreach ($data as $key => $value) 
             {
               if (!in_array($key, array('meta_box_nonce')) && !empty($value))
               {
+                delete_post_meta($ids['post'], $key);
+                
                 if (is_array($value))
                 {                  
                   if (self::$fields['post_meta'][$key]['serialize'])
