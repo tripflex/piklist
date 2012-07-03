@@ -132,7 +132,7 @@ class PikList_CPT
             ,'exclude_from_search' => null
             ,'capability_type' => 'post'
             ,'hierarchical' => false
-            ,'public' => null
+            ,'public' => true
             ,'internal' => null
             ,'protected' => true
             ,'private' => null
@@ -374,49 +374,51 @@ class PikList_CPT
               ,'new' => 'New'
             ));
 
+    $types = !empty($data['type']) ? get_post_types() : explode(',', $data['type']);
+
+    foreach ($types as $type)
+    {
+      $statuses = isset($data['status']) ? explode(',', $data['status']) : false;
+
+      if (post_type_exists($type) 
+        && (!$data['capability'] || ($data['capability'] && current_user_can($data['capability'])))
+        && (!$data['status'] || ($data['status'] && in_array($post->post_status, $statuses)))
+        && (!$data['new'] || ($data['new'] && $pagenow != 'post-new.php'))
+      )
+      {
+        $id = 'piklist_meta_' . piklist::slug($part);
+
+        add_meta_box(
+          $id
+          ,__($data['name'], 'piklist')
+          ,array('piklist_cpt', 'meta_box')
+          ,$type
+          ,!empty($data['context']) ? $data['context'] : 'normal'
+          ,!empty($data['priority']) ? $data['priority'] : 'high'
+          ,array(
+            'part' => $part
+            ,'add_on' => $add_on
+            ,'order' => $data['order'] ? $data['order'] : null
+            ,'config' => $data
+          )
+        );
+
+        // NOTE: Improve
+        if (isset($data['lock']) && strtolower($data['lock']) == 'true')
+        {
+          add_filter("postbox_classes_{$type}_{$id}", array('piklist_cpt', 'lock_meta_boxes'));
+        }
+        if (isset($data['collapse']) && strtolower($data['collapse']) == 'true')
+        {
+          add_filter("postbox_classes_{$type}_{$id}", array('piklist_cpt', 'collapse_meta_boxes'));
+        }
+        add_filter("postbox_classes_{$type}_{$id}", array('piklist_cpt', 'default_classes'));
+      }
+    }
+          
     if (!empty($data['type']))
     {
-      $types = explode(',', $data['type']);
-      
-      foreach ($types as $type)
-      {
-        $statuses = isset($data['status']) ? explode(',', $data['status']) : false;
 
-        if (post_type_exists($type) 
-          && (!$data['capability'] || ($data['capability'] && current_user_can($data['capability'])))
-          && (!$data['status'] || ($data['status'] && in_array($post->post_status, $statuses)))
-          && (!$data['new'] || ($data['new'] && $pagenow != 'post-new.php'))
-        )
-        {
-          $id = 'piklist_meta_' . piklist::slug($part);
-          
-          add_meta_box(
-            $id
-            ,__($data['name'], 'piklist')
-            ,array('piklist_cpt', 'meta_box')
-            ,$type
-            ,!empty($data['context']) ? $data['context'] : 'normal'
-            ,!empty($data['priority']) ? $data['priority'] : 'high'
-            ,array(
-              'part' => $part
-              ,'add_on' => $add_on
-              ,'order' => $data['order'] ? $data['order'] : null
-              ,'config' => $data
-            )
-          );
-          
-          // NOTE: Improve
-          if (isset($data['lock']) && strtolower($data['lock']) == 'true')
-          {
-            add_filter("postbox_classes_{$type}_{$id}", array('piklist_cpt', 'lock_meta_boxes'));
-          }
-          if (isset($data['collapse']) && strtolower($data['collapse']) == 'true')
-          {
-            add_filter("postbox_classes_{$type}_{$id}", array('piklist_cpt', 'collapse_meta_boxes'));
-          }
-          add_filter("postbox_classes_{$type}_{$id}", array('piklist_cpt', 'default_classes'));
-        }
-      }
     }
   }
   

@@ -123,7 +123,7 @@ class PikList_Form
     // ,'taxonomy_meta' => array()
   );
   
-  private static $save_ids = null;
+  public static $save_ids = null;
   
   private static $field_alias = array(
     'datepicker' => 'text'
@@ -423,7 +423,8 @@ class PikList_Form
     {
       array_push($wrapper['class'], 'piklist-field-column-' . $field['columns']);
     }
-    if (is_numeric($field['attributes']['columns']))
+    
+    if (isset($field['attributes']['columns']) && is_numeric($field['attributes']['columns']))
     {
       array_push($field['attributes']['class'], 'piklist-field-column-' . $field['attributes']['columns']);
       unset($field['attributes']['columns']);
@@ -457,13 +458,16 @@ class PikList_Form
                   $status_range_start = array_search($status_range[0], $status_list);
                   $status_range_end = array_search($status_range[1], $status_list);
 
-                  $status_slice = array();
-                  for ($i = $status_range_start; $i <= $status_range_end; $i++)
+                  if (is_numeric($status_range_start) && is_numeric($status_range_end))
                   {
-                    array_push($status_slice, $status_list[$i]);
-                  }
+                    $status_slice = array();
+                    for ($i = $status_range_start; $i <= $status_range_end; $i++)
+                    {
+                      array_push($status_slice, $status_list[$i]);
+                    }
                               
-                  array_splice($status[$status_display], array_search($_status, $status[$status_display]), 1, $status_slice);
+                    array_splice($status[$status_display], array_search($_status, $status[$status_display]), 1, $status_slice);
+                  }
                 }
               }
             }
