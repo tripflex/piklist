@@ -146,7 +146,7 @@
   
     .ui-datepicker th,
     .ui-datepicker-title {
-      font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+      font-family: Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
       font-weight: normal;
     }
  
@@ -267,40 +267,54 @@
   
 
 /* --------------------------------------------------------------------------------
-  Extra Styles for the core plugin settings pages
+  Extra Styles for the core plugin pages
 --------------------------------------------------------------------------------- */
+  
+  html body .piklist-left {
+    margin-left: 0px;
+  } 
 
-  ul.piklist-social-icons li {
-    float: left;
-    width: 120px;
+  a.piklist-social,
+  a.piklist-social:link,
+  a.piklist-social:visited {
+    float: right;
+    background-repeat: no-repeat;
+    display: block;
+    height: 24px;
+    width: 24px;
+    margin-right: 1em;
+    padding: 5px 0 0 0;
+    color: #000000;
+    text-decoration: none;
+    text-indent: -99999px;
+    opacity: 0.5;
+  	filter: alpha(opacity=50);
   }
-
-    ul.piklist-social-icons li a {
-      background-repeat: no-repeat;
-      display: block;
-      height: 24px;
-      padding: 5px 0 0 30px;
-      color: #000000;
-      text-decoration: none;
+    
+    a.piklist-social:hover,
+    a.piklist-social:focus,
+    a.piklist-social:active {
+      opacity: 1;
+    	filter: alpha(opacity=100);
     }
     
-    ul.piklist-social-icons li a.news {
-      background-image: url("../img/glyphicons_399_e-mail.png");
+    a.piklist-social-news {
+      background-image: url('../img/glyphicons_399_e-mail.png');
     }
 
-    ul.piklist-social-icons li a.facebook {
-      background-image: url("../img/glyphicons_390_facebook.png");
+    a.piklist-social-facebook {
+      background-image: url('../img/glyphicons_390_facebook.png');
     }
 
-    ul.piklist-social-icons li a.twitter {
-      background-image: url("../img/glyphicons_391_twitter_t.png");
+    a.piklist-social-twitter {
+      background-image: url('../img/glyphicons_391_twitter_t.png');
     }
 
-    ul.piklist-social-icons li a.tweet {
-      background-image: url("../img/glyphicons_392_twitter.png");
+    a.piklist-social-tweet {
+      background-image: url('../img/glyphicons_392_twitter.png');
     }
 
-    ul.piklist-social-icons li a.google-plus {
-      background-image: url("../img/glyphicons_386_google_plus.png");
+    a.piklist-social-google-plus {
+      background-image: url('../img/glyphicons_386_google_plus.png');
     }
 

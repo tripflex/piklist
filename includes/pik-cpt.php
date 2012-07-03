@@ -374,7 +374,7 @@ class PikList_CPT
               ,'new' => 'New'
             ));
 
-    $types = !empty($data['type']) ? get_post_types() : explode(',', $data['type']);
+    $types = empty($data['type']) ? get_post_types() : explode(',', $data['type']);
 
     foreach ($types as $type)
     {

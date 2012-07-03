@@ -39,7 +39,7 @@ class PikList_Admin
   
   public static function admin_footer_text($footer_text)
   {
-    return str_replace('</a>.', sprintf(__('</a> &amp; <a href="%s">PikList</a>.'), 'http://www.piklist.com'), $footer_text);
+    return str_replace('</a>.', sprintf(__('</a> and <a href="%s">Piklist</a>.'), 'http://piklist.com'), $footer_text);
   }
   
   public static function hide_ui()
