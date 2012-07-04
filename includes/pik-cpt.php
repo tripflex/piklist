@@ -15,6 +15,7 @@ class PikList_CPT
   public static function _construct()
   {    
     add_action('init', array('piklist_cpt', 'init'));
+    add_action('add_meta_boxes', array('piklist_cpt', 'register_meta_boxes'));
     add_action('do_meta_boxes', array('piklist_cpt', 'sort_meta_boxes'), 100, 3);
     add_action('save_post', array('piklist_cpt', 'save_post_data'));
     add_action('edit_page_form', array('piklist_cpt', 'edit_form'));
@@ -111,9 +112,6 @@ class PikList_CPT
 
     foreach (self::$post_types as $post_type => &$configuration)
     {
-      $configuration['register_meta_box_cb'] = array('piklist_cpt', 'register_meta_boxes');
-
-      $configuration['supports'] = empty($configuration['supports']) ? array('nothing') : $configuration['supports'];
       register_post_type($post_type, $configuration);
       
       if (isset($configuration['status']) && !empty($configuration['status']))
@@ -350,7 +348,7 @@ class PikList_CPT
   }
   
   public static function register_meta_boxes()
-  { 
+  {
     piklist::process_views('meta-boxes', array('piklist_cpt', 'register_meta_boxes_callback'));
   }
 
@@ -375,7 +373,7 @@ class PikList_CPT
             ));
 
     $types = empty($data['type']) ? get_post_types() : explode(',', $data['type']);
-
+    
     foreach ($types as $type)
     {
       $statuses = isset($data['status']) ? explode(',', $data['status']) : false;
@@ -439,8 +437,8 @@ class PikList_CPT
         
         self::$meta_box_nonce = true;
       }
-      
-      piklist::render(piklist::$paths[$meta_box['args']['add_on']] . '/parts/meta-boxes/' . $meta_box['args']['part'], array(
+
+      piklist::render(piklist::$paths[$meta_box['args']['add_on']] . ($meta_box['args']['add_on'] == 'theme' ? '/piklist' : '') . '/parts/meta-boxes/' . $meta_box['args']['part'], array(
         'type' => $type
         ,'prefix' => 'piklist'
         ,'plugin' => 'piklist'

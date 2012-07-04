@@ -171,11 +171,11 @@ Order: 10
   </div>
 
   <p class="welcome-panel-dismiss">
-    Do you have any questions? Please post them on our <a href="http://piklist.com/support" target="_blank">Support Forum</a>.
+    ...stay tuned, more features, tutorials and docs coming soon...
   </p>
 
   <p class="about-text">
-    ...stay tuned, more features, tutorials and docs coming soon...
+    Do you have any questions? Please post them on our <a href="http://piklist.com/support?#utm_source=wpadmin&utm_medium=welcomepage&utm_campaign=piklistplugin" target="_blank">Support Forum</a>.
   </p>
     
 </div>
