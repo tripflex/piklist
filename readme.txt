@@ -3,7 +3,7 @@ Contributors: piklist
 Tags: framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.4
 Requires at least: 3.3.2
-Stable tag: 0.5.2
+Stable tag: 0.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,10 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.5.3 =
+*   Updated Meta Boxes to respect new theme folder structure
+*   Updated global meta boxes to work on default post types
 
 = 0.5.2 =
 *   Fixed Conditional Tag for Style Loading
