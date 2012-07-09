@@ -9,7 +9,6 @@ Lock: true
   piklist('field', array(
     'type' => 'editor'
     ,'field' => 'demo_editor'
-    ,'scope' => 'post_meta'
     ,'label' => __('HTML Content')
     ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
     ,'value' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')

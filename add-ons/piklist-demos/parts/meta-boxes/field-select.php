@@ -9,7 +9,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'select'
     ,'field' => 'select'
-    ,'scope' => 'post_meta'
     ,'label' => __('Select')
     ,'value' => 'third'
     ,'choices' => array(
@@ -24,7 +23,6 @@ Collapse: true
     'type' => 'select'
     ,'field' => 'select_add_more'
     ,'add_more' => true
-    ,'scope' => 'post_meta'
     ,'label' => __('Add More')
     ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
     ,'value' => 'third'

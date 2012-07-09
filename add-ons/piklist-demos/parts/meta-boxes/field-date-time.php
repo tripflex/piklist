@@ -9,7 +9,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'datepicker'
     ,'field' => 'date'
-    ,'scope' => 'post_meta'
     ,'label' => __('Date')
     ,'description' => __('Choose a date')
     ,'options' => array(
@@ -26,7 +25,6 @@ Collapse: true
     'type' => 'datepicker'
     ,'field' => 'date_add_more'
     ,'add_more' => true
-    ,'scope' => 'post_meta'
     ,'label' => __('Add More')
     ,'description' => __('Choose a date')
     ,'options' => array(
@@ -41,7 +39,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'timepicker'
     ,'field' => 'time'
-    ,'scope' => 'post_meta'
     ,'label' => __('Time')
     ,'description' => __('Choose a time')
     ,'options' => array(
@@ -60,7 +57,6 @@ Collapse: true
     'type' => 'timepicker'
     ,'field' => 'time_add_more'
     ,'add_more' => true
-    ,'scope' => 'post_meta'
     ,'label' => __('Add More')
     ,'description' => __('Choose a time')
     ,'options' => array(

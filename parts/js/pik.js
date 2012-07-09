@@ -254,13 +254,12 @@
                 .click(function(event)
                 {
                   event.preventDefault();
-                  
+
                   $('#piklist-field-add-more').hide();
                               
                   piklist.add_more_active.find(':input').each(function()
                   {
-                    var matches = $(this).attr('name').match(/\[(\d+)\]/);
-                    if ($(this).attr('name').indexOf('[]') == -1 && matches === null)
+                    if ($(this).attr('name').indexOf('[]') == -1)
                     {
                       $(this).attr('name', $(this).attr('name') + '[]');
                     }
@@ -387,6 +386,15 @@
                                 }
                               }
                             }
+                          }
+                          else
+                          {
+                            var name = input.attr(replace[h].attr);
+                            if (name.substr(name.length - 2) != '[]')
+                            {
+                              input.attr(replace[h].attr, name + '[]');
+                            }
+                            console.log(input.attr(replace[h].attr), name, name.substr(name.length - 2))
                           }
                           
                         break;

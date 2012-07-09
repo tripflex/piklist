@@ -1,9 +1,9 @@
-=== PIKLIST  | Rapid Development Framework ===
+=== Piklist ===
 Contributors: piklist
 Tags: framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.4
 Requires at least: 3.3.2
-Stable tag: 0.5.3
+Stable tag: 0.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,12 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.5.4 =
+*   Fixed Meta Box Sort for non-ordered meta boxes
+*   Added support to register a plugin with Piklist by using the Plugin Type comment
+*   Updated Theme Path
+*   Updated fields so that post_meta is the default scope for meta-boxes
 
 = 0.5.3 =
 *   Updated Meta Boxes to respect new theme folder structure

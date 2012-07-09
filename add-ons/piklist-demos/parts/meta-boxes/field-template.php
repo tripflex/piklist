@@ -9,7 +9,6 @@ Collapse: true
 
   piklist('field', array(
     'type' => 'text'
-    ,'scope' => 'post_meta'
     ,'field' => 'template'
     ,'label' => __('Text')
     ,'description' => __('ipsum dolor sit amet, consectetur adipiscing elit.')
@@ -21,7 +20,6 @@ Collapse: true
   
   piklist('field', array(
     'type' => 'text'
-    ,'scope' => 'post_meta'
     ,'field' => 'template_add_more'
     ,'add_more' => true
     ,'label' => __('Text')

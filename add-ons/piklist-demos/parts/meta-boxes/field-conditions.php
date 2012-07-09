@@ -8,7 +8,6 @@ Collapse: false
 
   piklist('field', array(
     'type' => 'radio'
-    ,'scope' => 'post_meta'
     ,'field' => 'show_hide'
     ,'label' => __('Toggle a field')
     ,'choices' => array(
@@ -21,22 +20,19 @@ Collapse: false
 
   piklist('field', array(
     'type' => 'text'
-    ,'scope' => 'post_meta'
     ,'field' => 'show_hide_field'
     ,'label' => __('Show/Hide Field')
     ,'description' => __('This field is toggled by the field above')
     ,'conditions' => array(
       array(
         'field' => 'show_hide'
-        ,'scope' => 'post_meta'
-        ,'value' => 'show'
+            ,'value' => 'show'
       )
     )
   ));
   
   piklist('field', array(
     'type' => 'radio'
-    ,'scope' => 'post_meta'
     ,'field' => 'change'
     ,'label' => __('Update a field')
     ,'choices' => array(
@@ -47,15 +43,13 @@ Collapse: false
     ,'conditions' => array(
       array(
         'field' => 'update_field'
-        ,'scope' => 'post_meta'
-        ,'value' => 'hello-world' 
+            ,'value' => 'hello-world' 
         ,'update' => 'Hello World!' 
         ,'type' => 'update'
       )
       ,array(
         'field' => 'update_field'
-        ,'scope' => 'post_meta'
-        ,'value' => 'clear' 
+            ,'value' => 'clear' 
         ,'update' => '' 
         ,'type' => 'update'
       )
@@ -64,7 +58,6 @@ Collapse: false
 
   piklist('field', array(
     'type' => 'text'
-    ,'scope' => 'post_meta'
     ,'field' => 'update_field'
     ,'label' => __('Update This Field')
     ,'description' => __('This field is updated by the field above')
