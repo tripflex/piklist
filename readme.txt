@@ -1,4 +1,4 @@
-=== Piklist ===
+=== PIKLIST | Rapid Development Framework ===
 Contributors: piklist
 Tags: framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.4
