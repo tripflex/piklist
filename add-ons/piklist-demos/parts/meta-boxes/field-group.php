@@ -10,7 +10,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'group'
     ,'field' => 'address'
-    ,'scope' => 'post_meta'
     ,'label' => __('Address')
     ,'description' => __('This is an example of how to build a simple address field using the group type.')
     ,'fields' => array(
@@ -105,7 +104,6 @@ Collapse: true
     'type' => 'group'
     ,'field' => 'address_add_more'
     ,'add_more' => true
-    ,'scope' => 'post_meta'
     ,'label' => __('Address (Add More)')
     ,'description' => __('This is an example of how to build a simple address field using the group type.')
     ,'fields' => array(
@@ -198,7 +196,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'group'
     ,'field' => 'group_add_more'
-    ,'scope' => 'post_meta'
     ,'add_more' => true
     ,'label' => __('Add More')
     ,'description' => __('This is an example of how to build a list with multiple element types.')
@@ -240,29 +237,25 @@ Collapse: true
       array(
         'type' => 'text'
         ,'field' => 'address_1'
-        ,'scope' => 'post_meta'
-        ,'label' => __('Street Address')
+            ,'label' => __('Street Address')
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'address_2'
-        ,'scope' => 'post_meta'
-        ,'label' => __('PO Box, Suite, etc.')
+            ,'label' => __('PO Box, Suite, etc.')
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'city'
-        ,'scope' => 'post_meta'
-        ,'label' => __('City')
+            ,'label' => __('City')
         ,'columns' => 5
       )
       ,array(
         'type' => 'select'
         ,'field' => 'state'
-        ,'scope' => 'post_meta'
-        ,'label' => __('State')
+            ,'label' => __('State')
         ,'columns' => 4
         ,'choices' => array(
           'AL' => 'Alabama'
@@ -321,8 +314,7 @@ Collapse: true
       ,array(
         'type' => 'text'
         ,'field' => 'zip_code'
-        ,'scope' => 'post_meta'
-        ,'label' => __('Zip Code')
+            ,'label' => __('Zip Code')
         ,'columns' => 3
       )
     )

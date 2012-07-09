@@ -8,7 +8,6 @@ Collapse: true
 
   piklist('field', array(
     'type' => 'text'
-    ,'scope' => 'post_meta'
     ,'field' => 'text_class_small'
     ,'label' => __('Small')
     ,'description' => __('class="small-text"')
@@ -21,7 +20,6 @@ Collapse: true
 
   piklist('field', array(
     'type' => 'text'
-    ,'scope' => 'post_meta'
     ,'field' => 'text_columns_element'
     ,'label' => __('Columns Element')
     ,'description' => __('columns="6"')
@@ -33,7 +31,6 @@ Collapse: true
   
   piklist('field', array(
     'type' => 'text'
-    ,'scope' => 'post_meta'
     ,'field' => 'text_add_more'
     ,'add_more' => true
     ,'label' => __('Add More')
@@ -46,7 +43,6 @@ Collapse: true
   
   piklist('field', array(
     'type' => 'text'
-    ,'scope' => 'post_meta'
     ,'field' => 'text_nested'
     ,'label' => __('Nested Field')
     ,'description' => __('This [field=text_nested_select] is nested in the description.')
@@ -68,7 +64,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'number'
     ,'field' => 'number'
-    ,'scope' => 'post_meta'
     ,'label' => __('Number')
     ,'description' => __('ipsum dolor sit amet, consectetur adipiscing elit.')
     ,'value' => 5
@@ -81,7 +76,6 @@ Collapse: true
   
   piklist('field', array(
     'type' => 'textarea'
-    ,'scope' => 'post_meta'
     ,'field' => 'demo_textarea_large'
     ,'label' => __('Large Code')
     ,'description' => __('class="large-text code" rows="10" columns="50"')

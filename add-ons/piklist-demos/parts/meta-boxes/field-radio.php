@@ -9,7 +9,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'radio'
-    ,'scope' => 'post_meta'
     ,'label' => __('Normal')
     ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
     ,'value' => 'third'
@@ -24,7 +23,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'radio_inline'
-    ,'scope' => 'post_meta'
     ,'label' => __('Single Line')
     ,'value' => 'no'
     ,'list' => false
@@ -37,7 +35,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'group'
     ,'field' => 'radio_list'
-    ,'scope' => 'post_meta'
     ,'label' => __('Group Lists')
     ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
     ,'fields' => array(
@@ -72,7 +69,6 @@ Collapse: true
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'radio_nested'
-    ,'scope' => 'post_meta'
     ,'label' => __('Nested Field')
     ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
     ,'value' => 'third'

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Piklist Demos
 Plugin URI: http://piklist.com
-Description: Piklist Demos. Creates a Demo post type and an Example Settings Page, with Field Examples.
+Description: Piklist Demos. Creates a Demo post type, Example Settings Page and Widget, with Field Examples.
 Version: 0.1
 Author: Piklist
 Author URI: http://piklist.com/

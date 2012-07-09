@@ -11,6 +11,7 @@
     piklist('field', array(
       'type' => 'hidden'
       ,'field' => 'nonce'
+      ,'scope' => false
       ,'value' => $nonce
     ));
   

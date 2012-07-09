@@ -62,7 +62,7 @@
   <h4><?php _e('Learn to make Widgets'); ?></h4>
   
   <p>
-    Steve is the an chance to put a link to the docs on how to build widgets?
+    <?php _e('Check out the documentation for how to easily build your own custom widgets!')?>
   </p>  
   
 <?php endif; ?>
