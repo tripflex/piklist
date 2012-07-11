@@ -30,10 +30,12 @@
   ?>
 
   <div class="<?php echo $class_name; ?>-forms">
-
+    
     <?php foreach ($widgets as $w): ?>
 
       <div class="hide-all <?php echo !empty($w['form_data']['width']) ? 'piklist-widget-width-' . $w['form_data']['width'] : ''; ?> <?php echo !empty($w['form_data']['height']) ? 'piklist-widget-height-' . $w['form_data']['height'] : ''; ?> <?php echo $class_name; ?>-form <?php echo $class_name; ?>-form-<?php echo $w['add_on'] . '--' . $w['name']; ?> <?php echo $instance[$widget_name] == $widget_name . '--' . $w['add_on'] . '--' . $w['name'] ? $class_name . '-form-selected' : ''; ?> ">
+
+        <?php do_action('admin_notices'); ?>
         
         <?php if (!empty($w['data']['description'])): ?>
       
@@ -43,7 +45,7 @@
       
         <?php endif; ?>
 
-        <?php if ($w['form']) piklist::render($w['form']); ?>
+        <?php if ($w['form']) piklist($w['form']); ?>
 
       </div>
 

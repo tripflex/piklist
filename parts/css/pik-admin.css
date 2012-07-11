@@ -272,18 +272,22 @@
   
   html body .piklist-left {
     margin-left: 0px;
-  } 
+  }
+
+.piklist-social-links {
+    display: block;
+    padding-bottom: 30px;
+  }
 
   a.piklist-social,
   a.piklist-social:link,
   a.piklist-social:visited {
-    float: right;
+    float: left;
     background-repeat: no-repeat;
     display: block;
     height: 24px;
     width: 24px;
     margin-right: 1em;
-    padding: 5px 0 0 0;
     color: #000000;
     text-decoration: none;
     text-indent: -99999px;

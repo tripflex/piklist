@@ -30,7 +30,7 @@ class PikList_Theme
   
   public function setup_theme()
   {
-    if (is_dir($path = get_template_directory() . '/piklist'))
+    if (is_dir($path = get_stylesheet_directory() . '/piklist'))
     {
       piklist::$paths['theme'] = $path;
     }
