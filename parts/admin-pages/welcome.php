@@ -9,18 +9,18 @@ Order: 10
 
   <div class="welcome-panel-content">
   
-    <p>
-      <a title="Get Piklist news in your inbox" class="piklist-social piklist-social-news" href="http://eepurl.com/lkbD9">News</a>
-      <a title="Like Piklist on Facebook" class="piklist-social piklist-social-facebook" href="https://www.facebook.com/Piklist">Like</a>
-      <a title="Like Piklist on Google Plus" class="piklist-social piklist-social-google-plus" href="https://plus.google.com/u/0/108403125978548990804/posts">Follow</a>
-      <a title="Tweet you love Piklist" class="piklist-social piklist-social-tweet"href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fpiklist.com%2F&source=tweetbutton&text=I%20am%20using%20Piklist%20and%20loving%20it.%20WordPress%20Developers%20get%20Piklist%20now.%20&url=http%3A%2F%2Fbit.ly%2Fgetpiklist">Tweet</a>
-      <a title="Follow Piklist on Twitter" class="piklist-social piklist-social-twitter"href="https://www.twitter.com/Piklist">Follow</a>
-    </p>
-  
     <h3 class="piklist-left">Welcome to Piklist</h3>
 
     <p class="about-text">
       Piklist was designed from the ground up to be a powerful, flexible framework for WordPress. With Piklist you can tailor and extend WordPress even more!
+    </p>
+
+    <p class="piklist-social-links">
+      <a target="_blank" title="Get Piklist news in your inbox" class="piklist-social piklist-social-news" href="http://eepurl.com/lkbD9">News</a>
+      <a target="_blank" title="Like Piklist on Facebook" class="piklist-social piklist-social-facebook" href="https://www.facebook.com/Piklist">Like</a>
+      <a target="_blank" title="Like Piklist on Google Plus" class="piklist-social piklist-social-google-plus" href="https://plus.google.com/u/0/108403125978548990804/posts">Follow</a>
+      <a target="_blank" title="Tweet you love Piklist" class="piklist-social piklist-social-tweet"href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fpiklist.com%2F&source=tweetbutton&text=I'm%20using%20Piklist%20and%20loving%20it!&url=http%3A%2F%2Fbit.ly%2Fgetpiklist">Tweet</a>
+      <a target="_blank" title="Follow Piklist on Twitter" class="piklist-social piklist-social-twitter"href="https://www.twitter.com/Piklist">Follow</a>
     </p>
 
     <div class="welcome-panel-column-container">
@@ -177,6 +177,14 @@ Order: 10
 
     <p class="about-text">
       Do you have any questions? Please post them on our <a href="http://piklist.com/support?#utm_source=wpadmin&utm_medium=welcomepage&utm_campaign=piklistplugin" target="_blank">Support Forum</a>.
+    </p>
+
+    <p class="piklist-social-links">
+      <a target="_blank" title="Get Piklist news in your inbox" class="piklist-social piklist-social-news" href="http://eepurl.com/lkbD9">News</a>
+      <a target="_blank" title="Like Piklist on Facebook" class="piklist-social piklist-social-facebook" href="https://www.facebook.com/Piklist">Like</a>
+      <a target="_blank" title="Like Piklist on Google Plus" class="piklist-social piklist-social-google-plus" href="https://plus.google.com/u/0/108403125978548990804/posts">Follow</a>
+      <a target="_blank" title="Tweet you love Piklist" class="piklist-social piklist-social-tweet"href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fpiklist.com%2F&source=tweetbutton&text=I'm%20using%20Piklist%20and%20loving%20it!&url=http%3A%2F%2Fbit.ly%2Fgetpiklist">Tweet</a>
+      <a target="_blank" title="Follow Piklist on Twitter" class="piklist-social piklist-social-twitter"href="https://www.twitter.com/Piklist">Follow</a>
     </p>
     
   </div>

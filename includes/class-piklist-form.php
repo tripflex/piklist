@@ -193,7 +193,7 @@ class PikList_Form
   
   public static function get_field_id($field, $scope, $index = false)
   {
-    if (self::is_widget() && $field != 'piklist_fields_id')
+    if (self::is_widget() && ($scope != 'piklist' && $field != 'fields_id'))
     {
       $id = piklist_widget::widget()->get_field_id($field);
     }
@@ -217,7 +217,7 @@ class PikList_Form
   
   public static function get_field_name($field, $scope, $index = false)
   {
-    if (self::is_widget() && $field != 'piklist_fields_id')
+    if (self::is_widget() && ($scope != 'piklist' && $field != 'fields_id'))
     {
       $name = piklist_widget::widget()->get_field_name($field). (is_numeric($index) ? '[]' : '');
     }
@@ -403,6 +403,7 @@ class PikList_Form
       ,'display' => false                   // show field value, not key (mostly internal)
       ,'list' => true                       // wraps multiple in list
       ,'add_more' => false                  // makes it an add more field
+      ,'required' => false                  // Is the field required?
     ));
     
     // Should this field be rendered?
@@ -872,7 +873,7 @@ class PikList_Form
           
           if (!$data['capability'] || ($data['capability'] && current_user_can($data['capability'])))
           {
-            $data['nonce'] = wp_create_nonce(plugin_basename(__FILE__));
+            $data['nonce'] = wp_create_nonce('piklist/piklist.php');
             $data['form'] = $path . '/parts/forms/' . $form;
             $data['ids'] = self::$save_ids;
                         
@@ -942,12 +943,12 @@ class PikList_Form
   public static function save($ids = null)
   { 
     // NOTE: Meta Validation
-    if (!isset($_REQUEST['piklist_fields_id']))
+    if (!isset($_REQUEST['piklist']['fields_id']))
     {
       return false;
     }
 
-    self::$fields = get_transient('pik_' . $_REQUEST['piklist_fields_id']);
+    self::$fields = get_transient('pik_' . $_REQUEST['piklist']['fields_id']);
     
     foreach (array('post', 'comment', 'user', 'taxonomy', 'post_meta', 'comment_meta', 'user_meta', 'taxonomy_meta') as $type)
     {
@@ -972,7 +973,7 @@ class PikList_Form
 
             foreach ($data as $key => $value) 
             {
-              if (!in_array($key, array('meta_box_nonce')) && !empty($value))
+              if (!empty($value))
               {
                 delete_post_meta($ids['post'], $key);
                 

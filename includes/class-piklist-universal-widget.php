@@ -30,7 +30,6 @@ class PikList_Universal_Widget extends WP_Widget
     
   public function form($instance) 
   {
-    // NOTE: Add filter to block the display for perms, etc
     $this->register_widgets();
     
     $this->instance = $instance;

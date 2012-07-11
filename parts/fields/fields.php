@@ -2,8 +2,8 @@
 <?php
   piklist('field', array(
     'type' => 'hidden'
-    ,'scope' => false
-    ,'field' => 'piklist_fields_id'
+    ,'scope' => 'piklist'
+    ,'field' => 'fields_id'
     ,'value' => $fields_id
     ,'widget' => false
   ));

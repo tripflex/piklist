@@ -293,12 +293,12 @@ class PikList_CPT
   {
     global $wpdb, $post;
     
-    if (empty($_POST) || !isset($_POST['post_meta']['meta_box_nonce']))
+    if (empty($_REQUEST) || !isset($_REQUEST['piklist']['nonce']))
     {
       return $post_id;
     }
     
-    if (!wp_verify_nonce($_POST['post_meta']['meta_box_nonce'], plugin_basename(__FILE__))) 
+    if (!wp_verify_nonce($_REQUEST['piklist']['nonce'], 'piklist/piklist.php')) 
     {
       return $post_id;
     }
@@ -326,23 +326,23 @@ class PikList_CPT
         'post' => $post_id
       ));
 
-      $_post = array(
+      $_REQUEST = array(
         'ID' => $post_id
       );
 
       if (empty($_REQUEST['post_title']) || !isset($_REQUEST['post_title']))
       {
-        $_post['post_title'] = ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $post_id;
+        $_REQUEST['post_title'] = ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $post_id;
       }
 
       if (isset($_REQUEST['original_publish']) && $_REQUEST['original_publish'] != 'Publish')
       {
-        $_post['post_status'] = $_REQUEST['original_publish'];
+        $_REQUEST['post_status'] = $_REQUEST['original_publish'];
       }
       
-      if (count($_post) > 1)
+      if (count($_REQUEST) > 1)
       {
-        wp_update_post($_post);
+        wp_update_post($_REQUEST);
       }
           
     add_action('save_post', array('piklist_cpt', 'save_post_data'));
@@ -431,9 +431,9 @@ class PikList_CPT
       {
         piklist_form::render_field(array(
           'type' => 'hidden'
-          ,'field' => 'meta_box_nonce'
-          ,'value' => wp_create_nonce(plugin_basename(__FILE__))
-          ,'scope' => 'post_meta'
+          ,'field' => 'nonce'
+          ,'value' => wp_create_nonce('piklist/piklist.php')
+          ,'scope' => 'piklist'
         ));
         
         self::$meta_box_nonce = true;

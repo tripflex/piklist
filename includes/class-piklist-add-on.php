@@ -31,8 +31,6 @@ class PikList_Add_On
       }
     }
     
-    // piklist::pre(piklist::$paths); die;
-    
     $paths = array();
     foreach (piklist::$paths as $from => $path)
     {
