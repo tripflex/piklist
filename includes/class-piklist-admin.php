@@ -44,7 +44,7 @@ class PikList_Admin
   
   public static function hide_ui()
   {
-    return isset($_REQUEST['_pik_admin_hide_ui']) && $_REQUEST['_pik_admin_hide_ui'] == 'true';
+    return isset($_REQUEST['_piklist_admin_hide_ui']) && $_REQUEST['_piklist_admin_hide_ui'] == 'true';
   }
   
   public static function redirect_post_location($location, $post_id)
@@ -55,7 +55,7 @@ class PikList_Admin
       
       foreach ($_REQUEST as $key => $value)
       {
-        if (substr($key, 0, 4) == '_pik')
+        if (substr($key, 0, 8) == '_piklist')
         {
           $pik_vars[$key] = $value;
         }

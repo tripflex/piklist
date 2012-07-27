@@ -250,6 +250,7 @@ class PikList_Form
         if ($id)
         {
           $saved = piklist(wp_get_post_terms($id, $key), 'name');
+          $key = false;
         }
         
       break;
@@ -372,38 +373,39 @@ class PikList_Form
   {  
     $field = wp_parse_args($field, array(
       'field' => false
+      ,'type' => 'text'                     // field type
       ,'label' => false
       ,'description' => false
-      ,'capability' => false                // one user role
-      ,'choices' => false                   // single array of values, or key => values
       ,'scope' => null                      // how content is saved if you want it saved. post, post_meta, user, user_meta, comment, comment_meta (not required for Widget or Settings)
       ,'value' => false                     // default value
+      ,'capability' => false                // one user role
+      ,'add_more' => false                  // makes it an add more field
+      ,'choices' => false                   // single array of values, or key => values
+      ,'list' => true                       // wraps multiple in list
+      ,'position' => false                  // start, end, wrap
+      ,'serialize' => false                 // by default values stored as unique. To save as a serialized array, set to TRUE. Will work for any multiple select input.
+      ,'template' => self::get_template()
+      ,'wrapper' => false 
+      ,'rows' => 1
+      ,'columns' => null
+      ,'embed' => false                     // internal
+      ,'child_field' => false
+      ,'label_position' => 'after'  
+      ,'unique' => true                     // when editing a field, FALSE will add new data, TRUE will overwrite.
+      ,'disable_label' => false             // remove label table cell (you would use for post_meta)
+      ,'conditions' => false                // array of array of conditions
+      ,'options' => false                   // tbd
+      ,'on_post_status' => false 
+      ,'on_comment_status' => false         // tbd
+      ,'display' => false                   // show field value, not key (mostly internal)
+      ,'required' => false                  // Is the field required?
+      ,'index' => null                      // internal 
       ,'attributes' => array(               // html attributes
         'class' => array()
         ,'title' => false                     // title
         ,'alt' => false                       // alt 
         ,'tabindex' => false                  // tabindex
       )
-      ,'template' => self::get_template()
-      ,'wrapper' => false 
-      ,'rows' => 1
-      ,'columns' => null
-      ,'type' => 'text'                     // field type
-      ,'embed' => false                     // internal
-      ,'child_field' => false
-      ,'label_position' => 'after'
-      ,'serialize' => false                 // by default values stored as unique. To save as a serialized array, set to TRUE. Will work for any multiple select input.
-      ,'unique' => true                     // when editing a field, FALSE will add new data, TRUE will overwrite.
-      ,'disable_label' => false             // remove label table cell (you would use for post_meta)
-      ,'conditions' => false                // array of array of conditions
-      ,'position' => false                  // top, bottom, wrap
-      ,'options' => false                   // tbd
-      ,'on_post_status' => false 
-      ,'on_comment_status' => false         // tbd
-      ,'display' => false                   // show field value, not key (mostly internal)
-      ,'list' => true                       // wraps multiple in list
-      ,'add_more' => false                  // makes it an add more field
-      ,'required' => false                  // Is the field required?
     ));
     
     // Should this field be rendered?
@@ -960,7 +962,7 @@ class PikList_Form
         {
           case 'post':
                     
-            $ids['post'] = self::save_object('post', $data);
+            $ids['post'] = self::save_object('post', $data, isset($_REQUEST['post_ID']) ? $_REQUEST['post_ID'] : false);
           
           break;
         
@@ -1082,7 +1084,7 @@ class PikList_Form
         $object[$allowed] = sanitize_text_field($data[$allowed]);
       }
     }
-    
+
     // NOTE: Handle Update vs Insert
     switch ($type)
     {
@@ -1112,7 +1114,7 @@ class PikList_Form
         
       break;
     }
-    
+
     if ($belongs_to)
     {
       self::relate($belongs_to, $id);

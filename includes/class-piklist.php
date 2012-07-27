@@ -517,7 +517,7 @@ function piklist($option, $arguments = array())
       else
       {
         $_value = $arguments[0];
-        array_push($list, is_object($value) ? $value->$_value : $value[$_value]);
+        array_push($list, is_object($value) && isset($value->$_value) ? $value->$_value : (isset($value[$_value]) ? $value[$_value] : null));
       }
     }
 

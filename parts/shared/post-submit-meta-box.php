@@ -236,7 +236,7 @@
     <img src="<?php echo esc_url(admin_url('images/wpspin_light.gif')); ?>" class="ajax-loading" id="ajax-loading" alt="" />
 
     <?php
-      if (isset($statuses['publish']) && (!in_array($post->post_status, array('publish', 'future', 'private')) || 0 == $post->ID)):
+      if ((!in_array($post->post_status, array('publish', 'future', 'private')) || 0 == $post->ID)):
         if ($can_publish):
           if (!empty($post->post_date_gmt) && time() < strtotime($post->post_date_gmt . ' +0000')): ?>
       
