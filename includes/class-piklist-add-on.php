@@ -60,7 +60,7 @@ class PikList_Add_On
         else
         {
           $add_on = basename($path);
-          $file = file_exists($include) ? $include : $path . '/' . $add_on . '.php';
+          $file = file_exists($path . '/' . $add_on . '.php') ? $path . '/' . $add_on . '.php' : $path . '/plugin.php';
           self::register_add_on($add_on, $file, $path, true);
         }
       }

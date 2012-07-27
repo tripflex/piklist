@@ -1,7 +1,6 @@
 
 <?php 
   array_push($attributes['class'], 'hide-all');
-  
   $settings = piklist_setting::get('settings');
   $values = array_keys($choices);
   for ($index = 0; $index < count($choices); $index++):

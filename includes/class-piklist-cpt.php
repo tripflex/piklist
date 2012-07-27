@@ -86,16 +86,16 @@ class PikList_CPT
   public static function edit_form()
   {
     $fields = array(
-      '_pik_relate'
-      ,'_pik_post_id'
-      ,'_pik_admin_hide_ui'
+      '_piklist_relate'
+      ,'_piklist_post_id'
+      ,'_piklist_admin_hide_ui'
     );
 
     foreach ($fields as $field)
     {
       if (isset($_REQUEST[$field]) && !empty($_REQUEST[$field])) 
       {
-        piklist::render_field(array(
+        piklist_form::render_field(array(
           'type' => 'hidden'
           ,'field' => $field
           ,'value' => $_REQUEST[$field]
@@ -107,14 +107,22 @@ class PikList_CPT
   public static function register_post_types()
   {
     global $wp_post_statuses;
+
+    $flushed = get_option('piklist_post_type_rules_flushed');
     
     self::$post_types = apply_filters('piklist_post_types', self::$post_types);
 
     foreach (self::$post_types as $post_type => &$configuration)
     {
       $configuration['supports'] = empty($configuration['supports']) ? array(false) : $configuration['supports'];
+
       register_post_type($post_type, $configuration);
-      
+
+      if (!$flushed[$post_type])
+      {
+        $flushed[$post_type] = true;
+      }
+     
       if (isset($configuration['status']) && !empty($configuration['status']))
       {   
         $configuration['status'] = apply_filters('piklist_post_type_statuses', $configuration['status'], $post_type);
@@ -133,6 +141,7 @@ class PikList_CPT
             ,'hierarchical' => false
             ,'public' => true
             ,'internal' => null
+            ,'has_archive' => false
             ,'protected' => true
             ,'private' => null
             ,'show_in_admin_all' => null
@@ -175,6 +184,12 @@ class PikList_CPT
       {
         add_action('restrict_manage_posts', array('piklist_cpt', 'restrict_manage_posts'));
       }
+    }
+    
+    if ($flushed != get_option('piklist_post_type_rules_flushed'))
+    {
+      flush_rewrite_rules(false);
+      update_option('piklist_post_type_rules_flushed', $flushed);
     }
   }
   
@@ -232,11 +247,12 @@ class PikList_CPT
                 if ($meta_box == 'submitdiv')
                 {
                   $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
+                  $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['args']['order'] = 0;                  
                 }
-                else
+                else 
                 {
                   unset($wp_meta_boxes[$post_type][$context][$priority][$meta_box]);
-                } 
+                }
               }     
             }
           }
@@ -247,11 +263,21 @@ class PikList_CPT
   
   public static function post_submit_meta_box()
   {
-    global $post;
+    global $post, $wp_post_statuses;
+    
+    $default_statuses = array(
+      'draft' => $wp_post_statuses['draft']
+      ,'pending' => $wp_post_statuses['pending']
+    );
+
+    if ($post->post_status == 'publish')
+    {
+      $default_statuses['publish'] = $wp_post_statuses['publish'];
+    } 
         
     piklist::render('shared/post-submit-meta-box', array(
       'post' => $post
-      ,'statuses' => self::$post_types[$post->post_type]['status'] 
+      ,'statuses' => isset(self::$post_types[$post->post_type]['status']) ? self::$post_types[$post->post_type]['status'] : $default_statuses
     ));
   }
   
@@ -326,23 +352,23 @@ class PikList_CPT
         'post' => $post_id
       ));
 
-      $_REQUEST = array(
+      $update = array(
         'ID' => $post_id
       );
 
       if (empty($_REQUEST['post_title']) || !isset($_REQUEST['post_title']))
       {
-        $_REQUEST['post_title'] = ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $post_id;
+        $update['post_title'] = ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $post_id;
       }
 
       if (isset($_REQUEST['original_publish']) && $_REQUEST['original_publish'] != 'Publish')
       {
-        $_REQUEST['post_status'] = $_REQUEST['original_publish'];
+        $update['post_status'] = $_REQUEST['original_publish'];
       }
       
-      if (count($_REQUEST) > 1)
+      if (count($update) > 1)
       {
-        wp_update_post($_REQUEST);
+        wp_update_post($update);
       }
           
     add_action('save_post', array('piklist_cpt', 'save_post_data'));
@@ -393,7 +419,7 @@ class PikList_CPT
           ,array('piklist_cpt', 'meta_box')
           ,$type
           ,!empty($data['context']) ? $data['context'] : 'normal'
-          ,!empty($data['priority']) ? $data['priority'] : 'high'
+          ,!empty($data['priority']) ? $data['priority'] : 'low'
           ,array(
             'part' => $part
             ,'add_on' => $add_on
@@ -458,7 +484,7 @@ class PikList_CPT
         uasort($wp_meta_boxes[$post_type][$context][$priority], array('piklist', 'sort_by_args_order'));
       }
     }        
-
+    
     add_filter('get_user_option_meta-box-order_' . $post_type, array('piklist_cpt', 'user_sort_meta_boxes'), 100, 3);
   }
   
@@ -520,25 +546,37 @@ class PikList_CPT
   public static function get_post_statuses($type, $object_type = null)
   {
     $status_list = array();
-    
-    switch ($type)
+
+    global $wp_post_statuses;
+
+    $object_type = $object_type ? $object_type : get_post_type();
+
+    foreach ($wp_post_statuses as $status)
     {
-      case 'post':
-      
-        global $wp_post_statuses;
-
-        $object_type = $object_type ? $object_type : get_post_type();
-
-        foreach ($wp_post_statuses as $status)
-        {
-          if ($status->capability_type == $object_type)
-          {
-            array_push($status_list, $status->name);
-          }
-        }
-        
-      break;
+      if ($status->capability_type == $object_type)
+      {
+        array_push($status_list, $status->name);
+      }
     }
+        
+    // switch ($type)
+    // {
+    //   case 'post':
+    //   
+    //     global $wp_post_statuses;
+    // 
+    //     $object_type = $object_type ? $object_type : get_post_type();
+    // 
+    //     foreach ($wp_post_statuses as $status)
+    //     {
+    //       if ($status->capability_type == $object_type)
+    //       {
+    //         array_push($status_list, $status->name);
+    //       }
+    //     }
+    //     
+    //   break;
+    // }
     
     return $status_list;
   }

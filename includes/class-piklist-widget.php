@@ -29,7 +29,7 @@ class PikList_Widget
       register_sidebar(array_merge(array(
         'name' => __($sidebar['name'])
         ,'id' => sanitize_title_with_dashes($sidebar['name'])
-        ,'description'   => $sidebar['description']
+        ,'description' => isset($sidebar['description']) ? __($sidebar['description']) : null
         ,'before_widget' => isset($sidebar['before_widget']) ? $sidebar['before_widget'] : '<aside id="%1$s" class="widget-container %2$s">'
         ,'after_widget' => isset($sidebar['after_widget']) ? $sidebar['after_widget'] : '</aside>'
         ,'before_title' => isset($sidebar['before_title']) ? $sidebar['before_title'] : '<h3 class="widget-title">'
