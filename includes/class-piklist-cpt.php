@@ -247,7 +247,6 @@ class PikList_CPT
                 if ($meta_box == 'submitdiv')
                 {
                   $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
-                  $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['args']['order'] = 0;                  
                 }
                 else 
                 {
@@ -257,6 +256,18 @@ class PikList_CPT
             }
           }
         }
+      }
+      
+      // NOTE: Force the publish box to the top right, can't use union operator due to compatibility
+      if (isset($wp_meta_boxes[$post_type]['side']['core']['submitdiv']))
+      {
+        $meta_boxes = array('submitdiv' => $wp_meta_boxes[$post_type]['side']['core']['submitdiv']);
+        unset($wp_meta_boxes[$post_type]['side']['core']['submitdiv']);
+        foreach ($wp_meta_boxes[$post_type]['side']['core'] as $id => $meta_box)
+        {
+          $meta_boxes[$id] = $meta_box;
+        }
+        $wp_meta_boxes[$post_type]['side']['core'] = $meta_boxes;
       }
     }
   }
