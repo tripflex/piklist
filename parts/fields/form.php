@@ -1,7 +1,7 @@
 
 <form 
-  method="<?php echo $method; ?>" 
-  action="<?php echo $_SERVER['REQUEST_URI']; ?>" 
+  method="<?php echo strtolower($method); ?>" 
+  action="<?php echo isset($action) ? $action : $_SERVER['REQUEST_URI']; ?>" 
   enctype="multipart/form-data" 
   <?php echo piklist_form::attributes_to_string($attributes); ?>
 >
@@ -48,6 +48,15 @@
         ,'scope' => 'post'
         ,'field' => 'ID'
         ,'value' => $_REQUEST['ID']
+      ));
+    }
+    
+    if (isset($filter) && $filter == 'true')
+    {
+      piklist('field', array(
+        'type' => 'hidden'
+        ,'field' => 'piklist_filter'
+        ,'value' => 'true'
       ));
     }
      

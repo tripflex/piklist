@@ -18,6 +18,7 @@ class PikList_CPT
     add_action('add_meta_boxes', array('piklist_cpt', 'register_meta_boxes'));
     add_action('do_meta_boxes', array('piklist_cpt', 'sort_meta_boxes'), 100, 3);
     add_action('save_post', array('piklist_cpt', 'save_post_data'));
+    add_action('pre_get_posts', array('piklist_cpt', 'pre_get_posts'), 1);
     add_action('edit_page_form', array('piklist_cpt', 'edit_form'));
     add_action('edit_form_advanced', array('piklist_cpt', 'edit_form'));
     add_action('piklist_install', array('piklist_cpt', 'install'));
@@ -569,27 +570,92 @@ class PikList_CPT
         array_push($status_list, $status->name);
       }
     }
-        
-    // switch ($type)
-    // {
-    //   case 'post':
-    //   
-    //     global $wp_post_statuses;
-    // 
-    //     $object_type = $object_type ? $object_type : get_post_type();
-    // 
-    //     foreach ($wp_post_statuses as $status)
-    //     {
-    //       if ($status->capability_type == $object_type)
-    //       {
-    //         array_push($status_list, $status->name);
-    //       }
-    //     }
-    //     
-    //   break;
-    // }
-    
+
     return $status_list;
+  }
+
+  public function pre_get_posts(&$query) 
+  {
+    if (isset($_REQUEST) && (isset($_REQUEST['piklist_filter']) && strtolower($_REQUEST['piklist_filter']) == 'true')) 
+    {
+      $args = array(
+        'meta_query' => array()
+        ,'tax_query' => array(
+          'relation' => isset($_REQUEST['taxonomy']['relation']) && in_array(strtoupper($_REQUEST['taxonomy']['relation']), array('AND', 'OR')) ? strtoupper($_REQUEST['taxonomy']['relation']) : 'AND'
+        )
+      );
+      
+      foreach ($_REQUEST as $key => $values) 
+      {
+        if ($key == 'post_meta')
+        {
+          foreach ($values as $meta_key => $meta_value)
+          {
+            if ($meta_value != '')
+            {
+              if (strstr($meta_key, '__min'))
+              {
+                array_push(
+                  $args['meta_query']
+                  ,array(
+                    'key' => str_replace('__min', '', $meta_key)
+                    ,'value' => array($meta_value, $_REQUEST[$key][str_replace('__min', '__max', $meta_key)])
+                    ,'type' => 'NUMERIC'
+                    ,'compare' => 'BETWEEN'
+                  )
+                );
+              }
+              else if (!strstr($meta_key, '__min') && !strstr($meta_key, '__max'))
+              {
+                array_push(
+                  $args['meta_query']
+                  ,array(
+                    'key' => $meta_key
+                    ,'value' => is_array($meta_value) && count($meta_value) > 1 ? implode(',', $meta_value) : (is_array($meta_value) ? $meta_value[0] : $meta_value)
+                    ,'compare' => is_array($meta_value) && count($meta_value) > 1 ? 'IN' : '='
+                    ,'type' => is_numeric(is_array($meta_value) ? $meta_value[0] : $meta_value) ? 'NUMERIC' : 'CHAR'
+                  )
+                );
+              }
+            }
+          }
+        }
+        else if ($key == 'taxonomy')
+        {
+          foreach ($values as $taxonomy => $terms)
+          {
+            if (!empty($terms))
+            {
+              array_push(
+                $args['tax_query']
+                ,array(
+                  'taxonomy' => $taxonomy
+                  ,'field' => 'slug'
+                  ,'terms' => $terms
+                  ,'include_children' => false
+                  ,'operator' => 'IN'
+                )
+              );
+            }
+          }
+        }
+      }
+      
+      if (isset($_REQUEST['post_type']))
+      {
+        $query->set('post_type', $_REQUEST['post_type']);
+      }
+
+      if (!empty($args['meta_query']))
+      {
+        $query->set('meta_query', $args['meta_query']);
+      }
+
+      if (count($args['tax_query']) > 1)
+      {
+        $query->set('tax_query', $args['tax_query']);
+      }
+    }
   }
 }
 
