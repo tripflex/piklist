@@ -377,7 +377,7 @@ class PikList_Form
       ,'label' => false
       ,'description' => false
       ,'scope' => null                      // how content is saved if you want it saved. post, post_meta, user, user_meta, comment, comment_meta (not required for Widget or Settings)
-      ,'value' => false                     // default value
+      ,'value' => null                      // default value
       ,'capability' => false                // one user role
       ,'add_more' => false                  // makes it an add more field
       ,'choices' => false                   // single array of values, or key => values
@@ -870,9 +870,11 @@ class PikList_Form
                     'class' => 'Class'
                     ,'title' => 'Title'
                     ,'method' => 'Method'
+                    ,'action' => 'Action'
+                    ,'filter' => 'Filter'
                     ,'capability' => 'Capability'
                   ));
-          
+
           if (!$data['capability'] || ($data['capability'] && current_user_can($data['capability'])))
           {
             $data['nonce'] = wp_create_nonce('piklist/piklist.php');

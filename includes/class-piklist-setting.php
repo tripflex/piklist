@@ -155,7 +155,9 @@ class PikList_Setting
       return $old;
     }
 
-    return wp_parse_args($new, $old);
+    $settings = wp_parse_args($new, $old);
+    
+    return apply_filters('piklist_pre_update_option', $new, $old, $settings);
   }
 
   public static function render_setting($setting)
@@ -174,8 +176,7 @@ class PikList_Setting
   public static function validate_setting($setting)
   {
     // NOTE: Validation
-    //   piklist::pre($setting);die;
-    
+
     return $setting;
   }
 }
