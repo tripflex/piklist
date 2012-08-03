@@ -98,8 +98,8 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
-0.5.8
-= Advanced Search capabilities function
+= 0.5.8 =
+* Advanced Search capabilities function
 
 = 0.5.7 =
 * Publish box set to Priority:Core, so meta boxes can be added before it.
