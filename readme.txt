@@ -100,6 +100,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 = 0.5.9 =
 * Allow multiple nested fields.
+* Bugfix: add-more fields
 * Bugfix: Conditonal fields.
 * Bugfix: Auto update fields.
 * Bugfix: issue with plugin folders alphabetically higher than "piklist".

@@ -83,7 +83,7 @@ class PikList
   
   public static function load()
   {    
-    self::$paths['plugin'] = rtrim(substr(dirname(__FILE__), 0, strpos(dirname(__FILE__), '/includes')), '/');
+    self::$paths['plugin'] = dirname(dirname(__FILE__));
     
     register_activation_hook('piklist/piklist.php', array('piklist', 'install'));
     
@@ -122,7 +122,7 @@ class PikList
      
     foreach (self::$paths as $_display => $_path)
     {
-      $_file = (substr($view, 0, 1) == '/' ? $view : self::$paths[$_display] . '/parts/' . $view) . (strstr($view, '.php') ? '' : '.php');
+      $_file = (path_is_absolute($view) ? $view : self::$paths[$_display] . '/parts/' . $view) . (strstr($view, '.php') ? '' : '.php');
 
       if (file_exists($_file))
       {      

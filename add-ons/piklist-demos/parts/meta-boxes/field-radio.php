@@ -14,7 +14,7 @@ Collapse: true
     ,'value' => 'third'
     ,'choices' => array(
       'first' => 'First Choice'
-      ,'second' => 'Second Choice with a nested input.'
+      ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
     )
     ,'position' => 'start'

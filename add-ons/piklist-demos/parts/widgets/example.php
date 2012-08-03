@@ -10,9 +10,7 @@ echo $before_widget; ?>
     <?php _e('Example Display Widget'); ?>
   
   <?php echo $after_title; ?>
-  
-  <?php piklist::pre($settings); ?>
-  
+   
   <ul>
     <li><strong><?php _e('Text ~ Small'); ?></strong> <?php echo $settings['demo_text_small']; ?></li>
     <li><strong><?php _e('Text'); ?></strong> <?php echo $settings['demo_text']; ?></li>
