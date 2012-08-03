@@ -3,7 +3,6 @@
 Title: Field Templates <span class="piklist-title-right">Order 70</span>
 Post Type: piklist_demo
 Order: 70
-Priority: high
 Collapse: true
 */
 

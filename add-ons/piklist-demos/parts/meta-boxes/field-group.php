@@ -3,7 +3,6 @@
 Title: Field Groups <span class="piklist-title-right">Order 80</span>
 Post Type: piklist_demo
 Order: 80
-Priority: high
 Collapse: true
 */
   
