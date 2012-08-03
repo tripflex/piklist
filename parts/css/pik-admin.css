@@ -190,7 +190,7 @@
   - These should be submitted as patches to the core 
 --------------------------------------------------------------------------------- */
 
-  #post-body ul.wp-tab-bar { 
+  ul.wp-tab-bar { 
     float: left; 
     width: 120px; 
     text-align: right; 
@@ -202,22 +202,25 @@
     
     #side-sortables ul.wp-tab-bar { 
       margin: 8px 0 3px; 
+      width: auto;
+      float: none;
+      text-align: left;
     } 
 
-    #post-body ul.wp-tab-bar a { 
+    ul.wp-tab-bar a { 
       text-decoration: underline; 
     }
    
-    #post-body ul.wp-tab-bar li {
+    ul.wp-tab-bar li {
       padding: 8px; 
       display: block; 
     } 
    
-      #post-body ul.wp-tab-bar li { 
+      ul.wp-tab-bar li { 
         padding: 8px; 
       } 
-   
-        #post-body ul.wp-tab-bar li.wp-tab-active { 
+        
+        ul.wp-tab-bar li.wp-tab-active { 
           border-style: solid none solid solid; 
           border-width: 1px 0 1px 1px;
           -webkit-border-top-left-radius: 3px; 
@@ -229,16 +232,40 @@
           margin-right: -1px
         } 
       
-          #post-body ul.wp-tab-bar li.wp-tab-active a { 
+          ul.wp-tab-bar li.wp-tab-active a { 
             font-weight: bold;
             text-decoration: none;
           }
-   
-  #post-body div.wp-tab-panel { 
+          
+          #side-sortables ul.wp-tab-bar li.wp-tab-active a { 
+            font-weight: normal;
+          }
+          
+        #side-sortables ul.wp-tab-bar li {
+          padding: 3px 5px 5px;
+          display: inline;
+        }
+
+        #side-sortables ul.wp-tab-bar li.wp-tab-active { 
+          border-style: solid solid none solid; 
+          border-width: 1px 1px 0px 1px;
+          -webkit-border-top-left-radius: 3px; 
+          -webkit-border-bottom-left-radius: 0px; 
+          -webkit-border-top-right-radius: 3px; 
+          border-top-left-radius: 3px; 
+          border-bottom-left-radius: 0px; 
+          border-top-right-radius: 3px;
+        }
+          
+  div.wp-tab-panel { 
     margin: 0 5px 5px 125px; 
   } 
+    
+    #side-sortables div.wp-tab-panel {
+      margin: 0 0 5px 0;
+    }
   
-    #post-body div.wp-tab-panel-resize {
+    div.wp-tab-panel-resize {
       height: auto;
       min-height: 200px;
     }
@@ -274,7 +301,7 @@
     margin-left: 0px;
   }
 
-.piklist-social-links {
+  .piklist-social-links {
     display: block;
     padding-bottom: 30px;
   }

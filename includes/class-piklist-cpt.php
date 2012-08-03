@@ -496,7 +496,7 @@ class PikList_CPT
         uasort($wp_meta_boxes[$post_type][$context][$priority], array('piklist', 'sort_by_args_order'));
       }
     }        
-    
+
     add_filter('get_user_option_meta-box-order_' . $post_type, array('piklist_cpt', 'user_sort_meta_boxes'), 100, 3);
   }
   

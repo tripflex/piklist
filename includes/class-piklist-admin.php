@@ -178,7 +178,7 @@ class PikList_Admin
     wp_enqueue_style('farbtastic');
     wp_enqueue_style('wp-pointer');
 
-    wp_enqueue_style('piklist-admin', WP_CONTENT_URL . '/plugins/piklist/parts/css/pik-admin.css', array(), false, 'screen, projection'); 
+    wp_enqueue_style('piklist-admin', WP_PLUGIN_URL . '/piklist/parts/css/pik-admin.css', array(), false, 'screen, projection'); 
   }
   
   public static function admin_print_scripts()
@@ -188,8 +188,8 @@ class PikList_Admin
     wp_enqueue_script('farbtastic');
     wp_enqueue_script('wp-pointer');
     
-    wp_enqueue_script('piklist-admin', WP_CONTENT_URL . '/plugins/piklist/parts/js/pik-admin.js', array('jquery'), '0.1', true); 
-    wp_enqueue_script('piklist', WP_CONTENT_URL . '/plugins/piklist/parts/js/pik.js', array('jquery'), '0.1', true); 
+    wp_enqueue_script('piklist-admin', WP_PLUGIN_URL . '/piklist/parts/js/pik-admin.js', array('jquery'), '0.1', true); 
+    wp_enqueue_script('piklist', WP_PLUGIN_URL . '/piklist/parts/js/pik.js', array('jquery'), '0.1', true); 
   } 
   
   public function transient_update_plugins($value = '') 

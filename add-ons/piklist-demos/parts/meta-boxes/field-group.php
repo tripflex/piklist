@@ -235,25 +235,25 @@ Collapse: true
     ,'fields' => array(
       array(
         'type' => 'text'
-        ,'field' => 'address_1'
+        ,'field' => 'ungrouped_address_1'
             ,'label' => __('Street Address')
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
-        ,'field' => 'address_2'
+        ,'field' => 'ungrouped_address_2'
             ,'label' => __('PO Box, Suite, etc.')
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
-        ,'field' => 'city'
+        ,'field' => 'ungrouped_city'
             ,'label' => __('City')
         ,'columns' => 5
       )
       ,array(
         'type' => 'select'
-        ,'field' => 'state'
+        ,'field' => 'ungrouped_state'
             ,'label' => __('State')
         ,'columns' => 4
         ,'choices' => array(
@@ -312,7 +312,7 @@ Collapse: true
       )
       ,array(
         'type' => 'text'
-        ,'field' => 'zip_code'
+        ,'field' => 'ungrouped_zip_code'
             ,'label' => __('Zip Code')
         ,'columns' => 3
       )

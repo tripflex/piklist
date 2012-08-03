@@ -265,7 +265,7 @@
                     }
                   });
                   
-                  var form_id = piklist.add_more_active.parents('form').find(':input[name="piklist_fields_id"]').val();
+                  var form_id = piklist.add_more_active.parents('form').find(':input[class="piklist_fields_id"]').val();
                   var fields = piklist.to_array(piklist_fields[form_id]);
                   var clone = piklist.add_more_active.clone();
                   var clone_inputs = clone.find(':input');
@@ -307,7 +307,7 @@
                     {
                       var p = input.attr(replace[h].attr).split(replace[h].sep);
                       var numeric = false;
-
+                  
                       for (var i = 0; i < p.length; i++)
                       {
                         p[i] = p[i].replace(']', '');
@@ -334,7 +334,7 @@
                           }
                         }
                       }
-
+                  
                       switch (replace[h].attr)
                       {  
                         case 'id':
@@ -355,7 +355,7 @@
                         break;
                       
                         case 'name':
-
+                  
                           if (piklist.add_more_active.parents('.widget-content').length == 0)
                           {
                             var name = '';
@@ -368,7 +368,7 @@
                             name += ']';
                             
                             var matches = name.match(/\[(\d+)\]/);
-
+                  
                             input.attr(replace[h].attr, numeric && matches === null ? name.substr(0, name.length - 2) : name);
                                        
                             for (var i in fields)
@@ -378,10 +378,10 @@
                                 if (fields[i][j].id == piklist.add_more_active.find(':input:eq(' + c + ')').attr('id'))
                                 {
                                   fields[i].push(fields[i][j]);
-
+                  
                                   fields[i][fields[i].length - 1].id = input.attr('id');
                                   fields[i][fields[i].length - 1].name = input.attr('name');
-
+                  
                                   new_fields.push(fields[i][fields[i].length - 1]);
                                 }
                               }
@@ -394,7 +394,6 @@
                             {
                               input.attr(replace[h].attr, name + '[]');
                             }
-                            console.log(input.attr(replace[h].attr), name, name.substr(name.length - 2))
                           }
                           
                         break;

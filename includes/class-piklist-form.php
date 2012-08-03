@@ -236,35 +236,51 @@ class PikList_Form
     $key = isset($field['save_as']) ? $field['save_as'] : $field['field'];
     
     $saved = false;
-
-    switch ($type)
+    
+    if (!$id)
     {
-      case 'option':
+      if (isset($_REQUEST[$key]))
+      {
+        $saved = $_REQUEST[$key];
+      }
+      else if (isset($_REQUEST[$type][$key]))
+      {
+        $saved = $_REQUEST[$type][$key];
+      }
+    }
+    
+    if (!$saved)
+    {
+      switch ($type)
+      {
+        case 'option':
       
-        $saved = get_option($scope);
+          $saved = get_option($scope);
 
-      break;
+        break;
       
-      case 'taxonomy':
+        case 'taxonomy':
       
-        if ($id)
-        {
-          $saved = piklist(wp_get_post_terms($id, $key), 'name');
-          $key = false;
-        }
+          if ($id)
+          {
+            $saved = piklist(wp_get_post_terms($id, $key), 'name');
+            $key = false;
+          }
         
-      break;
+        break;
             
-      default: 
+        case 'post_meta':
+        case 'user_meta': 
       
-        if ($id)
-        {
-          $meta_key = $key ? $key : $scope;
-          $saved = $type == 'user' ? get_user_meta($id, $meta_key) : get_post_meta($id, $meta_key, $unique);
-          $saved = count($saved) == 1 && empty($saved[0]) ? false : $saved;
-        }
+          if ($id)
+          {
+            $meta_key = $key ? $key : $scope;
+            $saved = $type == 'user' ? get_user_meta($id, $meta_key) : get_post_meta($id, $meta_key, $unique);
+            $saved = count($saved) == 1 && empty($saved[0]) ? false : $saved;
+          }
         
-      break;
+        break;
+      }
     }
 
     if (is_array($saved) && !empty($saved) && $key)
@@ -520,11 +536,7 @@ class PikList_Form
         case 'taxonomy':
           
           $id = isset(self::$save_ids['post']) ? self::$save_ids['post'] : (is_admin() ? $post->ID : false);
-
-          if ($id)
-          {
-            $field['value'] = self::get_field_value($field['scope'], $field, $field['scope'], $id, false);
-          }
+          $field['value'] = self::get_field_value($field['scope'], $field, $field['scope'], $id, false);
           
         break;
 
@@ -557,6 +569,7 @@ class PikList_Form
       
       foreach ($field['conditions'] as &$condition)
       {
+        $condition['scope'] = isset($condition['scope']) ? $condition['scope'] : $field['scope'];
         $condition['id'] = piklist_form::get_field_id($condition['field'], $condition['scope']);
         array_push($wrapper['class'], 'piklist-field-' . (isset($condition['type']) && $condition['type'] ? $condition['type'] : 'condition'));
       }
@@ -669,34 +682,37 @@ class PikList_Form
 
     if (!empty($matches[1]))
     {
-      $nested_field = false;
+      for ($i = 0; $i < count($matches[1]); $i++)
+      {
+        $nested_field = false;
 
-      foreach ($field['fields'] as $f)
-      {
-        if ($f['field'] == $matches[1][0])
+        foreach ($field['fields'] as $f)
         {
-          $nested_field = $f;
-          break;
+          if ($f['field'] == $matches[1][$i])
+          {
+            $nested_field = $f;
+            break;
+          }
         }
-      }
       
-      if ($nested_field)
-      {
-        return str_replace(
-          $matches[0][0]
-          ,self::render_field(
-            wp_parse_args(array(
-                'scope' => $field['scope']
-                ,'field' => $nested_field['field']
-                ,'embed' => true
-                ,'value' => self::get_field_value($field['scope'], $nested_field, isset(self::$core_scopes[$field['scope']]) ? $field['scope'] : 'option')
+        if ($nested_field)
+        {
+          $content = str_replace(
+            $matches[0][$i]
+            ,self::render_field(
+              wp_parse_args(array(
+                  'scope' => $field['scope']
+                  ,'field' => $nested_field['field']
+                  ,'embed' => true
+                  ,'value' => self::get_field_value($field['scope'], $nested_field, isset(self::$core_scopes[$field['scope']]) ? $field['scope'] : 'option')
+                )
+                ,$nested_field
               )
-              ,$nested_field
+              ,true
             )
-            ,true
-          )
-          ,$content
-        );
+            ,$content
+          );
+        }
       }
     }
     
