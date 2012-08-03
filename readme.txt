@@ -98,42 +98,50 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
+= 0.5.9 =
+* Allow multiple nested fields.
+* Bugfix: Conditonal fields.
+* Bugfix: Auto update fields.
+* Bugfix: issue with plugin folders alphabetically higher than "piklist".
+* Implemented GET Field value function.
+* Bugfix: path issue on Windows server.
+
 = 0.5.8 =
-* Advanced Search capabilities function
+* Advanced Search capabilities function.
 
 = 0.5.7 =
 * Publish box set to Priority:Core, so meta boxes can be added before it.
 
 = 0.5.6 =
-* Forced Publish Meta Box to always be at top right
-* Fixed all PHP Notice issues
-* Added rule to flush permalinks when registering a new post type if needed
-* Fixed default post title fallback
-* Added has_archive to register_custom_post_types function
+* Forced Publish Meta Box to always be at top right.
+* Fixed all PHP Notice issues.
+* Added rule to flush permalinks when registering a new post type if needed.
+* Fixed default post title fallback.
+* Added has_archive to register_custom_post_types function.
 * Fixed Taxonomy scope bug on show value.
 * Fixed bug with Post-to-Post relationships.
 
 = 0.5.5 =
-* Fixed Child theme support
-* Fixed bug with frontend forms
+* Fixed Child theme support.
+* Fixed bug with frontend forms.
 
 = 0.5.4 =
-* Fixed Meta Box Sort for non-ordered meta boxes
-* Added support to register a plugin with Piklist by using the Plugin Type comment
-* Updated Theme Path
-* Updated fields so that post_meta is the default scope for meta-boxes
+* Fixed Meta Box Sort for non-ordered meta boxes.
+* Added support to register a plugin with Piklist by using the Plugin Type comment.
+* Updated Theme Path.
+* Updated fields so that post_meta is the default scope for meta-boxes.
 
 = 0.5.3 =
-* Updated Meta Boxes to respect new theme folder structure
-* Updated global meta boxes to work on default post types
+* Updated Meta Boxes to respect new theme folder structure.
+* Updated global meta boxes to work on default post types.
 
 = 0.5.2 =
-* Fixed Conditional Tag for Style Loading
-* Fixed Add-On Registration
+* Fixed Conditional Tag for Style Loading.
+* Fixed Add-On Registration.
 
 = 0.5.1 =
-* Updated Status Ranges
-* Fixed Directory Parse Bug
+* Updated Status Ranges.
+* Fixed Directory Parse Bug.
 
 = 0.5.0 =
 * Initial release!

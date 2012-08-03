@@ -26,7 +26,7 @@ Collapse: false
     ,'conditions' => array(
       array(
         'field' => 'show_hide'
-            ,'value' => 'show'
+        ,'value' => 'show'
       )
     )
   ));
@@ -43,13 +43,13 @@ Collapse: false
     ,'conditions' => array(
       array(
         'field' => 'update_field'
-            ,'value' => 'hello-world' 
+        ,'value' => 'hello-world' 
         ,'update' => 'Hello World!' 
         ,'type' => 'update'
       )
       ,array(
         'field' => 'update_field'
-            ,'value' => 'clear' 
+        ,'value' => 'clear' 
         ,'update' => '' 
         ,'type' => 'update'
       )
