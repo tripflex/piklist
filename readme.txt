@@ -105,7 +105,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 * Bugfix: Auto update fields.
 * Bugfix: issue with plugin folders alphabetically higher than "piklist".
 * Implemented GET Field value function.
-* Bugfix: path issue on Windows server. Thanks to Daniel Ménard for providing us with the neccessary code.
+* Bugfix: path issue on Windows server. Thanks to Daniel Menard for providing us with the neccessary code.
 
 = 0.5.8 =
 * Advanced Search capabilities function.
