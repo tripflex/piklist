@@ -3,23 +3,21 @@
 Title: ColorPicker Fields <span class="piklist-title-right">Order 60</span>
 Post Type: piklist_demo
 Order: 60
-Collapse: true
+Collapse: false
 */
     
   piklist('field', array(
     'type' => 'colorpicker'
     ,'field' => 'color'
-    ,'label' => __('Color Picker')
-    ,'position' => 'start'
+    ,'label' => 'Color Picker'
   ));
   
   piklist('field', array(
     'type' => 'colorpicker'
     ,'field' => 'color_add_more'
     ,'add_more' => true
-    ,'label' => __('Add More')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-    ,'position' => 'end'
+    ,'label' => 'Add More'
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   ));
   
   piklist('shared/meta-field-welcome', array(

@@ -197,10 +197,12 @@
             break;
             
             default:
-   
+
+              var parent = $(this).parents('form').find(':input[name="option_page"]').length > 0 ? 'tr' : '.piklist-field-condition';
+              
               if ($(this).val() == condition.value)
               {
-                field.parents('.piklist-field-condition').show();
+                field.parents(parent).show();
               }
               else
               {
@@ -213,7 +215,7 @@
                   field.val('');
                 }
                                 
-                field.parents('.piklist-field-condition').hide();
+                field.parents(parent).hide();
               }
             
             break;
@@ -429,7 +431,10 @@
       {
         $('.piklist-field-add-more:not(.piklist-add-more-activated)').each(function()
         {
-          piklist.add_more_handler(this);
+          if ($(this).find(':input:first').attr('name').indexOf('__i__') <= 0)
+          {
+            piklist.add_more_handler(this);
+          }
         });
       },
       
@@ -515,7 +520,6 @@
             ,'float': tag == 'input' || tag == 'select' || tag == 'textarea' ? 'none' : 'left'
             ,'width': ((columns / 12) * 100) - 2.5 + '%'
             ,'margin-right': 2.5 + '%'
-            ,'margin-bottom': '0.5em'
           });
 
           $(this).find(':input:not(:radio, :checkbox)').each(function()

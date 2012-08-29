@@ -134,9 +134,9 @@ Width: 700
       'class' => 'clear-left'
     )
     ,'options' => array(
-      'dateFormat' => 'MM d, yy'
+      'dateFormat' => 'M d, yy'
     )
-    ,'value' => date('M d, y', time() + 604800)
+    ,'value' => date('M d, Y', time() + 604800)
   ));
 
   piklist('field', array(

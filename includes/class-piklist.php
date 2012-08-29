@@ -81,6 +81,8 @@ class PikList
     )
   );
   
+  public static $prefix = 'pik_';
+  
   public static function load()
   {    
     self::$paths['plugin'] = dirname(dirname(__FILE__));
@@ -115,6 +117,8 @@ class PikList
   
   public static function render($view, $arguments = array(), $return = false) 
   {
+    global $post, $posts, $post_id, $current_user, $wpdb, $wp_query;
+    
     if ($return)
     {
       ob_start();

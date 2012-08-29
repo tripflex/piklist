@@ -9,21 +9,9 @@ Lock: true
   piklist('field', array(
     'type' => 'editor'
     ,'field' => 'demo_editor'
-    ,'label' => __('HTML Content')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-    ,'value' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-    ,'attributes' => array(
-      'wpautop' => true
-      ,'media_buttons' => true
-      ,'tabindex' => ''
-      ,'editor_css' => ''
-      ,'editor_class' => ''
-      ,'teeny' => false
-      ,'dfw' => false
-      ,'tinymce' => true
-      ,'quicktags' => true
-    )
-    ,'position' => 'wrap'
+    ,'label' => 'HTML Content'
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    ,'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   ));
 
   piklist('shared/meta-field-welcome', array(

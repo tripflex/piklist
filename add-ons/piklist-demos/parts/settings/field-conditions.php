@@ -1,15 +1,15 @@
 <?php
 /*
-Title: Conditional Fields <span class="piklist-title-right">Order 90</span>
-Post Type: piklist_demo
-Order: 90
-Collapse: false
+Title: Conditional Fields
+Setting: piklist-demo-fields
+Tab: Advanced
+Order: 40
 */
 
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'show_hide'
-    ,'label' => 'Toggle a field'
+    ,'label' => __('Toggle a field')
     ,'choices' => array(
       'show' => 'Show'
       ,'hide' => 'Hide'
@@ -20,8 +20,8 @@ Collapse: false
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'show_hide_field'
-    ,'label' => 'Show/Hide Field'
-    ,'description' => 'This field is toggled by the field above'
+    ,'label' => __('Show/Hide Field')
+    ,'description' => __('This field is toggled by the field above')
     ,'conditions' => array(
       array(
         'field' => 'show_hide'
@@ -33,7 +33,7 @@ Collapse: false
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'change'
-    ,'label' => 'Update a field'
+    ,'label' => __('Update a field')
     ,'choices' => array(
       'hello-world' => 'Hello World'
       ,'clear' => 'Clear'
@@ -58,12 +58,6 @@ Collapse: false
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'update_field'
-    ,'label' => 'Update This Field'
-    ,'description' => 'This field is updated by the field above'
+    ,'label' => __('Update This Field')
+    ,'description' => __('This field is updated by the field above')
   ));
-  
-  piklist('shared/meta-field-welcome', array(
-    'location' => __FILE__
-  ));
-  
-?>
