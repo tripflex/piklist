@@ -3,27 +3,26 @@
 Title: Checkbox Fields <span class="piklist-title-right">Order 40</span>
 Post Type: piklist_demo
 Order: 40
-Collapse: true
+Collapse: false
 */
 
   piklist('field', array(
     'type' => 'checkbox'
     ,'field' => 'checkbox'
-    ,'label' => __('Normal')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+    ,'label' => 'Normal'
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'value' => 'third'
     ,'choices' => array(
       'first' => 'First Choice'
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
     )
-    ,'position' => 'start'
   ));
   
   piklist('field', array(
     'type' => 'checkbox'
     ,'field' => 'checkbox_inline'
-    ,'label' => __('Single Line')
+    ,'label' => 'Single Line'
     ,'value' => 'that'
     ,'list' => false
     ,'choices' => array(
@@ -35,13 +34,14 @@ Collapse: true
   piklist('field', array(
     'type' => 'group'
     ,'field' => 'checkbox_list'
-    ,'label' => __('Group Lists')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+    ,'label' => 'Group Lists'
+    ,'list' => false
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'fields' => array(
       array(
         'type' => 'checkbox'
         ,'field' => 'checkbox_list_1'
-        ,'label' => __('List #1')
+        ,'label' => 'List #1'
         ,'label_position' => 'before'
         ,'value' => 'third'
         ,'choices' => array(
@@ -53,7 +53,7 @@ Collapse: true
       ,array(
         'type' => 'checkbox'
         ,'field' => 'checkbox_list_2'
-        ,'label' => __('List #2')
+        ,'label' => 'List #2'
         ,'label_position' => 'before'
         ,'value' => 'second'
         ,'choices' => array(
@@ -69,8 +69,8 @@ Collapse: true
   piklist('field', array(
     'type' => 'checkbox'
     ,'field' => 'checkbox_nested'
-    ,'label' => __('Nested Field')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+    ,'label' => 'Nested Field'
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'value' => array(
       'first'
       ,'third'
@@ -91,7 +91,6 @@ Collapse: true
         )
       )
     )
-    ,'position' => 'end'
   ));
 
   piklist('shared/meta-field-welcome', array(

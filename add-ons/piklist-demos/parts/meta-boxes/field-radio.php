@@ -3,27 +3,26 @@
 Title: Radio Fields <span class="piklist-title-right">Order 30</span>
 Post Type: piklist_demo
 Order: 30
-Collapse: true
+Collapse: false
 */
 
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'radio'
-    ,'label' => __('Normal')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+    ,'label' => 'Normal'
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'value' => 'third'
     ,'choices' => array(
       'first' => 'First Choice'
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
     )
-    ,'position' => 'start'
   ));
   
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'radio_inline'
-    ,'label' => __('Single Line')
+    ,'label' => 'Single Line'
     ,'value' => 'no'
     ,'list' => false
     ,'choices' => array(
@@ -35,13 +34,13 @@ Collapse: true
   piklist('field', array(
     'type' => 'group'
     ,'field' => 'radio_list'
-    ,'label' => __('Group Lists')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+    ,'label' => 'Group Lists'
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'fields' => array(
       array(
         'type' => 'radio'
         ,'field' => 'radio_list_1'
-        ,'label' => __('List #1')
+        ,'label' => 'List #1'
         ,'label_position' => 'before'
         ,'value' => 'third'
         ,'choices' => array(
@@ -53,7 +52,7 @@ Collapse: true
       ,array(
         'type' => 'radio'
         ,'field' => 'radio_list_2'
-        ,'label' => __('List #2')
+        ,'label' => 'List #2'
         ,'label_position' => 'before'
         ,'value' => 'second'
         ,'choices' => array(
@@ -69,8 +68,8 @@ Collapse: true
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'radio_nested'
-    ,'label' => __('Nested Field')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+    ,'label' => 'Nested Field'
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'value' => 'third'
     ,'choices' => array(
       'first' => 'First Choice'
@@ -88,7 +87,6 @@ Collapse: true
         )
       )
     )
-    ,'position' => 'end'
   ));
 
   piklist('shared/meta-field-welcome', array(

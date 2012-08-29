@@ -359,7 +359,7 @@ class PikList_CPT
     }
     
     remove_action('save_post', array('piklist_cpt', 'save_post_data'));
-      
+      // piklist::pre($_REQUEST);die;
       piklist_form::save(array(
         'post' => $post_id
       ));
@@ -372,17 +372,17 @@ class PikList_CPT
       {
         $update['post_title'] = ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $post_id;
       }
-
-      if (isset($_REQUEST['original_publish']) && $_REQUEST['original_publish'] != 'Publish')
+      
+      if (isset($_REQUEST['hidden_post_status']) && $_REQUEST['hidden_post_status'] != 'publish')
       {
-        $update['post_status'] = $_REQUEST['original_publish'];
+        $update['post_status'] = $_REQUEST['hidden_post_status'];
       }
       
       if (count($update) > 1)
       {
         wp_update_post($update);
       }
-          
+
     add_action('save_post', array('piklist_cpt', 'save_post_data'));
   }
   
@@ -576,74 +576,82 @@ class PikList_CPT
 
   public function pre_get_posts(&$query) 
   {
-    if (isset($_REQUEST) && (isset($_REQUEST['piklist_filter']) && strtolower($_REQUEST['piklist_filter']) == 'true')) 
+    if (isset($_REQUEST) && (isset($_REQUEST['piklist']['filter']) && strtolower($_REQUEST['piklist']['filter']) == 'true')) 
     {
       $args = array(
         'meta_query' => array()
         ,'tax_query' => array(
-          'relation' => isset($_REQUEST['taxonomy']['relation']) && in_array(strtoupper($_REQUEST['taxonomy']['relation']), array('AND', 'OR')) ? strtoupper($_REQUEST['taxonomy']['relation']) : 'AND'
+          'relation' => isset($_REQUEST[piklist::$prefix . 'taxonomy']['relation']) && in_array(strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation']), array('AND', 'OR')) ? strtoupper($_REQUEST['taxonomy']['relation']) : 'AND'
         )
       );
       
       foreach ($_REQUEST as $key => $values) 
       {
-        if ($key == 'post_meta')
+        $filter = substr($key, strlen(piklist::$prefix));
+        
+        switch ($filter)
         {
-          foreach ($values as $meta_key => $meta_value)
-          {
-            if ($meta_value != '')
+          case 'post_meta':
+
+            foreach ($values as $meta_key => $meta_value)
             {
-              if (strstr($meta_key, '__min'))
+              if ($meta_value != '')
               {
-                array_push(
-                  $args['meta_query']
-                  ,array(
-                    'key' => str_replace('__min', '', $meta_key)
-                    ,'value' => array($meta_value, $_REQUEST[$key][str_replace('__min', '__max', $meta_key)])
-                    ,'type' => 'NUMERIC'
-                    ,'compare' => 'BETWEEN'
-                  )
-                );
+                if (strstr($meta_key, '__min'))
+                {
+                  array_push(
+                    $args['meta_query']
+                    ,array(
+                      'key' => str_replace('__min', '', $meta_key)
+                      ,'value' => array($meta_value, $_REQUEST[$key][str_replace('__min', '__max', $meta_key)])
+                      ,'type' => 'NUMERIC'
+                      ,'compare' => 'BETWEEN'
+                    )
+                  );
+                }
+                else if (!strstr($meta_key, '__min') && !strstr($meta_key, '__max'))
+                {
+                  array_push(
+                    $args['meta_query']
+                    ,array(
+                      'key' => $meta_key
+                      ,'value' => is_array($meta_value) && count($meta_value) > 1 ? implode(',', $meta_value) : (is_array($meta_value) ? $meta_value[0] : $meta_value)
+                      ,'compare' => is_array($meta_value) && count($meta_value) > 1 ? 'IN' : '='
+                      ,'type' => is_numeric(is_array($meta_value) ? $meta_value[0] : $meta_value) ? 'NUMERIC' : 'CHAR'
+                    )
+                  );
+                }
               }
-              else if (!strstr($meta_key, '__min') && !strstr($meta_key, '__max'))
+            }
+            
+          break;
+          
+          case 'taxonomy':
+          
+            foreach ($values as $taxonomy => $terms)
+            {
+              if (!empty($terms))
               {
                 array_push(
-                  $args['meta_query']
+                  $args['tax_query']
                   ,array(
-                    'key' => $meta_key
-                    ,'value' => is_array($meta_value) && count($meta_value) > 1 ? implode(',', $meta_value) : (is_array($meta_value) ? $meta_value[0] : $meta_value)
-                    ,'compare' => is_array($meta_value) && count($meta_value) > 1 ? 'IN' : '='
-                    ,'type' => is_numeric(is_array($meta_value) ? $meta_value[0] : $meta_value) ? 'NUMERIC' : 'CHAR'
+                    'taxonomy' => $taxonomy
+                    ,'field' => 'slug'
+                    ,'terms' => $terms
+                    ,'include_children' => false
+                    ,'operator' => 'IN'
                   )
                 );
               }
             }
-          }
-        }
-        else if ($key == 'taxonomy')
-        {
-          foreach ($values as $taxonomy => $terms)
-          {
-            if (!empty($terms))
-            {
-              array_push(
-                $args['tax_query']
-                ,array(
-                  'taxonomy' => $taxonomy
-                  ,'field' => 'slug'
-                  ,'terms' => $terms
-                  ,'include_children' => false
-                  ,'operator' => 'IN'
-                )
-              );
-            }
-          }
+          
+          break;
         }
       }
       
-      if (isset($_REQUEST['post_type']))
+      if (isset($_REQUEST[piklist::$prefix . 'post_type']))
       {
-        $query->set('post_type', $_REQUEST['post_type']);
+        $query->set('post_type', $_REQUEST[piklist::$prefix . 'post_type']);
       }
 
       if (!empty($args['meta_query']))

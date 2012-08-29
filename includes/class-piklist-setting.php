@@ -154,10 +154,10 @@ class PikList_Setting
       
       return $old;
     }
-
+    
     $settings = wp_parse_args($new, $old);
     
-    return apply_filters('piklist_pre_update_option', $new, $old, $settings);
+    return apply_filters('piklist_pre_update_option', $settings, $new, $old);
   }
 
   public static function render_setting($setting)

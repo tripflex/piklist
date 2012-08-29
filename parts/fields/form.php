@@ -10,8 +10,8 @@
   
     piklist('field', array(
       'type' => 'hidden'
+      ,'scope' => 'piklist'
       ,'field' => 'nonce'
-      ,'scope' => false
       ,'value' => $nonce
     ));
   
@@ -55,7 +55,8 @@
     {
       piklist('field', array(
         'type' => 'hidden'
-        ,'field' => 'piklist_filter'
+        ,'scope' => 'piklist'
+        ,'field' => 'filter'
         ,'value' => 'true'
       ));
     }

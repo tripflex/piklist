@@ -19,9 +19,9 @@ Order: 10
     ,'label' => __('Date')
     ,'description' => __('Choose a date')
     ,'options' => array(
-      'dateFormat' => 'M d, y'
+      'dateFormat' => 'M d, yy'
     )
-    ,'value' => date('M d, y', time() + 604800)
+    ,'value' => date('M d, Y', time() + 604800)
   ));
   
   piklist('field', array(

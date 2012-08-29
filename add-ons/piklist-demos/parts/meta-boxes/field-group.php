@@ -3,37 +3,38 @@
 Title: Field Groups <span class="piklist-title-right">Order 80</span>
 Post Type: piklist_demo
 Order: 80
-Collapse: true
+Collapse: false
 */
   
   piklist('field', array(
     'type' => 'group'
     ,'field' => 'address'
-    ,'label' => __('Address')
-    ,'description' => __('This is an example of how to build a simple address field using the group type.')
+    ,'label' => 'Address'
+    ,'list' => false
+    ,'description' => 'This is an example of how to build a simple address field using the group type.'
     ,'fields' => array(
       array(
         'type' => 'text'
         ,'field' => 'address_1'
-        ,'label' => __('Street Address')
+        ,'label' => 'Street Address'
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'address_2'
-        ,'label' => __('PO Box, Suite, etc.')
+        ,'label' => 'PO Box, Suite, etc.'
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'city'
-        ,'label' => __('City')
+        ,'label' => 'City'
         ,'columns' => 5
       )
       ,array(
         'type' => 'select'
         ,'field' => 'state'
-        ,'label' => __('State')
+        ,'label' => 'State'
         ,'columns' => 4
         ,'choices' => array(
           'AL' => 'Alabama'
@@ -92,7 +93,7 @@ Collapse: true
       ,array(
         'type' => 'text'
         ,'field' => 'zip_code'
-        ,'label' => __('Zip Code')
+        ,'label' => 'Zip Code'
         ,'columns' => 3
       )
     )
@@ -103,31 +104,31 @@ Collapse: true
     'type' => 'group'
     ,'field' => 'address_add_more'
     ,'add_more' => true
-    ,'label' => __('Address (Add More)')
-    ,'description' => __('This is an example of how to build a simple address field using the group type.')
+    ,'label' => 'Address (Add More)'
+    ,'description' => 'This is an example of how to build a simple address field using the group type.'
     ,'fields' => array(
       array(
         'type' => 'text'
         ,'field' => 'address_1'
-        ,'label' => __('Street Address')
+        ,'label' => 'Street Address'
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'address_2'
-        ,'label' => __('PO Box, Suite, etc.')
+        ,'label' => 'PO Box, Suite, etc.'
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'city'
-        ,'label' => __('City')
+        ,'label' => 'City'
         ,'columns' => 5
       )
       ,array(
         'type' => 'select'
         ,'field' => 'state'
-        ,'label' => __('State')
+        ,'label' => 'State'
         ,'columns' => 4
         ,'choices' => array(
           'AL' => 'Alabama'
@@ -186,7 +187,7 @@ Collapse: true
       ,array(
         'type' => 'text'
         ,'field' => 'zip_code'
-        ,'label' => __('Zip Code')
+        ,'label' => 'Zip Code'
         ,'columns' => 3
       )
     )
@@ -196,8 +197,8 @@ Collapse: true
     'type' => 'group'
     ,'field' => 'group_add_more'
     ,'add_more' => true
-    ,'label' => __('Add More')
-    ,'description' => __('This is an example of how to build a list with multiple element types.')
+    ,'label' => 'Add More'
+    ,'description' => 'This is an example of how to build a list with multiple element types.'
     ,'fields' => array(
       array(
         'type' => 'text'
@@ -230,31 +231,31 @@ Collapse: true
   
   piklist('field', array(
     'type' => 'group'
-    ,'label' => __('Address (Un-Grouped)')
-    ,'description' => __('This is an example of how to build a simple address field using the group type.')
+    ,'label' => 'Address (Un-Grouped)'
+    ,'description' => 'This is an example of how to build a simple address field using the group type.'
     ,'fields' => array(
       array(
         'type' => 'text'
         ,'field' => 'ungrouped_address_1'
-            ,'label' => __('Street Address')
+            ,'label' => 'Street Address'
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'ungrouped_address_2'
-            ,'label' => __('PO Box, Suite, etc.')
+            ,'label' => 'PO Box, Suite, etc.'
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'ungrouped_city'
-            ,'label' => __('City')
+            ,'label' => 'City'
         ,'columns' => 5
       )
       ,array(
         'type' => 'select'
         ,'field' => 'ungrouped_state'
-            ,'label' => __('State')
+            ,'label' => 'State'
         ,'columns' => 4
         ,'choices' => array(
           'AL' => 'Alabama'
@@ -313,11 +314,10 @@ Collapse: true
       ,array(
         'type' => 'text'
         ,'field' => 'ungrouped_zip_code'
-            ,'label' => __('Zip Code')
+            ,'label' => 'Zip Code'
         ,'columns' => 3
       )
     )
-    ,'position' => 'end'
   ));
   
   piklist('shared/meta-field-welcome', array(

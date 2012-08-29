@@ -5,48 +5,70 @@ class PikList_Form
   private static $templates = array(
     'field'  => '[field]'
     ,'default' => '[field]
-                  [field_description_wrapper]
-                    <span class="description">[field_description]</span>
-                  [/field_description_wrapper]'
+                   [field_description_wrapper]
+                     <span class="description">[field_description]</span>
+                   [/field_description_wrapper]'
     ,'widget' => '[field_wrapper]
-                  <p id="%1$s" class="%2$s">
-                    [field_label]
-                    [field]
-                    [field_description_wrapper]
-                      <small>[field_description]</small>
-                    [/field_description_wrapper]
-                  </p>
+                    <div id="%1$s" class="%2$s piklist-field-container">
+                      <div class="piklist-label-container">
+                        [field_label]
+                      </div>
+                      <div class="piklist-field">
+                        [field]
+                        [field_description_wrapper]
+                          <span class="piklist-field-description description">[field_description]</span>
+                        [/field_description_wrapper]
+                      </div>
+                    </div>
                   [/field_wrapper]'
-    ,'post_meta' => '<table class="form-table">
-                  [field_wrapper]
-                  <tr id="%1$s" class="%2$s">
-                    <th scope="row" class="left">
-                      [field_label]
-                    </th>
-                    <td>
-                      [field]
-                      [field_description_wrapper]
-                        <span class="description">[field_description]</span>
-                      [/field_description_wrapper]
-                    </td>
-                  </tr>
-                  [/field_wrapper]
-                </table>'
-    ,'theme' => '<table class="form-table">
-                   [field_wrapper]
-                   <tr id="%1$s" class="%2$s">
-                     <td scope="row" class="left" width="200">
-                       [field_label]
-                     </td>
-                     <td>
+    ,'widget_classic' => '[field_wrapper]
+                            <p id="%1$s" class="%2$s">
+                              [field_label]
+                              [field]
+                              [field_description_wrapper]
+                                <small>[field_description]</small>
+                              [/field_description_wrapper]
+                            </p>
+                          [/field_wrapper]'
+    ,'post_meta' => '[field_wrapper]
+                      <div id="%1$s" class="%2$s piklist-field-container">
+                        <div class="piklist-label-container">
+                          [field_label]
+                          [field_description_wrapper]
+                            <span class="piklist-field-description description">[field_description]</span>
+                          [/field_description_wrapper]
+                        </div>
+                        <div class="piklist-field">
+                          [field]
+                        </div>
+                      </div>
+                     [/field_wrapper]'
+    ,'post_meta_classic' => '<table class="form-table">
+                               [field_wrapper]
+                               <tr id="%1$s" class="%2$s">
+                                 <th scope="row" class="left">
+                                   [field_label]
+                                 </th>
+                                 <td>
+                                   [field]
+                                   [field_description_wrapper]
+                                     <span class="description">[field_description]</span>
+                                   [/field_description_wrapper]
+                                 </td>
+                               </tr>
+                               [/field_wrapper]
+                             </table>'
+    ,'theme' => '[field_wrapper]
+                   <div id="%1$s" class="%2$s piklist-field-container">
+                     [field_label]
+                     <div class="piklist-field">
                        [field]
                        [field_description_wrapper]
-                         <p><small>[field_description]</small></p>
+                         <span class="piklist-field-description">[field_description]</span>
                        [/field_description_wrapper]
-                     </td>
-                   </tr>
-                   [/field_wrapper]
-                 </table>'
+                     </div>
+                   </div>
+                 [/field_wrapper]'
   );
   
   private static $template_shortcodes = array(
@@ -142,7 +164,7 @@ class PikList_Form
   private static $field_rendering = null;
   
   private static $field_wrapper_ids = array();
-  
+    
   private static $field_list_types = array(
     'checkbox'
     ,'radio'
@@ -193,13 +215,15 @@ class PikList_Form
   
   public static function get_field_id($field, $scope, $index = false)
   {
+    $prefix = $scope != 'piklist' && !is_admin() ? piklist::$prefix : '';
+    
     if (self::is_widget() && ($scope != 'piklist' && $field != 'fields_id'))
     {
-      $id = piklist_widget::widget()->get_field_id($field);
+      $id = $prefix . piklist_widget::widget()->get_field_id($field);
     }
     else
     {
-      $id = ($scope ? $scope . '_' : null) . str_replace('][', '_', $field) . (is_numeric($index) ? '_' . $index : null);
+      $id = $prefix . ($scope ? $scope . '_' : null) . str_replace('][', '_', $field) . (is_numeric($index) ? '_' . $index : null);
     }
 
     if ($index && $index > 0)
@@ -217,13 +241,15 @@ class PikList_Form
   
   public static function get_field_name($field, $scope, $index = false)
   {
+    $prefix = $scope != 'piklist' && !is_admin() ? piklist::$prefix : '';
+    
     if (self::is_widget() && ($scope != 'piklist' && $field != 'fields_id'))
     {
-      $name = piklist_widget::widget()->get_field_name($field). (is_numeric($index) ? '[]' : '');
+      $name = $prefix . piklist_widget::widget()->get_field_name($field). (is_numeric($index) ? '[]' : '');
     }
     else
     {
-      $name = ($scope ? $scope . '[' : null) . $field . ($scope ? ']' : null) . (is_numeric($index) ? '[]' : null);
+      $name = $prefix . ($scope ? $scope . '[' : null) . $field . ($scope ? ']' : null) . (is_numeric($index) ? '[]' : null);
     }
     
     self::$fields_rendered[$scope][$field]['name'] = $name;
@@ -234,18 +260,18 @@ class PikList_Form
   public static function get_field_value($scope, $field, $type = 'option', $id = false, $unique = false)
   {
     $key = isset($field['save_as']) ? $field['save_as'] : $field['field'];
-    
     $saved = false;
+    $prefix = is_admin() ? '' : piklist::$prefix;
     
     if (!$id)
     {
-      if (isset($_REQUEST[$key]))
+      if (isset($_REQUEST[$prefix . $key]))
       {
-        $saved = $_REQUEST[$key];
+        $saved = $_REQUEST[$prefix . $key];
       }
-      else if (isset($_REQUEST[$type][$key]))
+      else if (isset($_REQUEST[$prefix . $type][$key]))
       {
-        $saved = $_REQUEST[$type][$key];
+        $saved = $_REQUEST[$prefix . $type][$key];
       }
     }
     
@@ -301,7 +327,7 @@ class PikList_Form
     
     do {
       
-      $id = 'field_' . $field['field'] . ($index === null ? '' : '_' . $index);
+      $id = piklist::$prefix . $field['field'] . ($index === null ? '' : '_' . $index);
       
       $index = $index === null ? 0 : $index + 1;
       
@@ -423,7 +449,7 @@ class PikList_Form
         ,'tabindex' => false                  // tabindex
       )
     ));
-    
+
     // Should this field be rendered?
     if (($field['embed'] && !$return) || ($field['capability'] && !current_user_can($field['capability'])) || !isset($field['field']))
     {
@@ -449,9 +475,7 @@ class PikList_Form
     // Set Wrapper
     $wrapper = array(
       'id' => self::get_field_wrapper_id($field)
-      ,'class' => array(
-        'piklist-field-wrapper'
-      )
+      ,'class' => array()
     );
     
     // Set Columns
@@ -630,20 +654,18 @@ class PikList_Form
   
   public static function save_fields()
   {
-    // NOTE: As of now this works with one form on a page generated by piklist, we need to hook it into the closing form tag on 
-    //        front-end forms so we can do it per form instance
     if (!empty(self::$fields_rendered))
     {
       $fields_id = md5(serialize(self::$fields_defaults));
       
       if (current_user_can('manage_options'))
       {
-        delete_transient('pik_' . $fields_id);
+        delete_transient(piklist::$prefix . $fields_id);
       }
       
-      if (false === ($fields = get_transient('pik_' . $fields_id))) 
+      if (false === ($fields = get_transient(piklist::$prefix . $fields_id))) 
       {
-        set_transient('pik_' . $fields_id, self::$fields_rendered, 60 * 60 * 24);
+        set_transient(piklist::$prefix . $fields_id, self::$fields_rendered, 60 * 60 * 24);
       }
       
       piklist::render('fields/fields', array(
@@ -828,7 +850,7 @@ class PikList_Form
     
     $label_tag = !in_array($type, self::$field_list_types) ? 'label' : 'span';    
     
-    return '<' . $label_tag . ($label_tag == 'span' ? ' class="piklist-label" ' : ' ') . self::attributes_to_string($attributes) . '>' . __($field['label']) . '</' . $label_tag . '>';
+    return '<' . $label_tag . ($label_tag == 'span' ? ' class="piklist-label" ' : ' ') . self::attributes_to_string($attributes) . '>' . __($field['label']) . ($field['required'] ? '<span class="piklist-required">*</span>' : '') . '</' . $label_tag . '>';
   }
  
   public static function template_field($type, $field, $dynamic = array())
@@ -967,16 +989,18 @@ class PikList_Form
     {
       return false;
     }
-
-    self::$fields = get_transient('pik_' . $_REQUEST['piklist']['fields_id']);
     
-    foreach (array('post', 'comment', 'user', 'taxonomy', 'post_meta', 'comment_meta', 'user_meta', 'taxonomy_meta') as $type)
+    self::$fields = get_transient(piklist::$prefix . $_REQUEST['piklist']['fields_id']);
+    
+    foreach (array('post', 'comment', 'user', 'taxonomy', 'post_meta', 'comment_meta', 'user_meta', 'taxonomy_meta') as $builtin)
     {
+      $type = (is_admin() ? '' : piklist::$prefix) . $builtin;
+      
       if (isset($_REQUEST[$type]))
       {
         $data = $_REQUEST[$type];
-      
-        switch($type)
+
+        switch($builtin)
         {
           case 'post':
                     
@@ -1075,10 +1099,55 @@ class PikList_Form
           default: break;
         }
       }
+      
+      if (isset($_FILES[$type]))
+      {
+        switch($type)
+        {
+          case 'post':
+            
+            foreach ($_FILES[$type]['name'] as $fid => $file_name)
+            {
+              if ($_FILES[$type]['error'][$fid] === UPLOAD_ERR_OK)
+              {
+                $result = media_handle_sideload(
+                            array(
+                              'name' => $file_name
+                              ,'size' => $_FILES[$type]['size'][$fid]
+                              ,'tmp_name' => $_FILES[$type]['tmp_name'][$fid]
+                            )
+                            ,$ids['post']
+                            ,null
+                            ,!isset($_REQUEST[$fid]) ? null : $_REQUEST[$fid]
+                          );
+              }
+            }
+            
+          break;
+        
+          case 'comment':
+          
+          break;
+        
+          case 'user':
+        
+          break;
+        
+          case 'taxonomy':
+
+          break;
+        
+          default: 
+          
+            // NOTE: Uploads without scope
+            
+          break;
+        }
+      }
     }
     
     self::$save_ids = $ids;
-    
+
     if (isset($_REQUEST['post_relate']) && isset($_REQUEST['post_has']))
     {
       self::relate($ids['post'], $_REQUEST['post_has']);
@@ -1143,6 +1212,8 @@ class PikList_Form
   
   public static function relate($to, $belongs)
   {
+    global $wpdb;
+    
     $found = $wpdb->get_col($wpdb->prepare('SELECT relate_id FROM ' . $wpdb->prefix . 'piklist_cpt_relate WHERE post_id = %d AND has_post_id = %d', $belongs, $to));
 
     if (empty($found))

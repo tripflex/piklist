@@ -90,19 +90,15 @@ Author URI: http://piklist.com/
   add_filter('piklist_field_templates', 'piklist_demo_field_templates');
   function piklist_demo_field_templates($templates)
   {
-    $templates['piklist_demo'] = '<div class="piklist-example-fields-custom-template">
-                                      [field_wrapper]
-                                        <div style="display: block;">
-                                          [field_label]
-                                        </div>
-                                        <div id="%1$s" class="%2$s">
-                                          [field]
-                                          [field_description_wrapper]
-                                            <small>[field_description]</small>
-                                          [/field_description_wrapper]
-                                        </div>
-                                      [/field_wrapper]
-                                    </div>';
+    $templates['piklist_demo'] = '[field_wrapper]
+                                    <div id="%1$s" class="%2$s">
+                                      [field_label]
+                                      [field]
+                                      [field_description_wrapper]
+                                        <small>[field_description]</small>
+                                      [/field_description_wrapper]
+                                    </div>
+                                  [/field_wrapper]';
 
     return $templates;
   }

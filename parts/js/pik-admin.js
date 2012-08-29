@@ -34,6 +34,19 @@
               .css('cursor', 'default');
 
         $('.piklist-meta-box-lock').show();
+        
+        $('.wp-editor-wrap')
+          .parent()
+          .css({
+            'clear': 'both'
+            ,'overflow': 'auto'
+            ,'border': 'none'
+          })
+          .prev()
+          .css({
+            'width': 'auto'
+            ,'border': 'none'
+          });
       },
       
       post_submit_meta_box: function()
@@ -76,7 +89,7 @@
         $('.' + piklist_admin.widget + '-form-selected').show();
         
         piklist_admin.widgets(false);
-      
+        
         piklist_admin.widget_interval = setInterval(function()
         {
           $('#widgets-right .widget-inside:visible .' + piklist_admin.widget + '-forms .' + piklist_admin.widget + '-form-selected').each(function(index)

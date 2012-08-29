@@ -1,4 +1,5 @@
 <?php
+
   global $action, $wp_post_statuses;
 
   $post_type = $post->post_type;
@@ -6,9 +7,11 @@
   $can_publish = current_user_can($post_type_object->cap->publish_posts);
 
   $statuses = isset($statuses) && !empty($statuses) ? $statuses : $wp_post_statuses;
-  $initial_status = current(array_keys($statuses));
-  $next_status = piklist::array_next($statuses, $post->post_status);
-  $last_status = end(array_keys($statuses));
+  $current_status = array(
+    'status' => current(array_keys($statuses))
+    ,'data' => current($statuses)
+  );
+
 ?>
 
 <div class="submitbox" id="submitpost">
@@ -66,7 +69,7 @@
         <label for="post_status"><?php _e('Status:'); ?></label>
       
         <span id="post-status-display">
-          <?php _e($wp_post_statuses[$post->post_status == 'auto-draft' ? $initial_status : $post->post_status]->label); ?>
+          <?php _e($wp_post_statuses[$post->post_status == 'auto-draft' ? $current_status['status'] : $post->post_status]->label); ?>
         </span>
 
         <?php if ('publish' == $post->post_status || 'private' == $post->post_status || $can_publish): ?>
@@ -75,7 +78,7 @@
 
           <div id="post-status-select" class="hide-if-js">
 
-            <input type="hidden" name="hidden_post_status" id="hidden_post_status" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $initial_status : $post->post_status); ?>" />
+            <input type="hidden" name="hidden_post_status" id="hidden_post_status" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $current_status['status'] : $post->post_status); ?>" />
 
             <select name="post_status" id="post_status" tabindex="4">
               <?php foreach ($statuses as $status => $status_data): ?>
@@ -166,7 +169,7 @@
         } 
         else if ('0000-00-00 00:00:00' == $post->post_date_gmt) 
         { // draft, 1 or more saves, no date specified
-          $stamp = __('Publish <b>immediately</b>');
+          $stamp = __((isset($statuses['publish']) ? 'Publish' : 'Schedule') . ' <b>immediately</b>');
         } 
         else if (time() < strtotime($post->post_date_gmt . ' +0000')) 
         { // draft, 1 or more saves, future date specified
@@ -174,7 +177,7 @@
         } 
         else 
         { // draft, 1 or more saves, date specified
-          $stamp = __('Publish on: <b>%1$s</b>');
+          $stamp = __((isset($statuses['publish']) ? 'Publish' : 'Schedule') . ' on: <b>%1$s</b>');
         }
         $date = date_i18n($datef, strtotime($post->post_date));
       } 
@@ -236,7 +239,7 @@
     <img src="<?php echo esc_url(admin_url('images/wpspin_light.gif')); ?>" class="ajax-loading" id="ajax-loading" alt="" />
 
     <?php
-      if ((!in_array($post->post_status, array('publish', 'future', 'private')) || 0 == $post->ID)):
+      if ((in_array($post->post_status, array('publish', 'future', 'private')) || 0 == $post->ID)):
         if ($can_publish):
           if (!empty($post->post_date_gmt) && time() < strtotime($post->post_date_gmt . ' +0000')): ?>
       
@@ -256,15 +259,10 @@
         <?php submit_button(__('Submit for Review'), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
   
       <?php endif; ?>
-    
-    <?php # elseif ($next_status != $last_status): ?>
-      
-<!--       <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e($next_status); ?>" />
-      <input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e(is_object($statuses[$next_status]) ? $statuses[$next_status]->label : $statuses[$next_status]['label']); ?> &rarr;" />
-       -->
+
     <?php else: ?>
     
-      <input name="original_publish" type="hidden" id="original_publish" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $initial_status : $post->post_status); ?>" />
+      <input name="original_publish" type="hidden" id="original_publish" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $current_status['status'] : $post->post_status); ?>" />
       <input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e('Update'); ?>" />
   
     <?php endif; ?>

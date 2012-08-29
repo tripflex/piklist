@@ -11,7 +11,7 @@
 
   
 /* --------------------------------------------------------------------------------
-  Styles ffor Piklist
+  Styles for Piklist
 --------------------------------------------------------------------------------- */
     
   /* Styles for the add-on field (admin) */
@@ -73,16 +73,146 @@
       text-indent: -18px;
     }
     
-  /* Default Label Improvement */
-  .piklist-meta-box label,
-  .piklist-meta-box .piklist-label {
-    font-weight: bold;
-    vertical-align: middle;
-    text-shadow: white 0 1px 0;
-  }
+  /* Meta Messages */
+  .piklist-meta-message {
+    clear: both;
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+    margin: 10px -10px 0 -10px;
+    padding: 0.8em;
+    background: white;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #dfdfdf;
+    line-height: 1.5;
+  }  
   
-    .piklist-meta-box .piklist-field-list-item {
-      font-weight: normal;
+    .piklist-meta-message a {
+      font-weight: bold;
+    }
+  
+  /* Meta box alernative to form-table */
+  .piklist-field-container:before,
+  .piklist-field-container:after {
+    content: "";
+    display: table;
+  }
+   
+    .piklist-field-container:after {
+      clear: both;
+    }
+  
+    .piklist-field-container {
+      zoom: 1;
+      overflow: hidden;
+      padding-bottom: 0.3334em;
+    } 
+
+      #side-sortables .piklist-field-container,
+      .widgets-holder-wrap .piklist-field-container {
+        overflow: auto;
+        padding-bottom: 0;
+      }
+    
+    .piklist-field-container .piklist-required {
+      color: red;
+      margin: 0 0 0 0.25em;
+    }
+    
+    .piklist-field-container .piklist-label-container {
+      display: block;
+      float: left;
+      width: 16.5em;
+      padding: 1em 0.8em 0 0.8em;
+      padding-bottom: 1000px;
+      margin-bottom: -1000px;
+    }
+
+    .piklist-meta-box ul {
+      list-style: inside;
+    }
+      
+      .piklist-meta-box .piklist-field-container .piklist-label-container {
+        border-right: 1px solid #dfdfdf;
+      }
+    
+        #side-sortables .piklist-meta-box .piklist-field-container .piklist-label-container,
+        .widgets-holder-wrap .piklist-meta-box .piklist-field-container .piklist-label-container {
+          border-right: none;
+        }
+
+    .piklist-meta-box hr {
+      color: #dfdfdf;
+      background-color: #dfdfdf;
+      border: 0 none #dfdfdf;
+      height: 1px;
+    }
+        
+      .piklist-field-container .piklist-label,
+      .piklist-field-container .piklist-child-label {
+        font-weight: bold;
+        vertical-align: middle;
+        text-shadow: white 0 1px 0;
+      }
+
+        .piklist-field-container .piklist-field-list-item {
+          font-weight: normal;
+        }
+  
+      .piklist-field-container.stack .piklist-label-container {
+        float: none;
+        width: auto;
+      }
+  
+      #side-sortables .piklist-field-container .piklist-label-container {
+        display: block;
+        float: none;
+        width: auto;
+        padding: 0.3334em 0.3334em 0 0.3334em;
+        margin: 0;
+      }
+      
+        .widgets-holder-wrap .piklist-field-container .piklist-label-container {
+          display: block;
+          float: none;
+          width: auto;
+          padding: 0.3334em 0 0 0;
+          margin: 0;
+        }
+      
+      
+    /* TODO: Put in front end stylesheet as well */
+    .piklist-field-container .piklist-field {
+      overflow: hidden;
+      position: relative;
+      padding: 0.6667em 0.8em 0 0.8em;
+      padding-bottom: 1000px;
+      margin-bottom: -1000px;
+    }
+    
+      #side-sortables .piklist-field-container .piklist-field {
+        line-height: 1.6667;
+        padding: 0.3334em 0.4em 0 0.4em;
+        margin: 0;
+      }
+        
+        .widgets-holder-wrap .piklist-field-container .piklist-field {
+          line-height: 1.6667;
+          padding: 0.3334em 0 0.3334em 1px;
+          margin: 0;
+        }
+      
+      .piklist-field-container .piklist-field ul.piklist-field-list,
+      .piklist-field-container .piklist-field ol.piklist-field-list {
+        margin-top: 0.3334em;
+        margin-bottom: 0;
+        list-style: none;
+      }
+      
+    .piklist-field-container .piklist-field-description {
+      clear: both;
+      display: block;
     }
 
   /* Plugin Icon */
@@ -240,9 +370,9 @@
           #side-sortables ul.wp-tab-bar li.wp-tab-active a { 
             font-weight: normal;
           }
-          
+        
         #side-sortables ul.wp-tab-bar li {
-          padding: 3px 5px 5px;
+          padding: 2px 5px 5px;
           display: inline;
         }
 
@@ -258,8 +388,14 @@
         }
           
   div.wp-tab-panel { 
+    height: auto;
+    min-height: 200px;
     margin: 0 5px 5px 125px; 
   } 
+
+    * html div.wp-tab-panel {
+      height: 200px;
+    }
     
     #side-sortables div.wp-tab-panel {
       margin: 0 0 5px 0;

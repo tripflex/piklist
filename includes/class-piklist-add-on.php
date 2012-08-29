@@ -84,7 +84,7 @@ class PikList_Add_On
       {
         include_once($file);
 
-        $class_name = str_replace('pik_', 'piklist_', piklist::slug($add_on));
+        $class_name = str_replace(piklist::$prefix, 'piklist_', piklist::slug($add_on));
 
         if (class_exists($class_name) && method_exists($class_name, '_construct') && !is_subclass_of($class_name, 'WP_Widget'))
         {
