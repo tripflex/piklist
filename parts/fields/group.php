@@ -1,9 +1,3 @@
-<?php if ($list): ?>
-  
-  <<?php echo isset($list_type) ? $list_type : 'ul'; ?> class="piklist-field-list">
-
-<?php endif; ?>
-
   <?php 
 
     foreach ($fields as $column)
@@ -26,17 +20,9 @@
         $column['scope'] = $scope;
 
       }
-      echo $list ? '<li>' : '';
 
         piklist('field', $column);
 
-      echo $list ? '</li>' : '';
     }
 
   ?>
-
-<?php if ($list): ?>
-  
-  </<?php echo isset($list_type) ? $list_type : 'ul'; ?>>
-
-<?php endif; ?>
