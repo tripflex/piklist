@@ -10,7 +10,6 @@ Collapse: false
     'type' => 'group'
     ,'field' => 'address'
     ,'label' => 'Address'
-    ,'list' => false
     ,'description' => 'This is an example of how to build a simple address field using the group type.'
     ,'fields' => array(
       array(
