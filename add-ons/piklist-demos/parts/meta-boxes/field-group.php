@@ -10,6 +10,7 @@ Collapse: false
     'type' => 'group'
     ,'field' => 'address'
     ,'label' => 'Address'
+    ,'list' => false
     ,'description' => 'This is an example of how to build a simple address field using the group type.'
     ,'fields' => array(
       array(
@@ -96,7 +97,6 @@ Collapse: false
         ,'columns' => 3
       )
     )
-    ,'position' => 'start'
   ));
   
   piklist('field', array(
@@ -236,25 +236,25 @@ Collapse: false
       array(
         'type' => 'text'
         ,'field' => 'ungrouped_address_1'
-            ,'label' => 'Street Address'
+        ,'label' => 'Street Address'
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'ungrouped_address_2'
-            ,'label' => 'PO Box, Suite, etc.'
+        ,'label' => 'PO Box, Suite, etc.'
         ,'columns' => 12
       )
       ,array(
         'type' => 'text'
         ,'field' => 'ungrouped_city'
-            ,'label' => 'City'
+        ,'label' => 'City'
         ,'columns' => 5
       )
       ,array(
         'type' => 'select'
         ,'field' => 'ungrouped_state'
-            ,'label' => 'State'
+        ,'label' => 'State'
         ,'columns' => 4
         ,'choices' => array(
           'AL' => 'Alabama'
@@ -313,7 +313,7 @@ Collapse: false
       ,array(
         'type' => 'text'
         ,'field' => 'ungrouped_zip_code'
-            ,'label' => 'Zip Code'
+        ,'label' => 'Zip Code'
         ,'columns' => 3
       )
     )

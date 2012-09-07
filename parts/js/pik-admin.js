@@ -66,6 +66,12 @@
             $('#publish').val('Update');
           }
         });
+        
+        $('#publish', '#major-publishing-actions').click(function()
+        {
+          $('.save-post-status', '#post-status-select').trigger('click');
+          $('.save-post-visibility', '#post-visibility-select').trigger('click');
+        })
       },
       
       widget: 'piklist-universal-widget',

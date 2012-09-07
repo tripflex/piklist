@@ -145,14 +145,14 @@ class PikList_Setting
 
   public static function pre_update_option($new, $old = false)
   {
-    if (!$new)
+    $fields = get_transient(piklist::$prefix . $_REQUEST['piklist']['fields_id']);
+    
+    foreach (current($fields) as $field => $data)
     {
-      foreach ($old as $key => $option)
+      if (!isset($new[$field]) && isset($old[$field]))
       {
-        $old[$key] = null;
+        unset($old[$field]);
       }
-      
-      return $old;
     }
     
     $settings = wp_parse_args($new, $old);
@@ -168,7 +168,7 @@ class PikList_Setting
         ,'disable_label' => true
         ,'position' => false
         ,'value' => piklist_form::get_field_value($setting['section']['setting'], $setting['field'], 'option')
-        )
+      )
       ,$setting['field']
     ));
   }
