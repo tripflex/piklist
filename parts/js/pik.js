@@ -49,6 +49,8 @@
         piklist.add_more_elements();
       },
       
+      processed_conditions: [],
+      
       process_field: function(field, fields_id)
       {
         if (field.id && field.id.indexOf('__i__') > -1)
@@ -71,23 +73,33 @@
         {
           for (var i in field.conditions)
           {
+            if (!piklist.processed_conditions[field.conditions[i].type])
+            {
+              piklist.processed_conditions[field.conditions[i].type] = [];
+            }
+            
             switch (field.conditions[i].type)
             {
               case 'update':
-                
+              
                 var _field = field;
                 var increment = _field.id.substr(_field.id.lastIndexOf('_') + 1);
                 _field.id = !isNaN(parseFloat(increment)) && isFinite(increment) ? _field.id.substr(0, _field.id.lastIndexOf('_')) : _field.id;
-                
+              
                 $('.' + _field.id).live('change', piklist.conditions_handler(field.conditions[i].id, field.conditions[i]));
                 $(':input:not(:radio)[class~="' + _field.id + '"], :radio:checked[class~="' + _field.id + '"]').trigger('change');
-                                
+                              
               break;
-              
+            
               default:
+              
+                // if ($.inArray(field.conditions[i].id, piklist.processed_conditions[field.conditions[i].type]) == -1)
+                // {
+                  $('.' + field.conditions[i].id).live('change', piklist.conditions_handler(field.id, field.conditions[i]));
+                  $(':input:not(:radio)[class~="' + field.conditions[i].id + '"], :radio:checked[class~="' + field.conditions[i].id + '"]').trigger('change');
 
-                $('.' + field.conditions[i].id).live('change', piklist.conditions_handler(field.id, field.conditions[i]));
-                $(':input:not(:radio)[class~="' + field.conditions[i].id + '"], :radio:checked[class~="' + field.conditions[i].id + '"]').trigger('change');
+                  piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
+                // }
                 
               break;
             }
@@ -202,19 +214,33 @@
               
               if ($(this).val() == condition.value)
               {
-                field.parents(parent).show();
+                console.log('1')
+                if ((field.is(':radio') || field.is(':checkbox')) && field.is(':checked'))
+                {
+                  console.log('1-1')
+                  
+                  field.parents(parent).show();
+                }
+                else if (!field.is(':radio') && !field.is(':checkbox'))
+                {
+                  console.log('1-2')
+                  field.parents(parent).show();
+                }
               }
               else
               {
+                console.log('2')
                 if (field.is(':radio') || field.is(':checkbox'))
                 {
+                  console.log('2-1')
                   field.attr('checked', false); 
                 }
                 else
                 {
+                  console.log('2-2')
                   field.val('');
                 }
-                                
+
                 field.parents(parent).hide();
               }
             
