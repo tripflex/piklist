@@ -15,6 +15,12 @@ A Rapid Development Framework for WordPress.
 
 Piklist is the developers best friend. A rapid development framework for WordPress that will let you concentrate on the main focus of your plugin or theme, and let Piklist handle everything else.
 
+[Watch the Piklist presentation from WordCamp NYC](http://wordpress.tv/2012/09/04/steve-bruner-and-kevin-miller-building-powerful-websites-and-web-applications-with-piklist/):
+
+http://wordpress.tv/2012/09/04/steve-bruner-and-kevin-miller-building-powerful-websites-and-web-applications-with-piklist/
+
+
+
 **Piklist makes it easy to:**
 
 *   Build Fields for Settings page, Widgets and Custom Post Types with minimal code (Custom Taxonomies and User Profiles coming soon.)
