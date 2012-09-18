@@ -16,7 +16,7 @@ class PikList_Theme
     add_action('wp_footer', array('piklist_theme', 'conditional_scripts_start'), -1);
     add_action('wp_head', array('piklist_theme', 'conditional_scripts_end'), 101);
     add_action('wp_footer', array('piklist_theme', 'conditional_scripts_end'), 101);
-
+    
     add_filter('template_directory', array('piklist_theme', 'template_directory'), 10, 3);
     add_filter('body_class', array('piklist_theme', 'body_class'));
     add_filter('style_loader_tag', array('piklist_theme', 'less_styles'), 10, 2);
@@ -139,22 +139,23 @@ class PikList_Theme
     } 
   }
   
-  public static function template_directory($template_dir, $template, $theme_root)
+  public static function template_directory($template_directory, $template, $theme_root)
   {
+    $theme_data = wp_get_theme();
+
     if (self::theme_core($template))
     {
-      $template_dir = piklist::$paths['plugin'] . '/themes/' . $template;
+      $template_directory = piklist::$paths['plugin'] . '/themes/' . $template;
     }
-    else if (is_child_theme())
+    else if ($theme_data->stylesheet != $theme_data->template)
     {
-      $theme_data = get_theme_data($template_dir . '/style.css');
-      if (self::theme_core($theme_data['Template']))
+      if (self::theme_core($theme_data->template))
       {  
-        $template_dir = piklist::$paths['plugin'] . '/themes/' . $theme_data['Template'];   
+        $template_directory = piklist::$paths['plugin'] . '/themes/' . $theme_data->template;   
       }
     }
 
-    return $template_dir;
+    return $template_directory;
   }
   
   public static function theme_core($theme)

@@ -69,8 +69,15 @@
         
         $('#publish', '#major-publishing-actions').click(function()
         {
-          $('.save-post-status', '#post-status-select').trigger('click');
-          $('.save-post-visibility', '#post-visibility-select').trigger('click');
+          if ($('#post-status-select').css('display') != 'none')
+          {
+            $('.save-post-status', '#post-status-select').trigger('click');
+          }
+          
+          if ($('#post-visibility-select').css('display') != 'none')
+          {
+            $('.save-post-visibility', '#post-visibility-select').trigger('click');
+          }
         })
       },
       

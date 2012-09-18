@@ -65,7 +65,13 @@
   /* Adjustment to style checkboxes and radio buttons better */
   .piklist-field-list {
     margin-top: 0px;
+    margin-bottom: 0px;
   }
+  
+    .piklist-field-list li {
+      margin-bottom: 0px;
+      vertical-align: middle;
+    }
 
     .piklist-field-list-item {
       display: inline-block;
@@ -148,6 +154,11 @@
       border: 0 none #dfdfdf;
       height: 1px;
     }
+    
+    .piklist-meta-box h4 {
+      clear: both;
+    }
+    
         
       .piklist-field-container .piklist-label,
       .piklist-field-container .piklist-child-label {

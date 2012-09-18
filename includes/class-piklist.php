@@ -404,7 +404,7 @@ class PikList
           $menu[$position] = array(
             ''
             ,'read'
-            ,"separator{$index}"
+            ,'separator' . $index
             ,''
             ,'wp-menu-separator'
           );
@@ -415,6 +415,102 @@ class PikList
         }
       }
     }
+  }
+  
+  public static function key_path($array, $find, $map = null)
+  {
+    $path = array();
+    
+    if (array_key_exists($find, $array))
+    {
+      return $map ? array("{$map[count($path)]}" => $find) : array($find);
+    }
+    else
+    {
+      foreach ($array as $key => $data)
+      {
+        if (is_array($data))
+        {
+          if ($path = self::key_path($data, $find, $map))
+          {
+            $path[($map ? $map[count($path)] : null)] = $key;
+            
+            return $path;
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+  
+  public static function xml_to_array($xml) 
+  {
+    libxml_use_internal_errors(true);
+
+    $xml_document = new DOMDocument();
+    $xml_document->loadXML($xml);
+
+    return self::dom_node_to_array($xml_document->documentElement);
+  }
+
+  public static function dom_node_to_array($node) 
+  {
+    $output = array();
+    switch ($node->nodeType) 
+    {
+      case XML_CDATA_SECTION_NODE:
+      case XML_TEXT_NODE:
+        $output = trim($node->textContent);
+      break;
+
+      case XML_ELEMENT_NODE:
+      for ($x = 0, $y = $node->childNodes->length; $x < $y; $x++) 
+      {
+        $child = $node->childNodes->item($x);
+
+        $value = self::dom_node_to_array($child);
+
+        if (isset($child->tagName)) 
+        {
+          $tag = $child->tagName;
+          if (!isset($output[$tag])) 
+          {
+            $output[$tag] = array();
+          }
+          $output[$tag][] = $value;
+        }
+        elseif ($value) 
+        {
+          $output = (string) $value;
+        }
+      }
+
+      if (is_array($output)) 
+      {
+        if ($node->attributes->length) 
+        {
+          $attributes = array();
+          foreach($node->attributes as $key => $attribute_node) 
+          {
+            $attributes[$key] = (string) $attribute_node->value;
+          }
+          $output['@attributes'] = $attributes;
+        }
+
+        foreach ($output as $key => $value) 
+        {
+          if (is_array($value) && count($value) == 1 && $key != '@attributes') 
+          {
+            $output[$key] = $value[0];
+          }
+        }
+      }
+
+      break;
+    }
+
+    return $output;
   }
   
   public static function directory_empty($path)
@@ -483,6 +579,15 @@ class PikList
     
     return $needle;
   }
+  
+  public static function performance()
+  {
+    if (!ini_get('safe_mode'))
+    { 
+      ini_set('max_execution_time', -1);
+      ini_set('memory_limit', -1);
+    }
+  }
 }
 
 /*
@@ -512,7 +617,6 @@ function piklist($option, $arguments = array())
         {
           $__key = $arguments[0];
           $_key = is_object($value) ? $value->$__key : $value[$__key];
-          $key = is_object($value) ? $value->$_key : $value[$_key];
 
           $_value = $arguments[1];
           $list[$_key] = is_object($value) ? $value->$_value : $value[$_value];
@@ -571,6 +675,12 @@ function piklist($option, $arguments = array())
       case 'slug':
       
         return piklist::slug($arguments);
+        
+      break;
+      
+      case 'performance':
+        
+        piklist::performance();
         
       break;
       

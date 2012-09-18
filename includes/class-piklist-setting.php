@@ -104,7 +104,7 @@ class PikList_Setting
   {
     add_settings_field(
       $field['field']
-      ,$field['label']
+      ,isset($field['label']) ? $field['label'] : null
       ,array('piklist_setting', 'render_setting')
       ,self::$active_section['setting']
       ,self::$active_section['slug']
