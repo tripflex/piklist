@@ -11,7 +11,6 @@ class PikList_Widget
     add_action('init', array('piklist_widget', 'init'));
     add_action('widgets_init', array('piklist_widget', 'widgets_init'));
     
-    add_filter('widget_text', 'do_shortcode');
     add_filter('dynamic_sidebar_params', array('piklist_widget', 'dynamic_sidebar_params'));
   }
 

@@ -177,6 +177,7 @@ class PikList_Form
     add_action('template_redirect', array('piklist_form', 'process_form'));
     add_action('admin_enqueue_scripts', array('piklist_form', 'scripts'));
     add_action('wp_enqueue_scripts', array('piklist_form', 'scripts'));
+    add_action('post_edit_form_tag', array('piklist_form', 'add_enctype'));
     
     self::save_fields_actions();
   }
@@ -291,10 +292,9 @@ class PikList_Form
       
           if ($id)
           {
-            // TODO: more than name
             $terms = piklist(wp_get_post_terms($id, $key), 'term_id');
-          
-            return isset($terms[$key]) ? $terms[$key] : false;
+
+            return !empty($terms) ? $terms : false;
           }
         
         break;
@@ -407,6 +407,11 @@ class PikList_Form
     return $pagenow == 'post.php' || $pagenow == 'post-new.php';
   }
 
+  public static function add_enctype()
+  {
+    echo ' enctype="multipart/form-data" ';
+  }
+
   public static function render_field($field, $return = false)
   {  
     $field = wp_parse_args($field, array(
@@ -443,6 +448,7 @@ class PikList_Form
         ,'title' => false                     // title
         ,'alt' => false                       // alt 
         ,'tabindex' => false                  // tabindex
+        ,'columns' => null
       )
     ));
 
@@ -465,7 +471,14 @@ class PikList_Form
     array_push(self::$fields_defaults, $field);
     
     // Manage Classes
-    $field['attributes']['class'] = !is_array($field['attributes']['class']) ? explode(' ', $field['attributes']['class']) : $field['attributes']['class'];
+    if (isset($field['attributes']['class']))
+    {
+      $field['attributes']['class'] = !is_array($field['attributes']['class']) ? explode(' ', $field['attributes']['class']) : $field['attributes']['class'];
+    }
+    else
+    {
+      $field['attributes']['class'] = array();
+    }
     array_push($field['attributes']['class'], piklist_form::get_field_id($field['field'], $field['scope']));
     
     // Set Wrapper
@@ -990,6 +1003,8 @@ class PikList_Form
   
   public static function save($ids = null)
   { 
+    global $wpdb;
+
     // NOTE: Meta Validation
     if (!isset($_REQUEST['piklist']['fields_id']))
     {
@@ -1056,14 +1071,14 @@ class PikList_Form
               array_push($updated, $key);
             }
             
-            foreach (self::$fields[$type] as $key => $config)
-            {
-              if (!in_array($key, $updated))
-              {
-                delete_post_meta($ids['post'], $key);
-                add_post_meta($ids['post'], $key, '', $config['unique'] ? true : false);
-              }
-            }
+            // foreach (self::$fields[$type] as $key => $config)
+            // {
+            //   if (!in_array($key, $updated))
+            //   {
+            //     delete_post_meta($ids['post'], $key);
+            //     add_post_meta($ids['post'], $key, '', $config['unique'] ? true : false);
+            //   }
+            // }
         
           break;
         
@@ -1125,7 +1140,7 @@ class PikList_Form
             {
               if ($_FILES[$type]['error'][$fid] === UPLOAD_ERR_OK)
               {
-                $result = media_handle_sideload(
+                $attach_id = media_handle_sideload(
                             array(
                               'name' => $file_name
                               ,'size' => $_FILES[$type]['size'][$fid]
@@ -1133,8 +1148,13 @@ class PikList_Form
                             )
                             ,$ids['post']
                             ,null
-                            ,!isset($_REQUEST[$fid]) ? null : $_REQUEST[$fid]
+                            ,isset($_REQUEST[$fid]) ? $_REQUEST[$fid] : null
                           );
+                
+                if (isset($_REQUEST[$fid]['post_status']) && !is_wp_error($attach_id))
+                {
+                  $wpdb->query($wpdb->prepare("UPDATE $wpdb->posts SET post_status = %s WHERE ID = %d", $_REQUEST[$fid]['post_status'], $attach_id));
+                }
               }
             }
             

@@ -1,9 +1,9 @@
 === PIKLIST | Rapid Development Framework ===
 Contributors: piklist
-Tags: framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
-Tested up to: 3.4.1
+Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
+Tested up to: 3.4
 Requires at least: 3.3.2
-Stable tag: 0.6.2
+Stable tag: 0.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,6 @@ A Rapid Development Framework for WordPress.
 Piklist is the developers best friend. A rapid development framework for WordPress that will let you concentrate on the main focus of your plugin or theme, and let Piklist handle everything else.
 
 [Watch the Piklist presentation from WordCamp NYC >](http://wordpress.tv/2012/09/04/steve-bruner-and-kevin-miller-building-powerful-websites-and-web-applications-with-piklist/):
-
 
 **Piklist makes it easy to:**
 
@@ -100,6 +99,13 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.6.3 =
+* New field! Upload files.
+* Added new Piklist XML class.
+* Updated Piklist get_terms function.
+* Removed ability to run any shortcode in a widget. Moved to WordPress-Helpers plugin.
+* Many notices have been fixed.
 
 = 0.6.2 =
 * Bugfix: Publish box wasn't always publishing.

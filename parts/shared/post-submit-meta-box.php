@@ -11,6 +11,7 @@
     'status' => current(array_keys($statuses))
     ,'data' => current($statuses)
   );
+  $action_label = !isset($statuses['publish']) ? 'Save' : 'Publish';
 
 ?>
 
@@ -25,7 +26,7 @@
 
     <div id="minor-publishing-actions">
 
-      <div id="save-action">
+      <div id="save-action" <?php echo $action_label != 'Publish' ? 'class="hide-all"' : null; ?>>
       
         <input type="submit" name="save" id="save-post" value="<?php esc_attr_e('Save'); ?>" tabindex="4" class="button button-highlighted" />
 
@@ -239,17 +240,17 @@
     <img src="<?php echo esc_url(admin_url('images/wpspin_light.gif')); ?>" class="ajax-loading" id="ajax-loading" alt="" />
 
     <?php
-      if ((in_array($post->post_status, array('publish', 'future', 'private')) || 0 == $post->ID)):
+      if ((!in_array($post->post_status, array('publish', 'future', 'private')) || 0 == $post->ID)):
         if ($can_publish):
           if (!empty($post->post_date_gmt) && time() < strtotime($post->post_date_gmt . ' +0000')): ?>
       
             <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Schedule'); ?>" />
             <?php submit_button(__('Schedule'), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
         
-          <?php else : ?>
+          <?php else: ?>
         
-            <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Publish'); ?>" />
-            <?php submit_button(__('Publish'), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
+            <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e($action_label); ?>" />
+            <?php submit_button(__($action_label), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
             
         <?php endif; ?>
       

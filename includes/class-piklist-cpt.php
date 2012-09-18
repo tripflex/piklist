@@ -357,7 +357,7 @@ class PikList_CPT
     {
       return $post_id;
     }
-    
+
     remove_action('save_post', array('piklist_cpt', 'save_post_data'));
 
       piklist_form::save(array(
@@ -373,7 +373,7 @@ class PikList_CPT
         $update['post_title'] = ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $post_id;
       }
       
-      if (isset($_REQUEST['hidden_post_status']) && !isset($_REQUEST['publish']))
+      if (isset($_REQUEST['hidden_post_status']))
       {
         $update['post_status'] = $_REQUEST['hidden_post_status'];
       }
@@ -584,7 +584,7 @@ class PikList_CPT
           'relation' => isset($_REQUEST[piklist::$prefix . 'taxonomy']['relation']) && in_array(strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation']), array('AND', 'OR')) ? strtoupper($_REQUEST['taxonomy']['relation']) : 'AND'
         )
       );
-      
+
       foreach ($_REQUEST as $key => $values) 
       {
         $filter = substr($key, strlen(piklist::$prefix));
