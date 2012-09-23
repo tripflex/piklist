@@ -19,25 +19,62 @@ Collapse: false
     'type' => 'text'
     ,'field' => 'post_status'
     ,'scope' => 'upload_simple'
+    ,'description' => 'This is set to pull in post status automatically'
     ,'label' => 'Attachment Status'
     ,'value' => $post->post_status
   ));
   
   piklist('field', array(
-    'type' => 'text'
-    ,'field' => 'post_title'
+    'type' => 'textarea'
+    ,'field' => 'post_excerpt'
     ,'scope' => 'upload_simple'
-    ,'label' => 'Attachment Title'
-    ,'value' => 'This is a fancy attachment title, go fancy!'
+    ,'label' => 'Attachment Notes'
+    ,'attributes' => array(
+      'class' => 'large-text'
+    )
   ));
   
   piklist('field', array(
     'type' => 'file'
     ,'field' => 'upload_simple'
     ,'scope' => 'post'
-    ,'label' => 'Attach File(s)'
+    ,'label' => 'Attach File'
     ,'value' => 'Upload'
   ));
+
+
+
+  $args = array( 
+    'post_type' => 'attachment' 
+    ,'numberposts' => -1
+    ,'post_parent' => $post->ID 
+    ,'post_status' => 'all'
+  ); 
+  
+  $attachments = get_posts( $args );
+  if ($attachments)
+  {
+    global $wp_post_statuses;
+    remove_all_filters('get_the_excerpt'); // Since we're using the_excerpt for notes, we need to keep it clean.
+
+    foreach ( $attachments as $post )
+    { 
+      setup_postdata($post); ?>
+
+      <div id="pik_post_attachment_<?php echo $post->ID; ?>" class="piklist-field-container">
+        <div class="piklist-label-container">
+          <?php echo wp_get_attachment_link( $attachment->ID, 'thumbnail', false, true ); ?>     
+        </div>
+        <div class="piklist-field">
+          <?php printf( __('%1$sOrder Status:%2$s %3$s','piklist'),'<strong>','</strong>',$wp_post_statuses[$post->post_status]->label); ?>
+          <?php the_excerpt(); ?>
+        </div>
+      </div>
+<?php
+    }
+
+  }
+
   
   piklist('shared/meta-field-welcome', array(
     'location' => __FILE__

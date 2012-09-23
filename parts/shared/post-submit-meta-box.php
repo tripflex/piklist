@@ -7,7 +7,7 @@
   $can_publish = current_user_can($post_type_object->cap->publish_posts);
 
   $statuses = isset($statuses) && !empty($statuses) ? $statuses : $wp_post_statuses;
-  $current_status = array(
+  $initial_status = array(
     'status' => current(array_keys($statuses))
     ,'data' => current($statuses)
   );
@@ -16,8 +16,8 @@
 ?>
 
 <div class="submitbox" id="submitpost">
-  
-  <div id="minor-publishing">
+
+  <div id="minor-publishing" <?php echo apply_filters('hide_minor_publishing_submit_box', false) ? 'class="hide-all"' : null; ?>>
 
     <!-- Hidden submit button early on so that the browser chooses the right button when form is submitted with Return key -->
     <div class="hide-all">
@@ -70,7 +70,7 @@
         <label for="post_status"><?php _e('Status:'); ?></label>
       
         <span id="post-status-display">
-          <?php _e($wp_post_statuses[$post->post_status == 'auto-draft' ? $current_status['status'] : $post->post_status]->label); ?>
+          <?php _e($wp_post_statuses[$post->post_status == 'auto-draft' ? $initial_status['status'] : $post->post_status]->label); ?>
         </span>
 
         <?php if ('publish' == $post->post_status || 'private' == $post->post_status || $can_publish): ?>
@@ -79,7 +79,7 @@
 
           <div id="post-status-select" class="hide-if-js">
 
-            <input type="hidden" name="hidden_post_status" id="hidden_post_status" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $current_status['status'] : $post->post_status); ?>" />
+            <input type="hidden" name="hidden_post_status" id="hidden_post_status" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $initial_status['status'] : $post->post_status); ?>" />
 
             <select name="post_status" id="post_status" tabindex="4">
               <?php foreach ($statuses as $status => $status_data): ?>
@@ -263,7 +263,7 @@
 
     <?php else: ?>
     
-      <input name="original_publish" type="hidden" id="original_publish" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $current_status['status'] : $post->post_status); ?>" />
+      <input name="original_publish" type="hidden" id="original_publish" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $initial_status['status'] : $post->post_status); ?>" />
       <input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e('Update'); ?>" />
   
     <?php endif; ?>

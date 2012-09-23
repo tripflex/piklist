@@ -159,7 +159,6 @@
       clear: both;
     }
     
-        
       .piklist-field-container .piklist-label,
       .piklist-field-container .piklist-child-label {
         font-weight: bold;
@@ -192,9 +191,8 @@
           margin: 0;
         }
       
-      
     /* TODO: Put in front end stylesheet as well */
-    .piklist-field-container .piklist-field {
+    .piklist-field {
       overflow: hidden;
       position: relative;
       padding: 0.6667em 0.8em 0 0.8em;
@@ -214,14 +212,14 @@
           margin: 0;
         }
       
-      .piklist-field-container .piklist-field ul.piklist-field-list,
-      .piklist-field-container .piklist-field ol.piklist-field-list {
+      ul.piklist-field-list,
+      ol.piklist-field-list {
         margin-top: 0.3334em;
         margin-bottom: 0;
-        list-style: none;
+        list-style-type: none;
       }
       
-    .piklist-field-container .piklist-field-description {
+    .piklist-field-description {
       clear: both;
       display: block;
     }
