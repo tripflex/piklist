@@ -78,7 +78,7 @@
           {
             $('.save-post-visibility', '#post-visibility-select').trigger('click');
           }
-        })
+        });
       },
       
       widget: 'piklist-universal-widget',

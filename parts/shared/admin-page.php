@@ -43,7 +43,11 @@
     
       <?php do_action('piklist_settings_form'); ?>
 
-      <?php submit_button(__('Save Changes')); ?>
+      <?php if ($save): ?>
+        
+        <?php submit_button(__('Save Changes')); ?>
+        
+      <?php endif; ?>
     
     </form>
     

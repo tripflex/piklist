@@ -13,10 +13,15 @@ Collapse: false
     ,'scope' => 'taxonomy'
     ,'field' => 'piklist_demo_type'
     ,'label' => 'Demo Types'
-    ,'choices' => array(
-      'tutorial' => 'Tutorial'
-      ,'video' => 'Video'
-      ,'presentation' => 'Presentation'
+    ,'description' => 'Terms will appear when they are added to this taxonomy.'
+    ,'choices' => piklist(
+      get_terms('piklist_demo_type', array(
+        'hide_empty' => false
+      ))
+      ,array(
+        'term_id'
+        ,'name'
+      )
     )
   ));
 

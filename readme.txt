@@ -100,6 +100,12 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
+= 0.6.4 =
+* Save button can be removed for individual Settings pages.
+* Show file uploads in Piklist Demos.
+* Bugfix: Taxonomy save/edit.
+* Bugfix: 3.3.2 support.
+
 = 0.6.3 =
 * New field! Upload files.
 * Added new Piklist XML class.

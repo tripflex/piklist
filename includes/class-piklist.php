@@ -580,6 +580,21 @@ class PikList
     return $needle;
   }
   
+  public static function post_custom($post_id)
+  {
+    $meta = get_post_custom($post_id);
+    
+    foreach ($meta as $key => $value)
+    {
+      if (count($value) == 1) 
+      {
+        $meta[$key] = maybe_unserialize($value[0]);
+      }
+    }
+    
+    return $meta;
+  }
+  
   public static function performance()
   {
     if (!ini_get('safe_mode'))
@@ -663,6 +678,12 @@ function piklist($option, $arguments = array())
       case 'taxonomy_labels':
       
         return piklist::taxonomy_labels($arguments);
+        
+      break;
+      
+      case 'post_custom':
+        
+        return piklist::post_custom($arguments);
         
       break;
       

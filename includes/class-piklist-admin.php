@@ -158,7 +158,7 @@ class PikList_Admin
     if ($page)
     {
       $setting_tabs = piklist_setting::get('setting_tabs');
-      
+
       piklist::render('shared/admin-page', array(
         'section' => $page['menu_slug']
         ,'icon' => isset($page['icon']) ? $page['icon'] : false
@@ -167,6 +167,7 @@ class PikList_Admin
         ,'setting' => isset($page['setting']) ? $page['setting'] : false
         ,'tabs' => isset($page['setting']) ? $setting_tabs[$page['setting']] : self::$admin_page_tabs[$page['menu_slug']]
         ,'page_sections' => isset(self::$admin_page_sections[$page['menu_slug']]) ? self::$admin_page_sections[$page['menu_slug']] : false
+        ,'save' => isset($page['save']) ? $page['save'] : true
       ));
     }
   }

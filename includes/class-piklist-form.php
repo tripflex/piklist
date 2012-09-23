@@ -292,7 +292,7 @@ class PikList_Form
       
           if ($id)
           {
-            $terms = piklist(wp_get_post_terms($id, $key), 'term_id');
+            $terms = piklist(wp_get_post_terms($id, $key), apply_filters('piklist_taxonomy_value_key', 'term_id', $key));
 
             return !empty($terms) ? $terms : false;
           }

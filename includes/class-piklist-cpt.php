@@ -229,31 +229,28 @@ class PikList_CPT
 
       $post_type = get_post_type();
 
-      if (isset(self::$meta_boxes_hidden[$post_type]))
+      if (isset(self::$meta_boxes_hidden[$post_type]) && !in_array('submitdiv', self::$meta_boxes_hidden[$post_type]))
       {
-        if (!in_array('submitdiv', self::$meta_boxes_hidden[$post_type]))
+        array_push(self::$meta_boxes_hidden[$post_type], 'submitdiv');
+      }
+
+      foreach (array('normal', 'advanced', 'side') as $context)
+      {
+        // NOTE: remove_meta_box simply removes the meta configuration not the key, we need to wipe it... 
+        foreach (array('high', 'core', 'default', 'low') as $priority)
         {
-          array_push(self::$meta_boxes_hidden[$post_type], 'submitdiv');
-        }
-        
-        foreach (self::$meta_boxes_hidden[$post_type] as $meta_box)
-        {  
-          foreach (array('normal', 'advanced', 'side') as $context)
+          if (isset($wp_meta_boxes[$post_type][$context][$priority]))
           {
-            // NOTE: remove_meta_box simply removes the meta configuration not the key, we need to wipe it... 
-            foreach (array('high', 'core', 'default', 'low') as $priority)
-            {              
-              if (isset($wp_meta_boxes[$post_type][$context][$priority][$meta_box]))
+            foreach ($wp_meta_boxes[$post_type][$context][$priority] as $meta_box => $data)
+            {            
+              if ($meta_box == 'submitdiv')
               {
-                if ($meta_box == 'submitdiv')
-                {
-                  $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
-                }
-                else 
-                {
-                  unset($wp_meta_boxes[$post_type][$context][$priority][$meta_box]);
-                }
-              }     
+                $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
+              }
+              else if (isset(self::$meta_boxes_hidden[$post_type][$context][$priority][$meta_box]))
+              {
+                unset($wp_meta_boxes[$post_type][$context][$priority][$meta_box]);
+              }
             }
           }
         }
@@ -277,12 +274,14 @@ class PikList_CPT
   {
     global $post, $wp_post_statuses;
     
+    $post_type = get_post_type();
+
     $default_statuses = array(
       'draft' => $wp_post_statuses['draft']
       ,'pending' => $wp_post_statuses['pending']
     );
 
-    if ($post->post_status == 'publish')
+    if ($post->post_status == 'publish' || (!isset(self::$post_types[$post_type]['status']) || (isset(self::$post_types[$post_type]['status']) && isset(self::$post_types[$post_type]['status']['publish']))))
     {
       $default_statuses['publish'] = $wp_post_statuses['publish'];
     } 
@@ -373,10 +372,10 @@ class PikList_CPT
         $update['post_title'] = ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $post_id;
       }
       
-      if (isset($_REQUEST['hidden_post_status']))
-      {
-        $update['post_status'] = $_REQUEST['hidden_post_status'];
-      }
+      // if (isset($_REQUEST['hidden_post_status']))
+      // {
+      //   $update['post_status'] = $_REQUEST['hidden_post_status'];
+      // }
       
       if (count($update) > 1)
       {

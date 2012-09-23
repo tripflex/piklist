@@ -7,7 +7,9 @@
   #screen-meta-links,
   #wphead,
   #footer,
-  .update-nag {
+  .update-nag,
+  .wrap h2,
+  .wrap .icon32 {
     display: none !important;
     margin: 0 !important;
   }
