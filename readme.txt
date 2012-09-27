@@ -74,7 +74,6 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   color picker
 *   add more
 
-
 **Choose a content type for your field (You can even mix-n-match on one form)**
 
 *   post
