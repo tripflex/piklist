@@ -175,3 +175,9 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 = 0.5.0 =
 * Initial release!
+
+
+== Upgrade Notice ==
+
+= 0.6.4 =
+* Fixes major issue with Publish box. Please upgrade.
