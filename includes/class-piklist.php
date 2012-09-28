@@ -100,7 +100,7 @@ class PikList
       $class_name = str_replace(array('.php', 'class_'), array('', ''), self::slug($include));
       if ($include != __FILE__)
       {
-        include_once(self::$paths['plugin'] . '/includes/' . $include);
+        include_once self::$paths['plugin'] . '/includes/' . $include;
      
         if (class_exists($class_name) && method_exists($class_name, '_construct') && !is_subclass_of($class_name, 'WP_Widget'))
         {
@@ -661,12 +661,6 @@ function piklist($option, $arguments = array())
           piklist_form::render_field($arguments, isset($arguments['return']) ? $arguments['return'] : false);
         }
         
-      break;
-      
-      case 'meta-box':
-
-        piklist_form::render_meta_box($arguments['box'], $arguments['add_on']); 
-
       break;
       
       case 'post_type_labels':

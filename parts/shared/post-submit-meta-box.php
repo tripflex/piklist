@@ -12,6 +12,7 @@
     ,'data' => current($statuses)
   );
   $action_label = !isset($statuses['publish']) ? 'Save' : 'Publish';
+  $status_type = $post->post_status == 'auto-draft' ? $initial_status['status'] : $post->post_status;
 
 ?>
 
@@ -70,7 +71,7 @@
         <label for="post_status"><?php _e('Status:'); ?></label>
       
         <span id="post-status-display">
-          <?php _e($wp_post_statuses[$post->post_status == 'auto-draft' ? $initial_status['status'] : $post->post_status]->label); ?>
+          <?php _e(isset($statuses[$status_type]) ? (is_object($statuses[$status_type]) ? $statuses[$status_type]->label : $statuses[$status_type]['label']) : $wp_post_statuses[$status_type]->label); ?>
         </span>
 
         <?php if ('publish' == $post->post_status || 'private' == $post->post_status || $can_publish): ?>
@@ -250,7 +251,7 @@
           <?php else: ?>
         
             <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e($action_label); ?>" />
-            <?php submit_button(__($action_label), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
+            <input name="<?php echo $action_label == 'Publish' ? 'publish' : 'save'; ?>" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e($action_label); ?>" />
             
         <?php endif; ?>
       
