@@ -16,7 +16,7 @@ class PikList_Add_On
   
   public static function include_add_ons()
   { 
-    require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+    require_once ABSPATH . 'wp-admin/includes/plugin.php';
     
     $plugins = get_option('active_plugins');
     foreach ($plugins as $plugin)
@@ -82,7 +82,7 @@ class PikList_Add_On
 
       if (in_array($add_on, is_array($active_add_ons) ? $active_add_ons : array($active_add_ons)))
       {
-        include_once($file);
+        include_once $file;
 
         $class_name = str_replace(piklist::$prefix, 'piklist_', piklist::slug($add_on));
 

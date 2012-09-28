@@ -86,7 +86,7 @@ class PikList_Setting
           
           ob_start();
 
-            include ($section['path'] . '/parts/' . $section['folder'] . '/' . $section['part']);
+            include $section['path'] . '/parts/' . $section['folder'] . '/' . $section['part'];
             
             $output = trim(ob_get_contents());
 

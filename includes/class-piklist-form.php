@@ -962,45 +962,6 @@ class PikList_Form
     }
   }
   
-  public static function render_meta_box($box, $add_on)
-  {
-    global $wp_meta_boxes;
-    
-    $path = piklist::$paths[$add_on] . '/parts/meta-boxes/' . $box;
-    
-    $data = get_file_data($path . '.php', array(
-              'name' => 'Title'
-              ,'context' => 'Context'
-              ,'description' => 'Description'
-              ,'capability' => 'Capability'
-              ,'priority' => 'Priority'
-              ,'order' => 'Order'
-              ,'type' => 'Type'
-              ,'locked' => 'Locked'
-              ,'status' => 'Status'
-              ,'new' => 'New'
-            ));
-       
-    $statuses = isset($data['status']) ? explode(',', $data['status']) : false;
-
-    if (isset(self::$save_ids['post']))
-    {
-      $post = get_post(self::$save_ids['post']);
-    }
-
-    if (
-      (!$data['capability'] || ($data['capability'] && current_user_can($data['capability'])))
-      && (!$data['status'] || ($data['status'] && isset($post->post_status) && in_array($post->post_status, $statuses)))
-      && (!$data['new'] || ($data['new'] == 'false' && $post->post_status != 'draft'))
-    )
-    {
-      // NOTE: Better way to template this
-      echo "<strong>{$data['name']}</strong>";
-
-      piklist::render($path, $data);
-    }
-  }
-  
   public static function save($ids = null)
   { 
     global $wpdb;
@@ -1012,6 +973,7 @@ class PikList_Form
     }
     
     self::$fields = get_transient(piklist::$prefix . $_REQUEST['piklist']['fields_id']);
+// piklist::pre($_REQUEST);die;
 
     foreach (array('post', 'comment', 'user', 'taxonomy', 'post_meta', 'comment_meta', 'user_meta', 'taxonomy_meta') as $builtin)
     {
@@ -1115,8 +1077,9 @@ class PikList_Form
                 {
                   $term = is_numeric($term) ? (int) $term : $term;
                 }
-
-                wp_set_object_terms($ids['post'], $terms, $taxonomy, isset(self::$fields['taxonomy'][$taxonomy]['save_as']));
+                
+                // TODO: How to handle append vs replace?
+                wp_set_object_terms($ids['post'], $terms, $taxonomy, isset(self::$fields['taxonomy'][$taxonomy]['save_as']), true);
               }
             }
         
@@ -1141,15 +1104,15 @@ class PikList_Form
               if ($_FILES[$type]['error'][$fid] === UPLOAD_ERR_OK)
               {
                 $attach_id = media_handle_sideload(
-                            array(
-                              'name' => $file_name
-                              ,'size' => $_FILES[$type]['size'][$fid]
-                              ,'tmp_name' => $_FILES[$type]['tmp_name'][$fid]
-                            )
-                            ,$ids['post']
-                            ,null
-                            ,isset($_REQUEST[$fid]) ? $_REQUEST[$fid] : null
-                          );
+                              array(
+                                'name' => $file_name
+                                ,'size' => $_FILES[$type]['size'][$fid]
+                                ,'tmp_name' => $_FILES[$type]['tmp_name'][$fid]
+                              )
+                              ,isset($ids['post']) ? $ids['post'] : 0
+                              ,null
+                              ,isset($_REQUEST[$fid]) ? $_REQUEST[$fid] : null
+                            );
                 
                 if (isset($_REQUEST[$fid]['post_status']) && !is_wp_error($attach_id))
                 {
@@ -1207,11 +1170,6 @@ class PikList_Form
       case 'post':
                 
         $id = $object['ID'] ? wp_update_post($object) : wp_insert_post($object);
-        
-        if (empty($object['post_title']) || !isset($object['post_title']))
-        {
-          piklist_cpt::default_post_title($id);
-        }
         
       break;
       

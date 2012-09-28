@@ -8,10 +8,16 @@ Author: Piklist
 Author URI: http://piklist.com
 */
 
-  if (!defined('ABSPATH')) exit;
+  if (!defined('ABSPATH'))
+  {
+    exit;
+  }
+  
+  if (!class_exists('Piklist'))
+  {
+    include_once 'includes/class-piklist.php';
 
-  include_once('includes/class-piklist.php');
-
-  piklist::load();
-
+    piklist::load();
+  }
+  
 ?>

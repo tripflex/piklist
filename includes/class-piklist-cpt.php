@@ -363,25 +363,6 @@ class PikList_CPT
         'post' => $post_id
       ));
 
-      $update = array(
-        'ID' => $post_id
-      );
-
-      if (empty($_REQUEST['post_title']) || !isset($_REQUEST['post_title']))
-      {
-        $update['post_title'] = ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $post_id;
-      }
-      
-      // if (isset($_REQUEST['hidden_post_status']))
-      // {
-      //   $update['post_status'] = $_REQUEST['hidden_post_status'];
-      // }
-      
-      if (count($update) > 1)
-      {
-        wp_update_post($update);
-      }
-
     add_action('save_post', array('piklist_cpt', 'save_post_data'));
   }
   

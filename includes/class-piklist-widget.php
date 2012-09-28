@@ -29,8 +29,8 @@ class PikList_Widget
         'name' => __($sidebar['name'])
         ,'id' => sanitize_title_with_dashes($sidebar['name'])
         ,'description' => isset($sidebar['description']) ? __($sidebar['description']) : null
-        ,'before_widget' => isset($sidebar['before_widget']) ? $sidebar['before_widget'] : '<aside id="%1$s" class="widget-container %2$s">'
-        ,'after_widget' => isset($sidebar['after_widget']) ? $sidebar['after_widget'] : '</aside>'
+        ,'before_widget' => isset($sidebar['before_widget']) ? $sidebar['before_widget'] : '<div id="%1$s" class="widget-container %2$s">'
+        ,'after_widget' => isset($sidebar['after_widget']) ? $sidebar['after_widget'] : '</div>'
         ,'before_title' => isset($sidebar['before_title']) ? $sidebar['before_title'] : '<h3 class="widget-title">'
         ,'after_title' => isset($sidebar['after_title']) ? $sidebar['after_title'] : '</h3>'
      ), $sidebar));
