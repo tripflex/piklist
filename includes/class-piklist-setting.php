@@ -111,6 +111,7 @@ class PikList_Setting
       ,array(
         'field' => $field
         ,'section' => self::$active_section
+        //,'label_for' => $field['field'] Change to ID
       ) 
     );
   }

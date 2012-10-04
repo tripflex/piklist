@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Text Fields
-Setting: piklist-demo-fields
+Setting: piklist_demo_fields
 Order: 10
 */
 

@@ -25,6 +25,7 @@ Author URI: http://piklist.com/
       ,'hide_meta_box' => array(
         'slug'
         ,'author'
+        ,'piklist_demo_type'
       )
       ,'status' => array(
         'draft' => array(
@@ -76,8 +77,8 @@ Author URI: http://piklist.com/
       ,'menu_title' => __('Field Demos', 'piklist')
       ,'sub_menu' => 'piklist'
       ,'capability' => 'manage_options'
-      ,'menu_slug' => 'piklist-demo-fields'
-      ,'setting' => 'piklist-demo-fields'
+      ,'menu_slug' => 'piklist_demo_fields'
+      ,'setting' => 'piklist_demo_fields'
       ,'icon' => 'options-general'
       ,'single_line' => false
       ,'default_tab' => 'Basic'

@@ -16,7 +16,7 @@
           $column['value'] = $value[$column['field']];
       }
 
-      $column['field'] = $field . '][' . ($index ? $index : '0') . '][' . $column['field'];
+      $column['field'] = (empty($field) ? '' : $field . '][' . ($index ? $index : '0') . '][') . $column['field'];
       $column['scope'] = $scope;
     }
 

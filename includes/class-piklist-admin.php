@@ -17,7 +17,7 @@ class PikList_Admin
     add_action('admin_print_styles', array('piklist_admin', 'admin_print_styles'));
     add_action('admin_print_scripts', array('piklist_admin', 'admin_print_scripts'), 100);
     add_action('redirect_post_location', array('piklist_admin', 'redirect_post_location'), 10, 2);
-    add_action('wp_scheduled_delete', array('piklist_admin', 'clear_transients'));
+    // add_action('wp_scheduled_delete', array('piklist_admin', 'clear_transients'));
 
     add_filter('admin_footer_text', array('piklist_admin', 'admin_footer_text'));
     add_filter('transient_update_plugins', array('piklist_admin', 'transient_update_plugins'));
@@ -28,7 +28,7 @@ class PikList_Admin
   {
     self::add_admin_pages();
   }
-  
+
   public static function admin_head()
   {
     if (self::hide_ui())
@@ -165,7 +165,7 @@ class PikList_Admin
         ,'single_line' => isset($page['single_line']) ? $page['single_line'] : true
         ,'title' => __($page['page_title'])
         ,'setting' => isset($page['setting']) ? $page['setting'] : false
-        ,'tabs' => isset($page['setting']) ? $setting_tabs[$page['setting']] : self::$admin_page_tabs[$page['menu_slug']]
+        ,'tabs' => isset($page['setting']) && isset($setting_tabs[$page['setting']]) ? $setting_tabs[$page['setting']] : self::$admin_page_tabs[$page['menu_slug']]
         ,'page_sections' => isset(self::$admin_page_sections[$page['menu_slug']]) ? self::$admin_page_sections[$page['menu_slug']] : false
         ,'save' => isset($page['save']) ? $page['save'] : true
       ));
@@ -230,8 +230,8 @@ class PikList_Admin
       return false;
     }
 
-    $time = isset ($_SERVER['REQUEST_TIME']) ? (int) $_SERVER['REQUEST_TIME'] : time();
-    $expired = $wpdb->get_col($wpdb->prepare("SELECT option_name FROM $wpdb->options WHERE option_name LIKE '_transient_timeout%' AND option_value < %s;", $time));
+    $time = isset($_SERVER['REQUEST_TIME']) ? (int) $_SERVER['REQUEST_TIME'] : time();
+    $expired = $wpdb->get_col($wpdb->prepare("SELECT option_name FROM $wpdb->options WHERE option_name LIKE '_transient_timeout%' AND CAST(option_value as INTEGER) < %d", $time));
     foreach ($expired as $transient) 
     {
       delete_transient(str_replace('_transient_timeout_', '', $transient));

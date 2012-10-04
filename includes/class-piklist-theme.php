@@ -11,7 +11,7 @@ class PikList_Theme
     add_action('init', array('piklist_theme', 'init'));
     add_action('setup_theme', array('piklist_theme', 'setup_theme'));
     add_action('wp_enqueue_scripts', array('piklist_theme', 'scripts'));
-    add_action('wp_enqueue_scripts', array('piklist_theme', 'scripts'));
+    add_action('admin_enqueue_scripts', array('piklist_theme', 'scripts'));
     add_action('wp_head', array('piklist_theme', 'conditional_scripts_start'), -1);
     add_action('wp_footer', array('piklist_theme', 'conditional_scripts_start'), -1);
     add_action('wp_head', array('piklist_theme', 'conditional_scripts_end'), 101);
@@ -89,6 +89,11 @@ class PikList_Theme
       ,'styles' => array()
     ));
     
+    $assets_to_enqueue = array(
+      'scripts' => array()
+      ,'styles' => array()
+    );
+    
     foreach ($assets as $type => $list)
     {    
       foreach ($assets[$type] as $asset)
@@ -116,23 +121,29 @@ class PikList_Theme
           
           if (isset($asset['enqueue']) && $asset['enqueue'])
           {
-            array_push($assets[$type], $asset['handle']);
+            array_push($assets_to_enqueue[$type], array(
+              'handle' => $asset['handle']
+              ,'admin' => $asset['admin']
+            ));
           }
         }
       }
     }
-    
-    foreach ($assets as $type => $assets)
-    {    
-      foreach ($assets as $enqueue)
+
+    foreach ($assets_to_enqueue as $type => $assets)
+    {
+      foreach ($assets as $asset)
       {
-        if ($type == 'scripts')
+        if ((is_admin() && $asset['admin']) || (!is_admin() && !$asset['admin']))
         {
-          wp_enqueue_script($enqueue);
-        }
-        else if ($type == 'styles')
-        {
-          wp_enqueue_style($enqueue);
+          if ($type == 'scripts')
+          {
+            wp_enqueue_script($asset['handle']);
+          }
+          else if ($type == 'styles')
+          {
+            wp_enqueue_style($asset['handle']);
+          }
         }
       }
     } 

@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Radio, Checkbox and Nested Fields
-Setting: piklist-demo-fields
+Setting: piklist_demo_fields
 Order: 30
 */
 

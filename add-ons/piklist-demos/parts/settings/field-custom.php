@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Custom Groups
-Setting: piklist-demo-fields
+Setting: piklist_demo_fields
 Tab: Custom
 Order: 10
 */
