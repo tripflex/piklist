@@ -13,7 +13,7 @@
   
     <?php echo $list ? '<li>' : ''; ?>
   
-      <label class="piklist-field-list-item">
+      <label class="piklist-field-list-item <?php echo isset($attributes['class']) ? implode(' ', $attributes['class']) : null; ?>">
   
         <input 
           type="radio"

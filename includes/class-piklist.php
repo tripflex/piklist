@@ -579,7 +579,7 @@ class PikList
     
     return $needle;
   }
-  
+    
   public static function post_custom($post_id)
   {
     $meta = get_post_custom($post_id);

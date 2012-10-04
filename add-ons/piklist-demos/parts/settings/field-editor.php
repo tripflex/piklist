@@ -1,7 +1,7 @@
 <?php
 /*
 Title: WYSIWYG Editor
-Setting: piklist-demo-fields
+Setting: piklist_demo_fields
 Tab: Advanced
 Order: 20
 */

@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Select Fields
-Setting: piklist-demo-fields
+Setting: piklist_demo_fields
 Order: 20
 */
 
