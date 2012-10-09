@@ -1,0 +1,452 @@
+# Copyright (C) 2012 Piklist
+# This file is distributed under the same license as the Piklist package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Piklist 0.6.5\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/piklist\n"
+"POT-Creation-Date: 2012-10-09 02:55:39+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:69
+msgid "%1$sOrder Status:%2$s %3$s"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:13
+msgid "Group ~ List Example"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:14
+msgid "This is an example of how to build a list with multiple element types."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:49
+#: add-ons/piklist-demos/parts/settings/field-text.php:22
+#: add-ons/piklist-demos/parts/widgets/example-form.php:20
+#: add-ons/piklist-demos/parts/widgets/example.php:16
+msgid "Text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:50
+msgid "class=\"small-text\""
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:58
+#: add-ons/piklist-demos/parts/settings/field-select.php:11
+#: add-ons/piklist-demos/parts/widgets/example-form.php:55
+#: add-ons/piklist-demos/parts/widgets/example.php:19
+msgid "Select"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:59
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:73
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:13
+#: add-ons/piklist-demos/parts/settings/field-editor.php:13
+#: add-ons/piklist-demos/parts/settings/field-editor.php:14
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:12
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:36
+#: add-ons/piklist-demos/parts/settings/field-select.php:12
+#: add-ons/piklist-demos/parts/settings/field-text.php:64
+#: add-ons/piklist-demos/parts/settings/field-text.php:65
+#: add-ons/piklist-demos/parts/widgets/example-form.php:43
+#: add-ons/piklist-demos/parts/widgets/example-form.php:44
+#: add-ons/piklist-demos/parts/widgets/example-form.php:56
+#: add-ons/piklist-demos/parts/widgets/example-form.php:72
+#: add-ons/piklist-demos/parts/widgets/example-form.php:96
+#: add-ons/piklist-demos/parts/widgets/example-form.php:122
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:72
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:12
+#: add-ons/piklist-demos/parts/widgets/example-form.php:121
+#: add-ons/piklist-demos/parts/widgets/example.php:22
+msgid "Color Picker"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:80
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:19
+#: add-ons/piklist-demos/parts/widgets/example-form.php:131
+msgid "Date"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:81
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:20
+#: add-ons/piklist-demos/parts/widgets/example-form.php:132
+msgid "Choose a date"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:30
+msgid "Time"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:31
+msgid "Choose a time"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:12
+msgid "Toggle a field"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:23
+msgid "Show/Hide Field"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:24
+msgid "This field is toggled by the field above"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:36
+msgid "Update a field"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:61
+msgid "Update This Field"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:62
+msgid "This field is updated by the field above"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:12
+msgid "Address"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:13
+msgid ""
+"This is an example of how to build a simple address field using the group "
+"type."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:18
+msgid "Street Address"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:24
+msgid "PO Box, Suite, etc."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:30
+msgid "City"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:36
+msgid "State"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:95
+msgid "Zip Code"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-editor.php:12
+msgid "HTML Content"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:11
+#: add-ons/piklist-demos/parts/widgets/example-form.php:71
+#: add-ons/piklist-demos/parts/widgets/example.php:20
+msgid "Radio"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:35
+#: add-ons/piklist-demos/parts/widgets/example-form.php:95
+#: add-ons/piklist-demos/parts/widgets/example.php:21
+msgid "Checkbox"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:11
+#: add-ons/piklist-demos/parts/widgets/example-form.php:9
+msgid "Text ~ small-text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:12
+#: add-ons/piklist-demos/parts/settings/field-text.php:23
+#: add-ons/piklist-demos/parts/settings/field-text.php:31
+#: add-ons/piklist-demos/parts/settings/field-text.php:42
+#: add-ons/piklist-demos/parts/settings/field-text.php:53
+#: add-ons/piklist-demos/parts/widgets/example-form.php:10
+#: add-ons/piklist-demos/parts/widgets/example-form.php:21
+#: add-ons/piklist-demos/parts/widgets/example-form.php:32
+#: add-ons/piklist-demos/parts/widgets/example-form.php:147
+msgid "ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:30
+msgid "Text ~ regular-text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:41
+#: add-ons/piklist-demos/parts/widgets/example-form.php:31
+msgid "Text ~ large-text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:52
+msgid "Number ~ small-text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:63
+msgid "Textarea ~ 10x50 ~ large-text code"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/shared/meta-field-welcome.php:2
+msgid "The code that built this meta box can be found here:"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:42
+msgid "Textarea ~ large-text code"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:146
+msgid "Add More"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:10
+msgid "Example Display Widget"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:15
+msgid "Text ~ Small"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:17
+msgid "Text ~ Large"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:18
+msgid "Textarea"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:23
+msgid "Date Picker"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/hello-world-form.php:6
+msgid "From"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:10
+msgid "Hello World from "
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:15
+msgid "This is a sample widget from"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Piklist 0.6.5)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Piklist 0.6.5)  #-#-#-#-#
+#. Author of the plugin/theme
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:15
+#: includes/class-piklist-setting.php:22
+msgid "Piklist"
+msgstr ""
+
+#: add-ons/piklist-demos/piklist-demos.php:22
+msgid "Demo"
+msgstr ""
+
+#: add-ons/piklist-demos/piklist-demos.php:23
+msgid "Person"
+msgstr ""
+
+#: add-ons/piklist-demos/piklist-demos.php:76
+#: add-ons/piklist-demos/piklist-demos.php:77
+msgid "Field Demos"
+msgstr ""
+
+#: includes/class-piklist-admin.php:42
+msgid "</a> and <a href=\"%s\">Piklist</a>."
+msgstr ""
+
+#: includes/class-piklist-admin.php:93 includes/class-piklist-setting.php:67
+msgid "General"
+msgstr ""
+
+#: includes/class-piklist-setting.php:21
+msgid "About"
+msgstr ""
+
+#: includes/class-piklist-setting.php:32
+msgid "Piklist Settings"
+msgstr ""
+
+#: includes/class-piklist-setting.php:33 parts/fields/add-ons.php:37
+msgid "Settings"
+msgstr ""
+
+#: includes/class-piklist-widget.php:54 includes/class-piklist-widget.php:64
+msgid " Widgets"
+msgstr ""
+
+#: includes/class-piklist-widget.php:59
+msgid "Piklist Widgets"
+msgstr ""
+
+#: includes/class-piklist-widget.php:60
+msgid "Core Widgets for Piklist."
+msgstr ""
+
+#: parts/fields/file.php:18
+msgid "Upload or View"
+msgstr ""
+
+#: parts/settings/add-ons.php:10
+msgid ""
+"Add-ons are Piklist plugins that are included with Piklist core, or another "
+"Piklist plugin. They allow you to turn on additional functionality."
+msgstr ""
+
+#: parts/settings/add-ons.php:19
+msgid "Plugin Add-ons"
+msgstr ""
+
+#: parts/settings/add-ons.php:20
+msgid "Check to activate."
+msgstr ""
+
+#: parts/shared/admin-notice.php:2
+msgid "ERROR:"
+msgstr ""
+
+#: parts/shared/admin-page.php:48
+msgid "Save Changes"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:25
+#: parts/shared/post-submit-meta-box.php:32
+msgid "Save"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:44
+msgid "Preview Changes"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:54
+msgid "Preview"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:71
+msgid "Status:"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:79
+#: parts/shared/post-submit-meta-box.php:128
+#: parts/shared/post-submit-meta-box.php:197
+msgid "Edit"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:91
+#: parts/shared/post-submit-meta-box.php:149
+msgid "OK"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:92
+#: parts/shared/post-submit-meta-box.php:150
+msgid "Cancel"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:101
+msgid "Visibility:"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:106
+#: parts/shared/post-submit-meta-box.php:146
+msgid "Private"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:111
+#: parts/shared/post-submit-meta-box.php:143
+msgid "Password protected"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:116
+msgid "Public, Sticky"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:121
+#: parts/shared/post-submit-meta-box.php:139
+msgid "Public"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:141
+msgid "Stick this post to the front page"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:145
+msgid "Password:"
+msgstr ""
+
+#. translators: Publish box date format, see http:php.net/date
+#: parts/shared/post-submit-meta-box.php:161
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:166
+msgid "Scheduled for: <b>%1$s</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:170
+msgid "Published on: <b>%1$s</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:178
+msgid "Schedule for: <b>%1$s</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:188
+msgid "Publish <b>immediately</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:224
+msgid "Delete Permanently"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:228
+msgid "Move to Trash"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:248
+#: parts/shared/post-submit-meta-box.php:249
+msgid "Schedule"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:260
+#: parts/shared/post-submit-meta-box.php:261
+msgid "Submit for Review"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:268
+msgid "Update"
+msgstr ""
+
+#: parts/shared/widget-select.php:5 parts/shared/widget-select.php:16
+msgid "Select a Widget"
+msgstr ""
+
+#: parts/shared/widget-select.php:61
+msgid "There are currently no Widgets available."
+msgstr ""
+
+#: parts/shared/widget-select.php:64
+msgid "Learn to make Widgets"
+msgstr ""
+
+#: parts/shared/widget-select.php:67
+msgid ""
+"Check out the documentation for how to easily build your own custom widgets!"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Piklist 0.6.5)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Piklist 0.6.5)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://piklist.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A Framework for Building Powerful Websites with WordPress."
+msgstr ""
