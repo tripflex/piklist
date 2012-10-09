@@ -75,8 +75,8 @@
 
     .piklist-field-list-item {
       display: inline-block;
-      padding-left: 18px;
-      text-indent: -16px;
+      /*padding-left: 18px;
+      text-indent: -16px;*/
     }
     
   /* Meta Messages */

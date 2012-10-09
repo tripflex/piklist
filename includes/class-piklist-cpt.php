@@ -561,7 +561,7 @@ class PikList_CPT
       $args = array(
         'meta_query' => array()
         ,'tax_query' => array(
-          'relation' => isset($_REQUEST[piklist::$prefix . 'taxonomy']['relation']) && in_array(strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation']), array('AND', 'OR')) ? strtoupper($_REQUEST['taxonomy']['relation']) : 'AND'
+          'relation' => isset($_REQUEST[piklist::$prefix . 'taxonomy']['relation']) && in_array(strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation']), array('AND', 'OR')) ? strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation']) : 'AND'
         )
       );
 
@@ -610,15 +610,15 @@ class PikList_CPT
           
             foreach ($values as $taxonomy => $terms)
             {
-              if (!empty($terms))
+              if (!empty($terms) && $taxonomy != 'relation')
               {
                 array_push(
                   $args['tax_query']
                   ,array(
                     'taxonomy' => $taxonomy
                     ,'field' => 'slug'
-                    ,'terms' => $terms
-                    ,'include_children' => false
+                    ,'terms' => !is_array($terms) && strstr($terms, ',') ? explode(',', $terms) : $terms
+                    ,'include_children' => false // NOTE: Add as option like relation
                     ,'operator' => 'IN'
                   )
                 );
@@ -628,7 +628,7 @@ class PikList_CPT
           break;
         }
       }
-      
+
       if (isset($_REQUEST[piklist::$prefix . 'post_type']))
       {
         $query->set('post_type', $_REQUEST[piklist::$prefix . 'post_type']);

@@ -3,7 +3,6 @@
   method="<?php echo strtolower($method); ?>" 
   action="<?php echo isset($action) ? $action : $_SERVER['REQUEST_URI']; ?>" 
   enctype="multipart/form-data" 
-  <?php echo piklist_form::attributes_to_string($attributes); ?>
 >
 
   <?php
