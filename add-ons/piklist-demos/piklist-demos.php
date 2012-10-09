@@ -71,11 +71,11 @@ Author URI: http://piklist.com/
 
   add_filter('piklist_admin_pages', 'piklist_demo_admin_pages');
   function piklist_demo_admin_pages($pages) 
-  {    
+  {
     $pages[] = array(
       'page_title' => __('Field Demos')
       ,'menu_title' => __('Field Demos', 'piklist')
-      ,'sub_menu' => 'piklist'
+      ,'sub_menu' => 'edit.php?post_type=piklist_demo'
       ,'capability' => 'manage_options'
       ,'menu_slug' => 'piklist_demo_fields'
       ,'setting' => 'piklist_demo_fields'

@@ -54,7 +54,7 @@ class PikList
       ,'/(h|bl)ouses$/i' => "$1ouse"
       ,'/(corpse)s$/i' => "$1"
       ,'/(us)es$/i' => "$1"
-      ,'/s$/i' => ""
+      //,'/s$/i' => ""
     )
     ,'irregular' => array(
       'move' => 'moves'
@@ -86,9 +86,11 @@ class PikList
   public static function load()
   {    
     self::$paths['plugin'] = dirname(dirname(__FILE__));
+
+    load_plugin_textdomain( 'piklist', false, dirname(dirname(plugin_basename(__FILE__ ))) . '/languages' );
     
     register_activation_hook('piklist/piklist.php', array('piklist', 'install'));
-    
+   
     self::auto_load();
   }
   

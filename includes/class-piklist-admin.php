@@ -20,8 +20,6 @@ class PikList_Admin
     // add_action('wp_scheduled_delete', array('piklist_admin', 'clear_transients'));
 
     add_filter('admin_footer_text', array('piklist_admin', 'admin_footer_text'));
-    add_filter('transient_update_plugins', array('piklist_admin', 'transient_update_plugins'));
-    add_filter('site_transient_update_plugins', array('piklist_admin', 'transient_update_plugins'));
   }
 
   public static function admin_menu()
@@ -172,7 +170,6 @@ class PikList_Admin
     }
   }
   
-  
   public static function admin_print_styles()
   {
     wp_enqueue_style('thickbox');
@@ -191,34 +188,6 @@ class PikList_Admin
     
     wp_enqueue_script('piklist-admin', WP_PLUGIN_URL . '/piklist/parts/js/pik-admin.js', array('jquery'), '0.1', true); 
     wp_enqueue_script('piklist', WP_PLUGIN_URL . '/piklist/parts/js/pik.js', array('jquery'), '0.1', true); 
-  } 
-  
-  public function transient_update_plugins($value = '') 
-  {
-    if (isset($value->response) && count($value->response))
-    {
-      $active_plugins = get_option('active_plugins');     
-      
-      if ($active_plugins) 
-      {
-        foreach ($value->response as $idx => $data) 
-        {
-          if (!in_array($idx, $active_plugins))
-          {
-            unset($value->response[$idx]);
-          }
-        }
-      }
-      else 
-      {
-        foreach ($value->response as $idx => $data) 
-        {
-          unset($value->response);
-        }           
-      }
-    }  
-     
-    return $value;
   }
 
   public static function clear_transients()

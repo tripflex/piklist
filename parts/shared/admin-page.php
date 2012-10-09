@@ -14,17 +14,29 @@
         <hr class="piklist-tab-divider" />
         
       <?php endif; ?>
-
+      
       <?php foreach ($tabs as $tab): ?>
-
-        <a class="nav-tab <?php echo (isset($tab['page']) && $_REQUEST['tab'] == $tab['page']) || (!isset($_REQUEST['tab']) && !isset($tab['page'])) ? 'nav-tab-active' : null; ?>" href="?page=<?php echo $_REQUEST['page']; ?><?php echo isset($tab['page']) ? '&tab=' . $tab['page'] : ''; ?>">
+        
+        <?php
+          parse_str($_SERVER['QUERY_STRING'], $url_defaults);
+          
+          $url = array_merge(
+                  $url_defaults
+                  ,array(
+                    'page' => $_REQUEST['page']
+                    ,'tab' => isset($tab['page']) ? $tab['page'] : false
+                  )
+                );      
+        ?>
+        
+        <a class="nav-tab <?php echo (isset($tab['page']) && $_REQUEST['tab'] == $tab['page']) || (!isset($_REQUEST['tab']) && !isset($tab['page'])) ? 'nav-tab-active' : null; ?>" href="?<?php echo http_build_query(array_filter($url)); ?>">
           <?php echo $tab['title']; ?>
         </a>
         
       <?php endforeach;?>
       
     </h2>
-       
+
   <?php elseif ($title): ?>
     
     <h2><?php _e($title); ?></h2>

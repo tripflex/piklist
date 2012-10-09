@@ -18,25 +18,23 @@ class PikList_Setting
   public static function admin_pages($pages) 
   {
     $pages[] = array(
-      'page_title' => __('About')
-      ,'menu_title' => __('Piklist')
+      'page_title' => 'About'
+      ,'menu_title' => 'Piklist'
       ,'capability' => 'manage_options'
       ,'menu_slug' => 'piklist'
       ,'single_line' => false
-      ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png')
       ,'icon' => 'piklist-page'
       ,'default_tab' => 'Introduction'
     );
     
     $pages[] = array(
-      'page_title' => __('Piklist Settings')
-      ,'menu_title' => __('Settings')
+      'page_title' => 'Piklist Settings'
+      ,'menu_title' => 'Settings'
       ,'capability' => 'manage_options'
       ,'sub_menu' => 'piklist'
       ,'menu_slug' => 'piklist-settings'
       ,'setting' => 'piklist'
       ,'single_line' => false
-      ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png')
       ,'icon' => 'piklist-page'
       ,'default_tab' => 'Add-Ons'
     );
@@ -147,16 +145,17 @@ class PikList_Setting
   public static function pre_update_option($new, $old = false)
   {
     $fields = get_transient(piklist::$prefix . $_REQUEST['piklist']['fields_id']);
+    $_old = $old;
     
     foreach (current($fields) as $field => $data)
     {
-      if (!isset($new[$field]) && isset($old[$field]))
+      if (!isset($new[$field]) && isset($_old[$field]))
       {
-        unset($old[$field]);
+        unset($_old[$field]);
       }
     }
     
-    $settings = wp_parse_args($new, $old);
+    $settings = wp_parse_args($new, $_old);
     
     return apply_filters('piklist_pre_update_option', $settings, $new, $old);
   }

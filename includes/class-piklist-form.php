@@ -276,12 +276,6 @@ class PikList_Form
     $saved = false;
     $prefix = is_admin() ? '' : piklist::$prefix;
     
-    // if (strstr($key, ']['))
-    // {
-    //   return false;
-    //   // $key = substr($key, 0, strpos($key, ']['));
-    // }
-    
     if (!$id)
     {
       if (isset($_REQUEST[$prefix . $key]))
@@ -302,7 +296,7 @@ class PikList_Form
       
           $options = get_option($scope);
         
-          return isset($options[$key]) ? $options[$key] : (empty($options) ? $field['value'] : false);
+          return isset($options[$key]) ? $options[$key] : (empty($options) && isset($field['value']) ? $field['value'] : false);
 
         break;
       
@@ -1296,7 +1290,7 @@ class PikList_Form
     }
   }
   
-  public static function attributes_to_string($attributes, $exclude = array())
+  public static function attributes_to_string($attributes = array(), $exclude = array())
   {
     $attribute_string = '';
 
