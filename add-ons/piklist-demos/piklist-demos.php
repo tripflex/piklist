@@ -75,7 +75,7 @@ Author URI: http://piklist.com/
     $pages[] = array(
       'page_title' => __('Field Demos')
       ,'menu_title' => __('Field Demos', 'piklist')
-      ,'sub_menu' => 'edit.php?post_type=piklist_demo'
+      ,'sub_menu' => 'piklist'
       ,'capability' => 'manage_options'
       ,'menu_slug' => 'piklist_demo_fields'
       ,'setting' => 'piklist_demo_fields'
