@@ -23,9 +23,9 @@ Order: 30
         'type' => 'datepicker'
         ,'field' => 'date_add_more'
         ,'options' => array(
-      'dateFormat' => 'M d, yy'
+          'dateFormat' => 'M d, yy'
         )
-    ,'value' => date('M d, Y', time() + 604800)
+        ,'value' => date('M d, Y', time() + 604800)
         ,'columns' => 2
       )
       ,array(

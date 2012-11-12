@@ -25,7 +25,7 @@ Collapse: false
     )
   ));
 
-  piklist('shared/meta-field-welcome', array(
+  piklist('shared/meta-box-welcome', array(
     'location' => __FILE__
   ));
   

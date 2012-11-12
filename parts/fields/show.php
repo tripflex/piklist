@@ -5,7 +5,7 @@
 
     <?php if (count($value) > 1 ): ?>
   
-      <ol id="<?php echo piklist_form::get_field_id($field, $scope, $index); ?>">
+      <ol id="<?php echo piklist_form::get_field_id($field, $scope, $index, $prefix); ?>">
         <li>
         <?php echo implode('</li><li>', $value); ?>
         </li>
@@ -19,13 +19,23 @@
 
   <?php else: ?>
 
-    <div id="<?php echo piklist_form::get_field_id($field, $scope, $index); ?>">
+    <div id="<?php echo piklist_form::get_field_id($field, $scope, $index, $prefix); ?>">
 
       <?php echo $type == 'editor' ? wpautop($value) : $value ; ?>
 
     </div>
 
   <?php endif; ?>
+  
+  <?php 
+    piklist('field', array(
+      'type' => 'hidden'
+      ,'scope' => 'piklist'
+      ,'field' => 'ignore' . ($scope ? '_' . $scope: '')
+      ,'index' => rand()
+      ,'value' => piklist_form::get_field_name($field, false, $index, $prefix)
+    ));
+  ?>
 
 <?php else: ?>
   

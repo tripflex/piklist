@@ -14,7 +14,7 @@
       'type' => 'select'
       ,'field' => $widget_name
       ,'label' => __('Select a Widget')
-      ,'value' => $instance[$name]
+      ,'value' => isset($instance[$name]) ? $instance[$name] : null
       ,'attributes' => array(
         'class' => array(
           'widefat'

@@ -2,8 +2,8 @@
 /*
 Plugin Name: Piklist Demos
 Plugin URI: http://piklist.com
-Description: Piklist Demos. Creates a Demo post type, Example Settings Page and Widget, with Field Examples.
-Version: 0.1
+Description: Piklist Demos. Creates a Demo post type, Taxonomy, Settings Page and Widget, with Field Examples.
+Version: 0.3
 Author: Piklist
 Author URI: http://piklist.com/
 */
@@ -74,12 +74,13 @@ Author URI: http://piklist.com/
   {
     $pages[] = array(
       'page_title' => __('Field Demos')
-      ,'menu_title' => __('Field Demos', 'piklist')
-      ,'sub_menu' => 'piklist'
+      ,'menu_title' => __('Settings', 'piklist')
+      ,'sub_menu' => 'edit.php?post_type=piklist_demo'
       ,'capability' => 'manage_options'
       ,'menu_slug' => 'piklist_demo_fields'
       ,'setting' => 'piklist_demo_fields'
-      ,'icon' => 'options-general'
+      ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png')
+      ,'icon' => 'piklist-page'
       ,'single_line' => false
       ,'default_tab' => 'Basic'
     );
@@ -103,4 +104,5 @@ Author URI: http://piklist.com/
 
     return $templates;
   }
+
 ?>

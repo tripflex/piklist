@@ -67,7 +67,7 @@
 
     <?php foreach ($page_sections as $page_section): ?>
       
-      <?php if (piklist::dashes($page_section['tab']) == $_REQUEST['tab']): ?>
+      <?php if (piklist::dashes($page_section['tab']) == '' || (isset($_REQUEST['tab']) && piklist::dashes($page_section['tab']) == $_REQUEST['tab'])): ?>
       
         <?php piklist::render($page_section['path'] . '/parts/admin-pages/' . $page_section['part']); ?>
       

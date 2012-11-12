@@ -1,4 +1,17 @@
 
-<h4><?php _e('The code that built this meta box can be found here:'); ?></h4> 
+<?php if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'edit'): ?>
+  
+  <tr id="pik_text_class_small" class="form-field">
+    <th scope="row" class="left">
+      &nbsp;
+    </th>
+    <td>
 
-<code><?php echo str_replace(ABSPATH, '', $location); ?></code>
+      <h4><?php _e('The code that built these fields can be found here:'); ?></h4> 
+
+      <code><?php echo str_replace(ABSPATH, '', $location); ?></code>
+    
+    </td>
+  </tr>
+  
+<?php endif; ?>

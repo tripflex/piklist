@@ -6,7 +6,6 @@ Order: 10
 Collapse: false
 */
 
-
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'text_class_small'
@@ -67,7 +66,7 @@ Collapse: false
     )
   ));
 
-  piklist('shared/meta-field-welcome', array(
+  piklist('shared/meta-box-welcome', array(
     'location' => __FILE__
   ));
   

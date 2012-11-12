@@ -62,7 +62,7 @@ Collapse: false
     ,'description' => 'This field is updated by the field above'
   ));
   
-  piklist('shared/meta-field-welcome', array(
+  piklist('shared/meta-box-welcome', array(
     'location' => __FILE__
   ));
   

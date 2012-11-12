@@ -23,6 +23,7 @@ class PikList_Setting
       ,'capability' => 'manage_options'
       ,'menu_slug' => 'piklist'
       ,'single_line' => false
+      ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png') 
       ,'icon' => 'piklist-page'
       ,'default_tab' => 'Introduction'
     );
@@ -35,6 +36,7 @@ class PikList_Setting
       ,'menu_slug' => 'piklist-settings'
       ,'setting' => 'piklist'
       ,'single_line' => false
+      ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png') 
       ,'icon' => 'piklist-page'
       ,'default_tab' => 'Add-Ons'
     );
@@ -156,7 +158,7 @@ class PikList_Setting
     }
     
     $settings = wp_parse_args($new, $_old);
-    
+
     return apply_filters('piklist_pre_update_option', $settings, $new, $old);
   }
 

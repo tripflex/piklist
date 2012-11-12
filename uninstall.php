@@ -18,7 +18,9 @@
 
     delete_option('piklist_demo_fields');
 
-      $cptargs = array(
+    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%_pik_%';");
+
+    $cptargs = array(
       'numberposts' => 100
       ,'post_type' =>'piklist_demo'
       ,'post_status' => 'all'

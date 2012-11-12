@@ -93,13 +93,10 @@
             
               default:
               
-                // if ($.inArray(field.conditions[i].id, piklist.processed_conditions[field.conditions[i].type]) == -1)
-                // {
-                  $('.' + field.conditions[i].id).live('change', piklist.conditions_handler(field.id, field.conditions[i]));
-                  $(':input:not(:radio)[class~="' + field.conditions[i].id + '"], :radio:checked[class~="' + field.conditions[i].id + '"]').trigger('change');
+                $('.' + field.conditions[i].id).live('change', piklist.conditions_handler(field.id, field.conditions[i]));
+                $(':input:not(:radio)[class~="' + field.conditions[i].id + '"], :radio:checked[class~="' + field.conditions[i].id + '"]').trigger('change');
 
-                  piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
-                // }
+                piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
                 
               break;
             }
@@ -209,35 +206,28 @@
             break;
             
             default:
-
+              
               var parent = $(this).parents('form').find(':input[name="option_page"]').length > 0 ? 'tr' : '.piklist-field-condition';
               
               if ($(this).val() == condition.value)
               {
-                console.log('1')
                 if ((field.is(':radio') || field.is(':checkbox')) && field.is(':checked'))
                 {
-                  console.log('1-1')
-                  
                   field.parents(parent).show();
                 }
-                else if (!field.is(':radio') && !field.is(':checkbox'))
+                else
                 {
-                  console.log('1-2')
                   field.parents(parent).show();
                 }
               }
               else
               {
-                console.log('2')
                 if (field.is(':radio') || field.is(':checkbox'))
                 {
-                  console.log('2-1')
                   field.attr('checked', false); 
                 }
                 else
                 {
-                  console.log('2-2')
                   field.val('');
                 }
 
@@ -275,9 +265,9 @@
               }
             )
             .append(
-              $('<a href="#" id="piklist-field-add-more-add-button" class="button-primary">Add</a>')
+              $('<a href="#" id="piklist-field-add-more-add-button" class="button-primary">+</a>')
                 .css({
-                  'margin-right': '1em'
+                  'margin-right': '.5em'
                 })
                 .click(function(event)
                 {
@@ -440,7 +430,7 @@
                 })
             )
             .append(
-              $('<a href="#" id="piklist-field-add-more-remove-button" class="button">Remove</a>')
+              $('<a href="#" id="piklist-field-add-more-remove-button" class="button">-</a>')
                 .click(function(event)
                 {
                   event.preventDefault();
@@ -457,7 +447,8 @@
       {
         $('.piklist-field-add-more:not(.piklist-add-more-activated)').each(function()
         {
-          if ($(this).find(':input:first').attr('name').indexOf('__i__') <= 0)
+          var element = $(this).find(':input:first');
+          if (element.length > 0 && element.attr('name').indexOf('__i__') <= 0)
           {
             piklist.add_more_handler(this);
           }

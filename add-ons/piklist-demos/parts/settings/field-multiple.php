@@ -28,6 +28,18 @@ Order: 30
       )
     )
   ));
+
+  piklist('field', array(
+    'type' => 'radio'
+    ,'field' => 'radio_inline'
+    ,'label' => 'Single Line'
+    ,'value' => 'no'
+    ,'list' => false
+    ,'choices' => array(
+      'yes' => 'Yes'
+      ,'no' => 'No'
+    )
+  ));
   
   piklist('field', array(
     'type' => 'checkbox'
