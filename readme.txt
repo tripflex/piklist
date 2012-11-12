@@ -3,7 +3,7 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.4
 Requires at least: 3.3.2
-Stable tag: 0.6.6
+Stable tag: 0.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,10 +81,12 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   post_meta
 *   comment
 *   comment_meta
-*   taxonomy
-*   taxonomy_meta
+*   term
+*   term_meta
 *   user
 *   user_meta
+*   media
+*   media_meta
 
 **Mix Field and Content types (i.e. Taxonomies as radio buttons)**
 
@@ -99,6 +101,17 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.6.7 =
+* Our most significant update since the initial release:
+* Add Taxonomy Meta!
+* Add User Meta!
+* Add Media Meta!
+* New super powers for tax_query and meta_query!
+* Bugfix: Network Activated plugins did not work properly.
+* Bugfix: In function post_type_labels, view_item should be singularize. Props @James_Mc
+* Bugfix: Allow creating of field-less meta boxes. Props @James_Mc
+* Bugfix: Register Taxonomies before Custom Post Types. Props @Daniel Ménard
 
 = 0.6.6 =
 * uninstall.php file added.
@@ -189,6 +202,9 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 
 == Upgrade Notice ==
+
+= 0.6.7 =
+* Major upgrade. Looks of awesome new features.
 
 = 0.6.4 =
 * Fixes major issue with Publish box. Please upgrade.

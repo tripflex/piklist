@@ -70,7 +70,7 @@ Collapse: false
     ,'value' => date('H:m A')
   ));
     
-  piklist('shared/meta-field-welcome', array(
+  piklist('shared/meta-box-welcome', array(
     'location' => __FILE__
   ));
   

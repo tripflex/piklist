@@ -123,7 +123,7 @@ class PikList_Theme
           {
             array_push($assets_to_enqueue[$type], array(
               'handle' => $asset['handle']
-              ,'admin' => $asset['admin']
+              ,'admin' => isset($asset['admin']) ? $asset['admin'] : false
             ));
           }
         }

@@ -78,6 +78,13 @@
       /*padding-left: 18px;
       text-indent: -16px;*/
     }
+
+  /* Add-More */
+  #piklist-field-add-more-add-button,
+  #piklist-field-add-more-remove-button {
+    font-size: 14px !important;
+    font-weight: bold;
+  }
     
   /* Meta Messages */
   .piklist-meta-message {
@@ -165,6 +172,12 @@
         vertical-align: middle;
         text-shadow: white 0 1px 0;
       }
+      
+        .media-upload-form th.label .piklist-label {
+          font-weight: bold;
+          margin: .5em;
+          font-size: 13px;
+        }
 
         .piklist-field-container .piklist-field-list-item {
           font-weight: normal;
@@ -224,6 +237,10 @@
       display: block;
     }
 
+  .media-item .final td {
+    padding-left: 10px;
+  }
+
   /* Plugin Icon */
   #icon-piklist-page {
     background-image: url('../img/piklist-page-icon-32.png');
@@ -242,7 +259,10 @@
     margin-left: 0.25em;
   }
   
-
+  .form-wrap .piklist-form-field {
+    margin: 0 0 10px 0;
+    padding: 8px;
+  }
 
 /* --------------------------------------------------------------------------------
   Make the default jQuery UI Datepicker & Timepicker fit a little beter in 

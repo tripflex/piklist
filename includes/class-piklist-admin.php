@@ -10,6 +10,10 @@ class PikList_Admin
   
   private static $admin_page_default_tabs = array();
   
+  private static $redirect_post_location_allowed = array(
+    'admin_hide_ui'
+  );
+  
   public static function _construct()
   {    
     add_action('admin_head', array('piklist_admin', 'admin_head'));
@@ -42,24 +46,26 @@ class PikList_Admin
   
   public static function hide_ui()
   {
-    return isset($_REQUEST['_piklist_admin_hide_ui']) && $_REQUEST['_piklist_admin_hide_ui'] == 'true';
+    return isset($_REQUEST['piklist']['admin_hide_ui']) && $_REQUEST['piklist']['admin_hide_ui'] == 'true';
   }
   
   public static function redirect_post_location($location, $post_id)
   {
-    if (self::hide_ui())
+    if (isset($_REQUEST['piklist']))
     {
-      $pik_vars = array();
+      $variables = array(
+        'piklist' => array()
+      );
       
-      foreach ($_REQUEST as $key => $value)
+      foreach ($_REQUEST['piklist'] as $key => $value)
       {
-        if (substr($key, 0, 8) == '_piklist')
+        if (in_array($key, self::$redirect_post_location_allowed))
         {
-          $pik_vars[$key] = $value;
+          $variables['piklist'][$key] = $value;
         }
       }
       
-      $location .= '&' . http_build_query($pik_vars);
+      $location .= '&' . http_build_query($variables);
     }
     
     return $location;

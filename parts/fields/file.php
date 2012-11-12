@@ -11,7 +11,7 @@
   ?>
   
   <!-- <a 
-    id="<?php echo piklist_form::get_field_id($field, $scope, $index); ?>"
+    id="<?php echo piklist_form::get_field_id($field, $scope, $index, $prefix); ?>"
     href="<?php echo admin_url('media-upload.php?' . $query_string); ?>"
     <?php echo piklist_form::attributes_to_string($attributes); ?>
   >
@@ -22,8 +22,8 @@
 
   <input 
     type="file"
-    id="<?php echo piklist_form::get_field_id($field, $scope, $index); ?>" 
-    name="<?php echo piklist_form::get_field_name($field, $scope, $index); ?>"
+    id="<?php echo piklist_form::get_field_id($field, $scope, $index, $prefix); ?>" 
+    name="<?php echo piklist_form::get_field_name($field, $scope, $index, $prefix); ?>"
     <?php echo piklist_form::attributes_to_string($attributes); ?>
   />
   

@@ -6,7 +6,7 @@
     ,array_merge(
       isset($attributes) ? $attributes : array()
       ,array(
-        'textarea_name' => piklist_form::get_field_name($field, $scope)
+        'textarea_name' => piklist_form::get_field_name($field, $scope, false, $prefix)
         ,'wpautop' => true
         ,'media_buttons' => true
         ,'tabindex' => ''

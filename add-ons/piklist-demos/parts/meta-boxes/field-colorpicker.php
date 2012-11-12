@@ -20,7 +20,7 @@ Collapse: false
     ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   ));
   
-  piklist('shared/meta-field-welcome', array(
+  piklist('shared/meta-box-welcome', array(
     'location' => __FILE__
   ));
   

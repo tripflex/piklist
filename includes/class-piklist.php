@@ -125,7 +125,7 @@ class PikList
     {
       ob_start();
     }
-     
+
     foreach (self::$paths as $_display => $_path)
     {
       $_file = (path_is_absolute($view) ? $view : self::$paths[$_display] . '/parts/' . $view) . (strstr($view, '.php') ? '' : '.php');
@@ -181,7 +181,7 @@ class PikList
   public static function process_views($folder, $callback, $path = false, $prefix = '', $suffix = '.php')
   { 
     $paths = $path ? $path : self::$paths;
-    
+
     foreach ($paths as $display => $path)
     {   
       $files = self::get_directory_list($path . '/parts/' . $folder);
@@ -285,17 +285,17 @@ class PikList
   public static function create_table($table_name, $columns) 
   {
     global $wpdb;
-
+    
     $settings = $wpdb->has_cap('collation') ? (!empty($wpdb->charset) ? 'DEFAULT CHARACTER SET ' . $wpdb->charset : null) . (!empty($wpdb->collate) ? ' COLLATE ' . $wpdb->collate : null) : null;
 
-    $wpdb->query('CREATE TABLE IF NOT EXISTS ' . $wpdb->prefix . self::slug('piklist') . '_' . $table_name . ' (' . $columns . ') ' . $settings . ';');
+    $wpdb->query('CREATE TABLE IF NOT EXISTS ' . $wpdb->prefix . $table_name . ' (' . $columns . ') ' . $settings . ';');
   }
 
   public static function delete_table($table_name) 
   {
     global $wpdb;
 
-    $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . self::slug('piklist') . '_' . $table_name);
+    $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . $table_name);
   }
   
   public static function post_type_labels($label)
@@ -307,7 +307,7 @@ class PikList
       ,'add_new_item' => __('Add New ' . self::singularize($label), 'piklist')
       ,'edit_item' => __('Edit ' . self::singularize($label), 'piklist')
       ,'new_item' => __('Add New ' . self::singularize($label), 'piklist')
-      ,'view_item' => __('View ' . self::pluralize($label), 'piklist')
+      ,'view_item' => __('View ' . self::singularize($label), 'piklist')
       ,'search_items' => __('Search ' . self::pluralize($label), 'piklist')
       ,'not_found' => __('No ' . self::pluralize(strtolower($label)) . ' found', 'piklist')
       ,'not_found_in_trash' => __('No ' . self::pluralize(strtolower($label)) . ' found in trash', 'piklist')
@@ -582,15 +582,15 @@ class PikList
     return $needle;
   }
     
-  public static function post_custom($post_id)
+  public static function object_custom($type, $id)
   {
-    $meta = get_post_custom($post_id);
-    
+    $meta = get_metadata($type, $id);
+
     foreach ($meta as $key => $value)
     {
       if (count($value) == 1) 
       {
-        $meta[$key] = maybe_unserialize($value[0]);
+        $meta[$key] = is_array($value[0]) ? array(maybe_unserialize($value[0])) : maybe_unserialize($value[0]);
       }
     }
     
@@ -678,8 +678,32 @@ function piklist($option, $arguments = array())
       break;
       
       case 'post_custom':
+      case 'get_post_custom':
+      case 'get_user_custom':
+      case 'get_term_custom':
         
-        return piklist::post_custom($arguments);
+        switch ($option)
+        {
+          case 'get_user_custom':
+          
+            $type = 'user';
+            
+          break;
+          
+          case 'get_term_custom':
+          
+            $type = 'term';
+            
+          break;
+          
+          default: 
+          
+            $type = 'post';
+            
+          break;
+        }
+        
+        return piklist::object_custom($type, $arguments);
         
       break;
       
@@ -703,7 +727,7 @@ function piklist($option, $arguments = array())
       
       default:
         
-        piklist::render($option, $arguments, isset($arguments['return']) ? $arguments['return'] : false); 
+        return piklist::render($option, $arguments, isset($arguments['return']) ? $arguments['return'] : false); 
         
       break;
     }

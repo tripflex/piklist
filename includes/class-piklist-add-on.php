@@ -18,7 +18,16 @@ class PikList_Add_On
   { 
     require_once ABSPATH . 'wp-admin/includes/plugin.php';
     
-    $plugins = get_option('active_plugins');
+    $site_wide_plugins = get_site_option('active_sitewide_plugins');
+    if (!empty($site_wide_plugins))
+    {
+      $plugins = array_merge(get_option('active_plugins'), array_keys($site_wide_plugins));
+    }
+    else
+    {
+      $plugins = get_option('active_plugins');      
+    }
+    
     foreach ($plugins as $plugin)
     {
       $path = WP_CONTENT_DIR . '/plugins/' . $plugin;
