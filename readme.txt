@@ -48,7 +48,8 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Hide/Show based on the post status. 
 *   Hide/Show based on the users capability. 
 *   Sort meta boxes with granular control. 
-*   Lock the box, so users cannot move or hide them. 
+*   Lock the box, so users cannot move or hide them.
+*   Add meta box to a specific Page/Post ID.
 
 **Simple, Groupable Widgets**
 
@@ -108,6 +109,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 * Add User Meta!
 * Add Media Meta!
 * New super powers for tax_query and meta_query!
+* Add meta box to a specific Page/Post ID. Props @kattagami and @James_Mc
 * Bugfix: Network Activated plugins did not work properly.
 * Bugfix: In function post_type_labels, view_item should be singularize. Props @James_Mc
 * Bugfix: Allow creating of field-less meta boxes. Props @James_Mc
