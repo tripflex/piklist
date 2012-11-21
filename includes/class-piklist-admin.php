@@ -15,7 +15,8 @@ class PikList_Admin
   );
   
   public static function _construct()
-  {    
+  {  
+    add_action('admin_init', array('piklist_admin', 'admin_init'));
     add_action('admin_head', array('piklist_admin', 'admin_head'));
     add_action('admin_menu', array('piklist_admin', 'admin_menu'));
     add_action('admin_print_styles', array('piklist_admin', 'admin_print_styles'));
@@ -24,6 +25,11 @@ class PikList_Admin
     // add_action('wp_scheduled_delete', array('piklist_admin', 'clear_transients'));
 
     add_filter('admin_footer_text', array('piklist_admin', 'admin_footer_text'));
+  }
+
+  public static function admin_init()
+  {
+    add_action('in_plugin_update_message-piklist/piklist.php', array('piklist_admin', 'update_available'), null, 2);
   }
 
   public static function admin_menu()
@@ -37,6 +43,41 @@ class PikList_Admin
     {
       piklist::render('shared/admin-hide-ui');
     }
+  }
+
+  public static function update_available($pluginData, $newPluginData)
+  {
+    require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+
+    $plugin = plugins_api('plugin_information', array( 'slug' => $newPluginData->slug));
+
+      if (!$plugin || is_wp_error($plugin) || empty($plugin->sections['changelog']))
+      {
+        return;
+      }
+
+    $changes = $plugin->sections['changelog'];
+
+    $pos = strpos($changes, '<h4>' . preg_replace('/[^\d\.]/', '', $pluginData['Version']));
+    
+      if ($pos !== false)
+      {
+        $changes = trim( substr( $changes, 0, $pos ) );
+      }
+
+    $replace_header = sprintf(__( '%sUpdating is recommended, here\'s why:%s', 'piklist' ),'<h4 style="color:red; margin-bottom:0;">','</h4>');
+
+    $start_pos = strrpos($changes, "<h4>");
+    $end_pos = strrpos($changes, "</h4>");
+    $string_length = $end_pos - $start_pos;
+
+    $changes = substr_replace($changes, $replace_header, $start_pos, $string_length);
+
+    $replace = array(
+                  '<ul>' => '<ul style="list-style: disc inside; padding-left: 15px; font-weight: normal;">'
+                );
+
+    echo str_replace(array_keys($replace), $replace, $changes);
   }
   
   public static function admin_footer_text($footer_text)

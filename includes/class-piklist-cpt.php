@@ -257,6 +257,7 @@ class PikList_CPT
             {            
               if ($meta_box == 'submitdiv')
               {
+                $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['title'] = apply_filters('piklist_post_submit_meta_box_title', $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['title'], $post);
                 $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
               }
               else if (isset(self::$meta_boxes_hidden[$post_type]) && in_array($meta_box, self::$meta_boxes_hidden[$post_type]))

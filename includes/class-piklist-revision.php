@@ -19,21 +19,18 @@ class PikList_Revision
 
       foreach ($meta as $key => $value)
       {
-        add_metadata('post', $post_id, $key, $value);   
+        add_metadata('post', $post_id, $key, maybe_serialize($value));   
       }
     }
   }
   
   public static function restore_revision($post_id, $revision_id)
   {
-    $post = get_post($post_id);
-    $revision = get_post($revision_id);
     $meta = get_post_custom($revision->ID);
-    
-    // NOTE: Should we wipe all meta on the current revision before doing this?
+
     foreach ($meta as $key => $value)
     {
-      update_post_meta($post_id, $key, $value);   
+      update_metadata('post', $post_id, $key, $value);   
     }
   }  
 }

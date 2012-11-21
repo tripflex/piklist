@@ -2,7 +2,7 @@
 /**
  * Piklist Uninstall
  *
- * Removes: Options, Demo Post Type, Piklist Relationship Table
+ * Removes: Options, Demo Post Type, Piklist Tables
  *
  */
 
@@ -34,7 +34,16 @@
         }
       }
 
+
+    $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->base_prefix . 'post_relationships');
+    $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->base_prefix . 'termmeta');
+
+    // Pre-0.6.7
     $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->base_prefix . 'piklist_cpt_relate');
+
+
+
+    /** Sorry to see you go! **/
 
 
 ?>
