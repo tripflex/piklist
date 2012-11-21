@@ -105,4 +105,44 @@ Author URI: http://piklist.com/
     return $templates;
   }
 
+
+  add_filter('piklist_post_submit_meta_box_title', 'piklist_demo_post_submit_meta_box_title', 10, 2);
+  function piklist_demo_post_submit_meta_box_title($title, $post)
+  {
+    switch ($post->post_type)
+    {
+      case 'piklist_demo':
+        $title = __('Create Demo Post');
+      break;
+    }
+    
+    return $title;
+  }
+  
+  add_filter('piklist_post_submit_meta_box', 'piklist_demo_post_submit_meta_box', 10, 3);
+  function piklist_demo_post_submit_meta_box($show, $section, $post)
+  {
+    switch ($post->post_type)
+    {   
+      case 'piklist_demo':
+        
+        switch ($section)
+        {
+          case 'minor-publishing-actions':
+          case 'misc-publishing-actions':
+          case 'misc-publishing-actions-status':
+          case 'misc-publishing-actions-visibility':
+          case 'misc-publishing-actions-published':
+          
+            $show = false;
+          
+          break;
+        }
+        
+      break;
+    }
+    
+    return $show;
+  }
+
 ?>

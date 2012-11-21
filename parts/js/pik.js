@@ -86,18 +86,23 @@
                 var increment = _field.id.substr(_field.id.lastIndexOf('_') + 1);
                 _field.id = !isNaN(parseFloat(increment)) && isFinite(increment) ? _field.id.substr(0, _field.id.lastIndexOf('_')) : _field.id;
               
-                $('.' + _field.id).live('change', piklist.conditions_handler(field.conditions[i].id, field.conditions[i]));
+                $(document).delegate('.' + _field.id, 'change', piklist.conditions_handler(event, field.conditions[i].id, field.conditions[i]));
                 $(':input:not(:radio)[class~="' + _field.id + '"], :radio:checked[class~="' + _field.id + '"]').trigger('change');
+
+                piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
                               
               break;
             
               default:
-              
-                $('.' + field.conditions[i].id).live('change', piklist.conditions_handler(field.id, field.conditions[i]));
-                $(':input:not(:radio)[class~="' + field.conditions[i].id + '"], :radio:checked[class~="' + field.conditions[i].id + '"]').trigger('change');
-
-                piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
                 
+                if ($.inArray(field.conditions[i].id, piklist.processed_conditions[field.conditions[i].type]) == -1)
+                {
+                  $(document).delegate('.' + field.conditions[i].id, 'change', piklist.conditions_handler(event, field.id, field.conditions[i]));
+                  $(':input:not(:radio)[class~="' + field.conditions[i].id + '"], :radio:checked[class~="' + field.conditions[i].id + '"]').trigger('change');
+
+                  piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
+                }
+              
               break;
             }
           }
@@ -145,11 +150,11 @@
                 .attr('autocomplete', 'off')
                 .focus(function()
                 {
-                  $(this).next('.piklist-colorpicker').show();
+                  $(this).next('.piklist-colorpicker').show('slow');
                 })
                 .blur(function()
                 {
-                  $(this).next('.piklist-colorpicker').hide();
+                  $(this).next('.piklist-colorpicker').hide('slow');
                 });
             }
 
@@ -173,7 +178,7 @@
         });
       },
           
-      conditions_handler: function(id, condition) 
+      conditions_handler: function(event, id, condition) 
       {
         return function()
         {
@@ -207,18 +212,17 @@
             
             default:
               
-              var parent = $(this).parents('form').find(':input[name="option_page"]').length > 0 ? 'tr' : '.piklist-field-condition';
-              
-              if ($(this).val() == condition.value)
+              var options_page = $(this).parents('form').find(':input[name="option_page"]').length > 0;
+              var parent = options_page ? 'tr' : '.piklist-field-condition';
+              var element = $(this).prop('tagName') == 'LABEL' ? $(this).find(':input') : this;
+
+              if ($(element).val() == condition.value && !$(element).is(':checkbox'))
               {
-                if ((field.is(':radio') || field.is(':checkbox')) && field.is(':checked'))
-                {
-                  field.parents(parent).show();
-                }
-                else
-                {
-                  field.parents(parent).show();
-                }
+                field.parents(parent).show('slow');
+              }
+              else if ($(element).val() == condition.value && $(element).is(':checkbox') && $(element).is(':checked'))
+              {
+                field.parents(parent).show('slow');
               }
               else
               {
@@ -230,8 +234,11 @@
                 {
                   field.val('');
                 }
-
-                field.parents(parent).hide();
+                
+                if ($(element).is(':input'))
+                {
+                  field.parents(parent).hide('slow');
+                }
               }
             
             break;

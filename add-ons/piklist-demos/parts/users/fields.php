@@ -26,7 +26,7 @@ Capability: manage_options
       'columns' => 6
     )
   ));
-
+  
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'text_add_more'
@@ -38,7 +38,7 @@ Capability: manage_options
       'columns' => 8
     )
   ));
-
+  
   piklist('field', array(
     'type' => 'number'
     ,'field' => 'number'
@@ -164,7 +164,7 @@ Capability: manage_options
       )
     )
   ));
-
+  
   piklist('field', array(
     'type' => 'colorpicker'
     ,'field' => 'color'
@@ -173,8 +173,8 @@ Capability: manage_options
   ));
 
   piklist('field', array(
-    'type' => 'radio'
-    ,'field' => 'show_hide'
+    'type' => 'select'
+    ,'field' => 'show_hide_select'
     ,'label' => 'Toggle a field'
     ,'choices' => array(
       'show' => 'Show'
@@ -185,17 +185,17 @@ Capability: manage_options
 
   piklist('field', array(
     'type' => 'text'
-    ,'field' => 'show_hide_field'
+    ,'field' => 'show_hide_field_select'
     ,'label' => 'Show/Hide Field'
-    ,'description' => 'This field is toggled by the field above'
+    ,'description' => 'This field is toggled by the Select field above'
     ,'conditions' => array(
       array(
-        'field' => 'show_hide'
+        'field' => 'show_hide_select'
         ,'value' => 'show'
       )
     )
   ));
-
+  
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'change'

@@ -162,6 +162,12 @@
       height: 1px;
     }
     
+    .piklist-meta-box .inside:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
     .piklist-meta-box h4 {
       clear: both;
     }
@@ -172,12 +178,6 @@
         vertical-align: middle;
         text-shadow: white 0 1px 0;
       }
-      
-        .media-upload-form th.label .piklist-label {
-          font-weight: bold;
-          margin: .5em;
-          font-size: 13px;
-        }
 
         .piklist-field-container .piklist-field-list-item {
           font-weight: normal;

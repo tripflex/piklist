@@ -7,9 +7,33 @@ Order: 40
 */
 
   piklist('field', array(
+    'type' => 'select'
+    ,'field' => 'show_hide_select'
+    ,'label' => 'Select: toggle a field'
+    ,'choices' => array(
+      'show' => 'Show'
+      ,'hide' => 'Hide'
+    )
+    ,'value' => 'hide'
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'show_hide_field_select'
+    ,'label' => 'Show/Hide Field'
+    ,'description' => 'This field is toggled by the Select field above'
+    ,'conditions' => array(
+      array(
+        'field' => 'show_hide_select'
+        ,'value' => 'show'
+      )
+    )
+  ));
+
+  piklist('field', array(
     'type' => 'radio'
     ,'field' => 'show_hide'
-    ,'label' => __('Toggle a field')
+    ,'label' => 'Radio: toggle a field'
     ,'choices' => array(
       'show' => 'Show'
       ,'hide' => 'Hide'
@@ -20,11 +44,33 @@ Order: 40
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'show_hide_field'
-    ,'label' => __('Show/Hide Field')
-    ,'description' => __('This field is toggled by the field above')
+    ,'label' => 'Show/Hide Field'
+    ,'description' => 'This field is toggled by the Radio field above'
     ,'conditions' => array(
       array(
         'field' => 'show_hide'
+        ,'value' => 'show'
+      )
+    )
+  ));
+
+  piklist('field', array(
+    'type' => 'checkbox'
+    ,'field' => 'show_hide_checkbox'
+    ,'label' => 'Checkbox: toggle a field'
+    ,'choices' => array(
+      'show' => 'Show'
+    )
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'show_hide_field_checkbox'
+    ,'label' => 'Show/Hide Field'
+    ,'description' => 'This field is toggled by the Checkbox field above'
+    ,'conditions' => array(
+      array(
+        'field' => 'show_hide_checkbox'
         ,'value' => 'show'
       )
     )
@@ -33,7 +79,7 @@ Order: 40
   piklist('field', array(
     'type' => 'radio'
     ,'field' => 'change'
-    ,'label' => __('Update a field')
+    ,'label' => 'Update a field'
     ,'choices' => array(
       'hello-world' => 'Hello World'
       ,'clear' => 'Clear'
@@ -58,6 +104,6 @@ Order: 40
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'update_field'
-    ,'label' => __('Update This Field')
-    ,'description' => __('This field is updated by the field above')
+    ,'label' => 'Update This Field'
+    ,'description' => 'This field is updated by the field above'
   ));
