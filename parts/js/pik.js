@@ -86,7 +86,7 @@
                 var increment = _field.id.substr(_field.id.lastIndexOf('_') + 1);
                 _field.id = !isNaN(parseFloat(increment)) && isFinite(increment) ? _field.id.substr(0, _field.id.lastIndexOf('_')) : _field.id;
               
-                $(document).delegate('.' + _field.id, 'change', piklist.conditions_handler(event, field.conditions[i].id, field.conditions[i]));
+                $(document).delegate('.' + _field.id, 'change', piklist.conditions_handler(field.conditions[i].id, field.conditions[i]));
                 $(':input:not(:radio)[class~="' + _field.id + '"], :radio:checked[class~="' + _field.id + '"]').trigger('change');
 
                 piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
@@ -97,7 +97,7 @@
                 
                 if ($.inArray(field.conditions[i].id, piklist.processed_conditions[field.conditions[i].type]) == -1)
                 {
-                  $(document).delegate('.' + field.conditions[i].id, 'change', piklist.conditions_handler(event, field.id, field.conditions[i]));
+                  $(document).delegate('.' + field.conditions[i].id, 'change', piklist.conditions_handler(field.id, field.conditions[i]));
                   $(':input:not(:radio)[class~="' + field.conditions[i].id + '"], :radio:checked[class~="' + field.conditions[i].id + '"]').trigger('change');
 
                   piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
@@ -178,7 +178,7 @@
         });
       },
           
-      conditions_handler: function(event, id, condition) 
+      conditions_handler: function(id, condition) 
       {
         return function()
         {
