@@ -18,7 +18,6 @@ class PikList_Theme
     add_action('wp_footer', array('piklist_theme', 'conditional_scripts_end'), 101);
     
     add_filter('body_class', array('piklist_theme', 'body_class'));
-    add_filter('style_loader_tag', array('piklist_theme', 'less_styles'), 10, 2);
   }
   
   public static function init()
@@ -181,20 +180,6 @@ class PikList_Theme
     return $classes;
   }
   
-  public static function less_styles($tag, $handle) 
-  {
-    global $wp_styles;
-
-    if (preg_match('/\.less$/U', $wp_styles->registered[$handle]->src)) 
-    {
-      $rel = isset($wp_styles->registered[$handle]->extra['alt']) && $wp_styles->registered[$handle]->extra['alt'] ? 'alternate stylesheet' : 'stylesheet';
-      $title = isset($wp_styles->registered[$handle]->extra['title']) ? 'title="' . esc_attr($wp_styles->registered[$handle]->extra['title']) . '"' : '';
-
-      $tag = '<link rel="stylesheet" ' . $title . ' id="' . $handle . '" href="' . $wp_styles->registered[$handle]->src . '?ver=' . $wp_styles->registered[$handle]->ver . '" type="text/less" media="' . $wp_styles->registered[$handle]->args . '" />' . "\r\n";
-    }
-    
-    return $tag;
-  }
 }
 
 ?>

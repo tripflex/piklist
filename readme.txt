@@ -3,7 +3,7 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.4
 Requires at least: 3.3.2
-Stable tag: 0.6.9
+Stable tag: 0.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,12 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.7.0 =
+* FEATURE: New Setting: Disable Piklist Deactivation.
+* FEATURE: Customize the "Enter Title Here" text in Post Type Titles.
+* BUGFIX: Error when saving Media meta.
+* BUGFIX: Removed legacy less_styles() function.
 
 = 0.6.9 =
 * Bugfix: Metaboxes jQuery conflict fixed for Firefox.

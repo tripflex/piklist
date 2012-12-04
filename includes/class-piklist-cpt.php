@@ -187,6 +187,11 @@ class PikList_CPT
         
         add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
       }
+
+      if (isset($configuration['title']) && !empty($configuration['title']))
+      {
+        add_filter('enter_title_here', array('piklist_cpt', 'enter_title_here'));
+      }
       
       if (isset($configuration['edit_columns']) && !empty($configuration['edit_columns']))
       {
@@ -547,7 +552,14 @@ class PikList_CPT
       ,'post_title' => ucwords(str_replace(array('-', '_'), ' ', $post->post_type)) . ' ' . $id 
     ));
   }
-  
+
+  public static function enter_title_here($title)
+  {
+    $post_type = get_post_type();
+
+    return isset(self::$post_types[$post_type]['title']) ? self::$post_types[$post_type]['title'] : $title;
+  }
+
   public static function get_post_statuses($type, $object_type = null)
   {
     $status_list = array();

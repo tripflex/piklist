@@ -9,8 +9,8 @@ class PikList_Media
   public static function _construct()
   {    
     add_action('init', array('piklist_media', 'init'));
-    add_action('attachment_fields_to_save', array('piklist_media', 'process_form'), 10, 2);
     
+    add_filter('attachment_fields_to_save', array('piklist_media', 'process_form'), 10, 2);
     add_filter('attachment_fields_to_edit', array('piklist_media', 'attachment_fields_to_edit'), 100, 2);
   }
 
@@ -128,6 +128,8 @@ class PikList_Media
     piklist_form::process_form(array(
       'post' => $post['ID']
     ));
+
+    return $post;
   }
 }
 

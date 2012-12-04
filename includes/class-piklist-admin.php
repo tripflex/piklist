@@ -10,6 +10,8 @@ class PikList_Admin
   
   private static $admin_page_default_tabs = array();
   
+  private static $locked_plugins = array();
+  
   private static $redirect_post_location_allowed = array(
     'admin_hide_ui'
   );
@@ -22,6 +24,8 @@ class PikList_Admin
     add_action('admin_print_styles', array('piklist_admin', 'admin_print_styles'));
     add_action('admin_print_scripts', array('piklist_admin', 'admin_print_scripts'), 100);
     add_action('redirect_post_location', array('piklist_admin', 'redirect_post_location'), 10, 2);
+    add_action('load-plugins.php', array('piklist_admin', 'deactivation_link'));
+    
     // add_action('wp_scheduled_delete', array('piklist_admin', 'clear_transients'));
 
     add_filter('admin_footer_text', array('piklist_admin', 'admin_footer_text'));
@@ -29,6 +33,8 @@ class PikList_Admin
 
   public static function admin_init()
   {
+    self::$locked_plugins = apply_filters('piklist_locked_plugins', array('piklist/piklist.php'));
+
     add_action('in_plugin_update_message-piklist/piklist.php', array('piklist_admin', 'update_available'), null, 2);
   }
 
@@ -51,21 +57,21 @@ class PikList_Admin
 
     $plugin = plugins_api('plugin_information', array( 'slug' => $newPluginData->slug));
 
-      if (!$plugin || is_wp_error($plugin) || empty($plugin->sections['changelog']))
-      {
-        return;
-      }
+    if (!$plugin || is_wp_error($plugin) || empty($plugin->sections['changelog']))
+    {
+      return;
+    }
 
     $changes = $plugin->sections['changelog'];
 
     $pos = strpos($changes, '<h4>' . preg_replace('/[^\d\.]/', '', $pluginData['Version']));
     
-      if ($pos !== false)
-      {
-        $changes = trim( substr( $changes, 0, $pos ) );
-      }
+    if ($pos !== false)
+    {
+      $changes = trim( substr( $changes, 0, $pos ) );
+    }
 
-    $replace_header = sprintf(__( '%sUpdating is recommended, here\'s why:%s', 'piklist' ),'<h4 style="color:red; margin-bottom:0;">','</h4>');
+    $replace_header = sprintf(__('%sUpdating is recommended, here\'s why:%s', 'piklist'), '<h4 style="color:red; margin-bottom:0;">','</h4>');
 
     $start_pos = strrpos($changes, "<h4>");
     $end_pos = strrpos($changes, "</h4>");
@@ -82,7 +88,7 @@ class PikList_Admin
   
   public static function admin_footer_text($footer_text)
   {
-    return str_replace('</a>.', sprintf(__('</a> and <a href="%s">Piklist</a>.'), 'http://piklist.com'), $footer_text);
+    return str_replace('</a>.', sprintf(__('%1$s and %2$sPiklist%1$s.','piklist'), '</a>', '<a href="http://piklist.com">'), $footer_text);
   }
   
   public static function hide_ui()
@@ -135,7 +141,7 @@ class PikList_Admin
       
       self::$admin_page_tabs[$page['menu_slug']] = array(
         'default' => array(
-          'title' => isset($page['default_tab']) ? __($page['default_tab']) : __('General')
+          'title' => isset($page['default_tab']) ? __($page['default_tab']) : __('General','piklist')
           ,'page' => null
         )
       );
@@ -258,7 +264,45 @@ class PikList_Admin
   {
     return isset(self::$$variable) ? self::$$variable : false;
   }
-  
+
+  public static function deactivation_link()
+  {
+    $deactivation_link = piklist::get_settings('piklist', 'deactivation_link');
+
+    if ($deactivation_link !== 'lock')
+    {
+      return;
+    }
+
+    foreach (self::$locked_plugins as $locked)
+    {
+      add_filter('plugin_action_links_' . plugin_basename($locked), array('piklist_admin', 'replace_deactivation_link'));
+    }
+    
+    add_filter('option_active_plugins', array('piklist_admin', 'active_plugins')); 
+  }
+
+  public static function replace_deactivation_link($actions)
+  {
+    unset($actions['deactivate']);
+    
+    array_unshift($actions, '<a href="' . admin_url('admin.php?page=piklist-settings&referer=plugins.php') . '">' . __('Settings') . '</a>'); 
+
+    return $actions;
+  }
+
+  public static function active_plugins($plugins)
+  {
+    foreach (self::$locked_plugins as $locked_plugin)
+    {
+      if (!array_search($locked_plugin, $plugins))
+      {
+        array_push($plugins, $locked_plugin);
+      }
+    }
+    
+    return $plugins;
+  }
 }
 
 ?>

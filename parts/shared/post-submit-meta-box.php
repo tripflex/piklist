@@ -1,4 +1,9 @@
 <?php
+/**
+ * Code based on wp-admin/includes/meta-boxes.php
+ *
+ * TEXT DOMAINS: Do not add text domains to this file so the default WordPress translations will be used.
+ */
 
   global $action, $wp_post_statuses;
 
@@ -20,7 +25,7 @@
 
   <div id="minor-publishing" <?php echo apply_filters('hide_minor_publishing_submit_box', false) ? 'class="hide-all"' : null; ?>>
 
-    <!-- Hidden submit button early on so that the browser chooses the right button when form is submitted with Return key -->
+    <!-- Hide submit button early on so that the browser chooses the right button when form is submitted with Return key -->
     <div class="hide-all">
       <?php submit_button(__('Save'), 'button', 'save'); ?>
     </div>

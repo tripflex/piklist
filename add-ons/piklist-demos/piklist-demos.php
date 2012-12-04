@@ -14,6 +14,10 @@ Author URI: http://piklist.com/
     $post_types['piklist_demo'] = array(
       'labels' => piklist('post_type_labels', 'Piklist Demo')
       ,'public' => true
+      ,'title' => __('Enter Custom Title')
+      ,'supports' => array(
+        'title'
+      )
       ,'rewrite' => array(
         'slug' => 'piklist-demo'
       )
@@ -144,5 +148,6 @@ Author URI: http://piklist.com/
     
     return $show;
   }
+
 
 ?>
