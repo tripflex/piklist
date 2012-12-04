@@ -2,7 +2,7 @@
   
   <?php
     $choices = array(
-      '' => __('Select a Widget')
+      '' => __('Select a Widget','piklist')
     );
 
     foreach ($widgets as $w)
@@ -13,7 +13,7 @@
     piklist('field', array(
       'type' => 'select'
       ,'field' => $widget_name
-      ,'label' => __('Select a Widget')
+      ,'label' => __('Select a Widget','piklist')
       ,'value' => isset($instance[$name]) ? $instance[$name] : null
       ,'attributes' => array(
         'class' => array(
@@ -58,7 +58,7 @@
 <?php else: ?>
   
   <p>
-    <em><?php __('There are currently no Widgets available.'); ?></em>
+    <em><?php __('There are currently no Widgets available.','piklist'); ?></em>
   </p>
   
   <h4><?php _e('Learn to make Widgets'); ?></h4>

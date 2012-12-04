@@ -38,7 +38,7 @@ class PikList_Setting
       ,'single_line' => false
       ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png') 
       ,'icon' => 'piklist-page'
-      ,'default_tab' => 'Add-Ons'
+      ,'default_tab' => 'General'
     );
 
     return $pages;
@@ -64,7 +64,7 @@ class PikList_Setting
       
       self::$setting_tabs[$setting] = array(
         'default' => array(
-          'title' => isset($default_tabs[$setting]) ? __($default_tabs[$setting]) : __('General')
+          'title' => isset($default_tabs[$setting]) ? __($default_tabs[$setting]) : __('General','piklist')
           ,'page' => null
         )
       );

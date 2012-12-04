@@ -51,18 +51,18 @@ class PikList_Widget
       
         if (isset(piklist_add_on::$available_add_ons[$from]))
         {
-          $title = piklist_add_on::$available_add_ons[$from]['Name'] . __(' Widgets');
+          $title = piklist_add_on::$available_add_ons[$from]['Name'] . ' ' . __('Widgets','piklist');
           $description = strip_tags(piklist_add_on::$available_add_ons[$from]['Description']);
         }
         else if ($from == 'plugin')
         {
-          $title = __('Piklist Widgets');
-          $description = __('Core Widgets for Piklist.');
+          $title = __('Piklist Widgets','piklist');
+          $description = __('Core Widgets for Piklist.','piklist');
         }
         else if ($from == 'theme')
         {
-          $title = get_current_theme() . __(' Widgets');
-          $description = __('Widgets for the ' . get_current_theme() . ' Theme.');
+          $title = get_current_theme() . ' ' . __('Widgets','piklist');
+          $description = sprintf(__('Widgets for the %s Theme', 'piklist'), get_current_theme());
         }
 
         $wp_widget_factory->widgets[$widget_class_name] = new $widget_class($widget_class_name, $title, $description, array($from => $path));

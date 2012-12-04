@@ -1,5 +1,5 @@
 
-<?php $prefix = $type == 'error' ? '<strong>' . __('ERROR:') . '</strong> ' : ''; ?>
+<?php $prefix = $type == 'error' ? '<strong>' . __('ERROR:','piklist') . '</strong> ' : ''; ?>
 
 <div class="<?php echo $type; ?>">
 
