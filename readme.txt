@@ -106,7 +106,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 = 0.7.0 =
 * FEATURE: New Setting: Disable Piklist Deactivation.
 * FEATURE: Customize the "Enter Title Here" text in Post Type Titles.
-* BUGFIX: Error when saving Media meta.
+* BUGFIX: Error when saving Media meta. Props @James_Mc
 * BUGFIX: Removed legacy less_styles() function.
 * BUGFIX: Added Text Domain to all localized strings.
 
