@@ -104,20 +104,19 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 == Changelog ==
 
 = 0.7.1 =
-* LOTS OF BUG FIXES: &bull;
-* BUGFIX: Add-mores save correctly when adding/deleting rows.
-* BUGFIX: Media meta saves without errors.
-* BUGFIX: Settings save properly when using multiple tabs.
-* BUGFIX: Logged-in user can now save user meta for any user.
-* BUGIFX: Fixed typo in process_form function in class-piklist-taxonomy. Props @James_Mc
-* BUGFIX: Empty Time and Date fields no longer return "false".
+* FIXED: Add-mores save correctly when adding/deleting rows.
+* FIXED: Media meta saves without errors.
+* FIXED: Settings save properly when using multiple tabs.
+* FIXED: Logged-in user can now save user meta for any user.
+* FIXED: Fixed typo in process_form function in class-piklist-taxonomy. Props @James_Mc
+* FIXED: Empty Time and Date fields no longer return "false".
 
 = 0.7.0 =
 * NEW FEATURE: Disable Piklist Deactivation.
 * NEW FEATURE: Customize the "Enter Title Here" text in Post Type Titles.
-* BUGFIX: Error when saving Media meta. Props @James_Mc
-* BUGFIX: Removed legacy less_styles() function.
-* BUGFIX: Added Text Domain to all localized strings.
+* FIXED: Error when saving Media meta. Props @James_Mc
+* FIXED: Removed legacy less_styles() function.
+* FIXED: Added Text Domain to all localized strings.
 
 = 0.6.9 =
 * Bugfix: Metaboxes jQuery conflict fixed for Firefox.
