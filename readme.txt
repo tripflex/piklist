@@ -106,8 +106,8 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 = 0.7.1 =
 * BUGFIX: Add-mores save correctly when adding/deleting rows.
 * BUGFIX: Media meta saves without errors.
-* BUGFIX: Setting save properly when using multiple tabs.
-* BUGFIX: Logged in user can now save user meta for any user.
+* BUGFIX: Settings save properly when using multiple tabs.
+* BUGFIX: Logged-in user can now save user meta for any user.
 * BUGIFX: Fixed typo in process_form function in class-piklist-taxonomy. Props @James_Mc
 * BUGFIX: Empty Time and Date fields no longer return "false".
 
