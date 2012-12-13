@@ -303,6 +303,7 @@ class PikList
     return array(
       'name' => __(self::pluralize($label), 'piklist')
       ,'singular_name' => __(self::singularize($label), 'piklist')
+
       ,'add_new' => __('Add New ' . self::singularize($label), 'piklist')
       ,'add_new_item' => __('Add New ' . self::singularize($label), 'piklist')
       ,'edit_item' => __('Edit ' . self::singularize($label), 'piklist')
@@ -586,11 +587,16 @@ class PikList
   {
     $meta = get_metadata($type, $id);
 
-    foreach ($meta as $key => $value)
+    foreach ($meta as $meta_key => $values)
     {
-      if (count($value) == 1) 
+      foreach ($values as $value_key => $value)
       {
-        $meta[$key] = is_array($value[0]) ? array(maybe_unserialize($value[0])) : maybe_unserialize($value[0]);
+        $meta[$meta_key][$value_key] = maybe_unserialize($value);
+      }
+
+      if (count($values) == 1 && !is_array($values[0])) 
+      {
+        $meta[$meta_key] = maybe_unserialize($values[0]);
       }
     }
     

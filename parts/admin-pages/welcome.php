@@ -37,9 +37,6 @@ Order: 10
           <?php _e('Add post meta, taxonomy, post, comment, and other field types to your post edit screens.','piklist');?>
         </p>
     
-      </div>
-    
-      <div class="welcome-panel-column">
 
         <h4>
           <span class="icon16 icon-post"></span> <?php _e('Meta Boxes','piklist');?>
@@ -48,35 +45,7 @@ Order: 10
         <p>
           <?php _e('Order, Lock and Collapse your Meta Boxes by simply setting a comment!','piklist');?>
         </p>
-    
-      </div>
-
-      <div class="welcome-panel-column welcome-panel-last">
-
-        <h4>
-          <span class="icon16 icon-settings"></span> <?php _e('Settings','piklist');?>
-        </h4>
       
-        <p>
-          <?php _e('Add new Settings Pages with ease, and make them look sharp with WordPress tabs.','piklist');?>
-        </p>
-      
-      </div>
-    
-      <div class="welcome-panel-column">
-
-        <h4>
-          <span class="icon16 icon-appearance"></span> <?php _e('Widgets','piklist');?>
-        </h4>
-    
-        <p>
-          <?php _e('Create Widgets and Widget Forms without being a advanced programmer! If you can create a loop you can build a widget!','piklist');?>
-        </p>
-
-      </div>
-    
-      <div class="welcome-panel-column">
-
         <h4>
           <span class="icon16 icon-page"></span> <?php _e('Admin Pages','piklist');?>
         </h4>
@@ -85,9 +54,6 @@ Order: 10
           <?php _e('Custom Admin Pages couldn\'t be easier to build and extend!','piklist');?>
         </p>
 
-      </div>
-    
-      <div class="welcome-panel-column welcome-panel-last">
 
         <h4>
           <span class="icon16 icon-tools"></span> <?php _e('Fields','piklist');?>
@@ -98,8 +64,30 @@ Order: 10
         </p>
 
       </div>
+
+
+
+
+
     
       <div class="welcome-panel-column">
+
+        <h4>
+          <span class="icon16 icon-settings"></span> <?php _e('Settings','piklist');?>
+        </h4>
+      
+        <p>
+          <?php _e('Add new Settings Pages with ease, and make them look sharp with WordPress tabs.','piklist');?>
+        </p>
+      
+
+        <h4>
+          <span class="icon16 icon-appearance"></span> <?php _e('Widgets','piklist');?>
+        </h4>
+    
+        <p>
+          <?php _e('Create Widgets and Widget Forms without being a advanced programmer! If you can create a loop you can build a widget!','piklist');?>
+        </p>
 
         <h4>
           <span class="icon16 icon-tools"></span> <?php _e('Add More Fields','piklist');?>
@@ -109,9 +97,6 @@ Order: 10
           <?php _e('Any field can be an Add More field, even Group fields! For those times when you need a little more...','piklist');?>
         </p>
 
-      </div>
-    
-      <div class="welcome-panel-column">
 
         <h4>
           <span class="icon16 icon-tools"></span> <?php _e('Group Fields','piklist');?>
@@ -122,6 +107,8 @@ Order: 10
         </p>
 
       </div>
+
+
     
       <div class="welcome-panel-column welcome-panel-last">
 
@@ -133,10 +120,6 @@ Order: 10
           <?php _e('Create your own html templates for your forms and fields... you know best right?','piklist');?>
         </p>
 
-      </div>
-    
-      <div class="welcome-panel-column">
-
         <h4>
           <span class="icon16 icon-page"></span> <?php _e('Custom Post Types','piklist');?>
         </h4>
@@ -145,9 +128,6 @@ Order: 10
           <?php _e('Now packaged with more options like custom statuses support, column headers, and meta box control.','piklist');?>
         </p>
 
-      </div>
-    
-      <div class="welcome-panel-column">
 
         <h4>
           <span class="icon16 icon-post"></span> <?php _e('Taxonomies','piklist');?>
@@ -156,10 +136,6 @@ Order: 10
         <p>
           <?php _e('Easily create Taxonomies and gain more control over how they appear on edit screens.','piklist');?>
         </p>
-
-      </div>
-    
-      <div class="welcome-panel-column welcome-panel-last">
 
         <h4>
           <span class="icon16 icon-tools"></span> <?php _e('Styles and Scripts','piklist');?>

@@ -15,6 +15,9 @@ Collapse: false
       ,'hide' => 'Hide'
     )
     ,'value' => 'hide'
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
 
   piklist('field', array(
@@ -28,6 +31,9 @@ Collapse: false
         ,'value' => 'show'
       )
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
 
   piklist('field', array(
@@ -39,6 +45,9 @@ Collapse: false
       ,'hide' => 'Hide'
     )
     ,'value' => 'hide'
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
 
   piklist('field', array(
@@ -52,6 +61,9 @@ Collapse: false
         ,'value' => 'show'
       )
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
 
   piklist('field', array(
@@ -61,6 +73,9 @@ Collapse: false
     ,'choices' => array(
       'show' => 'Show'
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
 
   piklist('field', array(
@@ -74,6 +89,9 @@ Collapse: false
         ,'value' => 'show'
       )
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
   
   piklist('field', array(
@@ -99,6 +117,9 @@ Collapse: false
         ,'type' => 'update'
       )
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
 
   piklist('field', array(
@@ -106,6 +127,9 @@ Collapse: false
     ,'field' => 'update_field'
     ,'label' => 'Update This Field'
     ,'description' => 'This field is updated by the field above'
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
   
   piklist('shared/meta-box-welcome', array(

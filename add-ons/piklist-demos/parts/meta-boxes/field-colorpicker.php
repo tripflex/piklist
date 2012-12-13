@@ -10,6 +10,9 @@ Collapse: false
     'type' => 'colorpicker'
     ,'field' => 'color'
     ,'label' => 'Color Picker'
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
   
   piklist('field', array(
@@ -18,6 +21,9 @@ Collapse: false
     ,'add_more' => true
     ,'label' => 'Add More'
     ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
   
   piklist('shared/meta-box-welcome', array(

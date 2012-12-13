@@ -71,7 +71,7 @@ class PikList_Admin
       $changes = trim( substr( $changes, 0, $pos ) );
     }
 
-    $replace_header = sprintf(__('%sUpdating is recommended, here\'s why:%s', 'piklist'), '<h4 style="color:red; margin-bottom:0;">','</h4>');
+    $replace_header = '<h4 style="color:red; margin-bottom:0;">' . __('Updating is recommended, here\'s why:','piklist') . '</h4>';
 
     $start_pos = strrpos($changes, "<h4>");
     $end_pos = strrpos($changes, "</h4>");
@@ -141,7 +141,7 @@ class PikList_Admin
       
       self::$admin_page_tabs[$page['menu_slug']] = array(
         'default' => array(
-          'title' => isset($page['default_tab']) ? __($page['default_tab']) : __('General','piklist')
+          'title' => isset($page['default_tab']) ? __($page['default_tab']) : __('General')
           ,'page' => null
         )
       );

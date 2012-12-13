@@ -11,7 +11,7 @@ if (isset( $_GET['referer']) && $_GET['referer'] == 'plugins.php'): ?>
   <div id="message" class="error">
 
     <p>
-      <?php printf(__('%1$sWARNING: Deactivating Piklist may disable functionality on this website.%2$s','piklist'),'<strong>','</strong>');?>
+      <?php echo '<strong>', __('WARNING: Deactivating Piklist may disable functionality on this website.','piklist'), '</strong>';?>
     </p>
 
     <p>

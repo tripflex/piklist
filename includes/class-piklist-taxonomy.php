@@ -116,7 +116,7 @@ class PikList_Taxonomy
     }
   }
   
-  public static function process_form($term_id, $taxonomny_id)
+  public static function process_form($term_id, $taxonomy_id)
   {
     piklist_form::process_form(array(
       'term' => $term_id
