@@ -24,12 +24,11 @@ Author URI: http://piklist.com/
       ,'capability_type' => 'post'
       ,'edit_columns' => array(
         'title' => __('Demo')
-        ,'author' => __('Person')
+        ,'author' => __('Assigned to')
       )
       ,'hide_meta_box' => array(
         'slug'
         ,'author'
-        ,'piklist_demo_type'
       )
       ,'status' => array(
         'draft' => array(
@@ -40,8 +39,8 @@ Author URI: http://piklist.com/
           'label' => 'Demo'
           ,'public' => true
         )
-        ,'tutorial' => array(
-          'label' => 'Tutorial'
+        ,'lock' => array(
+          'label' => 'Lock'
           ,'public' => true
         )
       )
@@ -65,7 +64,7 @@ Author URI: http://piklist.com/
         ,'rewrite' => array( 
           'slug' => 'demo-type' 
         )
-        ,'hide_meta_box' => true
+        ,'show_admin_column' => true
       )
     );
   
@@ -133,8 +132,8 @@ Author URI: http://piklist.com/
         switch ($section)
         {
           case 'minor-publishing-actions':
-          case 'misc-publishing-actions':
-          case 'misc-publishing-actions-status':
+          //case 'misc-publishing-actions':
+          //case 'misc-publishing-actions-status':
           case 'misc-publishing-actions-visibility':
           case 'misc-publishing-actions-published':
           

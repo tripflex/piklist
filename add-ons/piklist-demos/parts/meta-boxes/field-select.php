@@ -16,6 +16,9 @@ Collapse: false
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
     )
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
   
   piklist('field', array(
@@ -29,6 +32,9 @@ Collapse: false
       'first' => 'First Choice'
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
     )
   ));
 

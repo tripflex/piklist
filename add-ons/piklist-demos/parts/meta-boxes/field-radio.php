@@ -17,6 +17,9 @@ Collapse: false
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
     )
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
   
   piklist('field', array(
@@ -28,6 +31,9 @@ Collapse: false
     ,'choices' => array(
       'yes' => 'Yes'
       ,'no' => 'No'
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
     )
   ));
   
@@ -63,6 +69,9 @@ Collapse: false
         ,'columns' => 6
       )
     )
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
   
   piklist('field', array(
@@ -86,6 +95,9 @@ Collapse: false
           'class' => 'small-text'
         )
       )
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
     )
   ));
 

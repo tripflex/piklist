@@ -14,6 +14,9 @@ Collapse: false
     ,'value' => 'Lorem'
     ,'template' => 'piklist_demo'
     ,'columns' => 12
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
   
   piklist('field', array(
@@ -25,6 +28,9 @@ Collapse: false
     ,'value' => 'Lorem'
     ,'template' => 'piklist_demo'
     ,'columns' => 8
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
 
   piklist('shared/meta-box-welcome', array(

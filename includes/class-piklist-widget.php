@@ -61,8 +61,12 @@ class PikList_Widget
         }
         else if ($from == 'theme')
         {
-          $title = get_current_theme() . ' ' . __('Widgets','piklist');
-          $description = sprintf(__('Widgets for the %s Theme', 'piklist'), get_current_theme());
+          global $wp_version;
+          
+          $current_theme = ($wp_version >= 3.4 ? wp_get_theme() : get_current_theme());
+
+          $title = $current_theme . ' ' . __('Widgets','piklist');
+          $description = sprintf(__('Widgets for the %s Theme', 'piklist'), $current_theme);
         }
 
         $wp_widget_factory->widgets[$widget_class_name] = new $widget_class($widget_class_name, $title, $description, array($from => $path));

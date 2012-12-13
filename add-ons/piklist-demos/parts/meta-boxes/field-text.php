@@ -15,6 +15,9 @@ Collapse: false
     ,'attributes' => array(
       'class' => 'small-text'
     )
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
 
   piklist('field', array(
@@ -25,6 +28,9 @@ Collapse: false
     ,'value' => 'Lorem'
     ,'attributes' => array(
       'columns' => 6
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
     )
   ));
   
@@ -37,6 +43,9 @@ Collapse: false
     ,'value' => 'Lorem'
     ,'attributes' => array(
       'columns' => 8
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
     )
   ));
   
@@ -51,6 +60,9 @@ Collapse: false
       ,'step' => 5
       ,'min' => 5
     )
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
   
   piklist('field', array(
@@ -63,6 +75,9 @@ Collapse: false
       'rows' => 10
       ,'cols' => 50
       ,'class' => 'large-text code'
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
     )
   ));
 

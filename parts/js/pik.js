@@ -113,9 +113,9 @@
         switch (field.type)
         {
           case 'datepicker':
-                    
+
             $('#' + field.id)
-              .val($('#' + field.id).val() ? $('#' + field.id).val() : field.value)
+              .val($('#' + field.id).val() ? $('#' + field.id).val() : (!field.value ? null : field.value))
               .attr('autocomplete', 'off')
               .datepicker(options);
         
@@ -124,7 +124,7 @@
           case 'timepicker':
                     
             $('#' + field.id)
-              .val($('#' + field.id).val() ? $('#' + field.id).val() : field.value)
+              .val($('#' + field.id).val() ? $('#' + field.id).val() : (!field.value ? null : field.value))
               .attr('autocomplete', 'off')
               .timePicker(options);
             

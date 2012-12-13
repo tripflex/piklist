@@ -28,13 +28,13 @@
       />
     
       <a href="#<?php echo piklist::dashes(piklist_add_on::$available_add_ons[$values[$index]]['Name']); ?>" class="button<?php echo $active ? '' : '-primary'; ?> piklist-field-add-on-button">
-        <?php _e($active ? 'Disable' : 'Activate'); ?>
+        <?php $active ? _e('Disable','piklist') : _e('Activate','piklist');?>
       </a>
 
       <?php if (isset($settings[$values[$index]])): ?>
       
         <a href="<?php echo admin_url('admin.php?page=' . $values[$index]); ?>" class="button piklist-field-add-on-button-settings">
-          <?php _e('Settings'); ?>
+          <?php _e('Settings','piklist'); ?>
         </a>
       
       <?php endif; ?>

@@ -7,14 +7,14 @@
     
     <ul>
       <?php foreach ($message as $line): ?>
-        <li><?php echo $prefix; ?><?php _e($line); ?></li>
+        <li><?php echo $prefix . $line; ?></li>
       <?php endforeach; ?>
     </ul>
   
   <?php else: ?>
     
     <p>
-      <?php echo $prefix; ?><?php _e($message); ?>
+      <?php echo $prefix . $message; ?>
     </p>
 
   <?php endif; ?>

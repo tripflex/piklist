@@ -12,6 +12,9 @@ Lock: true
     ,'label' => 'HTML Content'
     ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
 
   piklist('shared/meta-box-welcome', array(

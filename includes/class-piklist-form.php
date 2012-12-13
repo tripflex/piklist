@@ -348,8 +348,8 @@ class PikList_Form
         case 'option':
       
           $options = get_option($scope);
-        
-          return isset($options[$key]) ? $options[$key] : (empty($options) && isset($field['value']) ? $field['value'] : false);
+          
+          return isset($options[$key]) ? $options[$key] : (isset($field['value']) ? $field['value'] : false);
 
         break;
       
@@ -502,7 +502,7 @@ class PikList_Form
   {
     global $pagenow;
     
-    return in_array($pagenow, array('user.php', 'user-new.php', 'profile.php'));
+    return in_array($pagenow, array('user.php', 'user-new.php', 'user-edit.php', 'profile.php'));
   }
   
   public static function is_media()
@@ -693,7 +693,7 @@ class PikList_Form
     }
     else
     {
-      global $post, $tag_ID, $user_ID;
+      global $post, $tag_ID;
       
       switch ($field['scope'])
       {
@@ -721,7 +721,7 @@ class PikList_Form
         
         case 'user_meta':
                 
-          $field['value'] = self::get_field_value($field['scope'], $field, $field['scope'], $user_ID, false);
+          $field['value'] = self::get_field_value($field['scope'], $field, $field['scope'], $_REQUEST['user_id'], false);
           
         break;
 
@@ -1005,6 +1005,7 @@ class PikList_Form
         else
         {      
           $values = is_array(self::$field_rendering['value']) ? self::$field_rendering['value'] : array(self::$field_rendering['value']);
+          $values = array_values($values);
           $clone = self::$field_rendering;
 
           for ($i = 0; $i < count($values); $i++)
@@ -1182,7 +1183,13 @@ class PikList_Form
             {
               break;
             }
-                        
+            //          
+            // piklist::pre($ids);
+            // piklist::pre($meta_type);
+            // piklist::pre($data);
+            // piklist::pre($_REQUEST);
+            // die;
+            
             foreach ($data as $key => $value) 
             {
               delete_metadata($meta_type, $id, $key);

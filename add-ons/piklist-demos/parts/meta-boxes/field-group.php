@@ -97,6 +97,9 @@ Collapse: false
         ,'columns' => 3
       )
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
   
   piklist('field', array(
@@ -190,6 +193,9 @@ Collapse: false
         ,'columns' => 3
       )
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
   
   piklist('field', array(
@@ -226,6 +232,9 @@ Collapse: false
         ,'columns' => 3
       )
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
   
   piklist('field', array(
@@ -317,6 +326,9 @@ Collapse: false
         ,'columns' => 3
       )
     )
+    ,'on_post_status' => array(
+        'value' => 'lock'
+      )
   ));
   
   piklist('shared/meta-box-welcome', array(

@@ -3,7 +3,7 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.4
 Requires at least: 3.3.2
-Stable tag: 0.7.0
+Stable tag: 0.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,15 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.7.1 =
+Lots of Bugs fixed:
+* BUGFIX: Add-mores save correctly when adding/deleting rows.
+* BUGFIX: Media meta saves without errors.
+* BUGFIX: Setting save properly when using multiple tabs.
+* BUGFIX: Logged in user can now save user meta for any user.
+* BUGIFX: Fixed typo in process_form function in class-piklist-taxonomy. Props @James_Mc
+* BUGFIX: Empty Time and Date fields no longer return "false".
 
 = 0.7.0 =
 * NEW FEATURE: Disable Piklist Deactivation.

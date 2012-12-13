@@ -61,10 +61,10 @@
     <em><?php __('There are currently no Widgets available.','piklist'); ?></em>
   </p>
   
-  <h4><?php _e('Learn to make Widgets'); ?></h4>
+  <h4><?php _e('Learn to make Widgets','piklist'); ?></h4>
   
   <p>
-    <?php _e('Check out the documentation for how to easily build your own custom widgets!')?>
+    <?php _e('Check out the documentation for how to easily build your own custom widgets!','piklist')?>
   </p>  
   
 <?php endif; ?>

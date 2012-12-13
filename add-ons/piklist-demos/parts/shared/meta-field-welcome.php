@@ -7,7 +7,7 @@
     </th>
     <td>
 
-      <h4><?php _e('The code that built these fields can be found here:'); ?></h4> 
+      <h4><?php _e('The code that built these fields can be found here:','piklist'); ?></h4> 
 
       <code><?php echo str_replace(ABSPATH, '', $location); ?></code>
     
