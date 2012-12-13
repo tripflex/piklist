@@ -104,6 +104,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 == Changelog ==
 
 = 0.7.1 =
+* LOTS OF BUG FIXES: &bull;
 * BUGFIX: Add-mores save correctly when adding/deleting rows.
 * BUGFIX: Media meta saves without errors.
 * BUGFIX: Settings save properly when using multiple tabs.
