@@ -1,7 +1,7 @@
 === PIKLIST | Rapid Development Framework ===
 Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
-Tested up to: 3.4
+Tested up to: 3.5
 Requires at least: 3.3.2
 Stable tag: 0.7.1
 License: GPLv2 or later
