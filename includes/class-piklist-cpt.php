@@ -21,7 +21,7 @@ class PikList_CPT
     add_action('pre_get_posts', array('piklist_cpt', 'pre_get_posts'), 100);
     add_action('edit_page_form', array('piklist_cpt', 'edit_form'));
     add_action('edit_form_advanced', array('piklist_cpt', 'edit_form'));
-    add_action('piklist_install', array('piklist_cpt', 'install'));
+    add_action('piklist_activate', array('piklist_cpt', 'activate'));
     
     add_filter('posts_join', array('piklist_cpt', 'posts_join'));
     add_filter('posts_where', array('piklist_cpt', 'posts_where'));
@@ -44,7 +44,7 @@ class PikList_CPT
     $wpdb->post_relationships = $wpdb->prefix . 'post_relationships';
   }
   
-  public static function install()
+  public static function activate()
   {
     $table = piklist::create_table(
       'post_relationships'

@@ -89,7 +89,7 @@ class PikList
 
     load_plugin_textdomain( 'piklist', false, dirname(dirname(plugin_basename(__FILE__ ))) . '/languages' );
     
-    register_activation_hook('piklist/piklist.php', array('piklist', 'install'));
+    register_activation_hook('piklist/piklist.php', array('piklist', 'activate'));
    
     self::auto_load();
   }
@@ -111,10 +111,10 @@ class PikList
       }
     }
   }
-  
-  public static function install()
+
+  public static function activate()
   {
-    do_action('piklist_install');
+    piklist::check_network_propagate('do_action', 'piklist_activate');
   }
   
   public static function render($view, $arguments = array(), $return = false) 
@@ -280,6 +280,35 @@ class PikList
   public static function slug($string)
   {
     return str_replace('.php', '', str_replace(array('-', ' '), '_', strtolower($string)));
+  }
+
+  public static function check_network_propagate($callback, $arguments)
+  {
+    global $wpdb;
+
+    if (function_exists('is_multisite') && is_multisite()) 
+    {
+      if (is_network_admin())
+      {
+        $core = $wpdb->blogid;
+        $ids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+        foreach ($ids as $id) 
+        {
+          switch_to_blog($id);
+          
+          call_user_func($callback, $arguments);
+        }
+        switch_to_blog($core);
+      }
+      else
+      {
+        call_user_func($callback, $arguments);
+      }  
+    } 
+    else
+    {
+      call_user_func($callback, $arguments);
+    }
   }
   
   public static function create_table($table_name, $columns) 
