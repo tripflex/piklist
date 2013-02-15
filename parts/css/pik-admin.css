@@ -514,3 +514,15 @@
       background-image: url('../img/glyphicons_386_google_plus.png');
     }
 
+
+/* --------------------------------------------------------------------------------
+  WordPress overrides
+--------------------------------------------------------------------------------- */
+.subsubsub {
+  white-space: normal !important;
+}
+
+.subsubsub li {
+  white-space: nowrap !important;
+}
+

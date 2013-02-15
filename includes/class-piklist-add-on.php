@@ -33,10 +33,23 @@ class PikList_Add_On
       $path = WP_CONTENT_DIR . '/plugins/' . $plugin;
       $data = get_file_data($path, array(
                 'type' => 'Plugin Type'
+                ,'version' => 'Version'
               ));
       if ($data['type'] && strtolower($data['type']) == 'piklist')
       {
         piklist::$paths[basename(dirname($plugin))] = dirname($path);
+
+        if ($data['version'])
+        {
+          $file = $plugin;
+          $version = $data['version'];
+
+          piklist_admin::check_update($file, $version);
+        }
+        else
+        {
+          // TODO: add error message
+        }
       }
     }
     

@@ -9,7 +9,7 @@ class PikList_Taxonomy
   public static function _construct()
   {    
     add_action('init', array('piklist_taxonomy', 'init'));
-    add_action('piklist_install', array('piklist_taxonomy', 'install'));
+    add_action('piklist_activate', array('piklist_taxonomy', 'activate'));
   }
   
   public static function init()
@@ -123,18 +123,18 @@ class PikList_Taxonomy
     ));
   }
   
-  public static function install()
+  public static function activate($network_wide)
   {
     $table = piklist::create_table(
       'termmeta'
-      ,'meta_id bigint(20) unsigned NOT NULL auto_increment,
-        term_id bigint(20) unsigned NOT NULL default "0",
-        meta_key varchar(255) default NULL,
-        meta_value longtext,
-        PRIMARY KEY  (meta_id),
-        KEY term_id (term_id),
-        KEY meta_key (meta_key)
-      '
+      ,'meta_id bigint(20) unsigned NOT NULL auto_increment
+        ,term_id bigint(20) unsigned NOT NULL default "0"
+        ,meta_key varchar(255) default NULL
+        ,meta_value longtext
+        ,PRIMARY KEY (meta_id)
+        ,KEY term_id (term_id)
+        ,KEY meta_key (meta_key)'
+      ,$network_wide
    );
   }
 }

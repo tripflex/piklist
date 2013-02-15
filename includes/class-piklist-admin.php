@@ -33,6 +33,16 @@ class PikList_Admin
 
   public static function admin_init()
   {
+    $path = WP_CONTENT_DIR . '/plugins/piklist/piklist.php';
+    $data = get_file_data($path, array(
+              'version' => 'Version'
+            ));
+
+    if ($data['version'])
+    {
+      self::check_update('piklist/piklist.php', $data['version']);
+    }
+ 
     self::$locked_plugins = apply_filters('piklist_locked_plugins', array('piklist/piklist.php'));
 
     add_action('in_plugin_update_message-piklist/piklist.php', array('piklist_admin', 'update_available'), null, 2);
@@ -303,6 +313,121 @@ class PikList_Admin
     
     return $plugins;
   }
+
+  /**
+   * Check Update
+   *
+   * Run update script if plugin version is greater than stored version.
+   *
+   * @Credit Scribu for inspiration
+   * http://core.trac.wordpress.org/ticket/14912
+   *
+   * @param string $file plugin directory and file name.
+   * @param string $version version of plugin.
+   */
+  public static function check_update($file, $version)
+  {
+    global $pagenow;
+
+    if (!in_array($pagenow, array('plugins.php', 'update-core.php', 'update.php', 'index.php')) || !is_admin() || !current_user_can('manage_options'))
+    {
+      return;
+    }
+     
+    $plugin = plugin_basename($file);
+
+    if (is_plugin_active_for_network($plugin))
+    {
+      $versions = get_site_option('piklist_active_plugin_versions', array());
+      $network_wide = true;
+    }
+    else if (is_plugin_active($plugin))
+    {
+      $versions = get_option('piklist_active_plugin_versions', array());
+      $network_wide = false;
+    }
+    else
+    {
+      return;
+    }
+
+    // $operator param is temporary fix for this first install.
+    // will be removed in next version of Piklist
+    if (!isset($versions[$plugin]))
+    {
+      $operator = '>=';
+      $versions[$plugin] = array($version);
+    }
+    else
+    {
+      $operator = '>';
+    }
+
+    $current_version = current($versions[$plugin]);
+
+    if (version_compare($version, $current_version, $operator))
+    {
+      self::get_update($file, $version, $current_version);
+      
+      array_unshift($versions[$plugin], $version);
+    }
+
+    if ($network_wide)
+    { 
+      update_site_option('piklist_active_plugin_versions', $versions);
+    }
+    else
+    { 
+      update_option('piklist_active_plugin_versions', $versions);
+    }
+  }
+
+  public static function get_update($file, $version, $current_version)
+  {
+    $updates_url = WP_CONTENT_DIR . '/plugins/' . dirname($file) . '/parts/updates/';
+    $updates = piklist::get_directory_list($updates_url);
+
+    if ($updates)
+    {
+      array_multisort($updates);
+    }
+    else
+    {
+      return;
+    }
+
+    $operator = $current_version ? '=' : '>='; // Upgrade : Install
+    $valid_updates = array();
+    foreach ($updates as $update)
+    {
+      $update_version_number = rtrim($update, '.php');
+
+      if (version_compare($version, $update_version_number, $operator))
+      {
+        $update_code = file_get_contents($updates_url . $update);      
+        $stripped_update_code = str_ireplace(array('<?php', '<?', '?>'), '', $update_code);
+        $update_function = create_function('', $stripped_update_code);
+        $valid_updates[$update] = $update_function;
+      }
+    }
+
+    if ($valid_updates)
+    {
+      piklist::check_network_propagate(array('piklist_admin', 'run_update'), $valid_updates);
+    }
+  }
+
+  public static function run_update($valid_updates)
+  {
+    piklist::performance();
+    
+    foreach ($valid_updates as $valid_update)
+    {
+      $function = $valid_update;
+      $function();
+    }
+  }
+
 }
 
 ?>
