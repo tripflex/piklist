@@ -1,0 +1,528 @@
+
+/* --------------------------------------------------------------------------------
+  WordPress Style Updates
+--------------------------------------------------------------------------------- */  
+  
+  .inside ol {
+    margin: 0 0 1em 1.5em;
+  }
+  
+  
+
+  
+/* --------------------------------------------------------------------------------
+  Styles for Piklist
+--------------------------------------------------------------------------------- */
+    
+  /* Styles for the add-on field (admin) */
+  .piklist-field-add-on {
+    width: 210px;
+    min-height: 150px;
+    position: relative;
+    float: left;
+    border: 1px solid #e1e1e1;
+    padding: 10px;
+    margin: 0 15px 15px 0;
+    background-color: #f1f1f1;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+    
+    .piklist-field-add-on h3 {
+      margin-top: 0px;
+    }
+    
+    .piklist-field-add-on .piklist-field-add-on-button {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+    
+    .piklist-field-add-on .piklist-field-add-on-button-settings {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+  
+  /* Additional style to show off extra information in meta box titles */
+  .stuffbox h3 .piklist-title-right,
+  .postbox h3 .piklist-title-right {
+    float: right;
+    font-size: 75%;
+    font-family: sans-serif;
+    line-height: 1.5;
+    font-weight: bold;
+    display: block;
+    text-transform: uppercase;
+  }
+  
+    .stuffbox h3 .piklist-title-right {
+      margin-right: 17px;
+    }
+    
+  /* Adjustment to style checkboxes and radio buttons better */
+  .piklist-field-list {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  
+    .piklist-field-list li {
+      margin-bottom: 0px;
+      vertical-align: middle;
+    }
+
+    .piklist-field-list-item {
+      display: inline-block;
+      /*padding-left: 18px;
+      text-indent: -16px;*/
+    }
+
+  /* Add-More */
+  #piklist-field-add-more-add-button,
+  #piklist-field-add-more-remove-button {
+    font-size: 14px !important;
+    font-weight: bold;
+  }
+    
+  /* Meta Messages */
+  .piklist-meta-message {
+    clear: both;
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+    margin: 10px -10px 0 -10px;
+    padding: 0.8em;
+    background: white;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #dfdfdf;
+    line-height: 1.5;
+  }  
+  
+    .piklist-meta-message a {
+      font-weight: bold;
+    }
+  
+  /* Meta box alernative to form-table */
+  .piklist-field-container:before,
+  .piklist-field-container:after {
+    content: "";
+    display: table;
+  }
+   
+    .piklist-field-container:after {
+      clear: both;
+    }
+  
+    .piklist-field-container {
+      zoom: 1;
+      overflow: hidden;
+      padding-bottom: 0.3334em;
+    } 
+
+      #side-sortables .piklist-field-container,
+      .widgets-holder-wrap .piklist-field-container {
+        overflow: auto;
+        padding-bottom: 0;
+      }
+    
+    .piklist-field-container .piklist-required {
+      color: red;
+      margin: 0 0 0 0.25em;
+    }
+    
+    .piklist-field-container .piklist-label-container {
+      display: block;
+      float: left;
+      width: 16.5em;
+      padding: 1em 0.8em 0 0.8em;
+      padding-bottom: 1000px;
+      margin-bottom: -1000px;
+    }
+
+    .piklist-meta-box ul {
+      list-style: inside;
+    }
+      
+      .piklist-meta-box .piklist-field-container .piklist-label-container {
+        border-right: 1px solid #dfdfdf;
+      }
+    
+        #side-sortables .piklist-meta-box .piklist-field-container .piklist-label-container,
+        .widgets-holder-wrap .piklist-meta-box .piklist-field-container .piklist-label-container {
+          border-right: none;
+        }
+
+    .piklist-meta-box hr {
+      color: #dfdfdf;
+      background-color: #dfdfdf;
+      border: 0 none #dfdfdf;
+      height: 1px;
+    }
+    
+    .piklist-meta-box .inside:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    .piklist-meta-box h4 {
+      clear: both;
+    }
+    
+      .piklist-field-container .piklist-label,
+      .piklist-field-container .piklist-child-label {
+        font-weight: bold;
+        vertical-align: middle;
+        text-shadow: white 0 1px 0;
+      }
+
+        .piklist-field-container .piklist-field-list-item {
+          font-weight: normal;
+        }
+  
+      .piklist-field-container.stack .piklist-label-container {
+        float: none;
+        width: auto;
+      }
+  
+      #side-sortables .piklist-field-container .piklist-label-container {
+        display: block;
+        float: none;
+        width: auto;
+        padding: 0.3334em 0.3334em 0 0.3334em;
+        margin: 0;
+      }
+      
+        .widgets-holder-wrap .piklist-field-container .piklist-label-container {
+          display: block;
+          float: none;
+          width: auto;
+          padding: 0.3334em 0 0 0;
+          margin: 0;
+        }
+      
+    /* TODO: Put in front end stylesheet as well */
+    .piklist-field {
+      overflow: hidden;
+      position: relative;
+      padding: 0.6667em 0.8em 0 0.8em;
+      padding-bottom: 1000px;
+      margin-bottom: -1000px;
+    }
+    
+      #side-sortables .piklist-field-container .piklist-field {
+        line-height: 1.6667;
+        padding: 0.3334em 0.4em 0 0.4em;
+        margin: 0;
+      }
+        
+        .widgets-holder-wrap .piklist-field-container .piklist-field {
+          line-height: 1.6667;
+          padding: 0.3334em 0 0.3334em 1px;
+          margin: 0;
+        }
+      
+      ul.piklist-field-list,
+      ol.piklist-field-list {
+        margin-top: 0.3334em;
+        margin-bottom: 0;
+        list-style-type: none;
+      }
+      
+    .piklist-field-description {
+      clear: both;
+      display: block;
+    }
+
+  .media-item .final td {
+    padding-left: 10px;
+  }
+
+  /* Plugin Icon */
+  #icon-piklist-page {
+    background-image: url('../img/piklist-page-icon-32.png');
+    background-repeat: no-repeat;
+  }
+
+  /* Additional Divider for Tabs View */
+  .piklist-tab-divider {
+    visibility: hidden; 
+    margin: 0.25em 0 0.25em 0;
+  }
+
+  /* Slight position adjustment for child labels */
+  .piklist-child-label {
+    margin-right: 0.25em;
+    margin-left: 0.25em;
+  }
+  
+  .form-wrap .piklist-form-field {
+    margin: 0 0 10px 0;
+    padding: 8px;
+  }
+
+/* --------------------------------------------------------------------------------
+  Make the default jQuery UI Datepicker & Timepicker fit a little beter in 
+  the admin
+--------------------------------------------------------------------------------- */
+  
+  body.admin-color-fresh .ui-widget {
+    border-color: #DFDFDF;
+  }
+  
+    body.admin-color-fresh .ui-widget-header {
+      border-color: #DFDFDF;
+      background-color: #f1f1f1; /* Fallback */
+      background-image: -ms-linear-gradient(top, #f9f9f9, #ececec); /* IE10 */
+      background-image: -moz-linear-gradient(top, #f9f9f9, #ececec); /* Firefox */
+      background-image: -o-linear-gradient(top, #f9f9f9, #ececec); /* Opera */
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#ececec)); /* old Webkit */
+      background-image: -webkit-linear-gradient(top, #f9f9f9, #ececec); /* new Webkit */
+      background-image: linear-gradient(top, #f9f9f9, #ececec); /* proposed W3C Markup */    
+    }
+    
+  body.admin-color-classic .ui-widget {
+    border-color: #D1E5EE;
+  }
+
+    body.admin-color-classic .ui-widget-header {
+      border-color: #D1E5EE;
+      background-color: #f5fafd; /* Fallback */
+      background-image: -ms-linear-gradient(top, #f7fcfe, #eff8ff); /* IE10 */
+      background-image: -moz-linear-gradient(top, #f7fcfe, #eff8ff); /* Firefox */
+      background-image: -o-linear-gradient(top, #f7fcfe, #eff8ff); /* Opera */
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#f7fcfe), to(#eff8ff)); /* old Webkit */
+      background-image: -webkit-linear-gradient(top, #f7fcfe, #eff8ff); /* new Webkit */
+      background-image: linear-gradient(top, #f7fcfe, #eff8ff); /* proposed W3C Markup */  
+    }
+  
+  .ui-datepicker {
+    font-size: 1em !important;
+  }
+  
+    .ui-datepicker th,
+    .ui-datepicker-title {
+      font-family: Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
+      font-weight: normal;
+    }
+ 
+  div.time-picker {
+    position: absolute;
+    height: 191px;
+    width: 4.5em;
+    overflow: auto;
+    overflow-x: hidden;
+    background: #ffffff;
+    border: 1px solid #aaa;
+    z-index: 99;
+    margin: 0;
+  }
+
+    div.time-picker-12hours {
+      width: 6em;
+    }
+
+    div.time-picker ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    div.time-picker li {
+      cursor: pointer;
+      font-size: .8em;
+      padding: .25em;
+    }
+    
+    div.time-picker li.selected {
+      background: #0063CE;
+      color: #ffffff;
+    }
+    
+ 
+  
+/* --------------------------------------------------------------------------------
+  Updates to WP-Tab Classes
+  - These should be submitted as patches to the core 
+--------------------------------------------------------------------------------- */
+
+  ul.wp-tab-bar { 
+    float: left; 
+    width: 120px; 
+    text-align: right; 
+    
+    /* Negative margin for the sake of those without JS: all tabs display */
+    margin: 0 -120px 0 5px;
+    padding: 0;
+  } 
+    
+    #side-sortables ul.wp-tab-bar { 
+      margin: 8px 0 3px; 
+      width: auto;
+      float: none;
+      text-align: left;
+    } 
+
+    ul.wp-tab-bar a { 
+      text-decoration: underline; 
+    }
+   
+    ul.wp-tab-bar li {
+      padding: 8px; 
+      display: block; 
+    } 
+   
+      ul.wp-tab-bar li { 
+        padding: 8px; 
+      } 
+        
+        ul.wp-tab-bar li.wp-tab-active { 
+          border-style: solid none solid solid; 
+          border-width: 1px 0 1px 1px;
+          -webkit-border-top-left-radius: 3px; 
+          -webkit-border-bottom-left-radius: 3px; 
+          -webkit-border-top-right-radius: 0px; 
+          border-top-left-radius: 3px; 
+          border-bottom-left-radius: 3px; 
+          border-top-right-radius: 0px; 
+          margin-right: -1px
+        } 
+      
+          ul.wp-tab-bar li.wp-tab-active a { 
+            font-weight: bold;
+            text-decoration: none;
+          }
+          
+          #side-sortables ul.wp-tab-bar li.wp-tab-active a { 
+            font-weight: normal;
+          }
+        
+        #side-sortables ul.wp-tab-bar li {
+          padding: 2px 5px 5px;
+          display: inline;
+        }
+
+        #side-sortables ul.wp-tab-bar li.wp-tab-active { 
+          border-style: solid solid none solid; 
+          border-width: 1px 1px 0px 1px;
+          -webkit-border-top-left-radius: 3px; 
+          -webkit-border-bottom-left-radius: 0px; 
+          -webkit-border-top-right-radius: 3px; 
+          border-top-left-radius: 3px; 
+          border-bottom-left-radius: 0px; 
+          border-top-right-radius: 3px;
+        }
+          
+  div.wp-tab-panel { 
+    height: auto;
+    min-height: 200px;
+    margin: 0 5px 5px 125px; 
+  } 
+
+    * html div.wp-tab-panel {
+      height: 200px;
+    }
+    
+    #side-sortables div.wp-tab-panel {
+      margin: 0 0 5px 0;
+    }
+  
+    div.wp-tab-panel-resize {
+      height: auto;
+      min-height: 200px;
+    }
+    
+    div.wp-tab-panel h4 {
+      margin-top: 0.25em;
+    }
+    
+    div.wp-tab-panel-active { 
+      display: block; 
+    } 
+   
+    div.wp-tab-panel-inactive { 
+      display: none; 
+    } 
+
+  .has-right-sidebar #side-sortables ul.wp-tab-bar li { 
+    display: inline; 
+    line-height: 1.35em; 
+  } 
+   
+  .no-js #side-sortables ul.wp-tab-bar li.hide-if-no-js { 
+    display: none; 
+  }
+  
+  
+
+/* --------------------------------------------------------------------------------
+  Extra Styles for the core plugin pages
+--------------------------------------------------------------------------------- */
+  
+  html body .piklist-left {
+    margin-left: 0px;
+  }
+
+  .piklist-social-links {
+    display: block;
+    padding-bottom: 30px;
+  }
+
+  a.piklist-social,
+  a.piklist-social:link,
+  a.piklist-social:visited {
+    float: left;
+    background-repeat: no-repeat;
+    display: block;
+    height: 24px;
+    width: 24px;
+    margin-right: 1em;
+    color: #000000;
+    text-decoration: none;
+    text-indent: -99999px;
+    opacity: 0.5;
+  	filter: alpha(opacity=50);
+  }
+    
+    a.piklist-social:hover,
+    a.piklist-social:focus,
+    a.piklist-social:active {
+      opacity: 1;
+    	filter: alpha(opacity=100);
+    }
+    
+    a.piklist-social-news {
+      background-image: url('../img/glyphicons_399_e-mail.png');
+    }
+
+    a.piklist-social-facebook {
+      background-image: url('../img/glyphicons_390_facebook.png');
+    }
+
+    a.piklist-social-twitter {
+      background-image: url('../img/glyphicons_391_twitter_t.png');
+    }
+
+    a.piklist-social-tweet {
+      background-image: url('../img/glyphicons_392_twitter.png');
+    }
+
+    a.piklist-social-google-plus {
+      background-image: url('../img/glyphicons_386_google_plus.png');
+    }
+
+
+/* --------------------------------------------------------------------------------
+  WordPress overrides
+--------------------------------------------------------------------------------- */
+.subsubsub {
+  white-space: normal !important;
+}
+
+.subsubsub li {
+  white-space: nowrap !important;
+}
+
