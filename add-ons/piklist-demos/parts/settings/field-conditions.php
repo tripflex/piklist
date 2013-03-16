@@ -104,6 +104,42 @@ Order: 40
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'update_field'
+    ,'value' => 'Hello World!' 
     ,'label' => 'Update This Field'
     ,'description' => 'This field is updated by the field above'
+  ));
+  
+  piklist('field', array(
+    'type' => 'checkbox'
+    ,'field' => 'enable_field_below'
+    ,'label' => 'Auto Enable Example'
+    ,'description' => 'This field is updated by using the field below'
+    ,'choices' => array(
+      'enable' => 'Enable'
+    )
+  ));
+  
+  piklist('field', array(
+    'type' => 'textarea'
+    ,'field' => 'enable_description'
+    ,'label' => 'Description'
+    ,'attributes' => array(
+      'rows' => 10
+      ,'cols' => 50
+      ,'class' => 'large-text code'
+    )
+    ,'conditions' => array(
+      array(
+        'field' => 'enable_field_below_0'
+        ,'value' => ':any' 
+        ,'update' => 'enable' 
+        ,'type' => 'update'
+      )
+      ,array(
+        'field' => 'enable_field_below_0'
+        ,'value' => ''
+        ,'update' => null 
+        ,'type' => 'update'
+      )
+    )
   ));

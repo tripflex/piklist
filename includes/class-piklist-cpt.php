@@ -23,13 +23,13 @@ class PikList_CPT
     add_action('edit_form_advanced', array('piklist_cpt', 'edit_form'));
     add_action('piklist_activate', array('piklist_cpt', 'activate'));
     
-    add_filter('posts_join', array('piklist_cpt', 'posts_join'));
-    add_filter('posts_where', array('piklist_cpt', 'posts_where'));
+    add_filter('posts_join', array('piklist_cpt', 'posts_join'), 10, 2);
+    add_filter('posts_where', array('piklist_cpt', 'posts_where'), 10, 2);
     add_filter('wp_insert_post_data', array('piklist_cpt', 'wp_insert_post_data'), 100, 2);
   }
   
   public static function init()
-  {    
+  {
     self::register_tables();
     self::register_taxonomies();
     self::register_post_types();
@@ -46,7 +46,7 @@ class PikList_CPT
   
   public static function activate()
   {
-    $table = piklist::create_table(
+    piklist::create_table(
       'post_relationships'
       ,'relate_id bigint(20) unsigned NOT NULL auto_increment
         ,post_id bigint(20) unsigned NOT NULL
@@ -57,39 +57,35 @@ class PikList_CPT
     );
   }
 
-  public static function posts_join($join)
+  public static function posts_join($join, $query)
   {
     global $wpdb;
 
-    $table_name = $wpdb->prefix . 'post_relationships';
-
-    if ($post_id = get_query_var('post_belongs'))
+    if (isset($query->query_vars['post_belongs']) && $post_id = $query->query_vars['post_belongs'])
     {
-      $join .= " LEFT JOIN " . $table_name . " ON " . $wpdb->posts . ".ID = " . $table_name . ".has_post_id";
+      $join .= " LEFT JOIN {$wpdb->prefix}post_relationships ON $wpdb->posts.ID = {$wpdb->prefix}post_relationships.has_post_id";
     }
     
-    if ($post_id = get_query_var('post_has'))
+    if (isset($query->query_vars['post_has']) && $post_id = $query->query_vars['post_has'])
     {
-      $join .= " LEFT JOIN " . $table_name . " ON " . $wpdb->posts . ".ID = " . $table_name . ".post_id";
+      $join .= " LEFT JOIN {$wpdb->prefix}post_relationships ON $wpdb->posts.ID = {$wpdb->prefix}post_relationships.post_id";
     }
     
     return $join;
   }
 
-  public static function posts_where($where)
+  public static function posts_where($where, $query)
   {
     global $wpdb;
 
-    $table_name = $wpdb->prefix . 'post_relationships';
-
-    if ($post_id = get_query_var('post_belongs'))
+    if (isset($query->query_vars['post_belongs']) && $post_id = $query->query_vars['post_belongs'])
     {
-      $where .= " AND {$table_name}.post_id = {$post_id}";
+      $where .= " AND {$wpdb->prefix}post_relationships.post_id = $post_id";
     }
     
-    if ($post_id = get_query_var('post_has'))
+    if (isset($query->query_vars['post_has']) && $post_id = $query->query_vars['post_has'])
     {
-      $where .= " AND {$table_name}.has_post_id = {$post_id}";
+      $where .= " AND {$wpdb->prefix}post_relationships.has_post_id = $post_id";
     }
     
     return $where;
@@ -142,8 +138,8 @@ class PikList_CPT
   
         foreach ($configuration['status'] as $status => &$status_data)
         {
-          $status_data['label'] = _x($status_data['label'], $post_type);
-          $status_data['label_count'] = _n_noop($status_data['label'] .' <span class="count">(%s)</span>', $status_data['label'] . ' <span class="count">(%s)</span>');
+          $status_data['label'] = $status_data['label'];
+          $status_data['label_count'] = $status_data['label'] .' <span class="count">(%s)</span>';
           $status_data['capability_type'] = $post_type;
 
           $status_data = wp_parse_args($status_data, array(
@@ -192,17 +188,28 @@ class PikList_CPT
       {
         add_filter('enter_title_here', array('piklist_cpt', 'enter_title_here'));
       }
+
+      if (isset($configuration['hide_screen_options']) && !empty($configuration['hide_screen_options']))
+      {
+        add_filter('screen_options_show_screen', array('piklist_cpt', 'hide_screen_options'));
+      }     
       
       if (isset($configuration['edit_columns']) && !empty($configuration['edit_columns']))
       {
         add_filter('manage_edit-' . $post_type . '_columns', array('piklist_cpt', 'manage_edit_columns'));
       }
-      
+
+      if (isset($configuration['admin_body_class']) && !empty($configuration['admin_body_class']))
+      {
+        add_filter('admin_body_class', array('piklist_cpt','admin_body_class'),999);
+      }
+
       if (isset($configuration['edit_manage']) && !empty($configuration['edit_manage']))
       {
         add_action('restrict_manage_posts', array('piklist_cpt', 'restrict_manage_posts'));
       }
     }
+    flush_rewrite_rules(false);
     
     if ($flushed != get_option('piklist_post_type_rules_flushed'))
     {
@@ -238,17 +245,13 @@ class PikList_CPT
   
   public static function hide_meta_boxes()
   {    
-    global $pagenow, $wp_meta_boxes;
+    global $pagenow, $wp_meta_boxes, $typenow, $post;
 
     if (in_array($pagenow, array('post.php', 'post-new.php')))
     {
-      global $post;
-
-      $post_type = get_post_type();
-
-      if (isset(self::$meta_boxes_hidden[$post_type]) && !in_array('submitdiv', self::$meta_boxes_hidden[$post_type]))
+      if (isset(self::$meta_boxes_hidden[$typenow]) && !in_array('submitdiv', self::$meta_boxes_hidden[$typenow]))
       {
-        array_push(self::$meta_boxes_hidden[$post_type], 'submitdiv');
+        array_push(self::$meta_boxes_hidden[$typenow], 'submitdiv');
       }
 
       foreach (array('normal', 'advanced', 'side') as $context)
@@ -256,49 +259,47 @@ class PikList_CPT
         // NOTE: remove_meta_box simply removes the meta configuration not the key, we need to wipe it... 
         foreach (array('high', 'core', 'default', 'low') as $priority)
         {
-          if (isset($wp_meta_boxes[$post_type][$context][$priority]))
+          if (isset($wp_meta_boxes[$typenow][$context][$priority]))
           {
-            foreach ($wp_meta_boxes[$post_type][$context][$priority] as $meta_box => $data)
+            foreach ($wp_meta_boxes[$typenow][$context][$priority] as $meta_box => $data)
             {            
               if ($meta_box == 'submitdiv')
               {
-                $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['title'] = apply_filters('piklist_post_submit_meta_box_title', $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['title'], $post);
-                $wp_meta_boxes[$post_type][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
+                $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['title'] = apply_filters('piklist_post_submit_meta_box_title', $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['title'], $post);
+                $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
               }
-              else if (isset(self::$meta_boxes_hidden[$post_type]) && in_array($meta_box, self::$meta_boxes_hidden[$post_type]))
+              else if (isset(self::$meta_boxes_hidden[$typenow]) && in_array($meta_box, self::$meta_boxes_hidden[$typenow]))
               {
-                unset($wp_meta_boxes[$post_type][$context][$priority][$meta_box]);
+                unset($wp_meta_boxes[$typenow][$context][$priority][$meta_box]);
               }
             }
           }
         }
       }
       
-      if (isset($wp_meta_boxes[$post_type]['side']['core']['submitdiv']))
+      if (isset($wp_meta_boxes[$typenow]['side']['core']['submitdiv']))
       {
-        $meta_boxes = array('submitdiv' => $wp_meta_boxes[$post_type]['side']['core']['submitdiv']);
-        unset($wp_meta_boxes[$post_type]['side']['core']['submitdiv']);
-        foreach ($wp_meta_boxes[$post_type]['side']['core'] as $id => $meta_box)
+        $meta_boxes = array('submitdiv' => $wp_meta_boxes[$typenow]['side']['core']['submitdiv']);
+        unset($wp_meta_boxes[$typenow]['side']['core']['submitdiv']);
+        foreach ($wp_meta_boxes[$typenow]['side']['core'] as $id => $meta_box)
         {
           $meta_boxes[$id] = $meta_box;
         }
-        $wp_meta_boxes[$post_type]['side']['core'] = $meta_boxes;
+        $wp_meta_boxes[$typenow]['side']['core'] = $meta_boxes;
       }
     }
   }
   
   public static function post_submit_meta_box()
   {
-    global $post, $wp_post_statuses;
-    
-    $post_type = get_post_type();
+    global $post, $wp_post_statuses, $typenow;
 
     $default_statuses = array(
       'draft' => $wp_post_statuses['draft']
       ,'pending' => $wp_post_statuses['pending']
     );
 
-    if ($post->post_status == 'publish' || (!isset(self::$post_types[$post_type]['status']) || (isset(self::$post_types[$post_type]['status']) && isset(self::$post_types[$post_type]['status']['publish']))))
+    if ($post->post_status == 'publish' || (!isset(self::$post_types[$typenow]['status']) || (isset(self::$post_types[$typenow]['status']) && isset(self::$post_types[$typenow]['status']['publish']))))
     {
       $default_statuses['publish'] = $wp_post_statuses['publish'];
     } 
@@ -337,6 +338,26 @@ class PikList_CPT
     
     return $columns;
   }
+
+  public static function admin_body_class($classes)
+  {
+    global $pagenow;
+
+    if (in_array($pagenow, array('edit.php', 'post.php', 'post-new.php')))
+    {
+      $post_type = $_REQUEST['post_type'];
+      
+      if (isset(self::$post_types[$post_type]))
+      {
+        foreach (self::$post_types[$post_type]['admin_body_class'] as $class)
+        {
+          $classes .= ' ';
+          $classes .= $class; 
+        }
+      }
+    }  
+    return $classes;
+  }
   
   public static function restrict_manage_posts()
   {
@@ -346,7 +367,7 @@ class PikList_CPT
   public static function save_post_data($post_id) 
   {
     global $wpdb, $post;
-    
+
     if (empty($_REQUEST) || !isset($_REQUEST['piklist']['nonce']))
     {
       return $post_id;
@@ -410,6 +431,7 @@ class PikList_CPT
               ,'status' => 'Status'
               ,'new' => 'New'
               ,'id' => 'ID'
+              ,'template' => 'Template'
             ));
 
     $types = empty($data['type']) ? get_post_types() : explode(',', $data['type']);
@@ -425,13 +447,18 @@ class PikList_CPT
         && (!$data['status'] || ($data['status'] && in_array($post->post_status, $statuses)))
         && (!$data['new'] || ($data['new'] && $pagenow != 'post-new.php'))
         && (!$data['id'] || ($data['id'] && in_array($post->ID, $ids)))
+        && (!$data['template'] || ($data['template'] && $data['template'] == pathinfo(get_page_template_slug($post->ID), PATHINFO_FILENAME)))
       )
       {
         $id = 'piklist_meta_' . piklist::slug($part);
 
+        $textdomain = piklist_add_on::$available_add_ons[$add_on]['TextDomain'];
+
+        //piklist::pre(piklist_add_on::$available_add_ons[$add_on]['TextDomain']);
+
         add_meta_box(
           $id
-          ,__($data['name'], 'piklist')
+          ,!empty($textdomain) ? __($data['name'], $textdomain) : $data['name']
           ,array('piklist_cpt', 'meta_box')
           ,$type
           ,!empty($data['context']) ? $data['context'] : 'normal'
@@ -459,28 +486,25 @@ class PikList_CPT
   
   public static function meta_box($post, $meta_box)
   {
-    $type = get_post_type($post);
+    global $typenow;
 
-    if ($type)
+    if (!self::$meta_box_nonce)
     {
-      if (!self::$meta_box_nonce)
-      {
-        piklist_form::render_field(array(
-          'type' => 'hidden'
-          ,'field' => 'nonce'
-          ,'value' => wp_create_nonce('piklist/piklist.php')
-          ,'scope' => 'piklist'
-        ));
-        
-        self::$meta_box_nonce = true;
-      }
-
-      piklist::render(piklist::$paths[$meta_box['args']['add_on']] . '/parts/meta-boxes/' . $meta_box['args']['part'], array(
-        'type' => $type
-        ,'prefix' => 'piklist'
-        ,'plugin' => 'piklist'
-      ), false);
+      piklist_form::render_field(array(
+        'type' => 'hidden'
+        ,'field' => 'nonce'
+        ,'value' => wp_create_nonce('piklist/piklist.php')
+        ,'scope' => 'piklist'
+      ));
+      
+      self::$meta_box_nonce = true;
     }
+
+    piklist::render(piklist::$paths[$meta_box['args']['add_on']] . '/parts/meta-boxes/' . $meta_box['args']['part'], array(
+      'type' => $typenow
+      ,'prefix' => 'piklist'
+      ,'plugin' => 'piklist'
+    ), false);
   }
   
   public static function sort_meta_boxes($post_type, $context, $post)
@@ -560,6 +584,25 @@ class PikList_CPT
     return isset(self::$post_types[$post_type]['title']) ? self::$post_types[$post_type]['title'] : $title;
   }
 
+  public static function hide_screen_options()
+  {
+    global $pagenow;
+
+    if (in_array($pagenow, array('edit.php', 'post.php', 'post-new.php')))
+    {
+      $post_type = get_post_type();
+
+      if(self::$post_types[$post_type]['hide_screen_options'] == true)
+      {
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+  }
+
   public static function get_post_statuses($type, $object_type = null)
   {
     $status_list = array();
@@ -570,7 +613,7 @@ class PikList_CPT
 
     foreach ($wp_post_statuses as $status)
     {
-      if ($status->capability_type == $object_type)
+      if (isset($status->capability_type) && $status->capability_type == $object_type)
       {
         array_push($status_list, $status->name);
       }
@@ -591,28 +634,59 @@ class PikList_CPT
 
   public static function pre_get_posts(&$query) 
   {
-    if (is_main_query() && isset($_REQUEST) && (isset($_REQUEST['piklist']['filter']) && strtolower($_REQUEST['piklist']['filter']) == 'true') && isset($_REQUEST['piklist']['fields_id'])) 
+    if ($query->is_main_query() && isset($_REQUEST) && (isset($_REQUEST['piklist']['filter']) && strtolower($_REQUEST['piklist']['filter']) == 'true') && isset($_REQUEST['piklist']['fields_id'])) 
     {
       $args = array(
-        'meta_query' => array()
+        'meta_query' => array(
+          'relation' => isset($_REQUEST[piklist::$prefix . 'post_meta']['relation']) && in_array(strtoupper($_REQUEST[piklist::$prefix . 'post_meta']['relation'][0]), array('AND', 'OR')) ? strtoupper($_REQUEST[piklist::$prefix . 'post_meta']['relation'][0]) : 'AND'
+        )
         ,'tax_query' => array(
-          'relation' => isset($_REQUEST[piklist::$prefix . 'taxonomy']['relation']) && in_array(strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation']), array('AND', 'OR')) ? strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation']) : 'AND'
+          'relation' => isset($_REQUEST[piklist::$prefix . 'taxonomy']['relation']) && in_array(strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation'][0]), array('AND', 'OR')) ? strtoupper($_REQUEST[piklist::$prefix . 'taxonomy']['relation'][0]) : 'AND'
         )
       );
 
       $fields = get_transient(piklist::$prefix . $_REQUEST['piklist']['fields_id']);
 
-      foreach ($_REQUEST as $key => $values) 
+      $data = $_REQUEST;
+      
+      foreach ($fields as $filter => $_fields)
+      {
+        foreach ($fields[$filter] as $field => $field_config)
+        {
+          if (isset($field_config['include_fields']))
+          {
+            foreach ($field_config['include_fields'] as $include_field)
+            {
+              $value = $data[piklist::$prefix . $filter][$field];
+              if ($include_field == 's')
+              {
+                $query->set('s', is_array($value) ? current($value) : $value);
+              }
+              else
+              {
+                $data[piklist::$prefix . $filter][$include_field] = $value;
+                $fields[$filter][$include_field] = $fields[$filter][$field];                
+              }
+            }
+          }
+        }
+      }
+
+      foreach ($data as $key => $values) 
       {
         $filter = substr($key, strlen(piklist::$prefix));
         
         switch ($filter)
         {
           case 'post_meta':
-
+            
             foreach ($values as $meta_key => $meta_value)
             {
-              if ($meta_value != '')
+              $field = $fields[$filter][$meta_key];
+              
+              $meta_value = is_array($meta_value) ? array_filter($meta_value) : $meta_value;
+              
+              if (!empty($meta_value) && $meta_key != 'relation')
               {
                 if (strstr($meta_key, '__min'))
                 {
@@ -633,8 +707,8 @@ class PikList_CPT
                     ,array(
                       'key' => $meta_key
                       ,'value' => is_array($meta_value) && count($meta_value) > 1 ? implode(',', $meta_value) : (is_array($meta_value) ? $meta_value[0] : $meta_value)
-                      ,'compare' => is_array($meta_value) && count($meta_value) > 1 ? 'IN' : (isset($fields['taxonomy'][$taxonomy]['meta_query']['compare']) ? $fields['taxonomy'][$taxonomy]['meta_query']['compare'] : '=')
-                      ,'type' => is_numeric(is_array($meta_value) ? $meta_value[0] : $meta_value) ? 'NUMERIC' : (isset($fields['taxonomy'][$taxonomy]['meta_query']['type']) ? $fields['taxonomy'][$taxonomy]['meta_query']['type'] : 'CHAR')
+                      ,'compare' => is_array($meta_value) && count($meta_value) > 1 ? 'IN' : (isset($field['meta_query']['compare']) ? $field['meta_query']['compare'] : '=')
+                      ,'type' => is_numeric(is_array($meta_value) ? $meta_value[0] : $meta_value) ? 'NUMERIC' : (isset($field['meta_query']['type']) ? $field['meta_query']['type'] : 'CHAR')
                     )
                   );
                 }
@@ -647,6 +721,10 @@ class PikList_CPT
           
             foreach ($values as $taxonomy => $terms)
             {
+              $field = $fields[$filter][$taxonomy];
+              
+              $terms = is_array($terms) ? array_filter($terms) : $terms;
+              
               if (!empty($terms) && $taxonomy != 'relation')
               {
                 array_push(
@@ -654,9 +732,9 @@ class PikList_CPT
                   ,array(
                     'taxonomy' => $taxonomy
                     ,'terms' => !is_array($terms) && strstr($terms, ',') ? explode(',', $terms) : $terms
-                    ,'field' => isset($fields['taxonomy'][$taxonomy]['tax_query']['field']) ? $fields['taxonomy'][$taxonomy]['tax_query']['field'] : 'term_id'
-                    ,'include_children' => isset($fields['taxonomy'][$taxonomy]['tax_query']['include_children']) ? $fields['taxonomy'][$taxonomy]['tax_query']['include_children'] : true
-                    ,'operator' => isset($fields['taxonomy'][$taxonomy]['tax_query']['operator']) ? $fields['taxonomy'][$taxonomy]['tax_query']['operator'] : 'IN'
+                    ,'field' => isset($field['tax_query']['field']) ? $field['tax_query']['field'] : 'term_id'
+                    ,'include_children' => isset($field['tax_query']['include_children']) ? $field['tax_query']['include_children'] : true
+                    ,'operator' => isset($field['tax_query']['operator']) ? $field['tax_query']['operator'] : 'IN'
                   )
                 );
               }
@@ -668,7 +746,12 @@ class PikList_CPT
 
       if (isset($_REQUEST[piklist::$prefix . 'post_type']))
       {
-        $query->set('post_type', $_REQUEST[piklist::$prefix . 'post_type']);
+        $query->set('post_type', implode(',', $_REQUEST[piklist::$prefix . 'post_type']));
+      }
+      
+      if (isset($_REQUEST[piklist::$prefix . 'posts_per_page']))
+      {
+        $query->set('posts_per_page', current($_REQUEST[piklist::$prefix . 'posts_per_page']));
       }
 
       if (!empty($args['meta_query']))
@@ -679,7 +762,7 @@ class PikList_CPT
       if (count($args['tax_query']) > 1)
       {
         $query->set('tax_query', $args['tax_query']);
-      }
+      }  
     }
   }
 }

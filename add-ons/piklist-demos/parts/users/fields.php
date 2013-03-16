@@ -18,6 +18,41 @@ Capability: manage_options
 
   piklist('field', array(
     'type' => 'text'
+    ,'field' => 'text_required'
+    ,'label' => 'Text Required'
+    ,'description' => "required' => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'text_null'
+    ,'label' => 'Text Null'
+    ,'value' => 'null'
+    ,'description' => "required' => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'text_false'
+    ,'label' => 'Text False'
+    ,'value' => 'false'
+    ,'description' => "required' => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
     ,'field' => 'text_columns_element'
     ,'label' => 'Columns Element'
     ,'description' => 'columns="6"'
@@ -164,12 +199,62 @@ Capability: manage_options
       )
     )
   ));
+
+  piklist('field', array(
+    'type' => 'datepicker'
+    ,'field' => 'date_add_more'
+    ,'add_more' => true
+    ,'label' => 'Add More'
+    ,'description' => 'Choose a date'
+    ,'options' => array(
+      'dateFormat' => 'M d, yy'
+    )
+    ,'attributes' => array(
+      'size' => 12
+    )
+    ,'value' => date('M d, Y', time() + 604800)
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
+  ));
+  
+  piklist('field', array(
+    'type' => 'timepicker'
+    ,'field' => 'time_add_more'
+    ,'add_more' => true
+    ,'label' => 'Add More'
+    ,'description' => 'Choose a time'
+    ,'options' => array(
+      'startTime' => date('H:m A')
+      ,'show24Hours' => false
+      ,'separator' => ':'
+      ,'step' => 15
+    )
+    ,'attributes' => array(
+      'size' => 12
+    )
+    ,'value' => date('H:m A')
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
+  ));
   
   piklist('field', array(
     'type' => 'colorpicker'
     ,'field' => 'color'
     ,'label' => 'Color Picker'
     ,'value' => '#03ADEF'
+  ));
+
+  piklist('field', array(
+    'type' => 'colorpicker'
+    ,'field' => 'color_add_more'
+    ,'add_more' => true
+    ,'label' => 'Add More'
+    ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
   ));
 
   piklist('field', array(
@@ -224,6 +309,7 @@ Capability: manage_options
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'update_field'
+    ,'value' => 'Hello World!' 
     ,'label' => 'Update This Field'
     ,'description' => 'This field is updated by the field above'
   ));

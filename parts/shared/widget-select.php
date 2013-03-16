@@ -40,7 +40,7 @@
         <?php if (!empty($w['data']['description'])): ?>
       
           <p>
-            <em><?php _e($w['data']['description']); ?></em>
+            <em><?php echo $w['data']['description']; ?></em>
           </p>
       
         <?php endif; ?>

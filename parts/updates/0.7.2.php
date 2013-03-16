@@ -34,7 +34,6 @@
 
     // Delete legacy table
     $wpdb->query("DROP TABLE IF EXISTS " . $legacy_table);
-
   }
 
 ?>

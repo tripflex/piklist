@@ -17,7 +17,14 @@ Author URI: http://piklist.com/
       ,'title' => __('Enter Custom Title')
       ,'supports' => array(
         'title'
+        ,'editor'
       )
+      ,'admin_body_class' => array (
+        'piklist-demonstration'
+        ,'piklist-sample'
+      )
+      ,'hide_screen_options' => true
+      ,'has_archive' => true
       ,'rewrite' => array(
         'slug' => 'piklist-demo'
       )
@@ -84,8 +91,9 @@ Author URI: http://piklist.com/
       ,'setting' => 'piklist_demo_fields'
       ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png')
       ,'icon' => 'piklist-page'
-      ,'single_line' => false
+      ,'single_line' => true
       ,'default_tab' => 'Basic'
+      ,'save_text' => 'Save Demo Settings'
     );
   
     return $pages;
@@ -104,6 +112,19 @@ Author URI: http://piklist.com/
                                       [/field_description_wrapper]
                                     </div>
                                   [/field_wrapper]';
+
+
+    $templates['theme_tight'] = '[field_wrapper]
+                                   <div id="%1$s" class="%2$s piklist-field-container">
+                                     [field_label]
+                                     <div class="piklist-field">
+                                       [field]
+                                       [field_description_wrapper]
+                                         <span class="piklist-field-description">[field_description]</span>
+                                       [/field_description_wrapper]
+                                     </div>
+                                   </div>
+                                 [/field_wrapper]';
 
     return $templates;
   }
@@ -147,6 +168,27 @@ Author URI: http://piklist.com/
     
     return $show;
   }
+
+  function piklist_demo_meta_field_insert($content)
+  {
+    if (get_post_type() == 'piklist_demo')
+    {
+      global $post;
+      
+      $meta = piklist('post_custom', $post->ID);
+
+      foreach ($meta as $key => $value)
+      {
+        if (!empty($value) && substr($key, 0, 1) != '_')
+        {
+          $content .= '<br /><strong>' . $key . ':</strong> ' . (is_array($value) ? var_export($value, true) : $value);
+        }
+      }
+    }
+    
+    return $content;
+  }
+  add_action('the_content', 'piklist_demo_meta_field_insert');
 
 
 ?>

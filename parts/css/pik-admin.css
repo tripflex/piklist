@@ -6,8 +6,10 @@
   .inside ol {
     margin: 0 0 1em 1.5em;
   }
-  
-  
+    
+  #poststuff h2.nav-tab-wrapper {
+    margin-bottom: 0;
+  }
 
   
 /* --------------------------------------------------------------------------------
@@ -44,6 +46,14 @@
       position: absolute;
       bottom: 10px;
       right: 10px;
+    }
+    
+  .piklist-google-map {
+    height: 250px !important;
+  }
+
+    .piklist-google-map img {
+      max-width: none !important;
     }
   
   /* Additional style to show off extra information in meta box titles */
@@ -128,8 +138,8 @@
         padding-bottom: 0;
       }
     
-    .piklist-field-container .piklist-required {
-      color: red;
+    .piklist-required {
+      color: #c00;
       margin: 0 0 0 0.25em;
     }
     
@@ -236,21 +246,21 @@
       clear: both;
       display: block;
     }
+    
+    .piklist-error {
+      background-color: #ffebe8 !important;
+      border-color: #c00 !important;
+    }
 
   .media-item .final td {
     padding-left: 10px;
   }
 
   /* Plugin Icon */
-  #icon-piklist-page {
+  #icon-piklist-page,
+  #icon-piklist { 
     background-image: url('../img/piklist-page-icon-32.png');
     background-repeat: no-repeat;
-  }
-
-  /* Additional Divider for Tabs View */
-  .piklist-tab-divider {
-    visibility: hidden; 
-    margin: 0.25em 0 0.25em 0;
   }
 
   /* Slight position adjustment for child labels */
@@ -263,6 +273,12 @@
     margin: 0 0 10px 0;
     padding: 8px;
   }
+  
+  .branch-3-5 #save-action {
+    float: left;
+    margin-bottom: 7px;
+  }
+  
 
 /* --------------------------------------------------------------------------------
   Make the default jQuery UI Datepicker & Timepicker fit a little beter in 
@@ -367,7 +383,7 @@
     } 
 
     ul.wp-tab-bar a { 
-      text-decoration: underline; 
+      text-decoration: none; 
     }
    
     ul.wp-tab-bar li {
@@ -513,6 +529,11 @@
     a.piklist-social-google-plus {
       background-image: url('../img/glyphicons_386_google_plus.png');
     }
+
+
+body.cpt-setting .postbox {
+  background: #ffffff;
+}
 
 
 /* --------------------------------------------------------------------------------

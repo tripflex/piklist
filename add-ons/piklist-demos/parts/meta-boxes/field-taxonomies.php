@@ -1,8 +1,8 @@
 <?php
 /*
-Title: Taxonomies <span class="piklist-title-right">Order 110</span>
+Title: Taxonomies <span class="piklist-title-right">Order 20</span>
 Post Type: piklist_demo
-Order: 110
+Order: 20
 Priority: default
 Context: side
 Collapse: false

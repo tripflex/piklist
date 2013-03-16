@@ -125,6 +125,7 @@ Collapse: false
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'update_field'
+    ,'value' => 'Hello World!' 
     ,'label' => 'Update This Field'
     ,'description' => 'This field is updated by the field above'
     ,'on_post_status' => array(

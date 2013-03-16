@@ -1,8 +1,14 @@
 <?php
 
 class PikList
-{      
+{  
+  public static $version;
+      
+  public static $urls = array();
+
   public static $paths = array();
+
+  public static $domains = array();
   
   public static $plurals = array(
     'plural' => array(
@@ -84,10 +90,12 @@ class PikList
   public static $prefix = 'pik_';
   
   public static function load()
-  {    
-    self::$paths['plugin'] = dirname(dirname(__FILE__));
+  { 
+    self::add_plugin('plugin', dirname(dirname(__FILE__)));
+    
+    self::$version = current(get_file_data(self::$paths['plugin'] . '/piklist.php', array('version' => 'Version')));
 
-    load_plugin_textdomain( 'piklist', false, dirname(dirname(plugin_basename(__FILE__ ))) . '/languages' );
+    load_plugin_textdomain('piklist', false, dirname(dirname(plugin_basename(__FILE__ ))) . '/languages');
     
     register_activation_hook('piklist/piklist.php', array('piklist', 'activate'));
    
@@ -115,6 +123,12 @@ class PikList
   public static function activate()
   {
     piklist::check_network_propagate('do_action', 'piklist_activate');
+  }
+  
+  public static function add_plugin($type, $path)
+  {
+    self::$paths[$type] = $path;
+    self::$urls[$type] = plugins_url() . substr($path, strrpos($path, '/'));
   }
   
   public static function render($view, $arguments = array(), $return = false) 
@@ -323,16 +337,15 @@ class PikList
   public static function delete_table($table_name) 
   {
     global $wpdb;
-
+    
     $wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . $table_name);
   }
-  
+
   public static function post_type_labels($label)
   {
     return array(
       'name' => __(self::pluralize($label), 'piklist')
       ,'singular_name' => __(self::singularize($label), 'piklist')
-
       ,'add_new' => __('Add New ' . self::singularize($label), 'piklist')
       ,'add_new_item' => __('Add New ' . self::singularize($label), 'piklist')
       ,'edit_item' => __('Edit ' . self::singularize($label), 'piklist')
@@ -630,6 +643,11 @@ class PikList
     }
     
     return $meta;
+  }
+  
+  public static function explode($delimiter, $string)
+  {
+    return array_map('trim', explode($delimiter, $string));
   }
   
   public static function performance()

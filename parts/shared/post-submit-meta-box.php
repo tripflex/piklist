@@ -5,7 +5,7 @@
  * TEXT DOMAINS: Do not add text domains to this file so the default WordPress translations will be used.
  */
 
-  global $action, $wp_post_statuses;
+  global $action, $wp_post_statuses, $pagenow;
 
   $post_type = $post->post_type;
   $post_type_object = get_post_type_object($post_type);
@@ -27,7 +27,7 @@
 
     <!-- Hide submit button early on so that the browser chooses the right button when form is submitted with Return key -->
     <div class="hide-all">
-      <?php submit_button(__('Save'), 'button', 'save'); ?>
+      <?php submit_button(__('Save', 'piklist'), 'button', 'save'); ?>
     </div>
 
     <?php if (apply_filters('piklist_post_submit_meta_box', true, 'minor-publishing-actions', $post)): ?>
@@ -48,7 +48,7 @@
             if ('publish' == $post->post_status) 
             {
               $preview_link = esc_url(get_permalink($post->ID));
-              $preview_button = __('Preview Changes');
+              $preview_button = __('Preview Changes', 'piklist');
             } 
             else 
             {
@@ -58,7 +58,7 @@
                 $preview_link = str_replace('http://', 'https://', $preview_link);
               }
               $preview_link = esc_url(apply_filters('preview_post_link', add_query_arg('preview', 'true', $preview_link)));
-              $preview_button = __('Preview');
+              $preview_button = __('Preview', 'piklist');
             }
           ?>
 
@@ -83,7 +83,7 @@
 
           <div class="misc-pub-section<?php echo !$can_publish ? ' misc-pub-section-last' : ''; ?>">
     
-            <label for="post_status"><?php _e('Status:'); ?></label>
+            <label for="post_status"><?php _e('Status:','piklist'); ?></label>
     
             <span id="post-status-display">
               <?php _e(isset($statuses[$status_type]) ? (is_object($statuses[$status_type]) ? $statuses[$status_type]->label : $statuses[$status_type]['label']) : $wp_post_statuses[$status_type]->label); ?>
@@ -119,27 +119,27 @@
         <?php if (apply_filters('piklist_post_submit_meta_box', true, 'misc-publishing-actions-visibility', $post)): ?>
         
           <div class="misc-pub-section" id="visibility">
-            <?php _e('Visibility:'); ?> <span id="post-visibility-display"><?php
+            <?php _e('Visibility:', 'piklist'); ?> <span id="post-visibility-display"><?php
               if ($post->post_status == 'private') 
               {
                 $post->post_password = '';
                 $visibility = 'private';
-                $visibility_trans = __('Private');
+                $visibility_trans = __('Private', 'piklist');
               }
               elseif (!empty($post->post_password)) 
               {
                 $visibility = 'password';
-                $visibility_trans = __('Password protected');
+                $visibility_trans = __('Password protected', 'piklist');
               } 
               elseif ($post_type == 'post' && is_sticky($post->ID)) 
               {
                 $visibility = 'public';
-                $visibility_trans = __('Public, Sticky');
+                $visibility_trans = __('Public, Sticky', 'piklist');
               } 
               else 
               {
                 $visibility = 'public';
-                $visibility_trans = __('Public');
+                $visibility_trans = __('Public', 'piklist');
               }
 
               echo esc_html($visibility_trans); ?></span>
@@ -163,12 +163,12 @@
                 <?php endif; ?>
                 <input type="radio" name="visibility" id="visibility-radio-password" value="password" <?php checked($visibility, 'password'); ?> /> <label for="visibility-radio-password" class="selectit"><?php _e('Password protected'); ?></label><br />
 
-                <span id="password-span"><label for="post_password"><?php _e('Password:'); ?></label> <input type="text" name="post_password" id="post_password" value="<?php echo esc_attr($post->post_password); ?>" /><br /></span>
+                <span id="password-span"><label for="post_password"><?php _e('Password:', 'piklist'); ?></label> <input type="text" name="post_password" id="post_password" value="<?php echo esc_attr($post->post_password); ?>" /><br /></span>
                 <input type="radio" name="visibility" id="visibility-radio-private" value="private" <?php checked($visibility, 'private'); ?> /> <label for="visibility-radio-private" class="selectit"><?php _e('Private'); ?></label><br />
 
                 <p>
-                 <a href="#visibility" class="save-post-visibility hide-if-no-js button"><?php _e('OK'); ?></a>
-                 <a href="#visibility" class="cancel-post-visibility hide-if-no-js"><?php _e('Cancel'); ?></a>
+                  <a href="#visibility" class="save-post-visibility hide-if-no-js button"><?php _e('OK', 'piklist'); ?></a>
+                  <a href="#visibility" class="cancel-post-visibility hide-if-no-js"><?php _e('Cancel', 'piklist'); ?></a>
                 </p>
         
               </div>
@@ -185,34 +185,34 @@
     
           <?php
             // translators: Publish box date format, see http://php.net/date
-            $datef = __('M j, Y @ G:i');
+            $datef = __('M j, Y @ G:i', 'piklist');
             if (0 != $post->ID) 
             {
               if ('future' == $post->post_status) 
               { // scheduled for publishing at a future date
-                $stamp = __('Scheduled for: <b>%1$s</b>');
+                $stamp = __('Scheduled for: <b>%1$s</b>', 'piklist');
               } 
               else if ('publish' == $post->post_status || 'private' == $post->post_status) 
               { // already published
-                $stamp = __('Published on: <b>%1$s</b>');
+                $stamp = __('Published on: <b>%1$s</b>', 'piklist');
               } 
               else if ('0000-00-00 00:00:00' == $post->post_date_gmt) 
               { // draft, 1 or more saves, no date specified
-                $stamp = __((isset($statuses['publish']) ? 'Publish' : 'Schedule') . ' <b>immediately</b>');
+                $stamp = (isset($statuses['publish']) ? __('Publish','piklist') : __('Schedule','piklist')) . __(' <b>immediately</b>','piklist');
               } 
               else if (time() < strtotime($post->post_date_gmt . ' +0000')) 
               { // draft, 1 or more saves, future date specified
-                $stamp = __('Schedule for: <b>%1$s</b>');
+                $stamp = __('Scheduled for: <b>%1$s</b>', 'piklist');
               } 
               else 
               { // draft, 1 or more saves, date specified
-                $stamp = __((isset($statuses['publish']) ? 'Publish' : 'Schedule') . ' on: <b>%1$s</b>');
+                $stamp = (isset($statuses['publish']) ? __('Publish','piklist') : __('Schedule','piklist')) . __(' on: <b>%1$s</b>','piklist');
               }
               $date = date_i18n($datef, strtotime($post->post_date));
             } 
             else 
             { // draft (no saves, and thus no date specified)
-              $stamp = __('Publish <b>immediately</b>');
+              $stamp = __('Publish <b>immediately</b>','piklist');
               $date = date_i18n($datef, strtotime(current_time('mysql')));
             }
 
@@ -221,10 +221,10 @@
               <div class="misc-pub-section curtime misc-pub-section-last">
   
                 <span id="timestamp"><?php printf($stamp, $date); ?></span>
-                <a href="#edit_timestamp" class="edit-timestamp hide-if-no-js" tabindex='4'><?php _e('Edit'); ?></a>
+                <a href="#edit_timestamp" class="edit-timestamp hide-if-no-js" tabindex='4'><?php _e('Edit', 'piklist'); ?></a>
   
                 <div id="timestampdiv" class="hide-if-js">
-                  <?php touch_time(($action == 'edit'), 1, 4); ?>
+                  <?php touch_time(($action == 'edit'), ($pagenow != 'post-new.php'), 4); ?>
                 </div>
   
               </div>
@@ -253,11 +253,11 @@
       if (current_user_can("delete_post", $post->ID)):
         if (!EMPTY_TRASH_DAYS)
         {
-          $delete_text = __('Delete Permanently');
+          $delete_text = __('Delete Permanently','piklist');
         }
         else
         {
-          $delete_text = __('Move to Trash');
+          $delete_text = __('Move to Trash','piklist');
         }
     ?>
 
@@ -276,8 +276,8 @@
         if ($can_publish):
           if (!empty($post->post_date_gmt) && time() < strtotime($post->post_date_gmt . ' +0000')): ?>
       
-            <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Schedule'); ?>" />
-            <?php submit_button(__('Schedule'), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
+            <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Schedule','piklist'); ?>" />
+            <?php submit_button(__('Schedule','piklist'), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
         
           <?php else: ?>
         
@@ -288,15 +288,15 @@
       
       <?php else: ?>
     
-        <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Submit for Review'); ?>" />
-        <?php submit_button(__('Submit for Review'), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
+          <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Submit for Review','piklist'); ?>" />
+        <?php submit_button(__('Submit for Review','piklist'), 'primary', 'publish', false, array('tabindex' => '5', 'accesskey' => 'p')); ?>
   
       <?php endif; ?>
 
     <?php else: ?>
     
       <input name="original_publish" type="hidden" id="original_publish" value="<?php echo esc_attr('auto-draft' == $post->post_status ? $initial_status['status'] : $post->post_status); ?>" />
-      <input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e('Update'); ?>" />
+      <input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e('Update','piklist'); ?>" />
   
     <?php endif; ?>
   

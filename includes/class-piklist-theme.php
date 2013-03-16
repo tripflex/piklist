@@ -10,14 +10,14 @@ class PikList_Theme
     
     add_action('init', array('piklist_theme', 'init'));
     add_action('setup_theme', array('piklist_theme', 'setup_theme'));
-    add_action('wp_enqueue_scripts', array('piklist_theme', 'scripts'));
-    add_action('admin_enqueue_scripts', array('piklist_theme', 'scripts'));
     add_action('wp_head', array('piklist_theme', 'conditional_scripts_start'), -1);
     add_action('wp_footer', array('piklist_theme', 'conditional_scripts_start'), -1);
     add_action('wp_head', array('piklist_theme', 'conditional_scripts_end'), 101);
     add_action('wp_footer', array('piklist_theme', 'conditional_scripts_end'), 101);
     
     add_filter('body_class', array('piklist_theme', 'body_class'));
+    
+    add_filter('piklist_assets', array('piklist_theme', 'assets'));
   }
   
   public static function init()
@@ -34,12 +34,30 @@ class PikList_Theme
     }
   }
   
-  public function scripts()
+  public function assets($assets)
   {
-    // NOTE: Conditionally include based on whether its used.
-    wp_enqueue_script('farbtastic');
+    $scripts = array(
+      '/parts/js/pik.js' => piklist::$version
+    );
+    
+    foreach ($scripts as $path => $version)
+    {
+      array_push($assets['scripts'], array(
+        'handle' => 'piklist-' . str_replace(array('.js', '/'), '', substr($path, strrpos($path, '/')))
+        ,'src' => piklist::$urls['plugin'] . $path
+        ,'ver' => $version
+        ,'deps' => 'jquery'
+        ,'enqueue' => true
+        ,'in_footer' => true
+        ,'admin' => true
+      ));
+    }
+    
+    wp_enqueue_script('wp-color-picker');
 
-    wp_enqueue_script('piklist-plugin', WP_CONTENT_URL . '/plugins/piklist/parts/js/pik.js', array('jquery'));     
+    wp_enqueue_style('wp-color-picker');
+
+    return $assets;
   }
   
   public function conditional_scripts_start()
