@@ -1,5 +1,5 @@
 
-<h3><?php _e($meta_box['config']['name']); ?></h3>
+<h3><?php echo $meta_box['config']['name']; ?></h3>
   
 <?php if (!empty($meta_box['config']['description'])): ?>
   

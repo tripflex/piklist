@@ -46,13 +46,13 @@ if (isset( $_GET['referer']) && $_GET['referer'] == 'plugins.php'): ?>
   piklist('field', array(
     'type' => 'select'
     ,'field' => 'deactivation_link'
-    ,'label' => 'Piklist Deactivation'
+    ,'label' => __('Piklist Deactivation', 'piklist')
     ,'attributes' => array(
       'class' => 'text'
     )
     ,'choices' => array(
-      'unlock' => 'Allow Deactivation'
-      ,'lock' => 'Lock'
+      'unlock' => __('Allow Deactivation', 'piklist')
+      ,'lock' => __('Lock', 'piklist')
     )
   ));
   

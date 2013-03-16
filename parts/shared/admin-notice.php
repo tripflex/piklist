@@ -1,20 +1,18 @@
 
-<?php $prefix = $type == 'error' ? '<strong>' . __('ERROR:','piklist') . '</strong> ' : ''; ?>
-
 <div class="<?php echo $type; ?>">
 
   <?php if (is_array($message)): ?>
     
-    <ul>
-      <?php foreach ($message as $line): ?>
-        <li><?php echo $prefix . $line; ?></li>
-      <?php endforeach; ?>
-    </ul>
+    <?php foreach ($message as $line): ?>
+
+      <p><?php echo $line; ?></p>
+
+    <?php endforeach; ?>
   
   <?php else: ?>
     
     <p>
-      <?php echo $prefix . $message; ?>
+      <?php echo $message; ?>
     </p>
 
   <?php endif; ?>

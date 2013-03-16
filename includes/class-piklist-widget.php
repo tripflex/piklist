@@ -26,9 +26,9 @@ class PikList_Widget
     foreach ($sidebars as $sidebar)
     {
       register_sidebar(array_merge(array(
-        'name' => __($sidebar['name'])
+        'name' => $sidebar['name']
         ,'id' => sanitize_title_with_dashes($sidebar['name'])
-        ,'description' => isset($sidebar['description']) ? __($sidebar['description']) : null
+        ,'description' => isset($sidebar['description']) ? $sidebar['description'] : null
         ,'before_widget' => isset($sidebar['before_widget']) ? $sidebar['before_widget'] : '<div id="%1$s" class="widget-container %2$s">'
         ,'after_widget' => isset($sidebar['after_widget']) ? $sidebar['after_widget'] : '</div>'
         ,'before_title' => isset($sidebar['before_title']) ? $sidebar['before_title'] : '<h3 class="widget-title">'
@@ -63,7 +63,7 @@ class PikList_Widget
         {
           global $wp_version;
           
-          $current_theme = ($wp_version >= 3.4 ? wp_get_theme() : get_current_theme());
+          $current_theme = wp_get_theme();
 
           $title = $current_theme . ' ' . __('Widgets','piklist');
           $description = sprintf(__('Widgets for the %s Theme', 'piklist'), $current_theme);

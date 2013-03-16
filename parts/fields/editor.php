@@ -1,11 +1,10 @@
 
 <?php 
   wp_editor(
-    isset($value) && !empty($value) ? $value : ''
+    isset($value) && !empty($value) ? esc_attr($value) : ''
     ,str_replace('_', '', $scope . $field)
     ,array_merge(
-      isset($attributes) ? $attributes : array()
-      ,array(
+      array(
         'textarea_name' => piklist_form::get_field_name($field, $scope, false, $prefix)
         ,'wpautop' => true
         ,'media_buttons' => true
@@ -17,6 +16,7 @@
         ,'tinymce' => true
         ,'quicktags' => true
       )
+      ,isset($attributes) ? $attributes : array()
     )
   );
 ?>

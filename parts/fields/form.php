@@ -1,8 +1,9 @@
 
 <form 
   method="<?php echo strtolower($method); ?>" 
-  action="<?php echo isset($action) ? $action : $_SERVER['REQUEST_URI']; ?>" 
-  enctype="multipart/form-data" 
+  action="<?php echo isset($action) ? home_url() . $action : $_SERVER['REQUEST_URI']; ?>" 
+  enctype="multipart/form-data"
+  id="<?php echo $form_id; ?>"
 >
 
   <?php

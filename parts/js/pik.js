@@ -22,7 +22,7 @@
       },
     
       fields: function()
-      {
+      {      
         for (var id in piklist_fields) 
         {
           piklist.process_fields(id);
@@ -83,13 +83,11 @@
               case 'update':
               
                 var _field = field;
-                var increment = _field.id.substr(_field.id.lastIndexOf('_') + 1);
-                _field.id = !isNaN(parseFloat(increment)) && isFinite(increment) ? _field.id.substr(0, _field.id.lastIndexOf('_')) : _field.id;
-              
-                $(document).delegate('.' + _field.id, 'change', piklist.conditions_handler(field.conditions[i].id, field.conditions[i]));
-                $(':input:not(:radio)[class~="' + _field.id + '"], :radio:checked[class~="' + _field.id + '"]').trigger('change');
 
-                piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
+                $(document).delegate(':input[name="' + field.name + '"]', 'input propertychange change', piklist.conditions_handler(field.conditions[i].id, field.conditions[i]));
+                $(':input:not(:radio)[name="' + field.name + '"], :radio:checked[name="' + field.name + '"]').trigger('input propertychange change');
+              
+                piklist.processed_conditions[field.conditions[i].type].push(field.name);
                               
               break;
             
@@ -97,7 +95,16 @@
                 
                 if ($.inArray(field.conditions[i].id, piklist.processed_conditions[field.conditions[i].type]) == -1)
                 {
-                  $(document).delegate('.' + field.conditions[i].id, 'change', piklist.conditions_handler(field.id, field.conditions[i]));
+                  if (field.type == 'group' && field.field)
+                  {
+                    field_id = field.prefix ? 'pik_' + field.field : field.id;
+                  }
+                  else
+                  {
+                    field_id = field.id;
+                  }
+                  
+                  $(document).delegate('.' + field.conditions[i].id, 'change', piklist.conditions_handler(field_id, field.conditions[i]));
                   $(':input:not(:radio)[class~="' + field.conditions[i].id + '"], :radio:checked[class~="' + field.conditions[i].id + '"]').trigger('change');
 
                   piklist.processed_conditions[field.conditions[i].type].push(field.conditions[i].id);
@@ -134,29 +141,7 @@
           
           case 'colorpicker':
             
-            if ($('#' + field.id).next('.piklist-colorpicker').length == 0)
-            {
-              $('#' + field.id).removeAttr('style');
-              
-              $($('<div />')
-                  .addClass('piklist-colorpicker')
-                  .addClass('piklist-remove-add-more')
-                  .hide()
-                  .farbtastic($('#' + field.id), options)
-              ).insertAfter('#' + field.id);
-
-              $('#' + field.id)
-                .val($('#' + field.id).val() ? $('#' + field.id).val() : '#ffffff')
-                .attr('autocomplete', 'off')
-                .focus(function()
-                {
-                  $(this).next('.piklist-colorpicker').show('slow');
-                })
-                .blur(function()
-                {
-                  $(this).next('.piklist-colorpicker').hide('slow');
-                });
-            }
+            $(':input[name="' + field.name + '"]').wpColorPicker(options);
 
           break;
         }
@@ -188,19 +173,18 @@
           {
             case 'update':
               
-              if ($(this).val() == condition.value || condition.force)
+              if (($(this).val() == condition.value || condition.value == ':any') || condition.force)
               {
-                if (field.length == 0)
-                {
-                  field = $('.' + id + '[value="' + condition.value + '"]');
-                }
-                
                 if (field.is(':radio') || field.is(':checkbox'))
                 {
-                  var increment = $(this).attr('id').substr($(this).attr('id').lastIndexOf('_') + 1);
-                  var actual_id = !isNaN(parseFloat(increment)) && isFinite(increment) ? $(this).attr('id').substr(0, $(this).attr('id').lastIndexOf('_')) : $(this).attr('id');
-                  
-                  field.attr('checked', $('.' + actual_id + ':checked').length > 0 ? true : false);
+                  if ($(this).val() == '')
+                  {
+                    field.removeAttr('checked');
+                  }
+                  else
+                  {
+                    field.attr('checked', 'checked');
+                  }
                 }
                 else
                 {
@@ -215,14 +199,28 @@
               var options_page = $(this).parents('form').find(':input[name="option_page"]').length > 0;
               var parent = options_page ? 'tr' : '.piklist-field-condition';
               var element = $(this).prop('tagName') == 'LABEL' ? $(this).find(':input') : this;
-
+              
               if ($(element).val() == condition.value && !$(element).is(':checkbox'))
               {
-                field.parents(parent).show('slow');
+                if (field.hasClass('piklist-field-condition'))
+                {
+                  field.show('slow');
+                }
+                else
+                {
+                  field.parents(parent).show('slow');
+                }
               }
               else if ($(element).val() == condition.value && $(element).is(':checkbox') && $(element).is(':checked'))
               {
-                field.parents(parent).show('slow');
+                if (field.hasClass('piklist-field-condition'))
+                {
+                  field.show('slow');
+                }
+                else
+                {
+                  field.parents(parent).show('slow');
+                }
               }
               else
               {
@@ -237,12 +235,21 @@
                 
                 if ($(element).is(':input'))
                 {
-                  field.parents(parent).hide('slow');
+                  if (field.hasClass('piklist-field-condition'))
+                  {
+                    field.hide('slow');
+                  }
+                  else
+                  {
+                    field.parents(parent).hide('slow');
+                  }
                 }
               }
             
             break;
           }
+          
+          return false;
         };
       },
           

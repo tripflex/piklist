@@ -16,6 +16,41 @@ Width: 700
 
   piklist('field', array(
     'type' => 'text'
+    ,'field' => 'text_required'
+    ,'label' => 'Text Required'
+    ,'description' => "required' => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'text_null'
+    ,'label' => 'Text Null'
+    ,'value' => 'null'
+    ,'description' => "required' => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'text_false'
+    ,'label' => 'Text False'
+    ,'value' => 'false'
+    ,'description' => "required' => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
     ,'field' => 'demo_text'
     ,'label' => __('Text')
     ,'description' => __('ipsum dolor sit amet, consectetur adipiscing elit.')

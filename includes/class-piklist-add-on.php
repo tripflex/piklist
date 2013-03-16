@@ -30,14 +30,15 @@ class PikList_Add_On
     
     foreach ($plugins as $plugin)
     {
-      $path = WP_CONTENT_DIR . '/plugins/' . $plugin;
+      $path = WP_PLUGIN_DIR . '/' . $plugin;
       $data = get_file_data($path, array(
                 'type' => 'Plugin Type'
                 ,'version' => 'Version'
               ));
+              
       if ($data['type'] && strtolower($data['type']) == 'piklist')
       {
-        piklist::$paths[basename(dirname($plugin))] = dirname($path);
+        piklist::add_plugin(basename(dirname($plugin)), dirname($path));
 
         if ($data['version'])
         {
@@ -45,10 +46,6 @@ class PikList_Add_On
           $version = $data['version'];
 
           piklist_admin::check_update($file, $version);
-        }
-        else
-        {
-          // TODO: add error message
         }
       }
     }

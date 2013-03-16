@@ -22,6 +22,50 @@ Collapse: false
 
   piklist('field', array(
     'type' => 'text'
+    ,'field' => 'text_required'
+    ,'label' => 'Text Required'
+    ,'description' => "required => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'text_null'
+    ,'label' => 'Text Null'
+    ,'value' => 'null'
+    ,'description' => "required => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'text_false'
+    ,'label' => 'Text False'
+    ,'value' => 'false'
+    ,'description' => "required => true"
+    ,'attributes' => array(
+      'class' => 'small-text'
+    )
+    ,'on_post_status' => array(
+      'value' => 'lock'
+    )
+    ,'required' => true
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
     ,'field' => 'text_columns_element'
     ,'label' => 'Columns Element'
     ,'description' => 'columns="6"'

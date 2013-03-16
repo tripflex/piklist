@@ -15,7 +15,7 @@ class PikList_Revision
     if ($parent_id = wp_is_post_revision($post_id)) 
     {
       $parent = get_post($parent_id);
-      $meta = get_post_custom($parent->ID);
+      $meta = piklist('post_custom', $parent->ID);
 
       foreach ($meta as $key => $value)
       {
@@ -26,7 +26,7 @@ class PikList_Revision
   
   public static function restore_revision($post_id, $revision_id)
   {
-    $meta = get_post_custom($revision->ID);
+    $meta = piklist('post_custom', $revision->ID);
 
     foreach ($meta as $key => $value)
     {

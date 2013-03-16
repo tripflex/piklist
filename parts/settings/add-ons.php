@@ -17,7 +17,7 @@ Order: 10
     'type' => 'add-ons'
     ,'field' => 'add-ons'
     ,'template' => 'field'
-    ,'label' => 'Plugin Add-ons'
+    ,'label' => __('Plugin Add-ons', 'piklist')
     ,'description' => 'Check to activate.'
     ,'choices' => piklist(piklist_add_on::$available_add_ons, array('_key', 'Name'))
   ));

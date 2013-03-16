@@ -2,7 +2,7 @@
 Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.5
-Requires at least: 3.3.2
+Requires at least: 3.4
 Stable tag: 0.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,6 +21,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Build Fields for Settings page, Widgets, Custom Post Types, Custom Taxonomies and User Profiles with minimal code.
 *   Conditionally show fields (or their values), based on Post Status and/or User Role.
 *   Define Custom Post Statuses
+*   Relate Post-to-Posts.
 *   <a href="http://piklist.com">and more...</a>
 
 = COMING SOON =
@@ -29,6 +30,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 = LEARN MORE =
 *   <a href="http://piklist.com/user-guide/">Piklist User Guide</a>
+
 
 = Better Custom Post Types =
 *   Powerful Custom Post Types 
@@ -83,12 +85,36 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Hide/Show based on the users capability.
 *   Hide form fields, and just show field values
 
+= Translators =
+* French (fr) - Daniel Ménard
+* Slovak (sk) - Branco
+
 == Installation ==
 
 *   Install and activate Piklist like any other plugin.
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.7.3 =
+* Now requires WordPress 3.4+.
+* NEW: Required option for fields.
+* NEW: Show meta fields by Page Template. Props @James_Mc.
+* NEW: hide_screen_options parameter when registering Post Types.
+* NEW: admin_body_class parameter when registering Post Types.
+* NEW: Remove Save functionality for settings page.
+* NEW: Change Save button text.
+* NEW: French translation by Daniel Ménard.
+* NEW: Slovak translation by Branco.
+* IMPROVED: extended admin_body_class for Post Types and Taxonomies.
+* IMPROVED: Better display for settings page for both Tabs/no Tabs, and single line.
+* IMPROVED: Add or auto generate Form ID.
+* IMPROVED: more localized strings. Props @Daniel Ménard.
+* FIXED: HTTPS works properly.
+* FIXED: Long Post Status lists now wrap nicely.
+* FIXED: HTML escaped neccessary fields.
+* FIXED: Better garbage collection.
+* FIXED: CSS for h2.nav-tab-wrapper.
 
 = 0.7.2 =
 * NEW: Plugin updates...the Piklist way.
@@ -103,116 +129,116 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 * FIXED: Empty Time and Date fields no longer return "false".
 
 = 0.7.0 =
-* NEW FEATURE: Disable Piklist Deactivation.
-* NEW FEATURE: Customize the "Enter Title Here" text in Post Type Titles.
+* NEW: Disable Piklist Deactivation.
+* NEW: Customize the "Enter Title Here" text in Post Type Titles.
 * FIXED: Error when saving Media meta. Props @James_Mc
 * FIXED: Removed legacy less_styles() function.
 * FIXED: Added Text Domain to all localized strings.
 
 = 0.6.9 =
-* Bugfix: Metaboxes jQuery conflict fixed for Firefox.
+* FIXED: Metaboxes jQuery conflict fixed for Firefox.
 
 = 0.6.8 =
-* Better upgrade notice in admin.
-* Nicer jQuery animation for certain fields.
-* Update uninstall.php to remove Piklist tables.
-* Bugfix: Conditionals now working.
+* IMPROVED: Better upgrade notice in admin.
+* IMPROVED: Nicer jQuery animation for certain fields.
+* IMPROVED: Update uninstall.php to remove Piklist tables.
+* FIXED: Conditionals now working.
 
 = 0.6.7 =
 * Our most significant update since the initial release:
-* Add Taxonomy Meta!
-* Add User Meta!
-* Add Media Meta!
-* New super powers for tax_query and meta_query!
-* Add meta box to a specific Page/Post ID. Props @kattagami and @James_Mc
-* Bugfix: Network Activated plugins did not work properly.
-* Bugfix: In function post_type_labels, view_item should be singularize. Props @James_Mc
-* Bugfix: Allow creating of field-less meta boxes. Props @James_Mc
-* Bugfix: Register Taxonomies before Custom Post Types. Props @Daniel Ménard
+* NEW: Add Taxonomy Meta!
+* NEW: Add User Meta!
+* NEW: Add Media Meta!
+* NEW: New super powers for tax_query and meta_query!
+* NEW: Add meta box to a specific Page/Post ID. Props @kattagami and @James_Mc
+* FIXED: Network Activated plugins did not work properly.
+* FIXED: In function post_type_labels, view_item should be singularize. Props @James_Mc
+* FIXED: Allow creating of field-less meta boxes. Props @James_Mc
+* FIXED: Register Taxonomies before Custom Post Types. Props @Daniel Ménard
 
 = 0.6.6 =
-* uninstall.php file added.
-* Language folder added.
-* Bugfix: Stopped some installs from receiving upgrade notices.
-* Bugfix: Settings Tabs in submenu's didn't always work.
+* NEW: uninstall.php file added.
+* NEW: Language folder added.
+* FIXED: Stopped some installs from receiving upgrade notices.
+* FIXED: Settings Tabs in submenu's didn't always work.
 
 = 0.6.5 =
-* Taxonomy save function update.
-* Auto-columns for checkboxes and radio buttons.
-* Asset loader supports admin.
+* IMPROVED: Taxonomy save function.
+* NEW: Auto-columns for checkboxes and radio buttons.
+* NEW: Asset loader supports admin.
 
 = 0.6.4 =
-* Save button can be removed for individual Settings pages.
-* Show file uploads in Piklist Demos.
-* Bugfix: Publish box fixes.
-* Bugfix: Taxonomy save/edit.
-* Bugfix: 3.3.2 support.
+* NEW: Save button can be removed for individual Settings pages.
+* NEW: Show file uploads in Piklist Demos.
+* FIXED: Publish box fixes.
+* FIXED: Taxonomy save/edit.
+* FIXED: 3.3.2 support.
 
 = 0.6.3 =
-* New field! Upload files.
-* Added new Piklist XML class.
-* Updated Piklist get_terms function.
-* Removed ability to run any shortcode in a widget. Moved to WordPress-Helpers plugin.
-* Many notices have been fixed.
+* NEW: New field! Upload files.
+* NEW: Added new Piklist XML class.
+* NEW: Updated Piklist get_terms function.
+* NEW: Removed ability to run any shortcode in a widget. Moved to WordPress-Helpers plugin.
+* FIXED: notice issues.
 
 = 0.6.2 =
-* Bugfix: Publish box wasn't always publishing.
-* Bugfix: Fixed settings issues with multisite.
-* Bugfix: Grouped fields were not laying out properly.
+* FIXED: Publish box wasn't always publishing.
+* FIXED: Fixed settings issues with multisite.
+* FIXED: Grouped fields were not laying out properly.
 
 = 0.6.1 =
-* Bugfix: Group fields stying
+* FIXED: Group fields stying
 
 = 0.6.0 =
-* Bugfix: Published posts revert to draft on save.
-* Bugfix: Tabbed Settings page were not saving.
-* Field names and ID's are now prefixed on frontend.
+* NEW: Field names and ID's are now prefixed on frontend.
+* FIXED: Published posts revert to draft on save.
+* FIXED: Tabbed Settings page were not saving.
 
 = 0.5.9 =
-* Allow multiple nested fields.
-* Bugfix: add-more fields.
-* Bugfix: Conditonal fields.
-* Bugfix: Auto update fields.
-* Bugfix: issue with plugin folders alphabetically higher than "piklist".
-* Implemented GET Field value function.
-* Bugfix: path issue on Windows server.
+* NEW: Allow multiple nested fields.
+* NEW: Implemented GET Field value function.
+* FIXED: add-more fields.
+* FIXED: Conditonal fields.
+* FIXED: Auto update fields.
+* FIXED: issue with plugin folders alphabetically higher than "piklist".
+* FIXED: path issue on Windows server.
 
 = 0.5.8 =
-* Advanced Search capabilities function.
+* NEW: Implemented GET Field value function.Advanced Search capabilities function.
 
 = 0.5.7 =
-* Publish box set to Priority:Core, so meta boxes can be added before it.
+* FIXED: Publish box set to Priority:Core, so meta boxes can be added before it.
 
 = 0.5.6 =
-* Forced Publish Meta Box to always be at top right.
-* Fixed all PHP Notice issues.
-* Added rule to flush permalinks when registering a new post type if needed.
-* Fixed default post title fallback.
-* Added has_archive to register_custom_post_types function.
-* Fixed Taxonomy scope bug on show value.
-* Fixed bug with Post-to-Post relationships.
+* IMPROVED: Forced Publish Meta Box to always be at top right.
+* IMPROVED: Added has_archive to register_custom_post_types function.
+* FIXED: PHP Notice issues.
+* FIXED: Added rule to flush permalinks when registering a new post type if needed.
+* FIXED: default post title fallback.
+* FIXED: Taxonomy scope bug on show value.
+* FIXED: bug with Post-to-Post relationships.
 
 = 0.5.5 =
-* Fixed Child theme support.
-* Fixed bug with frontend forms.
+* FIXED: Child theme support.
+* FIXED: bug with frontend forms.
 
 = 0.5.4 =
-* Fixed Meta Box Sort for non-ordered meta boxes.
-* Added support to register a plugin with Piklist by using the Plugin Type comment.
-* Updated Theme Path.
-* Updated fields so that post_meta is the default scope for meta-boxes.
+* NEW: Added support to register a plugin with Piklist by using the Plugin Type comment.
+* IMPROVED: Updated fields so that post_meta is the default scope for meta-boxes.
+* FIXED: Meta Box Sort for non-ordered meta boxes.
+* FIXED: Updated Theme Path.
 
 = 0.5.3 =
-* Updated Meta Boxes to respect new theme folder structure.
-* Updated global meta boxes to work on default post types.
+* IMPROVED: Meta Boxes now respect new theme folder structure.
+* IMPROVED: Global meta boxes now work on default post types.
 
 = 0.5.2 =
-* Fixed Conditional Tag for Style Loading.
-* Fixed Add-On Registration.
+* FIXED: Conditional Tag for Style Loading.
+* FIXED: Add-On Registration.
 
 = 0.5.1 =
-* Updated Status Ranges.
-* Fixed Directory Parse Bug.
+* IMPROVED: Updated Status Ranges.
+* FIXED: Directory Parse Bug.
 
 = 0.5.0 =
 * Initial release!

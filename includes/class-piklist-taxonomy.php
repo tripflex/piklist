@@ -137,6 +137,7 @@ class PikList_Taxonomy
       ,$network_wide
    );
   }
+
 }
 
 if (!function_exists('add_term_meta'))

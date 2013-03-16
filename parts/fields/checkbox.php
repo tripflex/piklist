@@ -18,8 +18,8 @@
           type="checkbox"
           id="<?php echo piklist_form::get_field_id($field, $scope, $index, $prefix); ?>" 
           name="<?php echo piklist_form::get_field_name($field, $scope, $index, $prefix); ?>"
-          value="<?php echo $values[$index]; ?>"
-          <?php echo (!is_array($value) && $value == $values[$index]) || (is_array($value) && in_array($values[$index], $value)) ? 'checked="checked"' : ''; ?>
+          value="<?php echo esc_attr($values[$index]); ?>"
+          <?php echo (!is_array($value) && ($value == $values[$index])) || (is_array($value) && (in_array($values[$index], $value) || isset($value[$values[$index]]))) ? 'checked="checked"' : ''; ?>
           <?php echo piklist_form::attributes_to_string($attributes); ?>
         />
 
