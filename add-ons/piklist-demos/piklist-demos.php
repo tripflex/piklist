@@ -116,16 +116,7 @@ Author URI: http://piklist.com/
       ,'default_tab' => 'Basic'
       ,'save_text' => 'Save Demo Settings'
     );
-    
-    $pages[] = array(
-      'page_title' => __('List Table Demos')
-      ,'menu_title' => __('List Table', 'piklist')
-      ,'sub_menu' => 'edit.php?post_type=piklist_demo'
-      ,'capability' => 'manage_options'
-      ,'menu_slug' => 'piklist_list_table'
-      ,'icon' => 'edit'
-    );
-  
+      
     return $pages;
   }
 
