@@ -1,7 +1,7 @@
 === PIKLIST | Rapid Development Framework ===
 Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
-Tested up to: 3.5
+Tested up to: 3.6
 Requires at least: 3.4
 Stable tag: 0.7.2
 License: GPLv2 or later
@@ -95,6 +95,10 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.8.0b2 =
+* NEW: Upload File field!
+* Bug Fixes
 
 = 0.8.0b1 =
 * Now requires WordPress 3.4+.

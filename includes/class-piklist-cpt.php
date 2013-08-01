@@ -143,7 +143,6 @@ class PikList_CPT
   
         foreach ($configuration['status'] as $status => &$status_data)
         {
-          $status_data['label'] = $status_data['label'];
           $status_data['label_count'] = _n_noop($status_data['label'] . ' <span class="count">(%s)</span>', $status_data['label'] . ' <span class="count">(%s)</span>');
           $status_data['capability_type'] = $post_type;
 
@@ -242,7 +241,6 @@ class PikList_CPT
           }
           array_push(self::$meta_boxes_hidden[$object_type], $taxonomy['configuration']['hierarchical'] ? $taxonomy['name'] . 'div' : 'tagsdiv-' . $taxonomy['name']);
         }
-
         add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
       }
     }
@@ -338,7 +336,7 @@ class PikList_CPT
   {
     global $pagenow;
 
-    if (in_array($pagenow, array('edit.php', 'post.php', 'post-new.php')))
+    if (in_array($pagenow, array('edit.php', 'post.php', 'post-new.php')) && isset($_REQUEST['post_type']) && post_type_exists($_REQUEST['post_type']))
     {
       $post_type = $_REQUEST['post_type'];
       

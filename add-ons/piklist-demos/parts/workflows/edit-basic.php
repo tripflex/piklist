@@ -11,7 +11,9 @@ Flow: Edit Demo
     ,'piklist_meta_field_select'
     ,'piklist_meta_field_radio'
     ,'piklist_meta_field_checkbox'
+    ,'piklist_meta_field_upload'
     ,'piklist_meta_field_taxonomies'
+    ,'piklist_meta_field_featured_image'
     ,'piklist_meta_field_relate'
   ));
 

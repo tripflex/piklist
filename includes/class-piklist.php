@@ -161,17 +161,10 @@ class PikList
         }
         
         include $_file;
-        
-        $_included = true;
-        
+                
         break;
       }
     }    
-
-    if (!$_included)
-    {
-      self::pre('File Not Found: ' . $_file);
-    }
     
     if ($return)
     {
@@ -228,7 +221,7 @@ class PikList
   
   public static function pre($output, $source = false)
   {
-    echo "<pre" . ($source ? 'style="display: none !important;"' : null) . ">";
+    echo "<pre " . ($source ? 'style="display: none !important;"' : null) . ">";
   
     print_r($output);
   
@@ -647,37 +640,39 @@ class PikList
     
     if (!empty($data))
     {
-      foreach ($data as $key => $values)
+      foreach ($data as $key => $value)
       {
-        if (is_array($values))
-        {
-          foreach ($values as $value_key => $value)
-          {
-            $data[$key][$value_key] = maybe_unserialize($value);
-            
-            if (is_array($data[$key][$value_key]))
-            {
-              foreach ($data[$key][$value_key] as $value_sub_key => $value_sub)
-              {
-                if (is_array($data[$key][$value_key][$value_sub_key]) && count($data[$key][$value_key][$value_sub_key]) == 1)
-                {
-                  $data[$key][$value_key][$value_sub_key] = $data[$key][$value_key][$value_sub_key][0];
-                }
-              }
-            }
-          }
-
-          if (count($values) == 1 && !is_array($values[0])) 
-          {
-            $data[$key] = $data[$key][0];
-          }
-        }
+        $data[$key] = self::object_custom_value(maybe_unserialize($value));
       }
-
-      return $data;
     }
     
-    return false;
+    return $data;
+  }
+  
+  public function object_custom_value($object)
+  {
+    if (is_array($object))
+    {
+      foreach ($object as $key => $value)
+      {
+        $value = maybe_unserialize($value);
+        
+        if (is_array($value) && is_numeric($key) && count($value) == 1)
+        {
+          $object = current($value);
+        }
+        else if (is_array($value))
+        {
+          $object[$key] = self::object_custom_value($value);
+        }
+        else
+        {
+          $object = $value;
+        }
+      }
+    }
+    
+    return $object;
   }
   
   public static function explode($delimiter, $string)

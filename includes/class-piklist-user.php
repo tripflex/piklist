@@ -58,7 +58,7 @@ class PikList_User
     
     if ((!$data['capability'] || ($data['capability'] && current_user_can(strtolower($data['capability']))))
       && (!$data['role'] || in_array(strtolower($data['role']), $current_user->roles))
-      && (!$data['new'] || ($data['new'] && $pagenow != 'user-new.php'))
+      && (!$data['new'] || ($data['new'] && (isset($pagenow) && $pagenow != 'user-new.php')))
     )
     {
       if (isset($order))
@@ -123,19 +123,20 @@ class PikList_User
   
   public static function multiple_roles($user_id, $roles = false)
   {
-    global $wpdb, $wp_roles;
+    global $wpdb, $wp_roles, $current_user;
 
     $roles = $roles ? $roles : (isset($_POST['roles']) ? $_POST['roles'] : false);
 
-    if ($roles && current_user_can('edit_user', $user_id))
-    {
+    if ($roles && current_user_can('edit_user', $current_user->ID))
+    {      
       $editable_roles = get_editable_roles();
       $user = new WP_User($user_id);
       $user_roles = array_intersect(array_values($user->roles), array_keys($editable_roles));
       
       $_user_role_log = get_user_meta($user_id, $wpdb->prefix . 'capabilities_log', true);
       $user_role_log = $_user_role_log ? $_user_role_log : array();
-
+      
+      $roles = is_array($roles) ? $roles : array($roles);
       foreach ($roles as $role)
       {
         if (!in_array($role, $user_roles) && $wp_roles->is_role($role))

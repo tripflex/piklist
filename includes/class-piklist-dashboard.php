@@ -10,9 +10,22 @@ class PikList_Dashboard
   private static $widgets = array();
   
   public static function _construct()
-  { 
-    add_action('wp_dashboard_setup', array('piklist_dashboard', 'register_dashboard_widgets'));
+  {
+    add_action('wp_dashboard_setup', array('piklist_dashboard', 'wp_dashboard_setup'));
     add_action('wp_network_dashboard_setup', array('piklist_dashboard', 'register_dashboard_widgets'));
+  }
+
+  public static function wp_dashboard_setup()
+  {
+    //self::unregister_dashboard_widgets();
+    self::register_dashboard_widgets();
+  }
+
+  public static function unregister_dashboard_widgets()
+  {
+    global $wp_meta_boxes;
+    
+    unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
   }
 
   public static function register_dashboard_widgets()
@@ -31,6 +44,7 @@ class PikList_Dashboard
     $data = get_file_data($file, array(
               'title' => 'Title'
               ,'capability' => 'Capability'
+              ,'id' => 'ID'
               ,'network' => 'Network'
             ));
 
@@ -46,7 +60,7 @@ class PikList_Dashboard
 
     if ((isset($data['capability']) && current_user_can($data['capability'])) || empty($data['capability']))
     {
-      $id = piklist::dashes($add_on . '-' . $part);
+      $id = empty($data['id']) ? piklist::dashes($add_on . '-' . $part) : $data['id'];    
 
       self::$widgets[$id] = array(
         'id' => $id

@@ -22,8 +22,8 @@ Collapse: false
       'value' => 'lock'
     )
   ));
-  
 /*
+  
   piklist('field', array(
     'type' => 'datepicker'
     ,'field' => 'date_add_more'
@@ -41,6 +41,8 @@ Collapse: false
       'value' => 'lock'
     )
   ));
+
+*/
   
   piklist('field', array(
     'type' => 'timepicker'
@@ -62,6 +64,7 @@ Collapse: false
     )
   ));
   
+/*
   piklist('field', array(
     'type' => 'timepicker'
     ,'field' => 'time_add_more'

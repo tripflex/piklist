@@ -10,6 +10,7 @@ Default: true
     'piklist_meta_help'
     ,'piklist_meta_field_editor'
     ,'piklist_meta_field_taxonomies'
+    ,'piklist_meta_field_featured_image'
     ,'piklist_meta_field_relate'
   ));
 

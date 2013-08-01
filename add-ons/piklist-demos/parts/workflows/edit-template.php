@@ -9,6 +9,7 @@ Flow: Edit Demo
     'piklist_meta_help'
     ,'piklist_meta_field_template'
     ,'piklist_meta_field_taxonomies'
+    ,'piklist_meta_field_featured_image'
     ,'piklist_meta_field_relate'
   ));
 

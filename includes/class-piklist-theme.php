@@ -39,7 +39,7 @@ class PikList_Theme
     if (is_dir($path = get_stylesheet_directory() . '/piklist'))
     {
       piklist::$paths['theme'] = $path;
-    }
+    }    
   }
   
   public function assets($assets)
@@ -51,7 +51,7 @@ class PikList_Theme
     foreach ($scripts as $path => $version)
     {
       array_push($assets['scripts'], array(
-        'handle' => 'piklist-' . str_replace(array('.js', '/'), '', substr($path, strrpos($path, '/')))
+        'handle' => str_replace(array('.js', '/'), '', substr($path, strrpos($path, '/')))
         ,'src' => piklist::$urls['piklist'] . $path
         ,'ver' => $version
         ,'deps' => 'jquery'
@@ -62,11 +62,10 @@ class PikList_Theme
     }
     
     wp_enqueue_script('wp-color-picker');
-    
+    wp_enqueue_style('wp-color-picker');
+
     // TODO: Dependency
     wp_enqueue_script('jquery-ui-sortable');
-
-    wp_enqueue_style('wp-color-picker');
 
     return $assets;
   }
@@ -162,7 +161,7 @@ class PikList_Theme
         }
       }
     }
-
+    
     foreach ($assets_to_enqueue as $type => $assets)
     {
       foreach ($assets as $asset)

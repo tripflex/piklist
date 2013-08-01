@@ -15,6 +15,7 @@
     display: none;
   }
 
+
   
 /* --------------------------------------------------------------------------------
   Styles for Piklist
@@ -83,13 +84,17 @@
 
 	.piklist-field-container { 
 		position: relative;
-    overflow: hidden;
+/*    overflow: hidden;*/
 		width: 100%;
 	}
 		
 		#side-sortables .piklist-field-container { 
 			display: block;
 		}
+		
+		  #side-sortables .piklist-field-container select {
+		    max-width: 100%;
+		  }
 		
 		.piklist-field-container:before,
 	  .piklist-field-container:after,
@@ -135,6 +140,22 @@
 		 	float: left;
 		 	padding: 0.6667% 0 1% 1.5%;
 		}
+		  
+		  #side-sortables .piklist-field-container .piklist-field {
+		    padding: 0.6667% 0 1% 0;
+		    width: 100%;
+		  }
+		  
+		  .piklist-field-container .piklist-field input[type="text"],
+		  .piklist-field-container .piklist-field input[type="password"],
+		  .piklist-field-container .piklist-field select,
+		  .piklist-field-container .piklist-field textarea {
+		    margin: 0;
+		  }
+		  
+		  .piklist-field-container .piklist-field .large-text {
+		    width: 100%;
+		  }
 			
 		 	.piklist-field-container .piklist-label,
       .piklist-field-container .piklist-child-label {
@@ -145,12 +166,13 @@
 			
 			  /* Slight position adjustment for child labels */
 
-			 .piklist-child-label {
+			 .piklist-field-container .piklist-child-label {
 			    margin-right: 0.25%;
 			    margin-left: 0.25%;
-			  }
+			    line-height: 2em;
+        }
 
-			  .form-wrap .piklist-form-field {
+			  .form-wrap .piklist-field-container .piklist-form-field {
 			    margin: 0 0 10px 0;
 			    padding: 8px;
 			  }
@@ -180,7 +202,48 @@
 	      display: inline-block;
 	    }
 
-
+  /* Admin Thumbnail Preview */
+  
+  .piklist-upload-file-preview {
+    margin-top: 20px;
+    clear: both;
+  }
+    
+    .piklist-upload-file-preview .attachments {
+      margin-left: -6px;
+    }
+      
+      #side-sortables .piklist-upload-file-preview .attachments {
+        margin-left: -16px;
+      }
+      
+    .piklist-upload-file-preview .attachment {
+      cursor: pointer;
+    }
+    
+      #side-sortables .piklist-upload-file-preview .attachment {
+        margin: 0 0 20px 20px;
+      }
+    
+    .piklist-upload-file-preview .attachment-preview, 
+    .piklist-upload-file-preview .attachment-preview .thumbnail {
+      width: 10em;
+      height: 10em;
+    }
+      
+      #side-sortables .piklist-upload-file-preview .attachment-preview, 
+      #side-sortables .piklist-upload-file-preview .attachment-preview .thumbnail {
+        width: 9em;
+        height: 9em;
+      }
+      
+    .piklist-upload-file-preview a {
+      display: block;
+    }
+    
+      .piklist-upload-file-preview a span {
+        display: none;
+      }
 		
 	/* Basic Google Map Style */
 	
@@ -199,44 +262,58 @@
     position: relative;
     cursor: move;
     border: 1px solid #dfdfdf;
-    padding: 5px;
-    float: left;
+    padding: 7px;
+    margin-bottom: 7px;
     clear: left;
-    background: #ffffff;
- 		margin-bottom: 5px;
+    background: #fcfcfc;
+ 		padding-right: 82px;
+    float: left;
   }
-
+  
+    .piklist-field-addmore-wrapper:before, .piklist-field-addmore-wrapper:after { 
+      content: ""; 
+      display: table; 
+    }
+    
+    .piklist-field-addmore-wrapper:after { 
+      clear: both; 
+    }
+    
+    .piklist-field-addmore-wrapper { 
+      zoom: 1; 
+    }
+    
+    .piklist-field-addmore-wrapper-wide {
+      float: none;
+    }
+    
     .piklist-field-addmore-wrapper-actions {
-			float: right;
+			width: 75px;
+			position: absolute;
+		  bottom: 7px;
+		  right: 7px;
 		}
 
-    .piklist-field-addmore-wrapper.ui-sortable {
-        margin-bottom: 30px;
-        padding-bottom: 35px;
-      }
-
-    .piklist-field-addmore-wrapper.ui-sortable:last-child {
-        margin-bottom: 0;
-      }
-
     .piklist-field-addmore-wrapper .piklist-field-addmore-wrapper {
-      padding: 5px;
-      border-left: 5px solid #dfdfdf;
-			margin-right: 5px;
+      padding: 7px;
+      border-left: 7px solid #dfdfdf;
+   		padding-right: 82px;
+      margin-bottom: 0;
+   		float: none;
     }
 
       .piklist-field-addmore-wrapper .piklist-field-addmore-wrapper {
-        margin-top: 10px !important;
+        margin-top: 7px !important;
       }
 
       .piklist-field-addmore-wrapper .piklist-field-addmore-wrapper:hover {
         border-left-color: #2a95c5;
-        background: #F6F6F6;
+        background: #f6f6f6;
       }
 
       .piklist-add-more-add,
       .piklist-add-more-remove {
-        margin-left: 5px !important;
+        margin-left: 7px !important;
       }
 
       .piklist-add-more-move {
@@ -289,6 +366,10 @@
 
 		.piklist-meta-box-no-title.postbox h3 {
 		  display: none;
+		}
+		
+		.piklist-meta-box-none .inside {
+		  padding: 0;
 		}
 		
 		/* Meta Messages */
@@ -515,6 +596,14 @@
       height: 200px;
     }
     
+    div.widget div.wp-tab-panel {
+      max-height: none;
+    }
+    
+    * html div.widget div.wp-tab-panel {
+      height: none;
+    }
+    
     #side-sortables div.wp-tab-panel {
       margin: 0 0 5px 0;
     }
@@ -552,9 +641,11 @@
 --------------------------------------------------------------------------------- */
   
 	#icon-piklist-page,
-	#icon-piklist { 
+	#icon-piklist,
+  #icon-edit.icon32-posts-piklist_demo { 
 	  background-image: url('../img/piklist-page-icon-32.png');
 	  background-repeat: no-repeat;
+    background-position: 0 0;
 	}
 
   #get-piklist-news-badge {
@@ -652,6 +743,20 @@
   .subsubsub li {
     white-space: nowrap !important;
   }
+  
+  /* Alter Sortable Column Behavior */
+  .manage-column .sorting-indicator {
+    display: block !important;
+    visibility: hidden;
+  }
+  
+    .manage-column .sorted .sorting-indicator {
+      visibility: visible;
+    }
+  
+    .manage-column a:hover .sorting-indicator {
+      visibility: visible;
+    }
 
   /* Workflow tabs on edit screens */
   #poststuff h2.nav-tab-wrapper,
@@ -663,3 +768,19 @@
     color: #ffffff !important;
   }
 
+  /* Fix for the floating footer issue in the admin */
+  #wpfooter {
+    position: relative;
+    margin-top: -4em;
+  }
+  
+  /* Adjust Layout on Edit Screens if containers are empty */
+  #post-body-content:empty {
+    margin: 0;
+  }
+  
+  /* Set the background color of the editor just in case its in a metabox */
+  .mceIframeContainer {
+    background-color: #ffffff;
+  }
+  

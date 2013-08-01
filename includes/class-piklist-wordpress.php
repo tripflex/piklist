@@ -1,7 +1,4 @@
 <?php
-/*
- * New get_meta_sql
-*/
 
 if (!defined('ABSPATH'))
 {
@@ -69,6 +66,15 @@ class PikList_WordPress
     global $wpdb;
 
     $where = array_filter(preg_split('/$\R?^/m', trim(substr($meta_query['where'], 6, strlen($meta_query['where']) - 8))));
+    
+    // TODO: Research more into when a value is not set
+    foreach ($queries as $query)
+    {
+      if (!isset($query['value']))
+      {
+        return $meta_query;
+      }
+    }
 	
     if (!empty($where))
     {

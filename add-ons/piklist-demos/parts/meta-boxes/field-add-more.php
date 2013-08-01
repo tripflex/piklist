@@ -100,55 +100,73 @@ Collapse: false
 
   piklist('field', array(
     'type' => 'group'
-    ,'field' => 'test_add_more_group_nested_4'
-    ,'label' => __('Test ~ Add More Group Nested - 3 LEVELS')
+    ,'label' => __('Add Contacts Demo (Nested Add-More)')
     ,'add_more' => true
     ,'fields' => array(
       array(
         'type' => 'text'
-        ,'field' => 'test_add_more_group_4_1'
-        ,'value' => 'one'
+        ,'field' => 'nested_company_name'
+        ,'label' => 'Company Name'
+        ,'columns' => 7
         ,'attributes' => array(
           'class' => 'regular-text'
         )
       )
       ,array(
         'type' => 'select'
-        ,'field' => 'test_add_more_group_4_2'
-        ,'value' => 'first'
+        ,'field' => 'nested_industry'
+        ,'label' => 'Industry'
+        ,'columns' => 5
         ,'attributes' => array(
           'class' => 'regular-text'
         )
         ,'choices' => array(
-          'first' => 'First Choice'
-          ,'second' => 'Second Choice'
-          ,'third' => 'Third Choice'
+          'arts-and-entertainment' => 'Arts and Entertainment'
+          ,'automotive' => 'Automotive'
+          ,'beauty-and-fitness'=>'Beauty and Fitness'
+          ,'books-and-literature'=> 'Books and Literature'
+          ,'business-and-industrial-markets'=> 'Business and Industrial Markets'
+          ,'computers-and-electronics' => 'Computers and Electronics'
+          ,'finance' => 'Finance'
+          ,'food-and-drink' => 'Food and Drink'
+          ,'games' => 'Games'
+          ,'healthcare' => 'Healthcare'
+          ,'home-and-garden' => 'Home and Garden'
+          ,'internet-and-telecom' => 'Internet and Telecom'
+          ,'jobs-and-education' => 'Jobs and Education'
+          ,'news' => 'News'
+          ,'real-estate' => 'Real Estate'
+          ,'science' => 'Science'
+          ,'shopping' => 'Shopping'
+          ,'sports' => 'Sports'
+          ,'travel' => 'Travel'
+          ,'other' => 'Other'
         )
       )
       ,array(
         'type' => 'group'
-        ,'field' => 'test_add_more_nested_group_4_1'
         ,'add_more' => true
         ,'fields' => array(
           array(
             'type' => 'text'
-            ,'field' => 'test_add_more_nested_group_4_2'
-            ,'value' => 'First Name'
+            ,'field' => 'nested_first_name'
+            ,'label' => 'First Name'
+            ,'columns' => 6
           )
           ,array(
             'type' => 'text'
-            ,'field' => 'test_add_more_nested_group_4_3'
-            ,'value' => 'Last Name'
+            ,'field' => 'nested_last_name'
+            ,'label' => 'Last Name'
+            ,'columns' => 6
           )
           ,array(
             'type' => 'group'
-            ,'field' => 'test_add_more_nested_group_5_1'
             ,'add_more' => true
             ,'fields' => array(
               array(
                 'type' => 'select'
-                ,'field' => 'test_add_more_nested_group_5_2'
-                ,'value' => 'Home'
+                ,'field' => 'nested_phone_type'
+                ,'columns' => 5
                 ,'choices' => array(
                   'home' => 'Home'
                   ,'work' => 'Work'
@@ -157,7 +175,30 @@ Collapse: false
               )
               ,array(
                 'type' => 'text'
-                ,'field' => 'test_add_more_nested_group_5_3'
+                ,'field' => 'nested_phone_number'
+                ,'label' => 'Phone Number'
+                ,'columns' => 7
+              )
+            )
+          )
+          ,array(
+            'type' => 'group'
+            ,'add_more' => true
+            ,'fields' => array(
+              array(
+                'type' => 'select'
+                ,'field' => 'nested_email_address_type'
+                ,'columns' => 5
+                ,'choices' => array(
+                  'home' => 'Personal'
+                  ,'work' => 'Work'
+                )
+              )
+              ,array(
+                'type' => 'text'
+                ,'field' => 'nested_email_address'
+                ,'label' => 'Email Address'
+                ,'columns' => 7
               )
             )
           )

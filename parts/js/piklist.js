@@ -262,11 +262,28 @@
   
   $(document).ready(function()
   {
-    $('*[data-piklist-field-addmore="true"]').piklistaddmore({
-      sortable: true
-    });
+    $('*[data-piklist-field-addmore="true"]')
+      .piklistaddmore({
+        sortable: true
+      });
     
-    $('body').piklistcolumns();
+    $('body')
+      .piklistcolumns()
+      .piklistmediaupload();
+      
+    $('.wp-editor-wrap').each(function()
+    {
+      var $parent = $($(this).parent());
+      
+      if ($parent.hasClass('piklist-field'))
+      {
+        $parent.css({
+          'float': 'none',
+          'width': 'auto',
+          'padding': 0
+        });
+      }
+    })
   });
 
   /* --------------------------------------------------------------------------------
@@ -313,13 +330,19 @@
 			{
 	      if (typeof group === 'undefined')
 	      {
-	        this.$element.wrap($wrapper);
+	        this.$element
+            .siblings('label[for="' + this.$element.attr('name') + '"]')
+            .andSelf()
+            .wrapAll($wrapper);
 	      }
 	      else
 	      {
 	        var set = $('*[data-piklist-field-group="' + group + '"], *[data-piklist-field-sub-group="' + group + '"]');
-				
+	        
 	        this.$element = set.last();
+          
+				  set = $.merge(set, $(set.last()).siblings('.piklist-child-label'));
+
 	        set.wrapAll($wrapper);
 	      }
 			}
@@ -336,7 +359,7 @@
       
       if (this.sortable)
       {
-        $wrapper_actions.prepend($(this.move));
+        // $wrapper_actions.prepend($(this.move));
         
         var container = this.$element
           .parent('div[data-piklist-field-addmore="' + this.set + '"]')
@@ -348,9 +371,8 @@
             .sortable({
               items: '> div[data-piklist-field-addmore]',
               cursor: 'move'
-            });
-            
-          container.disableSelection();
+            })
+            .disableSelection();
         }
       }
 
@@ -477,7 +499,7 @@
   
   $.fn.piklistaddmore.defaults = {
     add: '<a href="#" class="button button-primary piklist-add-more-add">+</a>',
-    remove: '<a href="#" class="button button-secondary piklist-add-more-remove">-</a>',
+    remove: '<a href="#" class="button button-secondary piklist-add-more-remove">&ndash;</a>',
     move: '<span class="piklist-add-more-move">&varr;</span>',
     sortable: false
   };
@@ -504,30 +526,37 @@
     _init: function() 
     {
       var total_columns = this.total_columns,
-				gutter_width = this.gutter_width;
-
+				gutter_width = this.gutter_width,
+				track = {
+				  columns: 0,
+				  gutters: 0,
+				  group: false
+				};
+      
       this.$element
         .find('*[data-piklist-field-columns]:not(:radio, :checkbox)')
         .each(function()
         {
           var $element = $(this),
-            columns = parseFloat($element.attr('data-piklist-field-columns'));
+            columns = parseFloat($element.data('piklist-field-columns')),
+            group = $element.data('piklist-field-group');;
 
           $element
-            .prev('label')
+            .siblings('label[for="' + $element.attr('name') + '"]')
             .andSelf()
-            .wrapAll('<div data-piklist-field-columns="true" />');
-          
+            .wrapAll('<div data-piklist-field-columns="' + columns + '" data-piklist-field-group="' + group + '" />');
+				
           $element
             .css({
-              'width': $element.attr('size') ? 'auto' : '100%'
+              'width': $element.attr('size') ? 'auto' : '100%',
+              margin: 0
             })
-            .parent('div[data-piklist-field-columns="true"]')
+            .parent('div[data-piklist-field-columns]')
             .css({
               'display': 'block',
               'float': 'left',
               'width': ((columns / total_columns) * 100) - gutter_width + '%',
-              'margin-right': gutter_width + '%'
+              'margin-left': gutter_width + '%'
             });       
         });
 
@@ -537,28 +566,109 @@
         .each(function()
         {
           var $element = $(this),
-            columns = parseFloat($element.attr('data-piklist-field-columns'));
+            columns = parseFloat($element.data('piklist-field-columns')),
+            group = $element.data('piklist-field-group');
 					
           $element
             .parents('.piklist-field-list')
           	.each(function()
 						{
-							if ($(this).parent('div[data-piklist-field-columns="true"]').length == 0)
+							if ($(this).parent('div[data-piklist-field-columns]').length == 0)
 							{
 								$(this)
 									.prev('.piklist-label')
+									.siblings('.piklist-label[for="' + $element.attr('id') + '"], .piklist-field-list:first')
 									.andSelf()
-									.wrapAll('<div data-piklist-field-columns="true" />')
-									.parent('div[data-piklist-field-columns="true"]')
+									.wrapAll('<div data-piklist-field-columns="' + columns + '" data-piklist-field-group="' + group + '" />')
+									.parent('div[data-piklist-field-columns]')
 									.css({
 			              'display': 'block',
 			              'float': 'left',
 			              'width': ((columns / total_columns) * 100) - gutter_width + '%',
-			              'margin-right': gutter_width + '%'
+                    'margin-left': gutter_width + '%'
 			            });
 							}
 						});  
         });
+        
+        this.$element
+          .find('div[data-piklist-field-columns]')
+          .each(function(i)
+          {
+            var $element = $(this),
+              columns = parseFloat($element.data('piklist-field-columns')),
+              group = $element.data('piklist-field-group');
+
+            if (track.group && track.group != group)
+            {
+              track = {
+      				  columns: 0,
+      				  gutters: 0,
+      				  group: group
+              };
+            }
+            
+            if (track.columns == 0)
+            {
+              $element
+                .addClass('piklist-field-column-first')
+                .css({
+                  'margin-left': '0'
+                });
+            }
+            
+            track = {
+    				  columns: track.columns + columns,
+    				  gutters: track.gutters + 1,
+    				  group: group
+            };
+            
+            if (track.columns >= total_columns)
+            {
+              $element.addClass('piklist-field-column-last');
+
+              track = {
+      				  columns: 0,
+      				  gutters: 0,
+      				  group: false
+              };
+            }
+          });
+          
+        this.$element
+          .find('.piklist-field-column-first')
+          .each(function(i)
+          {
+            var $element = $(this),
+              $next = $element,
+              columns = parseFloat($element.data('piklist-field-columns')),
+              total_gutters = 0;
+            
+            if (!$element.hasClass('piklist-field-column-last'))
+            {
+              do {
+                total_gutters++;
+                
+                $next = $next.next();
+              }  while ($next.length > 0 && !$next.hasClass('piklist-field-column-last') && $next.data('piklist-field-columns')) 
+            }
+            
+            var total_width = 100 - total_gutters * gutter_width,
+              $next = $element;
+
+            do {
+              columns = parseFloat($next.data('piklist-field-columns'));
+              
+              $next
+                .css({
+                  'width': ((columns / total_columns) * total_width) + '%'
+                });
+
+              $next = $next.next();
+            }  while ($next.length > 0 && !$next.hasClass('piklist-field-column-first') && $next.data('piklist-field-columns'))
+            
+            total_gutters = 0;
+          });
     }
   };
   
@@ -591,6 +701,198 @@
   };
   
   $.fn.piklistcolumns.Constructor = PiklistColumns;
+  
+  /* --------------------------------------------------------------------------------
+    Piklist Media Upload - Handles the File Upload Field
+  -------------------------------------------------------------------------------- */
+  
+  var PiklistMediaUpload = function(element, options)
+  {
+    this.$element = $(element);
+    this._init();
+  };
+  
+  PiklistMediaUpload.prototype = {
+
+    constructor: PiklistMediaUpload,
+
+    _init: function() 
+    {
+      var media_frame;
+      
+      $('.piklist-upload-file-preview .attachments')
+        .sortable({
+          items: 'li.attachment',
+          cursor: 'move',
+          update: function(event, ui) 
+          {
+            var attachments = $(this).find('[data-attachment-id]'),
+              input_name = $(attachments[0]).data('attachments'),
+              input = $(':input[name="' + input_name + '"]'),
+              updates = [];
+          
+            attachments.each(function(i)
+            {
+              updates.push($(this).data('attachment-id'));
+            });
+            
+            $(':input[name="' + input_name + '"]:not(:first)').remove();
+            
+            input.val(updates.shift());
+
+            for (var i = 0; i < updates.length; i++)
+            {
+              $(input
+                  .first()
+                  .clone()
+                  .removeAttr('id')
+                  .val(updates[i])
+                ).insertAfter($(':input[name="' + input_name + '"]:last'));
+            }
+          }
+        })
+        .disableSelection();
+          
+      $('.piklist-upload-file-preview .attachment').live('click', function(event)
+      {
+        event.preventDefault();
+      
+        $(this)
+          .parents('.piklist-upload-file-preview:first')
+          .prev('.piklist-upload-file-button')
+          .trigger('click');
+      });
+      
+      $('.piklist-upload-file-preview .attachment .check').live('click', function(event)
+      {
+        event.preventDefault();
+        
+        var index = $($(this).parents('.attachment:first')).index($(this).parents('attachments:first')),
+          name = $(this).data('attachments'),
+          value = $(this).data('attachment-id');
+        
+        if ($(':input[name="' + name + '"]').length == 1)
+        {
+          $(':input[name="' + name + '"][value="' + value + '"]:eq(' + index + ')').val('')
+        }
+        else
+        {
+          $(':input[name="' + name + '"][value="' + value + '"]:eq(' + index + ')').remove();
+        }
+        
+        $(this)
+          .parents('.attachment:first')
+          .remove();
+      });
+      
+      $('.piklist-upload-file-button').live('click', function(event)
+      {
+        event.preventDefault();
+      
+        var button = $(this);
+      
+        if (media_frame) 
+        {
+          media_frame.open();
+          return;
+        }
+      
+        media_frame = wp.media.frames.file_frame = wp.media({
+          title: button.attr('title'),
+          button: {
+            text: button.text(),
+          },
+          multiple: true
+        });
+      
+        media_frame.on('select', function()
+        {
+          var attachments = media_frame.state().get('selection'),
+            input = button.prev(':input[type="hidden"]'),
+            input_name = input.attr('name'),
+            preview = button.next('.piklist-upload-file-preview').find('ul.attachments'),
+            updates = [];
+      
+          attachments.map(function(attachment) 
+          {
+            attachment = attachment.toJSON();
+      
+            var display = attachment.sizes.full;
+      
+            if (attachment.sizes.thumbnail)
+            {
+              display = attachment.sizes.thumbnail;
+            }
+            else if (attachment.sizes.medium)
+            {
+              display = attachment.sizes.medium;
+            }
+            else if (attachment.sizes.large)
+            {
+              display = attachment.sizes.large;
+            }
+      
+            updates.push(attachment.id);
+      
+            preview.append(
+              $('<li class="attachment selected">\
+                    <div class="attachment-preview ' + (display.width > display.height ? 'landscape' : 'portrait') + '">\
+                      <div class="thumbnail">\
+                        <div class="centered">\
+                          <a href="#">\
+                           <img src="' + display.url + '" />\
+                         </a>\
+                        </div>\
+                      </div>\
+                      <a class="check" href="#" title="Deselect" data-attachment-id="' + attachment.id + '" data-attachments="' + input.attr('name') + '"><div class="media-modal-icon"></div></a>\
+                    </div>\
+                 </li>\
+               ')
+            );
+          });
+          
+          for (var i = 0; i < updates.length; i++)
+          {
+            $(input
+                .first()
+                .clone()
+                .removeAttr('id')
+                .val(updates[i])
+              ).insertAfter($(':input[name="' + input_name + '"]:last'));
+          }
+        });
+      
+        media_frame.open();
+      });          
+    }
+  };
+  
+  $.fn.piklistmediaupload = function(option)
+  {
+    var _arguments = Array.apply(null, arguments);
+    _arguments.shift();
+  
+    return this.each(function() 
+    {
+      var $this = $(this),
+        data = $this.data('piklistmediaupload'),
+        options = typeof option === 'object' && option;
+  
+      if (!data) 
+      {
+        $this.data('piklistmediaupload', (data = new PiklistMediaUpload(this, $.extend({}, $.fn.piklistmediaupload.defaults, options, $(this).data()))));
+      }
+  
+      if (typeof option === 'string') 
+      {
+        data[option].apply(data, _arguments);
+      }
+    });
+  };
+  
+  $.fn.piklistmediaupload.defaults = {};
+  
+  $.fn.piklistmediaupload.Constructor = PiklistMediaUpload;
 
 })(jQuery, window, document);
 
