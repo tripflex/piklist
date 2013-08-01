@@ -36,7 +36,6 @@ Collapse: false
       )
   ));
 
-/*
   piklist('field', array(
     'type' => 'text'
     ,'field' => 'show_hide_field_select_2'
@@ -52,7 +51,6 @@ Collapse: false
         'value' => 'lock'
       )
   ));
-*/
 
   piklist('field', array(
     'type' => 'radio'

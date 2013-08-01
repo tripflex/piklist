@@ -196,6 +196,7 @@ class PikList_Form
       ,'rich_editing'
       ,'user_registered'
       ,'role'
+      ,'user_role'
       ,'jabber'
       ,'aim'
       ,'yim'
@@ -232,6 +233,7 @@ class PikList_Form
     'checkbox'
     ,'radio'
     ,'add-ons'
+    ,'file'
   );
     
   public static function _construct()
@@ -597,7 +599,7 @@ class PikList_Form
       ,'columns' => null
       ,'embed' => false                     // internal
       ,'child_field' => false
-      ,'label_position' => 'before'  
+      ,'label_position' => 'after'  
       ,'unique' => true                     // when editing a field, FALSE will add new data, TRUE will overwrite.
       ,'disable_label' => false             // remove label table cell (you would use for post_meta)
       ,'conditions' => false                // array of array of conditions
@@ -624,7 +626,6 @@ class PikList_Form
         'compare' => '='
         ,'type' => 'CHAR'
       )
-      ,'prefix' => true
     ));
 
     // Should this field be rendered?
@@ -764,7 +765,7 @@ class PikList_Form
           {
             $id = $GLOBALS['piklist_attachment']->ID;
           }
-          else if ($wp_taxonomies[$field['field']]->object_type[0] == 'user')
+          else if (isset($wp_taxonomies[$field['field']]) && isset($wp_taxonomies[$field['field']]->object_type) && $wp_taxonomies[$field['field']]->object_type[0] == 'user')
           {
             $id = isset(self::$save_ids['user']) ? self::$save_ids['user'] : (is_admin() && isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : false);
           }
@@ -1089,7 +1090,7 @@ class PikList_Form
     }
   
     $attributes = array(
-      'for' => self::get_field_id($field['field'], $field['scope'], false, $field['prefix'])
+      'for' => self::get_field_name($field['field'], $field['scope'], false, $field['prefix'])
       ,'class' => 'piklist' . ($field['child_field'] ? '-child' : '') . '-label'
     );
     
@@ -1229,11 +1230,41 @@ class PikList_Form
       }
     
       $type = piklist::$prefix . $builtin;
+      $request = $_REQUEST;
+      $files = $_FILES;
       
-      if (isset($_REQUEST[$type]) || $suffixed)
+      if (isset($files[$type]))
       {
-        $data = $_REQUEST[$type . ($suffixed ? '_' . $suffixed : '')];
+        foreach ($files[$type]['name'] as $fid => $file_name)
+        {
+          if ($files[$type]['error'][$fid][0] === UPLOAD_ERR_OK)
+          {
+            $attach_id = media_handle_sideload(
+                          array(
+                            'name' => $file_name[0]
+                            ,'size' => $files[$type]['size'][$fid][0]
+                            ,'tmp_name' => $files[$type]['tmp_name'][$fid][0]
+                          )
+                          ,0
+                        );
+                        
+            if ($attach_id)
+            {
+              if (!isset($request[$type][$fid]))
+              {
+                $request[$type][$fid] = array();
+              }
+
+              array_push($request[$type][$fid], $attach_id);
+            }
+          }
+        }
+      }
       
+      if (isset($request[$type]) || $suffixed)
+      {
+        $data = $request[$type . ($suffixed ? '_' . $suffixed : '')];
+        
         switch ($builtin)
         {
           case 'post':
@@ -1248,7 +1279,7 @@ class PikList_Form
               $data['ID'] = $ids['post'];
             }
             
-            $ids['post'] = self::save_object('post', $data, isset($_REQUEST[piklist::$prefix]['post_id']) ? $_REQUEST[piklist::$prefix]['post_id'] : false);
+            $ids['post'] = self::save_object('post', $data, isset($request[piklist::$prefix]['post_id']) ? $request[piklist::$prefix]['post_id'] : false);
           
           break;
         
@@ -1317,7 +1348,7 @@ class PikList_Form
               }
             }
             
-            $ignore_fields = isset($_REQUEST[piklist::$prefix]['ignore_' . $builtin]) ? $_REQUEST[piklist::$prefix]['ignore_' . $builtin] : array();
+            $ignore_fields = isset($request[piklist::$prefix]['ignore_' . $builtin]) ? $request[piklist::$prefix]['ignore_' . $builtin] : array();
             if (!empty($ignore_fields) && is_array($ignore_fields))
             {
               foreach ($unset_fields as $key => $value) 
@@ -1356,7 +1387,7 @@ class PikList_Form
           break;
         
           case 'user':
-        
+
             self::save_object('user', $data);
         
           break;
@@ -1418,67 +1449,17 @@ class PikList_Form
           default: break;
         }
       }
-      
-      if (isset($_FILES[$type]))
-      {
-        switch($type)
-        {
-          case 'post':
-            
-            foreach ($_FILES[$type]['name'] as $fid => $file_name)
-            {
-              if ($_FILES[$type]['error'][$fid] === UPLOAD_ERR_OK)
-              {
-                $attach_id = media_handle_sideload(
-                              array(
-                                'name' => $file_name
-                                ,'size' => $_FILES[$type]['size'][$fid]
-                                ,'tmp_name' => $_FILES[$type]['tmp_name'][$fid]
-                              )
-                              ,isset($ids['post']) ? $ids['post'] : 0
-                              ,null
-                              ,isset($_REQUEST[$fid]) ? $_REQUEST[$fid] : null
-                            );
-                
-                if (isset($_REQUEST[$fid]['post_status']) && !is_wp_error($attach_id))
-                {
-                  $wpdb->query($wpdb->prepare("UPDATE $wpdb->posts SET post_status = %s WHERE ID = %d", $_REQUEST[$fid]['post_status'], $attach_id));
-                }
-              }
-            }
-            
-          break;
-        
-          case 'comment':
-          
-          break;
-        
-          case 'user':
-        
-          break;
-        
-          case 'taxonomy':
-      
-          break;
-        
-          default: 
-          
-            // NOTE: Uploads without scope
-            
-          break;
-        }
-      }
     }
 
     self::$save_ids = $ids;
 
-    if (isset($_REQUEST[piklist::$prefix . 'relate']))
-    { 
-      foreach ($_REQUEST[piklist::$prefix . 'relate'] as $key => $value)
+    if (isset($request[piklist::$prefix . 'relate']))
+    {
+      foreach ($request[piklist::$prefix . 'relate'] as $key => $value)
       {
         if (substr_compare($key, '_post_id', -strlen('_post_id'), strlen('_post_id')) === 0)
         {
-          foreach ($_REQUEST[piklist::$prefix . 'relate'][$key] as $post_id)
+          foreach ($request[piklist::$prefix . 'relate'][$key] as $post_id)
           {
             self::relate($ids['post'], $post_id);
           }
@@ -1489,7 +1470,7 @@ class PikList_Form
           // TODO: Refactor into function
           // TODO: scope multiple fields by type
           // TODO: make checkboxes adapt on all tabs
-          $remove = array_filter(explode(',', $_REQUEST[piklist::$prefix . 'relate'][$key][0]));
+          $remove = array_filter(explode(',', $request[piklist::$prefix . 'relate'][$key][0]));
           foreach ($remove as $has)
           {
             $found = $wpdb->get_var($wpdb->prepare('SELECT relate_id FROM ' . $wpdb->prefix . 'post_relationships WHERE post_id = %d AND has_post_id = %d', $ids['post'], $has));
@@ -1524,7 +1505,7 @@ class PikList_Form
     {
       if (isset($data[$allowed]) && !empty($data[$allowed]))
       {
-        $object[$allowed] = sanitize_text_field(is_array($data[$allowed]) ? current($data[$allowed]) : $data[$allowed]);
+        $object[$allowed] = is_array($data[$allowed]) ? current($data[$allowed]) : $data[$allowed];
       }
     }
     
@@ -1547,8 +1528,13 @@ class PikList_Form
       
       case 'user':
         
+        if (isset($object['user_pass']) && empty($object['user_pass']))
+        {
+          unset($object['user_pass']);
+        }
+
         $id = isset($object['ID']) ? wp_update_user($object) : wp_insert_user($object);
-        
+
         if ($object['user_role'] && $id)
         {
           piklist_user::multiple_roles($id, $object['user_role']);

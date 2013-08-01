@@ -78,12 +78,12 @@ class PikList_Workflow
           {
             case 'post_type':
 
-              $is_active = ($post ? $post->post_type : (isset($_REQUEST['post_type']) ? $_REQUEST['post_type'] : null)) == $value;
+              $is_active = ($post ? $post->post_type : (isset($_REQUEST['post_type']) && post_type_exists($_REQUEST['post_type']) ? $_REQUEST['post_type'] : null)) == $value;
               
             break;
           
             case 'page':
-          
+                          
               $is_active = (is_array($value) && in_array($pagenow, $value)) || (is_string($value) && $pagenow == $value);
           
             break;

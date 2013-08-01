@@ -20,6 +20,7 @@ Author URI: http://piklist.com/
       'labels' => piklist('post_type_labels', 'Piklist Demo')
       ,'public' => true
       ,'title' => __('Enter Custom Title')
+      ,'menu_icon' => plugins_url('piklist/parts/img/piklist-icon.png')
       ,'supports' => array(
         'title'
         ,'revisions'
@@ -198,6 +199,7 @@ Author URI: http://piklist.com/
     return $show;
   }
 
+  add_action('the_content', 'piklist_demo_meta_field_insert');
   function piklist_demo_meta_field_insert($content)
   {
     if (get_post_type() == 'piklist_demo')
@@ -217,8 +219,19 @@ Author URI: http://piklist.com/
     
     return $content;
   }
-  add_action('the_content', 'piklist_demo_meta_field_insert');
 
-
+  add_filter('piklist_assets', 'piklist_demo_assets');
+  function piklist_demo_assets($assets)
+  {    
+    array_push($assets['styles'], array(
+      'handle' => 'piklist-contacts'
+      ,'src' => piklist::$urls['piklist'] . '/add-ons/piklist-demos/parts/css/piklist-demo.css'
+      ,'media' => 'screen, projection'
+      ,'enqueue' => true
+      ,'admin' => true
+    ));
+  
+    return $assets;
+  }
 
 ?>

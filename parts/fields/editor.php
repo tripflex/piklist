@@ -1,7 +1,7 @@
 
 <?php 
   wp_editor(
-    isset($value) && !empty($value) ? esc_attr($value) : ''
+    isset($value) && !empty($value) ? $value : ''
     ,str_replace('_', '', $scope . $field)
     ,array_merge(
       array(

@@ -20,7 +20,19 @@
         piklist_admin.post_submit_meta_box();
         piklist_admin.thickbox();
 				piklist_admin.user_forms();
+				piklist_admin.empty_elements();
         // piklist_admin.list_tables();
+      },
+      
+      empty_elements: function()
+      {
+        $('#post-body-content').each(function()
+        {
+          if ($.trim($(this).html()) == '')
+          {
+            $(this).html('');
+          }
+        });
       },
 
 			user_forms: function()
@@ -47,7 +59,7 @@
           setTimeout(function() {
             var TB_WIDTH = 870,
               TB_HEIGHT = 700; 
-              console.log('asdf');
+
             $('#TB_window').css({
               marginLeft: '-' + parseInt((TB_WIDTH / 2), 10) + 'px'
               ,width: TB_WIDTH + 'px'
@@ -235,6 +247,7 @@
           var form_id = $(this).attr('rel');
           
           tb_remove();
+          console.log(form_id);
           
           $('#' + form_id).submit();
         });

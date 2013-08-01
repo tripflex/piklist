@@ -22,6 +22,7 @@ class PikList_Media
   public static function attachment_fields_to_edit($form_fields, $post)
   {
     global $typenow;
+    
     if ($typenow =='attachment')
     {
       if ($meta_boxes = self::meta_box($post))

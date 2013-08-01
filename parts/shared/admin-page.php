@@ -45,9 +45,9 @@
                     'page' => $_REQUEST['page']
                     ,'tab' => isset($tab['page']) ? $tab['page'] : false
                   )
-                );     
+                );   
         ?>
-        <a class="nav-tab <?php echo (isset($tab['page']) && (isset($_REQUEST['tab'])) == $tab['page']) || (!isset($_REQUEST['tab']) && !isset($tab['page'])) ? 'nav-tab-active' : null; ?>" href="?<?php echo http_build_query(array_filter($url)); ?>">
+         <a class="nav-tab <?php echo (isset($tab['page']) && (isset($_REQUEST['tab'])) && ($_REQUEST['tab'] == $tab['page'])) || (!isset($_REQUEST['tab']) && !isset($tab['page'])) ? 'nav-tab-active' : null; ?>" href="?<?php echo http_build_query(array_filter($url)); ?>">
           <?php echo $tab['title']; ?>
         </a>
         

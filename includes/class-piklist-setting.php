@@ -40,10 +40,10 @@ class PikList_Setting
       ,'sub_menu' => 'piklist'
       ,'menu_slug' => 'piklist-core-settings'
       ,'setting' => 'piklist_core'
-      ,'single_line' => true
       ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png') 
       ,'icon' => 'piklist'
       ,'default_tab' => 'General'
+      ,'single_line' => true
     );
 
     return $pages;

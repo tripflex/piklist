@@ -71,6 +71,8 @@ class PikList_Admin
   
   public function assets($assets)
   {
+    global $pagenow;
+    
     $scripts = array(
       '/parts/js/piklist-admin.js' => piklist::$version
     );
@@ -78,7 +80,7 @@ class PikList_Admin
     foreach ($scripts as $path => $version)
     {
       array_push($assets['scripts'], array(
-        'handle' => 'piklist-' . str_replace(array('.js', '/'), '', substr($path, strrpos($path, '/')))
+        'handle' => str_replace(array('.js', '/'), '', substr($path, strrpos($path, '/')))
         ,'src' => piklist::$urls['piklist'] . $path
         ,'ver' => $version
         ,'deps' => 'jquery'
@@ -95,7 +97,7 @@ class PikList_Admin
     foreach ($styles as $path => $version)
     {
       array_push($assets['styles'], array(
-        'handle' => 'piklist-' . str_replace(array('.css', '/'), '', substr($path, strrpos($path, '/')))
+        'handle' => str_replace(array('.css', '/'), '', substr($path, strrpos($path, '/')))
         ,'src' => piklist::$urls['piklist'] . $path
         ,'ver' => $version
         ,'enqueue' => true
@@ -105,17 +107,24 @@ class PikList_Admin
       ));
     }
     
-    if (is_admin())
+    if (in_array($pagenow, array('post.php', 'post-new.php')))
     {
-      wp_enqueue_script('theme-preview');
-      wp_enqueue_script('thickbox');
-      wp_enqueue_script('wp-color-picker');
-      wp_enqueue_script('wp-pointer');
-        
-      wp_enqueue_style('thickbox');
-      wp_enqueue_style('wp-color-picker');
-      wp_enqueue_style('wp-pointer');
+      if (!post_type_supports(get_post_type((int) $_REQUEST['post']), 'thumbnail'))
+      {
+        wp_enqueue_media();
+      }
     }
+    
+    wp_enqueue_script('theme-preview');
+    
+    wp_enqueue_script('thickbox');
+    wp_enqueue_style('thickbox');
+    
+    wp_enqueue_script('wp-color-picker');
+    wp_enqueue_style('wp-color-picker');
+    
+    wp_enqueue_script('wp-pointer');
+    wp_enqueue_style('wp-pointer');
     
     return $assets;
   }

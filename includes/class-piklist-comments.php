@@ -93,13 +93,13 @@ class PikList_Comments
       $withcomments = true;
       
       $_post = $post;
-      
+
       // TODO: Users vs terms
       $post = self::get_term_post($term->term_id, $term->taxonomy, true);
-      
+     
       $_id = $id;
       $id = $post->ID;
-      
+
       comments_template($file, $separate_comments);
     
       $post = $_post;
@@ -138,7 +138,7 @@ class PikList_Comments
     
     // TODO: Users vs terms, profile update action for users?
     
-    if ($wp_taxonomies[$taxonomy]->comments)
+    if (isset($wp_taxonomies[$taxonomy]->comments))
     {
       $term = get_term_by('id', $term_id, $taxonomy);
       
@@ -171,6 +171,8 @@ class PikList_Comments
       
       foreach ($post['meta'] as $meta_key => $meta_value)
       {
+        // KM: in original plugin
+        //delete_metadata('post', $post_id, $meta_key, $meta_value);
         update_post_meta($post_id, $meta_key, $meta_value);
       }
       
@@ -183,6 +185,11 @@ class PikList_Comments
   
   public static function get_term_post($term_id, $taxonomy, $create = false)
   {
+
+    $term_id = '1831';
+    $taxonomy = 'bp-game';
+
+
     $posts = get_posts(array(
       'post_type' => self::$post_type_prefix . $taxonomy
       ,'post_status' => 'any'
