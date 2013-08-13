@@ -133,8 +133,8 @@ class PikList
   
   public static function add_plugin($type, $path)
   {
-    self::$paths[$type] = $path;
-    self::$urls[$type] = plugins_url() . substr($path, strrpos($path, '/'));
+    self::$paths[$type] = $path;        
+    self::$urls[$type] = plugins_url() . substr($path, strrpos(str_replace(chr(92), '/', $path), '/'));
   }
   
   public static function render($view, $arguments = array(), $return = false) 

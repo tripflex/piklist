@@ -17,7 +17,7 @@ Collapse: false
 
 ?>
 
-<?php //Displaying your related posts is as simple as using WP_Query
+<?php // Displaying your related posts is as simple as using WP_Query with one extra parameter, post_belongs
 
     $args = array(
       'post_type' => 'post'
@@ -28,26 +28,30 @@ Collapse: false
 
 ?>
 
-  <?php if (query_posts($args)) : ?>
+  <?php if ($post_id) : ?>
 
-    <h4>Related Posts</h4>
+    <?php if (query_posts($args)) : ?>
 
-      <ul>
+      <h4><?php _e('Related Posts','piklist');?></h4>
 
-        <?php query_posts($args); ?>
+        <ol>
 
-        <?php while (have_posts()) : the_post(); ?>
+          <?php query_posts($args); ?>
 
-          <li><?php the_title();?></li>
+          <?php while (have_posts()) : the_post(); ?>
 
-        <?php endwhile; ?>
+            <li><?php the_title();?></li>
 
-      </ul>
+          <?php endwhile; ?>
 
-      <hr>
+        </ol>
 
-      <?php wp_reset_query();?>
+        <hr>
 
+        <?php wp_reset_query();?>
+
+    <?php endif; ?>
+  
   <?php endif; ?>
 
 

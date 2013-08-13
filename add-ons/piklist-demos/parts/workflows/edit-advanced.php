@@ -13,6 +13,7 @@ Flow: Edit Demo
     ,'piklist_meta_field_add_more'
     ,'piklist_meta_field_taxonomies'
     ,'piklist_meta_field_featured_image'
+    ,'piklist_meta_field_relate'
   ));
 
   piklist('shared/code-locater', array(

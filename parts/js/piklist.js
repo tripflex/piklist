@@ -515,6 +515,7 @@
     this.$element = $(element);
     this.total_columns = options.total_columns;
 		this.gutter_width = options.gutter_width;
+		this.gutter_height = options.gutter_height;
     
     this._init();
   };
@@ -527,6 +528,7 @@
     {
       var total_columns = this.total_columns,
 				gutter_width = this.gutter_width,
+			  gutter_height = this.gutter_height,
 				track = {
 				  columns: 0,
 				  gutters: 0,
@@ -556,7 +558,8 @@
               'display': 'block',
               'float': 'left',
               'width': ((columns / total_columns) * 100) - gutter_width + '%',
-              'margin-left': gutter_width + '%'
+              'margin-left': gutter_width + ($.isNumeric(gutter_width) ? '%' : null),
+              'margin-bottom': gutter_height + ($.isNumeric(gutter_height) ? '%' : null)
             });       
         });
 
@@ -576,7 +579,6 @@
 							if ($(this).parent('div[data-piklist-field-columns]').length == 0)
 							{
 								$(this)
-									.prev('.piklist-label')
 									.siblings('.piklist-label[for="' + $element.attr('id') + '"], .piklist-field-list:first')
 									.andSelf()
 									.wrapAll('<div data-piklist-field-columns="' + columns + '" data-piklist-field-group="' + group + '" />')
@@ -585,7 +587,8 @@
 			              'display': 'block',
 			              'float': 'left',
 			              'width': ((columns / total_columns) * 100) - gutter_width + '%',
-                    'margin-left': gutter_width + '%'
+                    'margin-left': gutter_width + ($.isNUmeric(gutter_width) ? '%' : null),
+                    'margin-bottom': gutter_height + ($.isNUmeric(gutter_height) ? '%' : null)
 			            });
 							}
 						});  
@@ -697,7 +700,8 @@
   
   $.fn.piklistcolumns.defaults = {
     total_columns: 12,
-		gutter_width: 2.5
+		gutter_width: 2.5,
+		gutter_height: '7px'
   };
   
   $.fn.piklistcolumns.Constructor = PiklistColumns;
@@ -896,4 +900,3 @@
 
 })(jQuery, window, document);
 
-  

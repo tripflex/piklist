@@ -50,21 +50,6 @@ class PikList_Form
                         </div>
                       </div>
                      [/field_wrapper]'
-    ,'post_meta_classic' => '<table class="form-table">
-                               [field_wrapper]
-                               <tr id="%1$s" class="%2$s">
-                                 <th scope="row" class="left">
-                                   [field_label]
-                                 </th>
-                                 <td>
-                                   [field]
-                                   [field_description_wrapper]
-                                     <span class="description">[field_description]</span>
-                                   [/field_description_wrapper]
-                                 </td>
-                               </tr>
-                               [/field_wrapper]
-                             </table>'
    ,'term_meta' => '<table class="form-table">
                       [field_wrapper]
                       <tr id="%1$s" class="%2$s">
@@ -599,7 +584,7 @@ class PikList_Form
       ,'columns' => null
       ,'embed' => false                     // internal
       ,'child_field' => false
-      ,'label_position' => 'after'  
+      ,'label_position' => 'before'  
       ,'unique' => true                     // when editing a field, FALSE will add new data, TRUE will overwrite.
       ,'disable_label' => false             // remove label table cell (you would use for post_meta)
       ,'conditions' => false                // array of array of conditions
@@ -1505,7 +1490,7 @@ class PikList_Form
     {
       if (isset($data[$allowed]) && !empty($data[$allowed]))
       {
-        $object[$allowed] = is_array($data[$allowed]) ? current($data[$allowed]) : $data[$allowed];
+        $object[$allowed] = is_array($data[$allowed]) && count($data[$allowed]) == 1 ? current($data[$allowed]) : $data[$allowed];
       }
     }
     
