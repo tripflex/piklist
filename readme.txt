@@ -96,6 +96,9 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
+= 0.8.0b3 =
+* FIXED: Javascript error that broke visual editor and Help Tabs.
+
 = 0.8.0b2 =
 * NEW: Upload File field!
 * Bug Fixes

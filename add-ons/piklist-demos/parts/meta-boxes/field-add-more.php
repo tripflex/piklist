@@ -8,99 +8,99 @@ Collapse: false
 
   piklist('field', array(
     'type' => 'text'
-    ,'field' => 'test_add_more'
+    ,'field' => 'demo_add_more'
     ,'label' => __('Text')
     ,'add_more' => true
     ,'value' => 'single'
   ));
-
-  piklist('field', array(
-    'type' => 'textarea'
-    ,'field' => 'test_add_more_textarea'
-    ,'label' => __('Text Area')
-    ,'add_more' => true
-    ,'value' => 'This is some default text.'
-    ,'attributes' => array(
-      'rows' => 10
-      ,'cols' => 50
-      ,'class' => 'large-text code'
-    )
-  ));
  
   piklist('field', array(
     'type' => 'group'
-    ,'field' => 'test_add_more_grouped'
-    ,'label' => __('Test ~ Add More Group (Grouped)')
+    ,'label' => __('Todo\'s(Un-Grouped)')
     ,'add_more' => true
     ,'fields' => array(
       array(
-        'type' => 'text'
-        ,'field' => 'test_add_more_grouped_1'
-        ,'value' => 'one'
-      )
-      ,array(
-        'type' => 'text'
-        ,'field' => 'test_add_more_grouped_2'
-        ,'value' => 'two'
-      )
-      ,array(
-        'type' => 'text'
-        ,'field' => 'test_add_more_grouped_3'
-        ,'value' => 'three'
-      )
+        'type' => 'select'
+        ,'field' => 'demo_add_more_todo_user'
+        ,'label' => 'Assigned to'
+        ,'columns' => 4
+        ,'choices' => piklist(
+           get_users(
+             array(
+              'orderby' => 'display_name'
+              ,'order' => 'asc'
+             )
+             ,'objects'
+           )
+           ,array(
+             'ID'
+             ,'display_name'
+           )
+          )
+        )
+        ,array(
+          'type' => 'text'
+          ,'field' => 'demo_add_more_todo_task'
+          ,'label' => 'Task'
+          ,'columns' => 8
+        )
     )
   ));
-   
+
   piklist('field', array(
     'type' => 'group'
-    ,'field' => 'test_add_more_group_nested'
-    ,'label' => __('Test ~ Add More Group Nested')
+    ,'label' => __('Content Section(Un-Grouped)')
     ,'add_more' => true
     ,'fields' => array(
       array(
         'type' => 'text'
-        ,'field' => 'test_add_more_group_1'
-        ,'value' => 'one'
+        ,'field' => 'demo_content_section_title'
+        ,'label' => 'Section Title'
+        ,'columns' => 12
         ,'attributes' => array(
-          'class' => 'regular-text'
+          'class' => 'large-text'
         )
       )
       ,array(
-        'type' => 'select'
-        ,'field' => 'test_add_more_group_2'
-        ,'value' => 'first'
+        'type' => 'text'
+        ,'field' => 'demo_content_section_tagline'
+        ,'label' => 'Section Tagline'
+        ,'columns' => 12
         ,'attributes' => array(
-          'class' => 'regular-text'
-        )
-        ,'choices' => array(
-          'first' => 'First Choice'
-          ,'second' => 'Second Choice'
-          ,'third' => 'Third Choice'
+          'class' => 'large-text'
         )
       )
       ,array(
         'type' => 'group'
-        ,'field' => 'test_add_more_nested_group'
         ,'add_more' => true
         ,'fields' => array(
           array(
-            'type' => 'text'
-            ,'field' => 'test_add_more_nested_group_2'
-            ,'value' => 'two'
-          )
-          ,array(
-            'type' => 'text'
-            ,'field' => 'test_add_more_nested_group_3'
-            ,'value' => 'three'
+            'type' => 'select'
+            ,'field' => 'demo_content_section_title'
+            ,'value' => 'ID'
+            ,'choices' => piklist(
+              get_posts(
+                 array(
+                  'post_type' => 'post'
+                  ,'orderby' => 'post_date'
+                 )
+                 ,'objects'
+               )
+               ,array(
+                 'ID'
+                 ,'post_title'
+               )
+            )
           )
         )
       )
     )
   ));
 
+
   piklist('field', array(
     'type' => 'group'
-    ,'label' => __('Add Contacts Demo (Nested Add-More)')
+    ,'label' => __('Add Contacts (Un-Grouped)')
     ,'add_more' => true
     ,'fields' => array(
       array(

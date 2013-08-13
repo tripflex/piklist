@@ -116,7 +116,16 @@ Author URI: http://piklist.com/
       ,'default_tab' => 'Basic'
       ,'save_text' => 'Save Demo Settings'
     );
-      
+    
+    $pages[] = array(
+      'page_title' => __('List Table Demos')
+      ,'menu_title' => __('List Table', 'piklist')
+      ,'sub_menu' => 'edit.php?post_type=piklist_demo'
+      ,'capability' => 'manage_options'
+      ,'menu_slug' => 'piklist_list_table'
+      ,'icon' => 'edit'
+    );
+  
     return $pages;
   }
 
@@ -215,13 +224,13 @@ Author URI: http://piklist.com/
   function piklist_demo_assets($assets)
   {    
     array_push($assets['styles'], array(
-      'handle' => 'piklist-contacts'
+      'handle' => 'piklist-demos'
       ,'src' => piklist::$urls['piklist'] . '/add-ons/piklist-demos/parts/css/piklist-demo.css'
       ,'media' => 'screen, projection'
       ,'enqueue' => true
       ,'admin' => true
     ));
-  
+    
     return $assets;
   }
 
