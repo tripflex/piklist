@@ -587,8 +587,8 @@
 			              'display': 'block',
 			              'float': 'left',
 			              'width': ((columns / total_columns) * 100) - gutter_width + '%',
-                    'margin-left': gutter_width + ($.isNUmeric(gutter_width) ? '%' : null),
-                    'margin-bottom': gutter_height + ($.isNUmeric(gutter_height) ? '%' : null)
+                    'margin-left': gutter_width + ($.isNumeric(gutter_width) ? '%' : null),
+                    'margin-bottom': gutter_height + ($.isNumeric(gutter_height) ? '%' : null)
 			            });
 							}
 						});  
