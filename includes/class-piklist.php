@@ -634,7 +634,7 @@ class PikList
     return $needle;
   }
     
-  public static function object_custom($type, $id)
+  public static function object($type, $id)
   {
     $data = $type == 'option' ? get_option($id) : get_metadata($type, $id);
     
@@ -642,14 +642,14 @@ class PikList
     {
       foreach ($data as $key => $value)
       {
-        $data[$key] = self::object_custom_value(maybe_unserialize($value));
+        $data[$key] = self::object_value(maybe_unserialize($value));
       }
     }
     
     return $data;
   }
   
-  public function object_custom_value($object)
+  public function object_value($object)
   {
     if (is_array($object))
     {
@@ -663,7 +663,7 @@ class PikList
         }
         else if (is_array($value))
         {
-          $object[$key] = self::object_custom_value($value);
+          $object[$key] = self::object_value($value);
         }
         else
         {
@@ -951,7 +951,7 @@ function piklist($option, $arguments = array())
           break;
         }
         
-        return piklist::object_custom($type, $arguments);
+        return piklist::object($type, $arguments);
         
       break;
       

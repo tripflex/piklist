@@ -158,7 +158,8 @@
             .not(':submit, :reset')
             .attr('value', '')
             .removeAttr('checked')
-            .children('option:selected').removeAttr('selected');
+            .children('option:selected')
+            .removeAttr('selected');
         });
           
         $('.' + piklist_admin.widget + '-forms .' + piklist_admin.widget + '-widget-form').hide();
@@ -170,11 +171,11 @@
         {
           $('#widgets-right .widget-inside:visible .' + piklist_admin.widget + '-forms .' + piklist_admin.widget + '-form-selected').each(function(index)
           {
-            piklist.process_fields($(this).parent('.' + piklist_admin.widget + '-forms').find('input#piklist_fields_id').val());
+            piklist.process_fields($(this).parent('.' + piklist_admin.widget + '-forms').find('input#_fields_id').val());
             
             $(this).fadeIn();
           });
-        }, 1000);
+        }, 500);
       },
 
       widgets: function(object)
@@ -228,7 +229,9 @@
         if (object)
         {
           var action = widget.parents('.widget').find('.widget-action');
+          
           action.trigger('click');
+          
           setTimeout(function()
           {
             action.trigger('click');
@@ -247,7 +250,6 @@
           var form_id = $(this).attr('rel');
           
           tb_remove();
-          console.log(form_id);
           
           $('#' + form_id).submit();
         });
