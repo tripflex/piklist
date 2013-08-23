@@ -17,7 +17,7 @@ class PikList_Dashboard
 
   public static function wp_dashboard_setup()
   {
-    //self::unregister_dashboard_widgets();
+    self::unregister_dashboard_widgets();
     self::register_dashboard_widgets();
   }
 

@@ -106,10 +106,12 @@ class PikList_Admin
         ,'media' => 'screen, projection'
       ));
     }
-    
+
     if (in_array($pagenow, array('post.php', 'post-new.php')))
     {
-      if (!post_type_supports(get_post_type((int) $_REQUEST['post']), 'thumbnail'))
+      $post_type = isset($_REQUEST['post_type']) ? $_REQUEST['post_type'] : 'post';
+
+      if (!post_type_supports($post_type, 'thumbnail'))
       {
         wp_enqueue_media();
       }
