@@ -239,10 +239,7 @@ class PikList_Form
 
     wp_register_style('jquery-ui-core', content_url() . '/plugins/piklist/parts/css/jquery-ui/jquery-ui.smoothness.css', false, $jquery_ui_core->ver);
     wp_register_script('jquery-timepicker', content_url() . '/plugins/piklist/parts/js/jquery.timePicker.min.js', array('jquery'), '0.1', true); 
-    
-    wp_enqueue_script('jquery-ui-datepicker');
-    wp_enqueue_script('jquery-timepicker');
-    
+       
     wp_enqueue_style('jquery-ui-core');
   }
   
@@ -993,10 +990,34 @@ class PikList_Form
     extract(shortcode_atts(array(
       'class' => array()
     ), $attributes));
+
+
+    switch (self::$field_rendering['type'])
+    {
+      case 'datepicker':
+
+        wp_enqueue_script('jquery-ui-datepicker');
+
+      break;
+
+      case 'timepicker':
+
+        wp_enqueue_script('jquery-ui-timepicker');
+
+      break;
+
+      case 'colorpicker':
+
+        wp_enqueue_script('wp-color-picker');
+        wp_enqueue_style('wp-color-picker');
+
+      break;
+    }
+
     
     $content = do_shortcode($content);
     $type = isset(self::$field_alias[self::$field_rendering['type']]) ? self::$field_alias[self::$field_rendering['type']] : self::$field_rendering['type'];
-        
+
     switch ($tag)
     {
       case 'field_label':

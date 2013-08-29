@@ -134,7 +134,10 @@ class PikList
   public static function add_plugin($type, $path)
   {
     self::$paths[$type] = $path;        
-    self::$urls[$type] = plugins_url() . substr($path, strrpos(str_replace(chr(92), '/', $path), '/'));
+
+    // @credit Marcus Eby: http://piklist.com/support/reply/reply-to-problem-in-wp-3-5-2-media-library-4/
+    $path = str_replace(chr(92), '/', $path);
+    self::$urls[$type] = plugins_url() . substr($path, strrpos($path, '/'));
   }
   
   public static function render($view, $arguments = array(), $return = false) 

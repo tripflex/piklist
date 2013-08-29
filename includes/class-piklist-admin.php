@@ -107,27 +107,6 @@ class PikList_Admin
       ));
     }
 
-    if (in_array($pagenow, array('post.php', 'post-new.php')))
-    {
-      $post_type = isset($_REQUEST['post_type']) ? $_REQUEST['post_type'] : 'post';
-
-      if (!post_type_supports($post_type, 'thumbnail'))
-      {
-        wp_enqueue_media();
-      }
-    }
-    
-    wp_enqueue_script('theme-preview');
-    
-    wp_enqueue_script('thickbox');
-    wp_enqueue_style('thickbox');
-    
-    wp_enqueue_script('wp-color-picker');
-    wp_enqueue_style('wp-color-picker');
-    
-    wp_enqueue_script('wp-pointer');
-    wp_enqueue_style('wp-pointer');
-    
     return $assets;
   }
 

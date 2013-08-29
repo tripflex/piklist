@@ -14,6 +14,7 @@ Flow: Edit Demo
     ,'piklist_meta_field_taxonomies'
     ,'piklist_meta_field_featured_image'
     ,'piklist_meta_field_relate'
+    ,'piklist_meta_field_comments'
   ));
 
   piklist('shared/code-locater', array(

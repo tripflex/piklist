@@ -1,7 +1,7 @@
 
 <?php
 
-  $attributes['class'] = empty($attributes['class']) ? array('large-text', 'code') : $attributes['class']; 
+  $attributes['class'] = array_filter($attributes['class']) ? array_filter($attributes['class'],'trim') : array('large-text', 'code');
 
 ?>
 
