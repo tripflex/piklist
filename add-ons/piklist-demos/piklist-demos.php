@@ -226,6 +226,7 @@ Author URI: http://piklist.com/
     array_push($assets['styles'], array(
       'handle' => 'piklist-demos'
       ,'src' => piklist::$urls['piklist'] . '/add-ons/piklist-demos/parts/css/piklist-demo.css'
+      ,'ver' => $version
       ,'media' => 'screen, projection'
       ,'enqueue' => true
       ,'admin' => true

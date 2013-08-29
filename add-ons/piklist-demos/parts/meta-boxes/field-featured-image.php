@@ -1,8 +1,8 @@
 <?php
 /*
-Title: Featured Image(s) <span class="piklist-title-right">Order 30</span>
+Title: Featured Image(s) <span class="piklist-title-right">Order 40</span>
 Post Type: piklist_demo
-Order: 30
+Order: 40
 Priority: default
 Context: side
 Collapse: false

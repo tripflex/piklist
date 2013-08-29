@@ -1,4 +1,10 @@
 <?php
+
+  if(is_admin())
+  {
+    wp_enqueue_media();
+  }
+  
   $value = is_array($value) || empty($value) ? $value : array($value);
   if (empty($value)):
 ?>
@@ -24,7 +30,7 @@
 
 
 
-<?php if ($options['basic'] || !is_admin()): ?>
+<?php if (isset($options['basic']) || !is_admin()): ?>
 
   <input 
     type="file"

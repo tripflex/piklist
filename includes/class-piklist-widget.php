@@ -98,7 +98,7 @@ class PikList_Widget
 
     $class = 'class="widget-' . self::$widget_classes[$id] . ' ';
 
-    if (self::$widget_classes[$id] % 2)
+    if (self::$widget_classes[$id] % 2 == 0)
     {
       $class .= 'widget-even ';
       $class .= 'widget-alt ';

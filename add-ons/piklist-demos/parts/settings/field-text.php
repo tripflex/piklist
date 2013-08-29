@@ -4,6 +4,7 @@ Title: Text Fields
 Setting: piklist_demo_fields
 Order: 10
 */
+
   
   piklist('field', array(
     'type' => 'text'

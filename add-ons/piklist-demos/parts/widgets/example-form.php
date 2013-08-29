@@ -185,6 +185,30 @@ Width: 700
   <?php
 
     piklist('field', array(
+    'type' => 'file'
+    ,'field' => 'upload_basic'
+    ,'scope' => 'post_meta'
+    ,'label' => 'Add File(s)'
+    ,'description' => 'This is the basic upload field.'
+    ,'options' => array(
+      'basic' => true
+    )
+  ));
+  
+  piklist('field', array(
+    'type' => 'file'
+    ,'field' => 'upload_media'
+    ,'scope' => 'post_meta'
+    ,'label' => 'Add File(s)'
+    ,'description' => 'This is the uploader seen in the admin by default.'
+    ,'options' => array(
+      'title' => 'Add File(s)'
+      ,'button' => 'Add'
+    )
+  ));
+  
+
+    piklist('field', array(
       'type' => 'colorpicker'
       ,'field' => 'demo_color'
       ,'label' => __('Color Picker')

@@ -82,7 +82,10 @@ class PikList_Validate
     {
       foreach ($fields as &$field)
       {
-        $p = explode('[', str_replace(']', '', $field['name']));
+        if (isset($field['name']))
+        {
+          $p = explode('[', str_replace(']', '', $field['name']));
+        }
         
         if (isset($_REQUEST[$p[0]]))
         {
@@ -101,8 +104,13 @@ class PikList_Validate
           {
             $field['request_value'] = $_REQUEST[$p[0]];
           }
+
+          if(isset($field['request_value']))
+          {
+            $field['request_value'] = is_array($field['request_value']) ? array_filter($field['request_value']) : $field['request_value'];
+          }
           
-          $field['request_value'] = is_array($field['request_value']) ? array_filter($field['request_value']) : $field['request_value'];
+          
         }
         else
         {

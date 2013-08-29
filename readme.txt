@@ -96,6 +96,12 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
+= 0.8.0b5 =
+* NEW: Comment Field.
+* IMPROVED: Assets for Javascript fields only load when the field is in use.
+* FIXED: Windows Path Error.
+* FIXED: Image upload for Widgets.
+
 = 0.8.0b4 =
 * NEW: Replace standard Right Now widget on WordPress dashboard.
 * FIXED: REALLY fixed the Javascript error that broke visual editor and Help Tabs.
