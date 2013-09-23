@@ -5,7 +5,7 @@ Post Type: piklist_demo
 Order: 40
 Priority: default
 Context: side
-Collapse: false
+Collapse: true
 */
   
   piklist('field', array(

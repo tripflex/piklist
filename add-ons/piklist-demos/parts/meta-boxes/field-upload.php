@@ -3,7 +3,7 @@
 Title: Upload Fields <span class="piklist-title-right">Order 110</span>
 Post Type: piklist_demo
 Order: 110
-Collapse: false
+Collapse: true
 */
   
   // Any field with the scope set to the field name of the upload field will be treated as related
@@ -19,10 +19,10 @@ Collapse: false
     'type' => 'file'
     ,'field' => 'upload_basic'
     ,'scope' => 'post_meta'
-    ,'label' => 'Add File(s)'
-    ,'description' => 'This is the basic upload field.'
+    ,'label' => __('Add File(s)','piklist')
+    ,'description' => __('This is the basic upload field.','piklist')
     ,'options' => array(
-      'basic' => true
+      'basic' => false
     )
   ));
   
@@ -30,11 +30,11 @@ Collapse: false
     'type' => 'file'
     ,'field' => 'upload_media'
     ,'scope' => 'post_meta'
-    ,'label' => 'Add File(s)'
-    ,'description' => 'This is the uploader seen in the admin by default.'
+    ,'label' => __('Add File(s)','piklist')
+    ,'description' => __('This is the uploader seen in the admin by default.','piklist')
     ,'options' => array(
-      'title' => 'Add File(s)'
-      ,'button' => 'Add'
+      'modal_title' => __('Add File(s)','piklist')
+      ,'button' => __('Add','piklist')
     )
   ));
   

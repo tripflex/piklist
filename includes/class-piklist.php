@@ -142,8 +142,8 @@ class PikList
   
   public static function render($view, $arguments = array(), $return = false) 
   {
-    global $post, $posts, $post_id, $current_user, $wpdb, $wp_query, $pagenow, $typenow, $hook_suffix, $current_screen;
-    
+    global $post, $posts, $post_id, $current_user, $wpdb, $wp_query, $pagenow, $typenow, $hook_suffix, $current_screen, $wp_version;
+
     if ($return)
     {
       ob_start();
@@ -152,6 +152,34 @@ class PikList
     foreach (self::$paths as $_display => $_path)
     {
       $_file = (path_is_absolute($view) ? $view : self::$paths[$_display] . '/parts/' . $view) . (strstr($view, '.php') ? '' : '.php');
+
+      // Check for theme overrides
+      if (stristr($_file, '/parts/'))
+      {
+        $_part = '';
+        $_directories = explode('/', $_file);
+        for ($i = count($_directories); $i >= 0; $i--)
+        {
+          if (isset($_directories[$i]))
+          {
+            $_part = $_directories[$i] . (empty($_part) ? '' : '/') . $_part;  
+            if ($_directories[$i] == 'parts')
+            {
+              $_part = '/' . $_directories[$i - 1] . '/' . $_part;  
+              break;
+            }
+          }
+        }
+      }
+
+      if (isset(self::$paths['theme']))
+      {
+        if (file_exists(self::$paths['theme'] . $_part))
+        {
+          $_file = self::$paths['theme'] . $_part;
+        }
+      }
+
 
       if (file_exists($_file))
       {
@@ -372,13 +400,20 @@ class PikList
       ,'singular_name' => __(self::singularize($label), 'piklist')
       ,'search_items' =>  __('Search ' . self::pluralize($label), 'piklist')
       ,'all_items' => __('All ' . self::pluralize($label), 'piklist')
-      ,'parent_item' => __('Parent'  . self::pluralize($label), 'piklist')
+      ,'parent_item' => __('Parent '  . self::pluralize($label), 'piklist')
       ,'parent_item_colon' => __('Parent ' . self::pluralize($label) . ':', 'piklist')
       ,'edit_item' => __('Edit ' . self::singularize($label), 'piklist')
       ,'update_item' => __('Update ' . self::singularize($label), 'piklist')
       ,'add_new_item' => __('Add New ' . self::singularize($label), 'piklist')
+      ,'view_item' => __('View ' . self::singularize($label), 'piklist')
+      ,'popular_items' => __('Popular ' . self::pluralize($label), 'piklist')
       ,'new_item_name' => __('New ' . self::singularize($label) . ' Name', 'piklist')
+      ,'separate_items_with_commas' => __('Separate ' . self::pluralize($label) . ' with commas', 'piklist')
+      ,'add_or_remove_items' => __('Add or remove ' . self::pluralize($label), 'piklist')
+      ,'choose_from_most_used' => __('Choose from the most used ' . self::pluralize($label), 'piklist')
+      ,'not_found' => __('No ' . self::pluralize($label) . ' found.', 'piklist')
       ,'menu_name' => __(self::pluralize($label), 'piklist')
+      ,'name_admin_bar' => $label
     );
   }
   
@@ -640,7 +675,7 @@ class PikList
   public static function object($type, $id)
   {
     $data = $type == 'option' ? get_option($id) : get_metadata($type, $id);
-    
+
     if (!empty($data))
     {
       foreach ($data as $key => $value)
@@ -648,19 +683,23 @@ class PikList
         $data[$key] = self::object_value(maybe_unserialize($value));
       }
     }
-    
+
     return $data;
   }
   
   public function object_value($object)
   {
-    if (is_array($object))
+    if (is_array($object) && count($object) == 1 && self::is_flat($object))
+    {
+      return maybe_unserialize(current($object));
+    }
+    else if (is_array($object))
     {
       foreach ($object as $key => $value)
       {
         $value = maybe_unserialize($value);
         
-        if (is_array($value) && is_numeric($key) && count($value) == 1)
+        if (is_array($value) && is_numeric($key) && count($value) == 1 && self::is_flat($object))
         {
           $object = current($value);
         }
@@ -668,14 +707,15 @@ class PikList
         {
           $object[$key] = self::object_value($value);
         }
-        else
-        {
-          $object = $value;
-        }
       }
     }
     
-    return $object;
+    return maybe_unserialize($object);
+  }
+  
+  public static function is_flat($object)
+  {
+    return count($object) == count($object, COUNT_RECURSIVE);
   }
   
   public static function explode($delimiter, $string)
@@ -782,27 +822,27 @@ class PikList
       }
     }
     
-    if ($arguments['sections'])
-    {
-      $sections = array(
-        'Personal Options'
-        ,'Name'
-        ,'Contact Info'
-        ,'About the user'
-        ,'About Yourself'
-      );
-  
-      foreach ($sections as $section)
-      {
-        if (in_array($section, $arguments['sections']))
-        {
-          unset($sections[array_search($section, $sections)]);
-        }
-      }
-    }
+    // if ($arguments['sections'])
+    // {
+    //   $sections = array(
+    //     'Personal Options'
+    //     ,'Name'
+    //     ,'Contact Info'
+    //     ,'About the user'
+    //     ,'About Yourself'
+    //   );
+    //   
+    //   foreach ($sections as $section)
+    //   {
+    //     if (in_array($section, $arguments['sections']))
+    //     {
+    //       unset($sections[array_search($section, $sections)]);
+    //     }
+    //   }
+    // }
     
     piklist('shared/admin-user-profile-fields', array(
-      'sections' => $sections
+      'sections' => isset($arguments['sections']) ? $arguments['sections'] : array()
     ));
   }
   

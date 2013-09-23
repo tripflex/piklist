@@ -23,6 +23,9 @@ class PikList_Taxonomy
 		
 		add_filter('parent_file', array('piklist_taxonomy', 'parent_file'));
 		add_filter('sanitize_user', array('piklist_taxonomy', 'restrict_username'));
+		
+    // TODO: This isn't working
+    // add_filter('wp_redirect', array('piklist_taxonomy', 'redirect'), 10, 2);
  }
   
   public static function init()
@@ -215,7 +218,7 @@ class PikList_Taxonomy
 		return $file;
 	}
 	
-	public function user_taxonomy_column($columns) 
+	public static function user_taxonomy_column($columns) 
 	{
 		$columns['users']	= __('Users');
 
@@ -224,7 +227,7 @@ class PikList_Taxonomy
 		return $columns;
 	}
 	
-	public function user_taxonomy_column_value($display, $column, $term_id) 
+	public static function user_taxonomy_column_value($display, $column, $term_id) 
 	{
 	  switch ($column)
 	  {
@@ -247,6 +250,19 @@ class PikList_Taxonomy
 		
 		return $username;
 	}	
+
+  public static function redirect($location)
+  {
+    $url = parse_url($location);
+    parse_str($url['query'], $url_defaults);
+    
+    if (stristr($url['path'], 'edit-tags.php') && isset($url_defaults['taxonomy']) && isset($url_defaults['message']))
+    {
+      $location .= '&action=edit&tag_ID=' . (int) $_POST['tag_ID'];
+    }
+
+    return $location;
+  }
 }
 
 if (!function_exists('add_term_meta'))

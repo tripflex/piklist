@@ -5,7 +5,7 @@ Post Type: piklist_demo
 Order: 20
 Priority: default
 Context: side
-Collapse: false
+Collapse: true
 */
 
   piklist('field', array(
@@ -24,7 +24,6 @@ Collapse: false
       )
     )
   ));
-
 
   piklist('shared/code-locater', array(
     'location' => __FILE__

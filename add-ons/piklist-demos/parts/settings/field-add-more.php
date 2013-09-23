@@ -61,15 +61,6 @@ Order: 30
     )
   ));
 
-/*
-  piklist('field', array(
-    'type' => 'colorpicker'
-    ,'field' => 'demo_color_add_more'
-    ,'add_more' => true
-    ,'label' => __('Color Picker')
-    ,'description' => __('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-  ));
-  
   piklist('field', array(
     'type' => 'datepicker'
     ,'field' => 'demo_date_add_more'
@@ -81,8 +72,6 @@ Order: 30
     )
     ,'value' => date('M d, Y', time() + 604800)
   ));
-*/
-
 
   piklist('shared/code-locater', array(
     'location' => __FILE__

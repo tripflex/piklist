@@ -3,7 +3,7 @@
 Title: Select Fields <span class="piklist-title-right">Order 20</span>
 Post Type: piklist_demo
 Order: 20
-Collapse: false
+Collapse: true
 */
 
   piklist('field', array(

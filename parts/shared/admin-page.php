@@ -29,9 +29,9 @@
 
     <?php echo (isset($single_line) && !$single_line) ? '<h2 class="nav-tab-wrapper">' : ''; ?>
             
-      <?php foreach ($tabs as $tab): ?>
-        
-        <?php
+      <?php 
+        foreach ($tabs as $tab)
+        {
           parse_str($_SERVER['QUERY_STRING'], $url_defaults);
 
           foreach (array('message', 'paged') as $variable)
@@ -46,13 +46,10 @@
                     ,'tab' => isset($tab['page']) ? $tab['page'] : false
                   )
                 );   
-        ?>
-         <a class="nav-tab <?php echo (isset($tab['page']) && (isset($_REQUEST['tab'])) && ($_REQUEST['tab'] == $tab['page'])) || (!isset($_REQUEST['tab']) && !isset($tab['page'])) ? 'nav-tab-active' : null; ?>" href="?<?php echo http_build_query(array_filter($url)); ?>">
-          <?php echo $tab['title']; ?>
-        </a>
-        
-      <?php endforeach;?>
-      
+          ?><a class="nav-tab <?php echo (isset($tab['page']) && (isset($_REQUEST['tab'])) && ($_REQUEST['tab'] == $tab['page'])) || (!isset($_REQUEST['tab']) && !isset($tab['page'])) ? 'nav-tab-active' : null; ?>" href="?<?php echo http_build_query(array_filter($url)); ?>"><?php echo $tab['title']; ?></a><?php 
+        }
+      ?>
+
     </h2>
 
   <?php elseif ($title): ?>
@@ -79,7 +76,7 @@
   
       <?php settings_errors(); ?>
     
-      <form action="<?php echo admin_url('options.php'); ?>" method="post">
+      <form action="<?php echo admin_url('options.php'); ?>" method="post" enctype="multipart/form-data">
 
         <?php settings_fields($setting); ?>
 

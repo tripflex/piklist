@@ -9,17 +9,15 @@
       
       $('#your-profile h3').each(function()
       {
-        for (var i = 0; i < sections.length; i++)
+        if ($.inArray($(this).text(), sections) == -1)
         {
-          if ($(this).text() == sections[i])
-          {
-            $(this)
-              .next('.form-table')
-              .hide();
-              
-            $(this)
-              .hide();
-          } 
+          $(this)
+            .hide()
+            .nextUntil('.form-table')
+            .andSelf()
+            .next('.form-table')
+            .andSelf()
+            .hide();
         }
       });
       

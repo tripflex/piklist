@@ -3,9 +3,8 @@
 Title: Field Groups <span class="piklist-title-right">Order 80</span>
 Post Type: piklist_demo
 Order: 80
-Collapse: false
 */
-  
+
   piklist('field', array(
     'type' => 'group'
     ,'field' => 'address_group'

@@ -13,7 +13,7 @@ Default: true
       ,'Contact Info'
       ,'About the user'
       ,'About Yourself'
-      )
+    )
   ));
 
 

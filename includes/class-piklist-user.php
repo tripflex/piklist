@@ -14,21 +14,26 @@ class PikList_User
   public static function _construct()
   {    
     add_action('init', array('piklist_user', 'init'));
-
     add_action('show_user_profile', array('piklist_user', 'meta_box'));
     add_action('edit_user_profile', array('piklist_user', 'meta_box'));
-    add_action('profile_update', array('piklist_user', 'multiple_roles'));
-    add_action('user_register', array('piklist_user', 'multiple_roles'));
-    add_action('admin_footer', array('piklist_user', 'multiple_roles_field'));
     add_action('personal_options_update', array('piklist_user', 'process_form'));
     add_action('edit_user_profile_update', array('piklist_user', 'process_form'));
-    
-    add_filter('additional_capabilities_display', array('piklist_user', 'additional_capabilities_display'));
   }
   
   public static function init()
   {   
     self::register_meta_boxes();
+
+    $use_multiple_user_roles = piklist::get_settings('piklist_core', 'multiple_user_roles');
+
+    if ($use_multiple_user_roles)
+    {
+      add_action('profile_update', array('piklist_user', 'multiple_roles'));
+      add_action('user_register', array('piklist_user', 'multiple_roles'));
+      add_action('admin_footer', array('piklist_user', 'multiple_roles_field'));
+      
+      add_filter('additional_capabilities_display', array('piklist_user', 'additional_capabilities_display'));
+    }
   }
 
   public static function register_meta_boxes()
@@ -50,17 +55,20 @@ class PikList_User
               ,'role' => 'Role'
               ,'new' => 'New'
             ));
+            
+    $data = array_filter($data);
     
     $meta_box = array(
       'config' => $data
       ,'part' => $path . '/parts/' . $folder . '/' . $part
     );
     
-    if ((!$data['capability'] || ($data['capability'] && current_user_can(strtolower($data['capability']))))
-      && (!$data['role'] || in_array(strtolower($data['role']), $current_user->roles))
-      && (!$data['new'] || ($data['new'] && (isset($pagenow) && $pagenow != 'user-new.php')))
+    if ((!isset($data['capability']) || ($data['capability'] && current_user_can(strtolower($data['capability']))))
+      && (!isset($data['role']) || in_array(strtolower($data['role']), $current_user->roles))
+      && (!isset($data['new']) || ($data['new'] && (isset($pagenow) && $pagenow != 'user-new.php')))
     )
     {
+
       if (isset($order))
       {
         self::$meta_boxes[$order] = $meta_box;
@@ -70,6 +78,7 @@ class PikList_User
         array_push(self::$meta_boxes, $meta_box);
       }
     }
+    
   }
 
   public static function meta_box($user_id)

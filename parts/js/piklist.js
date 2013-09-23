@@ -116,10 +116,16 @@
         {
           case 'datepicker':
 
-            $('#' + field.id)
-              .val($('#' + field.id).val() ? $('#' + field.id).val() : (!field.value ? null : field.value))
-              .attr('autocomplete', 'off')
-              .datepicker(options);
+            $(':input[name="' + field.name + '"]').each(function()
+            {
+              if (!$(this).hasClass('hasDatepicker'))
+              {
+                $(this)
+                  .val($(this).val() ? $(this).val() : (!field.value ? null : field.value))
+                  .attr('autocomplete', 'off')
+                  .datepicker(options);
+              }
+            });
         
           break;
           
@@ -199,22 +205,22 @@
               {
                 if (field.hasClass('piklist-field-condition'))
                 {
-                  field.show('slow');
+                  field.show();
                 }
                 else
                 {
-                  field.parents(parent).show('slow');
+                  field.parents(parent).show();
                 }
               }
               else if ($(element).val() == condition.value && $(element).is(':checkbox') && $(element).is(':checked'))
               {
                 if (field.hasClass('piklist-field-condition'))
                 {
-                  field.show('slow');
+                  field.show();
                 }
                 else
                 {
-                  field.parents(parent).show('slow');
+                  field.parents(parent).show();
                 }
               }
               else
@@ -232,11 +238,11 @@
                 {
                   if (field.hasClass('piklist-field-condition'))
                   {
-                    field.hide('slow');
+                    field.hide();
                   }
                   else
                   {
-                    field.parents(parent).hide('slow');
+                    field.parents(parent).hide();
                   }
                 }
               }
@@ -261,15 +267,15 @@
   'use strict';
   
   $(document).ready(function()
-  {
+  {  
+    $('body')
+      .piklistcolumns()
+      .piklistmediaupload();
+    
     $('*[data-piklist-field-addmore="true"]')
       .piklistaddmore({
         sortable: true
       });
-    
-    $('body')
-      .piklistcolumns()
-      .piklistmediaupload();
       
     $('.wp-editor-wrap').each(function()
     {
@@ -283,7 +289,7 @@
           'padding': 0
         });
       }
-    })
+    });  
   });
 
   /* --------------------------------------------------------------------------------
@@ -337,13 +343,13 @@
 	      }
 	      else
 	      {
-	        var set = $('*[data-piklist-field-group="' + group + '"], *[data-piklist-field-sub-group="' + group + '"]');
-	        
-	        this.$element = set.last();
+	        var set = $('div[data-piklist-field-group="' + group + '"], div[data-piklist-field-sub-group="' + group + '"]');
           
-				  set = $.merge(set, $(set.last()).siblings('.piklist-child-label'));
+	        this.$element = set.last();
 
-	        set.wrapAll($wrapper);
+          set = $.merge(set, $(set.last()));
+
+          set.wrapAll($wrapper);
 	      }
 			}
 
@@ -359,8 +365,6 @@
       
       if (this.sortable)
       {
-        // $wrapper_actions.prepend($(this.move));
-        
         var container = this.$element
           .parent('div[data-piklist-field-addmore="' + this.set + '"]')
           .parent();
@@ -378,7 +382,7 @@
 
       var $element_last = this.$element
                             .parent('div.piklist-field-addmore-wrapper')
-                            .children('*[data-piklist-field-group="' + group + '"]:last');
+                            .children('div[data-piklist-field-group="' + group + '"]:last');
       
 			if (this.$element.is(':checkbox, :radio'))
 			{
@@ -393,10 +397,10 @@
     action_handler: function(event)
     {
       var $element = $(this),
-        $wrapper = $element.parents('div[data-piklist-field-addmore]:first'),
+        $wrapper = $element.parents('div.piklist-field-addmore-wrapper:first'),
         count = $wrapper.siblings('div.piklist-field-addmore-wrapper').length,
         element = $wrapper.attr('data-piklist-field-addmore'),
-        element_indexes = element.replace(/\]/g, '').split('['),
+        element_indexes = element ? element.replace(/\]/g, '').split('[') : [],
         groups = 0;
         
       for (var j = element_indexes.length - 1; j >= 0; j--)
@@ -410,7 +414,7 @@
       switch ($element.attr('data-piklist-field-addmore-action'))
       {
         case 'add':
-
+        
           var $clone = $wrapper.clone(true);
 
           $clone
@@ -424,7 +428,10 @@
           
           $clone
             .find(':input')
-            .removeAttr('value');
+            .removeAttr('id')
+            .removeAttr('value')
+            .removeClass('hasDatepicker')
+            .off();
                     
           $clone.insertAfter($wrapper);
  
@@ -437,25 +444,26 @@
               {
                 var name = $(this).attr('name'),
                   indexes = name.replace(/\]/g, '').split('['),
-                  scope = indexes[0],
-                  index = 0;
-
+                  scope = indexes[0];
+                
                 for (var j = 0; j < indexes.length; j++)
                 {
                   if ($.isNumeric(indexes[j]))
                   {
-                    index = index + 1;
-                    if (groups === index)
+                    if ($wrapper.parents('div.piklist-field-addmore-wrapper').length == 0)
                     {
                       indexes[j] = i;
                     }
                   }
                   indexes[j] = indexes[j] + (scope !== indexes[j] ? ']' : '');
                 }
-
+                
                 $(this).attr('name', indexes.join('['));
+                $('*[for="' + name + '"]').attr('for', indexes.join('['));
               });
             });
+            
+            piklist.fields();
             
         break;
         
@@ -541,17 +549,17 @@
         {
           var $element = $(this),
             columns = parseFloat($element.data('piklist-field-columns')),
-            group = $element.data('piklist-field-group');;
+            group = $element.data('piklist-field-group'),
+            sub_group = $element.data('piklist-field-sub-group');
 
           $element
-            .siblings('label[for="' + $element.attr('name') + '"]')
+            .siblings('label[for="' + $element.attr('name') + '"]:first')
             .andSelf()
-            .wrapAll('<div data-piklist-field-columns="' + columns + '" data-piklist-field-group="' + group + '" />');
-				
+            .wrapAll('<div data-piklist-field-columns="' + columns + '" data-piklist-field-group="' + group + '" ' + (sub_group ? 'data-piklist-field-sub-group="' + sub_group + '"' : '') +' />');
+              
           $element
             .css({
               'width': $element.attr('size') ? 'auto' : '100%',
-              margin: 0
             })
             .parent('div[data-piklist-field-columns]')
             .css({
@@ -560,7 +568,7 @@
               'width': ((columns / total_columns) * 100) - gutter_width + '%',
               'margin-left': gutter_width + ($.isNumeric(gutter_width) ? '%' : null),
               'margin-bottom': gutter_height + ($.isNumeric(gutter_height) ? '%' : null)
-            });       
+            });   
         });
 
 			this.$element
@@ -570,7 +578,8 @@
         {
           var $element = $(this),
             columns = parseFloat($element.data('piklist-field-columns')),
-            group = $element.data('piklist-field-group');
+            group = $element.data('piklist-field-group'),
+            sub_group = $element.data('piklist-field-sub-group');
 					
           $element
             .parents('.piklist-field-list')
@@ -579,13 +588,13 @@
 							if ($(this).parent('div[data-piklist-field-columns]').length == 0)
 							{
 								$(this)
-									.siblings('.piklist-label[for="' + $element.attr('id') + '"], .piklist-field-list:first')
+                  .siblings('.piklist-label[for="' + $element.attr('name') + '"]:first')
 									.andSelf()
-									.wrapAll('<div data-piklist-field-columns="' + columns + '" data-piklist-field-group="' + group + '" />')
+                  .wrapAll('<div data-piklist-field-columns="' + columns + '" data-piklist-field-group="' + group + '" ' + (sub_group ? 'data-piklist-field-sub-group="' + sub_group + '"' : '') +' />')
 									.parent('div[data-piklist-field-columns]')
 									.css({
-			              'display': 'block',
-			              'float': 'left',
+                    'display': 'block',
+                    'float': 'left',
 			              'width': ((columns / total_columns) * 100) - gutter_width + '%',
                     'margin-left': gutter_width + ($.isNumeric(gutter_width) ? '%' : null),
                     'margin-bottom': gutter_height + ($.isNumeric(gutter_height) ? '%' : null)
@@ -602,6 +611,8 @@
               columns = parseFloat($element.data('piklist-field-columns')),
               group = $element.data('piklist-field-group');
 
+            $element.addClass('piklist-field-column');
+            
             if (track.group && track.group != group)
             {
               track = {
@@ -820,39 +831,59 @@
           attachments.map(function(attachment) 
           {
             attachment = attachment.toJSON();
+        
+            if (attachment.sizes)
+            {
+              var display = attachment.sizes.full;
       
-            var display = attachment.sizes.full;
-      
-            if (attachment.sizes.thumbnail)
-            {
-              display = attachment.sizes.thumbnail;
+              if (attachment.sizes.thumbnail)
+              {
+                display = attachment.sizes.thumbnail;
+              }
+              else if (attachment.sizes.medium)
+              {
+                display = attachment.sizes.medium;
+              }
+              else if (attachment.sizes.large)
+              {
+                display = attachment.sizes.large;
+              }
+              
+              preview.append(
+                $('<li class="attachment selected">\
+                      <div class="attachment-preview ' + (display.width > display.height ? 'landscape' : 'portrait') + '">\
+                        <div class="thumbnail">\
+                          <div class="centered">\
+                            <a href="#">\
+                             <img src="' + display.url + '" />\
+                           </a>\
+                          </div>\
+                        </div>\
+                        <a class="check" href="#" title="Deselect" data-attachment-id="' + attachment.id + '" data-attachments="' + input.attr('name') + '"><div class="media-modal-icon"></div></a>\
+                      </div>\
+                   </li>\
+                 ')
+              );
             }
-            else if (attachment.sizes.medium)
+            else
             {
-              display = attachment.sizes.medium;
-            }
-            else if (attachment.sizes.large)
-            {
-              display = attachment.sizes.large;
+              var display = attachment;
+
+              preview.append(
+                $('<li class="attachment selected">\
+                      <div class="attachment-preview type-' + display.type + ' subtype-' + display.subtype + ' landscape">\
+                        <img src="' + display.icon + '" class="icon" />\
+                        <div class="filename">\
+                          <div>' + display.filename + '</div>\
+                        </div>\
+                        <a class="check" href="#" title="Deselect" data-attachment-id="' + attachment.id + '" data-attachments="' + input.attr('name') + '"><div class="media-modal-icon"></div></a>\
+                      </div>\
+                   </li>\
+                 ')
+              );
             }
       
             updates.push(attachment.id);
-      
-            preview.append(
-              $('<li class="attachment selected">\
-                    <div class="attachment-preview ' + (display.width > display.height ? 'landscape' : 'portrait') + '">\
-                      <div class="thumbnail">\
-                        <div class="centered">\
-                          <a href="#">\
-                           <img src="' + display.url + '" />\
-                         </a>\
-                        </div>\
-                      </div>\
-                      <a class="check" href="#" title="Deselect" data-attachment-id="' + attachment.id + '" data-attachments="' + input.attr('name') + '"><div class="media-modal-icon"></div></a>\
-                    </div>\
-                 </li>\
-               ')
-            );
           });
           
           for (var i = 0; i < updates.length; i++)

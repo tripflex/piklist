@@ -3,7 +3,7 @@
 Title: Field Templates <span class="piklist-title-right">Order 70</span>
 Post Type: piklist_demo
 Order: 70
-Collapse: false
+Collapse: true
 */
 
   piklist('field', array(

@@ -7,8 +7,8 @@ Flow: User Demo
    
   piklist('include_user_profile_fields', array(
     'sections' => array(
-      'piklist_usermeta_box'
-      )
+      'Piklist Demo Fields'
+    )
   ));
 
   piklist('shared/code-locater', array(

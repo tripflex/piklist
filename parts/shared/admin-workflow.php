@@ -18,11 +18,11 @@
 
     <h2 class="nav-tab-wrapper">
 
-      <?php foreach ($path as $data): ?>
-    
-        <?php if (strtolower($data['config']['header']) != 'true'): ?>
-      
-          <?php
+      <?php 
+        foreach ($path as $data)
+        {
+          if (strtolower($data['config']['header']) != 'true')
+          {          
             $saved = isset($post->ID);
             $data['config'] = array_filter($data['config']);
             $url_arguments = array(
@@ -61,22 +61,15 @@
               $url = false;
             }
 
-          ?>
-    
-          <a class="nav-tab <?php echo isset($data['config']['active']) ? 'nav-tab-active' : null; ?>" <?php echo $url ? 'href="' . $url . '"' : null; ?>>
-            <?php echo $data['config']['name']; ?>
-          </a>
-    
-          <?php
+            ?><a class="nav-tab <?php echo isset($data['config']['active']) ? 'nav-tab-active' : null; ?>" <?php echo $url ? 'href="' . $url . '"' : null; ?>><?php echo $data['config']['name']; ?></a><?php
+        
             if (isset($data['config']['active']))
             {
               $active_data = $data;
             }
-          ?>
-      
-        <?php endif; ?>
-    
-      <?php endforeach;?>
+          }
+        }
+      ?>
   
       <?php do_action('piklist_workflow_flow_append', $data['config']['flow_slug']); ?>
   
@@ -98,3 +91,7 @@
   </div>
 
 <?php endif; ?>
+
+
+
+
