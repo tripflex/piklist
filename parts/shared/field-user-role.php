@@ -2,7 +2,6 @@
 <div class="hidden" id="role_stub">
   
   <?php
-    
     piklist('field', array(
       'type' => 'hidden'
       ,'scope' => false

@@ -17,9 +17,9 @@ class PikList_Validate
   
   public static function _construct()
   {
-    add_filter('wp_redirect', array(self::$parameter, 'wp_redirect'), 10, 2);
+    add_filter('wp_redirect', array('piklist_validate', 'wp_redirect'), 10, 2);
         
-    add_action('admin_notices', array(self::$parameter, 'admin_notices'));
+    add_action('admin_notices', array('piklist_validate', 'admin_notices'));
   }
 
   public static function wp_redirect($location, $status)

@@ -25,7 +25,7 @@ class PikList_Setting
     $pages[] = array(
       'page_title' => 'About'
       ,'menu_title' => 'Piklist'
-      ,'capability' => 'manage_options'
+      ,'capability' => defined('PIKLIST_SETTINGS_CAP') ? PIKLIST_SETTINGS_CAP : 'manage_options'
       ,'menu_slug' => 'piklist'
       ,'single_line' => false
       ,'icon_url' => plugins_url('piklist/parts/img/piklist-icon.png') 
@@ -36,7 +36,7 @@ class PikList_Setting
     $pages[] = array(
       'page_title' => __('Piklist Settings', 'piklist')
       ,'menu_title' => __('Settings', 'piklist')
-      ,'capability' => 'manage_options'
+      ,'capability' => defined('PIKLIST_SETTINGS_CAP') ? PIKLIST_SETTINGS_CAP : 'manage_options'
       ,'sub_menu' => 'piklist'
       ,'menu_slug' => 'piklist-core-settings'
       ,'setting' => 'piklist_core'
@@ -173,6 +173,11 @@ class PikList_Setting
     else
     {
       $settings = $old;
+    }
+    
+    if (!isset($_FILES) && !empty($_FILES))
+    {
+      $settings = piklist_form::save_upload(current($_FILES), $settings);
     }
 
     return apply_filters('piklist_pre_update_option', $settings, $new, $old);

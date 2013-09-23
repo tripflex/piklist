@@ -105,7 +105,7 @@
             ,'overflow': 'auto'
             ,'border': 'none'
           })
-          .prev(':not(h2)')
+          .prev(':not(h2, th)')
           .css({
             'width': 'auto'
             ,'border': 'none'
@@ -118,16 +118,19 @@
         {
           event.preventDefault();
           
-          var status = $('#post_status').val();
+          var status = $('#post_status').val(),
+            text = $('#post_status option:selected').text();
           
           if (status != 'draft')
           {
             $('#save-post').val('Save');
             
             // TODO: Progress post status' these need to be updated to the next status!
-            $('#hidden_post_status, #original_publish').val(status);
+            $('#hidden_post_status, #original_publish').val(text);
             $('#publish').val('Update');
           }
+          
+          $('#post-status-display').text(text);
         });
         
         $('#publish', '#major-publishing-actions').click(function()
@@ -163,15 +166,27 @@
         });
           
         $('.' + piklist_admin.widget + '-forms .' + piklist_admin.widget + '-widget-form').hide();
-        $('.' + piklist_admin.widget + '-form-selected').show();
         
-        piklist_admin.widgets(false);
+        $('.' + piklist_admin.widget + '-form-selected').each(function()
+        {
+          var widget = $(this).parents('.widget-content'),
+            classes = $(this).attr('class').split(' ');
+
+          $(this).show();
+          
+          piklist_admin.widget_dimensions(classes, widget);
+        });
         
         piklist_admin.widget_interval = setInterval(function()
         {
           $('#widgets-right .widget-inside:visible .' + piklist_admin.widget + '-forms .' + piklist_admin.widget + '-form-selected').each(function(index)
           {
             piklist.process_fields($(this).parent('.' + piklist_admin.widget + '-forms').find('input#_fields_id').val());
+            
+            if (typeof wptabs != 'undefined')
+            {
+              wptabs.setup();
+            }
             
             $(this).fadeIn();
           });
@@ -180,63 +195,60 @@
 
       widgets: function(object)
       {
-        var widget = $(object).parents('.widget-content');
+        var widget = $(object).parents('.widget-content'),
+          action = widget.parents('.widget').find('.widget-action'),
+          selected = $(object).val();
+
+        action.trigger('click');
 
         widget
           .find('.' + piklist_admin.widget + '-forms .' + piklist_admin.widget + '-form')
           .removeClass(piklist_admin.widget + '-form-selected')
           .hide();
-          
-        var selected = $(object).val();
+        
         if (typeof selected != 'undefined')
         {
           selected = selected.split('--');
+        
+          var form = widget.find('.' + piklist_admin.widget + '-form-' + selected[1] + '--' + selected[2]),
+            classes = form.attr('class').split(' ');
           
-          widget
-            .find('.' + piklist_admin.widget + '-form-' + selected[1] + '--' + selected[2])
+          form  
             .addClass(piklist_admin.widget + '-form-selected')
             .fadeIn();
-        }
-        
-        widget.find('div[class*="piklist-widget-width-"], div[class*="piklist-widget-height-"]').each(function()
-        {
-          var height, width, classes = $(this).attr('class').split(' ');
-          
-          if ($(this).is(':visible'))
-          {
-            for (var i = 0; i < classes.length; i++)
-            {
-              if (classes[i].indexOf('piklist-widget-width-') > -1)
-              {
-                width = parseFloat(classes[i].replace('piklist-widget-width-', ''));
-              }
-              else if (classes[i].indexOf('piklist-widget-height-') > -1)
-              {
-                height = parseFloat(classes[i].replace('piklist-widget-height-', ''));
-              }
-            }
-          }
 
-          widget
-            .siblings('input[name="widget-width"]')
-            .val(width ? width : 250);
-            
-          widget
-            .siblings('input[name="widget-height"]')
-            .val(height ? height : 200);
-        });
-        
-        if (object)
-        {
-          var action = widget.parents('.widget').find('.widget-action');
-          
-          action.trigger('click');
-          
-          setTimeout(function()
-          {
-            action.trigger('click');
-          }, 500);
+          piklist_admin.widget_dimensions(classes, widget);
         }
+        
+        setTimeout(function()
+        {
+          action.trigger('click');
+        }, 500);
+      },
+      
+      widget_dimensions: function(classes, widget)
+      {
+        var height, width;
+        
+        for (var i = 0; i < classes.length; i++)
+        {
+          if (classes[i].indexOf('piklist-widget-width-') > -1)
+          {
+            width = parseFloat(classes[i].replace('piklist-widget-width-', ''));
+          }
+          else if (classes[i].indexOf('piklist-widget-height-') > -1)
+          {
+            height = parseFloat(classes[i].replace('piklist-widget-height-', ''));
+          }
+        }
+
+        widget
+          .siblings('input[name="widget-width"]')
+          .val(width ? width : 250);
+
+        widget
+          .siblings('input[name="widget-height"]')
+          .val(height ? height : 200);
       },
       
       list_tables: function()
@@ -264,33 +276,46 @@
     - These should be submitted as patches to the core 
 --------------------------------------------------------------------------------- */
 
-  jQuery(document).ready(function($) 
+  jQuery(document).ready(function() 
   { 
-    $('.wp-tab-bar li a').each(function()
+    wptabs.init();
+  });
+  
+  var wptabs = {
+    
+    init: function()
     {
-      var tab = $(this).closest('li');
-
-      if (!tab.hasClass('wp-tab-active'))
-      {
-        var index = $(this).closest('.wp-tab-bar').children().index(tab);
-        
-        $(this).closest('.wp-tab-bar').nextUntil('.wp-tab-bar', '.wp-tab-panel').eq(index).hide();
-      }
-
-      $(this).click(function(event)
+      this.setup();
+      
+      jQuery('.wp-tab-bar li a').live('click', function(event)
       {
         event.preventDefault(); 
 
-        var tab = $(this).closest('li');
-        var index = $(this).closest('.wp-tab-bar').children().index(tab);
-        var panels = $(this).closest('.wp-tab-bar').nextUntil('.wp-tab-bar', '.wp-tab-panel'); 
-                
+        var tab = jQuery(this).closest('li');
+        var index = jQuery(this).closest('.wp-tab-bar').children().index(tab);
+        var panels = jQuery(this).closest('.wp-tab-bar').nextUntil('.wp-tab-bar', '.wp-tab-panel'); 
+
         tab.addClass('wp-tab-active').siblings().removeClass('wp-tab-active');
-        
+
         for (var i = 0; i < panels.length; i++)
         {
-          $(panels[i]).toggle(i == index ? true : false); 
+          jQuery(panels[i]).toggle(i == index ? true : false); 
         }
       });
-    });
-  });
+    },
+    
+    setup: function()
+    {
+      jQuery('.wp-tab-bar li a').each(function()
+      {
+        var tab = jQuery(this).closest('li');
+
+        if (!tab.hasClass('wp-tab-active'))
+        {
+          var index = jQuery(this).closest('.wp-tab-bar').children().index(tab);
+
+          jQuery(this).closest('.wp-tab-bar').nextUntil('.wp-tab-bar', '.wp-tab-panel').eq(index).hide();
+        }
+      });
+    }
+  };

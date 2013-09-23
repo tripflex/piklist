@@ -5,7 +5,7 @@ Post Type: piklist_demo
 Order: 10
 Priority: default
 Context: side
-Collapse: false
+Collapse: true
 */
 
   // Let's show the Meta Box 

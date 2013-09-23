@@ -17,13 +17,6 @@
 
     piklist('field', array(
       'type' => 'hidden'
-      ,'scope' => 'post'
-      ,'field' => 'post_status'
-      ,'value' => $post->post_status
-    ));
-
-    piklist('field', array(
-      'type' => 'hidden'
       ,'scope' => 'comment'
       ,'field' => 'comment_type'
       ,'value' => $post->post_status

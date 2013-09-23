@@ -48,7 +48,7 @@ global $wp_registered_sidebars;
 
               <td class="t <?php echo strtolower($post_type->label); ?>">
 
-                  <a href="edit.php">
+                  <a href="<?php echo $post_type->name == 'attachment' ? 'upload.php' : 'edit.php?post_type=' . $post_type->name;?>">
                     <?php echo $post_type->label; ?>
                   </a>
 
@@ -181,7 +181,7 @@ global $wp_registered_sidebars;
 
           <td class="t <?php echo strtolower($taxonomy->name); ?>">
 
-              <a href="edit.php">
+              <a href="edit-tags.php?taxonomy=<?php echo $taxonomy->name; ?>">
                 <?php echo $taxonomy->label; ?>
               </a>
 

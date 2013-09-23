@@ -15,7 +15,6 @@ class PikList_Workflow
     ,'title' => 'edit_form_after_title'
     ,'editor' => 'edit_form_after_editor'
     ,'profile' => 'profile_personal_options'
-    ,'aftertable' => 'after-piklist_demo_type-table'
   );
   
   public static function _construct()
@@ -30,7 +29,8 @@ class PikList_Workflow
       add_action($filter, array('piklist_workflow', 'workflows'));   
     }
     
-    add_filter('redirect_post_location', array('piklist_workflow', 'redirect_post_location'), 10, 2);
+    add_filter('redirect_post_location', array('piklist_workflow', 'redirect'), 10, 2);
+    add_filter('wp_redirect', array('piklist_workflow', 'redirect'), 10, 2);
     
     self::register_workflows();
   }
@@ -40,13 +40,13 @@ class PikList_Workflow
     piklist::process_views('workflows', array('piklist_workflow', 'register_workflows_callback'));
   }
 
-  public static function redirect_post_location($location, $post_id)
+  public static function redirect($location, $post_id)
   {
     $url = parse_url($_REQUEST['_wp_http_referer']);
     
     parse_str($url['query'], $url_defaults);
     
-    if (isset($url_defaults['flow']) && isset($url_defaults['flow_page']))
+    if ((isset($url_defaults['flow']) && !stristr($location, 'flow=')) && (isset($url_defaults['flow_page']) && !stristr($location, 'flow_page=')))
     {
       $location .= 'flow=' . urlencode($url_defaults['flow']) . '&flow_page=' . urlencode($url_defaults['flow_page']);
     }

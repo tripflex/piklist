@@ -4,11 +4,7 @@ Title: Piklist Demo Fields
 Description: This is an example of some fields built with Piklist. Only displays for users with the capability of manage_options.
 Capability: manage_options
 Order: 10
-New: true
 */
-
-
-
 
   piklist('field', array(
     'type' => 'checkbox'
@@ -340,5 +336,3 @@ New: true
     'location' => __FILE__
     ,'type' => 'User Meta Section'
   ));
-
-?>

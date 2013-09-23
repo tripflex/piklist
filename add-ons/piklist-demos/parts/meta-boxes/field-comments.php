@@ -5,7 +5,7 @@ Post Type: piklist_demo
 Order: 30
 Priority: default
 Context: side
-Collapse: false
+Collapse: true
 */
 
   piklist('field', array(
@@ -28,7 +28,7 @@ Collapse: false
 
 ?>
 
-<?php if($comments) : ?>
+<?php if ($comments): ?>
 
   <?php $date_format = get_option('date_format'); ?>
   <?php $time_format = get_option('time_format'); ?>

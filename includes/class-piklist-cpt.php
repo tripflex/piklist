@@ -17,6 +17,16 @@ class PikList_CPT
   
   private static $meta_box_nonce = null;
   
+  private static $meta_boxes_builtin = array(
+    'slug'
+    ,'author'
+    ,'revision'
+    ,'pageparent'
+    ,'comments'
+    ,'commentstatus'
+    ,'postcustom'
+  );
+  
   public static function _construct()
   {    
     add_action('init', array('piklist_cpt', 'init'));
@@ -30,6 +40,7 @@ class PikList_CPT
     
     add_filter('posts_join', array('piklist_cpt', 'posts_join'), 10, 2);
     add_filter('posts_where', array('piklist_cpt', 'posts_where'), 10, 2);
+    add_filter('post_row_actions', array('piklist_cpt', 'post_row_actions'), 10, 2);
     add_filter('wp_insert_post_data', array('piklist_cpt', 'wp_insert_post_data'), 100, 2);
   }
   
@@ -122,7 +133,7 @@ class PikList_CPT
   {
     global $wp_post_statuses;
 
-    $flushed = get_option('piklist_post_type_rules_flushed');
+    $check = array();
     
     self::$post_types = apply_filters('piklist_post_types', self::$post_types);
 
@@ -132,9 +143,9 @@ class PikList_CPT
 
       register_post_type($post_type, $configuration);
 
-      if (!isset($flushed[$post_type]) || !$flushed[$post_type])
+      if (!isset($check[$post_type]) || !$check[$post_type])
       {
-        $flushed[$post_type] = true;
+        $check[$post_type] = $configuration;
       }
      
       if (isset($configuration['status']) && !empty($configuration['status']))
@@ -180,7 +191,7 @@ class PikList_CPT
           {
             self::$meta_boxes_hidden[$post_type] = array();
           }
-          array_push(self::$meta_boxes_hidden[$post_type], $meta_box . 'div');
+          array_push(self::$meta_boxes_hidden[$post_type], $meta_box . (in_array($meta_box, self::$meta_boxes_builtin) ? 'div' : null));
         }
         
         add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
@@ -211,24 +222,26 @@ class PikList_CPT
         add_action('restrict_manage_posts', array('piklist_cpt', 'restrict_manage_posts'));
       }
     }
-    flush_rewrite_rules(false);
     
-    if ($flushed != get_option('piklist_post_type_rules_flushed'))
-    {
-      flush_rewrite_rules(false);
-      update_option('piklist_post_type_rules_flushed', $flushed);
-    }
+    self::flush_rewrite_rules(md5(serialize($check)), 'piklist_post_type_rules_flushed');
   }
   
   public static function register_taxonomies()
   {
     self::$taxonomies = apply_filters('piklist_taxonomies', self::$taxonomies);
     
+    $check = array();
+    
     foreach (self::$taxonomies as $taxonomy)
     {
       $type = isset($taxonomy['object_type']) ? $taxonomy['object_type'] : $taxonomy['post_type'];
       
       register_taxonomy($taxonomy['name'], $type, $taxonomy['configuration']);
+      
+      if (!isset($check[$taxonomy['name']]) || !$check[$taxonomy['name']])
+      {
+        $check[$taxonomy['name']] = $taxonomy;
+      }
       
       if (isset($taxonomy['configuration']['hide_meta_box']) && !empty($taxonomy['configuration']['hide_meta_box']))
       {
@@ -243,6 +256,17 @@ class PikList_CPT
         }
         add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
       }
+    }
+    
+    self::flush_rewrite_rules(md5(serialize($check)), 'piklist_taxonomy_rules_flushed');
+  }
+  
+  public static function flush_rewrite_rules($check, $option)
+  {
+    if ($check != get_option($option))
+    {
+      flush_rewrite_rules(false);
+      update_option($option, $check);
     }
   }
   
@@ -331,16 +355,31 @@ class PikList_CPT
     
     return $columns;
   }
+  
+  public static function post_row_actions($actions, $post)
+  {
+    global $current_screen;
+    
+    if (isset(self::$post_types[$current_screen->post_type]) && isset(self::$post_types[$current_screen->post_type]['hide_post_row_actions']))
+    {
+      foreach (self::$post_types[$current_screen->post_type]['hide_post_row_actions'] as $action)
+      {
+        unset($actions[$action == 'quick-edit' ? 'inline hide-if-no-js' : $action]);
+      }
+    }
 
+  	return $actions;
+  }
+  
   public static function admin_body_class($classes)
   {
     global $pagenow;
 
-    if (in_array($pagenow, array('edit.php', 'post.php', 'post-new.php')) && isset($_REQUEST['post_type']) && post_type_exists($_REQUEST['post_type']))
+    if (in_array($pagenow, array('edit.php', 'post.php', 'post-new.php')) && post_type_exists(get_post_type()))
     {
-      $post_type = $_REQUEST['post_type'];
+      $post_type = get_post_type();
       
-      if (isset(self::$post_types[$post_type]))
+      if (isset(self::$post_types[$post_type]['admin_body_class']))
       {
         foreach (self::$post_types[$post_type]['admin_body_class'] as $class)
         {
@@ -429,6 +468,7 @@ class PikList_CPT
               ,'status' => 'Status'
               ,'new' => 'New'
               ,'id' => 'ID'
+              ,'div' => 'DIV'
               ,'template' => 'Template'
               ,'box' => 'Meta Box'
             ));
@@ -450,7 +490,16 @@ class PikList_CPT
         && (!$data['template'] || ($data['template'] && $data['template'] == pathinfo(get_page_template_slug($post->ID), PATHINFO_FILENAME)))
       )
       {
-        $id = 'piklist_meta_' . piklist::slug($part);
+        
+        if (!empty($data['div']))
+        {
+          $id = $data['div'];
+        }
+        else
+        {
+          $id = 'piklist_meta_' . piklist::slug($part);
+        }
+        
 
         $textdomain = piklist_add_on::$available_add_ons[$add_on]['TextDomain'];
 
@@ -626,12 +675,11 @@ class PikList_CPT
     }
   }
 
-  public static function get_post_statuses($type, $object_type = null)
+  public static function get_post_statuses($object_type = null)
   {
-    $status_list = array();
-
     global $wp_post_statuses;
 
+    $status_list = array();
     $object_type = $object_type ? $object_type : get_post_type();
 
     foreach ($wp_post_statuses as $status)

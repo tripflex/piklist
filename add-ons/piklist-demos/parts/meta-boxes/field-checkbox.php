@@ -3,7 +3,7 @@
 Title: Checkbox Fields <span class="piklist-title-right">Order 40</span>
 Post Type: piklist_demo
 Order: 40
-Collapse: false
+Collapse: true
 */
 
   piklist('field', array(

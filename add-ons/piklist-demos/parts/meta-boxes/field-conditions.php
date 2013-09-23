@@ -3,7 +3,7 @@
 Title: Conditional Fields <span class="piklist-title-right">Order 90</span>
 Post Type: piklist_demo
 Order: 90
-Collapse: false
+Collapse: true
 */
 
   piklist('field', array(

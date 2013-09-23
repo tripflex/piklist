@@ -3,7 +3,7 @@
 Title: User Workflow Demo
 Order: 0
 Flow: User Demo
-Page: user-new.php, user-edit.php, profile.php
+Page: user-edit.php, profile.php
 Header: true
 Position: body
 */

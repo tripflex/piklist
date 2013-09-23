@@ -96,6 +96,16 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
+= 0.8.0b6 =
+* IMPROVED: Multiple Author Roles are turned off by default.
+* IMPROVED: Add-mores are now even more awesome.
+* FIXED: Checkboxes.
+* FIXED: Tab Spacing.
+* FIXED: User Taxonomy data saves properly.
+* FIXED: WorkFlow tabs save properly for Post Types.
+* FIXED: Widgets work better than ever.
+* FIXED: Lots of bugs squashed!
+
 = 0.8.0b5 =
 * NEW: Comment Field.
 * IMPROVED: Assets for Javascript fields only load when the field is in use.
@@ -132,15 +142,14 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 * NEW: Change Save button text.
 * NEW: French translation by Daniel Ménard.
 * NEW: Slovak translation by Branco.
-* IMPROVED: extended admin_body_class for Post Types and Taxonomies.
+* IMPROVED: Extended admin_body_class for Post Types and Taxonomies.
 * IMPROVED: Better display for settings page for both Tabs/no Tabs, and single line.
 * IMPROVED: Add or auto generate Form ID.
 * IMPROVED: Stops Webkit browsers from auto-filling user fields in the admin.
-* IMPROVED: more localized strings. Props @Daniel Ménard.
+* IMPROVED: More localized strings. Props @Daniel Ménard.
 * FIXED: HTTPS works properly.
 * FIXED: Comment field no longer duplicates comments.
 * FIXED: Administrators can edit other users meta.
-* FIXED: Long Post Status lists now wrap nicely.
 * FIXED: HTML escaped neccessary fields.
 * FIXED: Better garbage collection.
 * FIXED: CSS for h2.nav-tab-wrapper.

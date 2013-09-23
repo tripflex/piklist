@@ -1,8 +1,9 @@
+
 <?php if (!empty($widgets)): ?>
   
   <?php
     $choices = array(
-      '' => __('Select a Widget','piklist')
+      '' => __('Select a Widget', 'piklist')
     );
 
     foreach ($widgets as $w)
@@ -34,7 +35,7 @@
     <?php foreach ($widgets as $w): ?>
 
       <div class="hide-all <?php echo !empty($w['form_data']['width']) ? 'piklist-widget-width-' . $w['form_data']['width'] : ''; ?> <?php echo !empty($w['form_data']['height']) ? 'piklist-widget-height-' . $w['form_data']['height'] : ''; ?> <?php echo $class_name; ?>-form <?php echo $class_name; ?>-form-<?php echo $w['add_on'] . '--' . $w['name']; ?> <?php echo current(maybe_unserialize($instance[$widget_name])) == $widget_name . '--' . $w['add_on'] . '--' . $w['name'] ? $class_name . '-form-selected' : ''; ?> ">
-
+        
         <?php do_action('admin_notices'); ?>
         
         <?php if (!empty($w['data']['description'])): ?>
@@ -58,13 +59,13 @@
 <?php else: ?>
   
   <p>
-    <em><?php __('There are currently no Widgets available.','piklist'); ?></em>
+    <em><?php __('There are currently no Widgets available.', 'piklist'); ?></em>
   </p>
   
-  <h4><?php _e('Learn to make Widgets','piklist'); ?></h4>
+  <h4><?php _e('Learn to make Widgets', 'piklist'); ?></h4>
   
   <p>
-    <?php _e('Check out the documentation for how to easily build your own custom widgets!','piklist')?>
+    <?php _e('Check out the documentation for how to easily build your own custom widgets!', 'piklist')?>
   </p>  
   
 <?php endif; ?>

@@ -13,6 +13,17 @@ Meta box: false
     ,'label' => 'Post Content'
     ,'description' => 'This is the standard post box, now placed in a Piklist WorkFlow.'
     ,'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    ,'attributes' => array (
+      'wpautop' => true
+      ,'media_buttons' => true
+      ,'tabindex' => ''
+      ,'editor_css' => ''
+      ,'editor_class' => ''
+      ,'teeny' => false
+      ,'dfw' => false
+      ,'tinymce' => true
+      ,'quicktags' => true
+    )
     ,'on_post_status' => array(
       'value' => 'lock'
     )

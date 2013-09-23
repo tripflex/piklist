@@ -59,17 +59,17 @@
 
   .stuffbox h3 .piklist-title-right,
   .postbox h3 .piklist-title-right {
-    float: right;
     font-size: 75%;
     font-family: sans-serif;
-    line-height: 1.5;
     font-weight: bold;
-    display: block;
+    text-transform: uppercase;
+    position: absolute;
+    right: 25px;
+    top: 10px;
+
+    opacity: 0.50;
+  	filter: alpha(opacity=50);
   }
-  
-    .stuffbox h3 .piklist-title-right {
-      margin-right: 17px;
-    }
 
 
   /* General Form Styles */
@@ -84,7 +84,6 @@
 
 	.piklist-field-container { 
 		position: relative;
-/*    overflow: hidden;*/
 		width: 100%;
 	}
 		
@@ -127,11 +126,11 @@
 				border: none;
       }
       
-        .widgets-holder-wrap .piklist-field-container .piklist-label-container {
+        .widget-content .piklist-field-container .piklist-label-container {
           display: block;
           float: none;
           width: auto;
-          padding: 0.3334% 0 0 0;
+          padding: 6px 0 0 0;
           margin: 0;
         }
 			
@@ -144,6 +143,11 @@
 		  #side-sortables .piklist-field-container .piklist-field {
 		    padding: 0.6667% 0 1% 0;
 		    width: 100%;
+		  }
+		  
+		  .widget-content .piklist-field-container .piklist-field {
+		    padding: 0.6667% 0 1% 0;
+		    width: auto;
 		  }
 		  
 		  .piklist-field-container .piklist-field input[type="text"],
@@ -163,7 +167,7 @@
         vertical-align: middle;
         text-shadow: white 0 1px 0;
       }
-			
+      
 			  /* Slight position adjustment for child labels */
 
 			 .piklist-field-container .piklist-child-label {
@@ -200,6 +204,7 @@
 
 	    .piklist-field-list-item {
 	      display: inline-block;
+	      margin-right: 1em;
 	    }
 
   /* Admin Thumbnail Preview */
@@ -215,6 +220,10 @@
       
       #side-sortables .piklist-upload-file-preview .attachments {
         margin-left: -16px;
+      }
+      
+      #side-sortables .piklist-upload-file-preview .attachment .icon {
+        padding-top: 10%;
       }
       
     .piklist-upload-file-preview .attachment {
@@ -233,8 +242,8 @@
       
       #side-sortables .piklist-upload-file-preview .attachment-preview, 
       #side-sortables .piklist-upload-file-preview .attachment-preview .thumbnail {
-        width: 9em;
-        height: 9em;
+        width: 8.2em;
+        height: 8.2em;
       }
       
     .piklist-upload-file-preview a {
@@ -270,6 +279,10 @@
     float: left;
   }
   
+    #side-sortables .piklist-field-addmore-wrapper {
+      min-width: 0;
+    }
+  
     .piklist-field-addmore-wrapper:before, .piklist-field-addmore-wrapper:after { 
       content: ""; 
       display: table; 
@@ -303,12 +316,17 @@
     }
 
       .piklist-field-addmore-wrapper .piklist-field-addmore-wrapper {
-        margin-top: 7px !important;
+        margin-top: 7px;
       }
 
       .piklist-field-addmore-wrapper .piklist-field-addmore-wrapper:hover {
         border-left-color: #2a95c5;
         background: #f6f6f6;
+      }
+      
+      .piklist-field-addmore-wrapper .piklist-field-column { 
+        display: inline-block !important;
+        float: none !important;
       }
 
       .piklist-add-more-add,
@@ -333,7 +351,12 @@
         opacity: 0.85;
       	filter: alpha(opacity=85);
       }
-
+      
+      .ui-sortable .description {
+        display: block;
+        clear: both;
+      }
+      
 
 	/* Meta Box Helpers */
   
@@ -369,7 +392,6 @@
 		}
 		
 		.piklist-meta-box-none .inside {
-		  padding: 0;
 		}
 		
 		/* Meta Messages */
@@ -744,6 +766,10 @@
     white-space: nowrap !important;
   }
   
+  .wp-admin select {
+    height: 1.9em;
+  }
+  
   /* Alter Sortable Column Behavior */
   .manage-column .sorting-indicator {
     display: block !important;
@@ -762,6 +788,8 @@
   #poststuff h2.nav-tab-wrapper,
   #poststuff h3.nav-tab-wrapper {
     padding-bottom: 0px;
+    padding-left: 10px;
+    margin-bottom: 10px !important;
   }
 
 	.button-primary {
@@ -783,3 +811,26 @@
   .mceIframeContainer {
     background-color: #ffffff;
   }
+  
+  /* WP Color Picker - Fixes jQuery UI Theme Conflicts */
+  .wp-picker-container .ui-slider-vertical {
+    width: auto;
+    height: auto;
+  }
+  
+    .wp-picker-container .ui-slider-vertical .ui-widget-content,
+    .wp-picker-container .ui-slider-vertical {
+      background: none !important;
+      border: none !important;
+    }
+    
+    .wp-picker-container .ui-state-focus,
+    .wp-picker-container .ui-draggable-dragging {
+      background: none !important;
+      border: none !important;
+    }
+  
+  
+  
+  
+  
