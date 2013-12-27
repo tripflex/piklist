@@ -31,7 +31,6 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 = LEARN MORE =
 *   <a href="http://piklist.com/user-guide/">Piklist User Guide</a>
 
-
 = Better Custom Post Types =
 *   Powerful Custom Post Types 
 *   Relate Custom Post Types to each other. 
