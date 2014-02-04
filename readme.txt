@@ -1,13 +1,13 @@
-=== PIKLIST | Rapid Development Framework ===
+=== PIKLIST | Rapid development framework ===
 Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
-Tested up to: 3.6
-Requires at least: 3.4
-Stable tag: 0.7.2
+Tested up to: 3.8
+Requires at least: 3.6
+Stable tag: 0.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A Rapid Development Framework for WordPress.
+A rapid development framework for WordPress.
 
 == Description ==
 
@@ -30,6 +30,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 = LEARN MORE =
 *   <a href="http://piklist.com/user-guide/">Piklist User Guide</a>
+
 
 = Better Custom Post Types =
 *   Powerful Custom Post Types 
@@ -94,6 +95,22 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.9.0 =
+* NEW: Embed widgets in the WordPress editor!
+* NEW: Add Tooltip Help to any Piklist field.
+* NEW: post_states parameter.
+* NEW: Set page icon on Taxonomy and User Taxonomy pages.
+* NEW: Dashicons now included.
+* NEW: Piklist grid css.
+* IMPROVED: Comma-seperated list of Taxonomies can be passed in a term file.
+* IMPROVED: Comma-separated lists of Post Types or Taxonomies in meta-boxes or term files can contain spaces.
+* IMPROVED: Use $page_icon instead of $icon.
+* IMPROVED: Use $menu_icon instead of $icon_url.
+* FIXED: Editing text boxes for Add-mores work in Firefox.
+* FIXED: Dashboard widget layout saves properly.
+* FIXED: $attributes in Editor field should be $options.
+* FIXED: Custom Post Statuses retain order when used with multiple CPTs.
 
 = 0.8.0b6 =
 * IMPROVED: Multiple Author Roles are turned off by default.
