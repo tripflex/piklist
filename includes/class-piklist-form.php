@@ -404,7 +404,10 @@ class PikList_Form
           $path = explode(':', $key);
           foreach ($path as $key)
           {
-            $value = $value[$key];
+            if (isset($value[$key]))
+            {
+              $value = $value[$key];
+            }
           }
         }
         else
@@ -475,7 +478,10 @@ class PikList_Form
             $path = explode(':', substr($meta_key, strpos($meta_key, ':') + 1));
             foreach ($path as $key)
             {
-              $meta = $meta[$key];
+              if (isset($meta[$key]))
+              {
+                $meta = $meta[$key];
+              }
             }
           }
           else
