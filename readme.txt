@@ -97,7 +97,6 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 == Changelog ==
 
 = 0.9.0 =
-* NEW: Embed widgets in the WordPress editor!
 * NEW: Add Tooltip Help to any Piklist field.
 * NEW: post_states parameter.
 * NEW: Set page icon on Taxonomy and User Taxonomy pages.
@@ -305,3 +304,10 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 = 0.6.4 =
 * Fixes major issue with Publish box. Please upgrade.
+
+== Screenshots ==
+
+1. Post relationships: You'll wish all relationships were this easy.
+2. Add-mores: The infinite repeater field.
+3. WorkFlows: The tab system you never knew was possible.
+4. Multiple user roles: Better security, more flexibility.
