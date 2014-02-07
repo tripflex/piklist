@@ -304,7 +304,7 @@ class PikList_Admin
   {
     global $typenow;
 
-    $classes .= '';
+    $classes .= ' ';
 
     if (piklist_admin::responsive_admin() == true)
     {
