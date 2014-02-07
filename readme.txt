@@ -3,7 +3,7 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.8
 Requires at least: 3.6
-Stable tag: 0.9.0
+Stable tag: 0.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,9 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.9.1 =
+* FIXED: Conflict issue with Jetpack and menu icon.
 
 = 0.9.0 =
 * NEW: Add Tooltip Help to any Piklist field.
