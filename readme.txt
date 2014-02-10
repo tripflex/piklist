@@ -4,6 +4,7 @@ Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, 
 Tested up to: 3.8
 Requires at least: 3.6
 Stable tag: 0.9.1
+Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
