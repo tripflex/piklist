@@ -3,7 +3,7 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.8
 Requires at least: 3.6
-Stable tag: 0.9.1
+Stable tag: 0.9.2
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,9 +25,6 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Relate Post-to-Posts.
 *   <a href="http://piklist.com">and more...</a>
 
-= COMING SOON =
-*   Drag-and-drop Field and Form builder.
-*   Out-of-the-box applications: Contact Manager, Order Management, etc.
 
 = LEARN MORE =
 *   <a href="http://piklist.com/user-guide/">Piklist User Guide</a>
@@ -97,8 +94,16 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
+= 0.9.2 =
+* NEW: Multiselect field.
+* NEW DEMO: Post Editor in an Add-more.
+* IMPROVED: Add-mores are better than ever.
+* FIXED: Dashboard widgets drag-and-drop properly.
+* FIXED: Fixed Notices.
+
 = 0.9.1 =
-* FIXED: Conflict issue with Jetpack and menu icon.
+* FIXED: Add-mores can now contain empty values.
+* FIXED: body_class function works better with Jetpack.
 
 = 0.9.0 =
 * NEW: Add Tooltip Help to any Piklist field.
