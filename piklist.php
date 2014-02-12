@@ -3,13 +3,14 @@
 Plugin Name: Piklist
 Plugin URI: http://piklist.com
 Description: A framework for building powerful websites with WordPress.
-Version: 0.9.1
+Version: 0.9.2
 Author: Piklist
 Author URI: http://piklist.com
 Text Domain: piklist
 Domain Path: /languages
 License: GPLv2
 */
+
 
 /*  
   Copyright (c) 2012-2014 Piklist, LLC.
