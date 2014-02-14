@@ -1,0 +1,457 @@
+# Copyright (C) 2012 Piklist
+# This file is distributed under the same license as the Piklist package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Piklist 0.6.5\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/piklist\n"
+"POT-Creation-Date: 2012-10-09 02:55:39+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-01-22 14:50+0300\n"
+"Last-Translator: Serg\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:69
+msgid "%1$sOrder Status:%2$s %3$s"
+msgstr "%1$ sOrder stav: % 2$ s %3$ s"
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:13
+msgid "Group ~ List Example"
+msgstr "Skupina ~ príklad zoznamu"
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:14
+msgid "This is an example of how to build a list with multiple element types."
+msgstr "Toto je príklad toho, ako vytvoriť zoznam s viacerými typmi prvok."
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:49
+#: add-ons/piklist-demos/parts/settings/field-text.php:22
+#: add-ons/piklist-demos/parts/widgets/example-form.php:20
+#: add-ons/piklist-demos/parts/widgets/example.php:16
+msgid "Text"
+msgstr "Text"
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:50
+msgid "class=\"small-text\""
+msgstr "trieda = \" &quot;small-text\""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:58
+#: add-ons/piklist-demos/parts/settings/field-select.php:11
+#: add-ons/piklist-demos/parts/widgets/example-form.php:55
+#: add-ons/piklist-demos/parts/widgets/example.php:19
+msgid "Select"
+msgstr "Vyberte"
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:59
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:73
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:13
+#: add-ons/piklist-demos/parts/settings/field-editor.php:13
+#: add-ons/piklist-demos/parts/settings/field-editor.php:14
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:12
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:36
+#: add-ons/piklist-demos/parts/settings/field-select.php:12
+#: add-ons/piklist-demos/parts/settings/field-text.php:64
+#: add-ons/piklist-demos/parts/settings/field-text.php:65
+#: add-ons/piklist-demos/parts/widgets/example-form.php:43
+#: add-ons/piklist-demos/parts/widgets/example-form.php:44
+#: add-ons/piklist-demos/parts/widgets/example-form.php:56
+#: add-ons/piklist-demos/parts/widgets/example-form.php:72
+#: add-ons/piklist-demos/parts/widgets/example-form.php:96
+#: add-ons/piklist-demos/parts/widgets/example-form.php:122
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:72
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:12
+#: add-ons/piklist-demos/parts/widgets/example-form.php:121
+#: add-ons/piklist-demos/parts/widgets/example.php:22
+msgid "Color Picker"
+msgstr "Color Picker"
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:80
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:19
+#: add-ons/piklist-demos/parts/widgets/example-form.php:131
+msgid "Date"
+msgstr "Dátum"
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:81
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:20
+#: add-ons/piklist-demos/parts/widgets/example-form.php:132
+msgid "Choose a date"
+msgstr "Vyberte dátum"
+
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:30
+msgid "Time"
+msgstr "Čas"
+
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:31
+msgid "Choose a time"
+msgstr "Vyberte čas"
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:12
+msgid "Toggle a field"
+msgstr "Zobraziť/Skryť pole"
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:23
+msgid "Show/Hide Field"
+msgstr "Zobraziť/Skryť pole"
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:24
+msgid "This field is toggled by the field above"
+msgstr "Toto pole je prepnuté do poľa vyššie"
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:36
+msgid "Update a field"
+msgstr "Aktualizovať pole"
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:61
+msgid "Update This Field"
+msgstr "Aktualizovať toto pole"
+
+#: add-ons/piklist-demos/parts/settings/field-conditions.php:62
+msgid "This field is updated by the field above"
+msgstr "Pole sa aktualizuje pole vyššie"
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:12
+msgid "Address"
+msgstr "Adresa"
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:13
+msgid ""
+"This is an example of how to build a simple address field using the group "
+"type."
+msgstr ""
+"Toto je príklad ako sa stavia jednoduchý adresu poľa pomocou skupiny typ."
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:18
+msgid "Street Address"
+msgstr "Adresu ulice"
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:24
+msgid "PO Box, Suite, etc."
+msgstr "P.O. Box, Suite, atď."
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:30
+msgid "City"
+msgstr "Mesto"
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:36
+msgid "State"
+msgstr "Štát"
+
+#: add-ons/piklist-demos/parts/settings/field-custom.php:95
+msgid "Zip Code"
+msgstr "smerovacie číslo"
+
+#: add-ons/piklist-demos/parts/settings/field-editor.php:12
+msgid "HTML Content"
+msgstr "Obsahu HTML"
+
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:11
+#: add-ons/piklist-demos/parts/widgets/example-form.php:71
+#: add-ons/piklist-demos/parts/widgets/example.php:20
+msgid "Radio"
+msgstr "Rádio"
+
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:35
+#: add-ons/piklist-demos/parts/widgets/example-form.php:95
+#: add-ons/piklist-demos/parts/widgets/example.php:21
+msgid "Checkbox"
+msgstr "Začiarkavacie políčko"
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:11
+#: add-ons/piklist-demos/parts/widgets/example-form.php:9
+msgid "Text ~ small-text"
+msgstr "Text ~ malý-text"
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:12
+#: add-ons/piklist-demos/parts/settings/field-text.php:23
+#: add-ons/piklist-demos/parts/settings/field-text.php:31
+#: add-ons/piklist-demos/parts/settings/field-text.php:42
+#: add-ons/piklist-demos/parts/settings/field-text.php:53
+#: add-ons/piklist-demos/parts/widgets/example-form.php:10
+#: add-ons/piklist-demos/parts/widgets/example-form.php:21
+#: add-ons/piklist-demos/parts/widgets/example-form.php:32
+#: add-ons/piklist-demos/parts/widgets/example-form.php:147
+msgid "ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr "ipsum dolor sit amet, consectetur adipiscing elit."
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:30
+msgid "Text ~ regular-text"
+msgstr "Text ~ pravidelný-text"
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:41
+#: add-ons/piklist-demos/parts/widgets/example-form.php:31
+msgid "Text ~ large-text"
+msgstr "Text ~ veľký-text"
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:52
+msgid "Number ~ small-text"
+msgstr "Číslo ~ malý-text"
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:63
+msgid "Textarea ~ 10x50 ~ large-text code"
+msgstr "Textarea ~ 10 x 50 ~ veľký text kód"
+
+#: add-ons/piklist-demos/parts/shared/meta-field-welcome.php:2
+msgid "The code that built this meta box can be found here:"
+msgstr "Kód, ktorý postavil tento meta box možno nájsť tu:"
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:42
+msgid "Textarea ~ large-text code"
+msgstr "Textarea ~ veľký text kód"
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:146
+msgid "Add More"
+msgstr "Pridať viac"
+
+#: add-ons/piklist-demos/parts/widgets/example.php:10
+msgid "Example Display Widget"
+msgstr "Príklad zobrazenia Widget"
+
+#: add-ons/piklist-demos/parts/widgets/example.php:15
+msgid "Text ~ Small"
+msgstr "Text ~ malý"
+
+#: add-ons/piklist-demos/parts/widgets/example.php:17
+msgid "Text ~ Large"
+msgstr "Text ~ veľký"
+
+#: add-ons/piklist-demos/parts/widgets/example.php:18
+msgid "Textarea"
+msgstr "Textarea"
+
+#: add-ons/piklist-demos/parts/widgets/example.php:23
+msgid "Date Picker"
+msgstr "Výber dátumu"
+
+#: add-ons/piklist-demos/parts/widgets/hello-world-form.php:6
+msgid "From"
+msgstr "Od"
+
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:10
+msgid "Hello World from "
+msgstr "Hello World od "
+
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:15
+msgid "This is a sample widget from"
+msgstr "Toto je vzorka widget z"
+
+#. #-#-#-#-#  plugin.pot (Piklist 0.6.5)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Piklist 0.6.5)  #-#-#-#-#
+#. Author of the plugin/theme
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:15
+#: includes/class-piklist-setting.php:22
+msgid "Piklist"
+msgstr "Piklist"
+
+#: add-ons/piklist-demos/piklist-demos.php:22
+msgid "Demo"
+msgstr "Demo"
+
+#: add-ons/piklist-demos/piklist-demos.php:23
+msgid "Person"
+msgstr "Osoba"
+
+#: add-ons/piklist-demos/piklist-demos.php:76
+#: add-ons/piklist-demos/piklist-demos.php:77
+msgid "Field Demos"
+msgstr "Pole dema"
+
+#: includes/class-piklist-admin.php:42
+msgid "</a> and <a href=\"%s\">Piklist</a>."
+msgstr "a <a href=&quot;\"%s\"&quot;>Piklist</a>."
+
+#: includes/class-piklist-admin.php:93 includes/class-piklist-setting.php:67
+msgid "General"
+msgstr "Všeobecné"
+
+#: includes/class-piklist-setting.php:21
+msgid "About"
+msgstr "O"
+
+#: includes/class-piklist-setting.php:32
+msgid "Piklist Settings"
+msgstr "Piklist nastavenia"
+
+#: includes/class-piklist-setting.php:33 parts/fields/add-ons.php:37
+msgid "Settings"
+msgstr "Nastavenia"
+
+#: includes/class-piklist-widget.php:54 includes/class-piklist-widget.php:64
+msgid " Widgets"
+msgstr " Widgety"
+
+#: includes/class-piklist-widget.php:59
+msgid "Piklist Widgets"
+msgstr "Piklist widgety"
+
+#: includes/class-piklist-widget.php:60
+msgid "Core Widgets for Piklist."
+msgstr "Jadro widgety pre Piklist."
+
+#: parts/fields/file.php:18
+msgid "Upload or View"
+msgstr "Upload alebo zobrazenie"
+
+#: parts/settings/add-ons.php:10
+msgid ""
+"Add-ons are Piklist plugins that are included with Piklist core, or another "
+"Piklist plugin. They allow you to turn on additional functionality."
+msgstr ""
+"Doplnky sú Piklist pluginy, ktoré sú súčasťou Piklist core, alebo iný "
+"Piklist plugin. Umožňujú vám zapnúť ďalšie funkcie."
+
+#: parts/settings/add-ons.php:19
+msgid "Plugin Add-ons"
+msgstr "Plugin Doplnky"
+
+#: parts/settings/add-ons.php:20
+msgid "Check to activate."
+msgstr "Kontrola aktivovať."
+
+#: parts/shared/admin-notice.php:2
+msgid "ERROR:"
+msgstr "CHYBA:"
+
+#: parts/shared/admin-page.php:48
+msgid "Save Changes"
+msgstr "Uložiť zmeny"
+
+#: parts/shared/post-submit-meta-box.php:25
+#: parts/shared/post-submit-meta-box.php:32
+msgid "Save"
+msgstr "Uložiť"
+
+#: parts/shared/post-submit-meta-box.php:44
+msgid "Preview Changes"
+msgstr "Náhľad zmeny"
+
+#: parts/shared/post-submit-meta-box.php:54
+msgid "Preview"
+msgstr "Náhľad"
+
+#: parts/shared/post-submit-meta-box.php:71
+msgid "Status:"
+msgstr "Stav:"
+
+#: parts/shared/post-submit-meta-box.php:79
+#: parts/shared/post-submit-meta-box.php:128
+#: parts/shared/post-submit-meta-box.php:197
+msgid "Edit"
+msgstr "Upraviť"
+
+#: parts/shared/post-submit-meta-box.php:91
+#: parts/shared/post-submit-meta-box.php:149
+msgid "OK"
+msgstr "ok"
+
+#: parts/shared/post-submit-meta-box.php:92
+#: parts/shared/post-submit-meta-box.php:150
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: parts/shared/post-submit-meta-box.php:101
+msgid "Visibility:"
+msgstr "Viditeľnosť:"
+
+#: parts/shared/post-submit-meta-box.php:106
+#: parts/shared/post-submit-meta-box.php:146
+msgid "Private"
+msgstr "Súkromné"
+
+#: parts/shared/post-submit-meta-box.php:111
+#: parts/shared/post-submit-meta-box.php:143
+msgid "Password protected"
+msgstr "Chránené heslom"
+
+#: parts/shared/post-submit-meta-box.php:116
+msgid "Public, Sticky"
+msgstr "Verejnosti, lepkavé"
+
+#: parts/shared/post-submit-meta-box.php:121
+#: parts/shared/post-submit-meta-box.php:139
+msgid "Public"
+msgstr "Verejnosti"
+
+#: parts/shared/post-submit-meta-box.php:141
+msgid "Stick this post to the front page"
+msgstr "Držať tento post na prednej strane"
+
+#: parts/shared/post-submit-meta-box.php:145
+msgid "Password:"
+msgstr "Heslo:"
+
+#. translators: Publish box date format, see http:php.net/date
+#: parts/shared/post-submit-meta-box.php:161
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G:i"
+
+#: parts/shared/post-submit-meta-box.php:166
+msgid "Scheduled for: <b>%1$s</b>"
+msgstr "Naplánované na: <b>%1$ s</b>"
+
+#: parts/shared/post-submit-meta-box.php:170
+msgid "Published on: <b>%1$s</b>"
+msgstr "Zverejnené na: <b>%1$ s</b>"
+
+#: parts/shared/post-submit-meta-box.php:178
+msgid "Schedule for: <b>%1$s</b>"
+msgstr "Harmonogram: <b>%1$ s</b>"
+
+#: parts/shared/post-submit-meta-box.php:188
+msgid "Publish <b>immediately</b>"
+msgstr "Publikovať <b>okamžite</b>"
+
+#: parts/shared/post-submit-meta-box.php:224
+msgid "Delete Permanently"
+msgstr "Natrvalo odstrániť"
+
+#: parts/shared/post-submit-meta-box.php:228
+msgid "Move to Trash"
+msgstr "Premiestniť do koša"
+
+#: parts/shared/post-submit-meta-box.php:248
+#: parts/shared/post-submit-meta-box.php:249
+msgid "Schedule"
+msgstr "Harmonogram"
+
+#: parts/shared/post-submit-meta-box.php:260
+#: parts/shared/post-submit-meta-box.php:261
+msgid "Submit for Review"
+msgstr "Odoslať na revíziu"
+
+#: parts/shared/post-submit-meta-box.php:268
+msgid "Update"
+msgstr "Aktualizácia"
+
+#: parts/shared/widget-select.php:5 parts/shared/widget-select.php:16
+msgid "Select a Widget"
+msgstr "Vyberte Widget"
+
+#: parts/shared/widget-select.php:61
+msgid "There are currently no Widgets available."
+msgstr "V súčasnosti neexistujú žiadne widgety k dispozícii."
+
+#: parts/shared/widget-select.php:64
+msgid "Learn to make Widgets"
+msgstr "Naučte sa robiť widgety"
+
+#: parts/shared/widget-select.php:67
+msgid ""
+"Check out the documentation for how to easily build your own custom widgets!"
+msgstr ""
+"Pozrite si dokumentáciu ako ľahko vytvoriť svoj vlastný vlastné widgety!"
+
+#. #-#-#-#-#  plugin.pot (Piklist 0.6.5)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Piklist 0.6.5)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://piklist.com"
+msgstr "http://piklist.com"
+
+#. Description of the plugin/theme
+msgid "A Framework for Building Powerful Websites with WordPress."
+msgstr "Rámec pre budovanie silný webové stránky s WordPress."
