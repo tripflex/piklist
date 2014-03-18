@@ -1,0 +1,824 @@
+# Copyright (C) 2014 Piklist
+# This file is distributed under the same license as the Piklist package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Piklist 0.9.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/piklist\n"
+"POT-Creation-Date: 2014-02-04 19:42:11+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: add-ons/piklist-demos/parts/dashboard/dashboard-piklist-news.php:29
+msgid "No items"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/help/demos-help-sidebar.php:12
+#: add-ons/piklist-demos/parts/meta-boxes/help.php:16
+msgid "Help with Piklist is just a click away."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/help/demos-help-sidebar.php:15
+#: add-ons/piklist-demos/parts/meta-boxes/help.php:19
+msgid "Tutorials"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/help/demos-help-sidebar.php:16
+#: add-ons/piklist-demos/parts/meta-boxes/help.php:20
+msgid "Documentation"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/help/demos-help-sidebar.php:17
+#: add-ons/piklist-demos/parts/meta-boxes/help.php:21
+msgid "Support Forum"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/help/demos-help-sidebar.php:18
+#: add-ons/piklist-demos/parts/meta-boxes/help.php:22
+msgid "Disable Piklist Demos"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/help/demos-help.php:10
+msgid ""
+"Piklist Demos are designed to show off Piklist features and demonstrate how "
+"to use them."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-add-more.php:11
+msgid ""
+"Piklist AddMore fields are the repeater field you always dreamed of. Group "
+"together as many fields as you want and make them repeat indefinitely. Or "
+"place an Add-More within an Add-More within an Add-more..."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-add-more.php:19
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:45
+#: add-ons/piklist-demos/parts/widgets/example-form.php:66
+#: add-ons/piklist-demos/parts/widgets/example.php:16
+msgid "Text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-add-more.php:27
+msgid "Todo's (Grouped)"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-add-more.php:60
+msgid "Todo's (Un-Grouped)"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-add-more.php:93
+msgid "Content Section (Grouped)"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-add-more.php:94
+#: add-ons/piklist-demos/parts/meta-boxes/field-add-more.php:150
+msgid ""
+"When an add-more field is nested it should be grouped to maintain the data "
+"relationships."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-add-more.php:149
+msgid "Content Section with Siblings (Grouped)"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-colorpicker.php:11
+msgid ""
+"WordPress ColorPicker fields are super simple to create. Piklist handles all "
+"the Javascript."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-comments.php:13
+msgid "Inline comments fields are a snap to add."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-comments.php:59
+msgid "on %s"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-comments.php:60
+msgid "Status: %s"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-conditions.php:11
+msgid ""
+"Hide or show one field or many. You can also update a field when a value is "
+"set in another."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-date-time.php:11
+msgid "DatePicker fields are easy to create and format."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-featured-image.php:13
+msgid ""
+"With Piklist you can easily replicate the WordPress Featured Image field, "
+"with an added bonus. Piklist allows you to use multiple featured images."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-relate.php:33
+msgid "Related Posts"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-taxonomies.php:13
+msgid ""
+"Create your own Taxonomy metabox, and display the terms as a checkbox, "
+"radio, select or any field you can imagine."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-text.php:12
+msgid ""
+"Text fields are at the core of most forms, and easily created with Piklist. "
+"Here a text field is marked REQUIRED, which will stop the entire form from "
+"saving unless filled in. Tooltip help can be added to any field with one "
+"line of code, and HTML fields can output your markup in the same format as "
+"other fields."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:21
+msgid ""
+"Piklist comes standard with two upload fields: Basic and Media. The Media "
+"field works just like the standard WordPress media field, while the Basic "
+"uploader is great for simple forms."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:22
+msgid "The metabox \"look\" can be removed to provide a different look."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:30
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:41
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:44
+msgid "Add File(s)"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:31
+msgid "This is the basic upload field."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:42
+msgid "This is the uploader seen in the admin by default."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/meta-boxes/field-upload.php:45
+msgid "Add"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:13
+msgid "Group ~ List Example"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:14
+msgid "This is an example of how to build a list with multiple element types."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:46
+msgid "class=\"small-text\""
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:54
+#: add-ons/piklist-demos/parts/settings/field-select.php:12
+#: add-ons/piklist-demos/parts/widgets/example-form.php:116
+#: add-ons/piklist-demos/parts/widgets/example.php:19
+msgid "Select"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:55
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:13
+#: add-ons/piklist-demos/parts/settings/field-editor.php:13
+#: add-ons/piklist-demos/parts/settings/field-editor.php:14
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:13
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:49
+#: add-ons/piklist-demos/parts/settings/field-select.php:13
+#: add-ons/piklist-demos/parts/settings/field-text.php:47
+#: add-ons/piklist-demos/parts/settings/field-text.php:48
+#: add-ons/piklist-demos/parts/widgets/example-form.php:96
+#: add-ons/piklist-demos/parts/widgets/example-form.php:97
+#: add-ons/piklist-demos/parts/widgets/example-form.php:117
+#: add-ons/piklist-demos/parts/widgets/example-form.php:133
+#: add-ons/piklist-demos/parts/widgets/example-form.php:157
+#: add-ons/piklist-demos/parts/widgets/example-form.php:201
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:68
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:20
+#: add-ons/piklist-demos/parts/widgets/example-form.php:210
+msgid "Date"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-add-more.php:69
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:21
+#: add-ons/piklist-demos/parts/widgets/example-form.php:211
+msgid "Choose a date"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-advanced.php:12
+#: add-ons/piklist-demos/parts/widgets/example-form.php:200
+#: add-ons/piklist-demos/parts/widgets/example.php:22
+msgid "Color Picker"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-editor.php:12
+msgid "HTML Content"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:12
+#: add-ons/piklist-demos/parts/widgets/example-form.php:132
+#: add-ons/piklist-demos/parts/widgets/example.php:20
+msgid "Radio"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-multiple.php:48
+#: add-ons/piklist-demos/parts/widgets/example-form.php:156
+#: add-ons/piklist-demos/parts/widgets/example.php:21
+msgid "Checkbox"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:12
+msgid "Text ~ regular-text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:13
+#: add-ons/piklist-demos/parts/settings/field-text.php:25
+#: add-ons/piklist-demos/parts/settings/field-text.php:36
+#: add-ons/piklist-demos/parts/widgets/example-form.php:21
+#: add-ons/piklist-demos/parts/widgets/example-form.php:67
+#: add-ons/piklist-demos/parts/widgets/example-form.php:78
+#: add-ons/piklist-demos/parts/widgets/example-form.php:226
+msgid "ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:24
+#: add-ons/piklist-demos/parts/widgets/example-form.php:77
+msgid "Text ~ large-text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:35
+msgid "Number ~ small-text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/settings/field-text.php:46
+msgid "Textarea ~ 10x50 ~ large-text code"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/shared/code-locater.php:5
+msgid "The code that built this %s can be found here:"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:8
+msgid "Basic"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:9
+msgid "Large Text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:10
+msgid "Selects"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:11
+msgid "Advanced"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:20
+msgid "Text ~ small-text"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:95
+msgid "Textarea ~ large-text code"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example-form.php:225
+msgid "Add More"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:10
+msgid "Example Display Widget"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:15
+msgid "Text ~ Small"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:17
+msgid "Text ~ Large"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:18
+msgid "Textarea"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/example.php:23
+msgid "Date Picker"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/hello-world-form.php:6
+msgid "From"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:10
+msgid "Hello World from"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:15
+msgid "This is a sample widget from"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Piklist 0.9.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Piklist 0.9.0)  #-#-#-#-#
+#. Author of the plugin/theme
+#: add-ons/piklist-demos/parts/widgets/hello-world.php:15
+msgid "Piklist"
+msgstr ""
+
+#: add-ons/piklist-demos/parts/workflows/edit-editor.php:11
+msgid ""
+"The WordPress post editor can be placed anywhere you like, since Piklist "
+"treats it like any other field. You can also use multiple editors per page."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/workflows/edit-group.php:10
+msgid ""
+"Grouping fields saves all their data in one field array for convenience. If "
+"you need to search the individual field data then don't group the fields. "
+"Don't worry you can acheive the same layout either way."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/workflows/edit-header.php:11
+msgid "Welcome to the Piklist Demo for custom post types."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/workflows/edit-header.php:12
+msgid ""
+"Click the Workflow Tabs to see sample field configurations you can easily "
+"build with Piklist."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/workflows/edit-list-table.php:10
+msgid ""
+"Fully customizable, sortable list tables can be created and placed anywhere "
+"with Piklist."
+msgstr ""
+
+#: add-ons/piklist-demos/parts/workflows/edit-lists.php:10
+msgid ""
+"Select, Radio and Checkbox fields have multiple configuration options. You "
+"can display them stacked, single line, as grouped lists and even use nested "
+"fields. "
+msgstr ""
+
+#: add-ons/piklist-demos/piklist-demos.php:21
+msgid "Enter a new Demo Title"
+msgstr ""
+
+#: add-ons/piklist-demos/piklist-demos.php:39
+msgid "Demo"
+msgstr ""
+
+#: add-ons/piklist-demos/piklist-demos.php:40
+msgid "Assigned to"
+msgstr ""
+
+#: add-ons/piklist-demos/piklist-demos.php:111
+#: add-ons/piklist-demos/piklist-demos.php:112
+msgid "Demo Settings"
+msgstr ""
+
+#: add-ons/piklist-demos/piklist-demos.php:164
+msgid "Create Demo"
+msgstr ""
+
+#: includes/class-piklist-admin.php:158
+msgid "%1$s and %2$sPiklist%1$s."
+msgstr ""
+
+#: includes/class-piklist-admin.php:213 includes/class-piklist-setting.php:71
+msgid "General"
+msgstr ""
+
+#: includes/class-piklist-admin.php:297
+msgid "Save Changes"
+msgstr ""
+
+#: includes/class-piklist-admin.php:371 includes/class-piklist-setting.php:37
+#: parts/fields/add-ons.php:41
+msgid "Settings"
+msgstr ""
+
+#: includes/class-piklist-cpt.php:752
+msgid "Custom field updated."
+msgstr ""
+
+#: includes/class-piklist-cpt.php:753
+msgid "Custom field deleted."
+msgstr ""
+
+#: includes/class-piklist-cpt.php:757
+msgid "Page saved."
+msgstr ""
+
+#. translators: Publish box date format, see http:php.net/date
+#: includes/class-piklist-cpt.php:759
+#: parts/shared/post-submit-meta-box.php:188
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: includes/class-piklist-list-table.php:207
+msgid "1 item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-piklist-list-table.php:231
+msgid "Go to the first page"
+msgstr ""
+
+#: includes/class-piklist-list-table.php:239
+msgid "Go to the previous page"
+msgstr ""
+
+#: includes/class-piklist-list-table.php:246
+msgid "Current page"
+msgstr ""
+
+#: includes/class-piklist-list-table.php:252
+msgctxt "paging"
+msgid "%1$s of %2$s"
+msgstr ""
+
+#: includes/class-piklist-list-table.php:257
+msgid "Go to the next page"
+msgstr ""
+
+#: includes/class-piklist-list-table.php:265
+msgid "Go to the last page"
+msgstr ""
+
+#: includes/class-piklist-setting.php:36
+msgid "Piklist Settings"
+msgstr ""
+
+#: includes/class-piklist-taxonomy.php:232
+msgid "Users"
+msgstr ""
+
+#: includes/class-piklist-widget.php:59 includes/class-piklist-widget.php:73
+msgid "Widgets"
+msgstr ""
+
+#: includes/class-piklist-widget.php:64
+msgid "Piklist Widgets"
+msgstr ""
+
+#: includes/class-piklist-widget.php:65
+msgid "Core Widgets for Piklist."
+msgstr ""
+
+#: includes/class-piklist-widget.php:74
+msgid "Widgets for the %s Theme"
+msgstr ""
+
+#: includes/class-piklist.php:460
+msgid "Add New"
+msgstr ""
+
+#: parts/admin-pages/welcome.php:150
+msgid "Welcome to Piklist"
+msgstr ""
+
+#: parts/admin-pages/welcome.php:152
+msgid "The most powerful framework available for WordPress."
+msgstr ""
+
+#: parts/admin-pages/welcome.php:154
+msgid "Version %s"
+msgstr ""
+
+#: parts/admin-pages/welcome.php:327
+msgid "Send to:"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:37
+#: parts/dashboard/dashboard-right-now.php:192
+msgid "Content"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:63
+#: parts/dashboard/dashboard-right-now.php:325
+msgid "Organization"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:91
+#: parts/dashboard/dashboard-right-now.php:251
+msgid "Comments"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:101
+#: parts/dashboard/dashboard-right-now.php:271
+msgid "Approved"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:111
+#: parts/dashboard/dashboard-right-now.php:291
+msgid "Pending"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:121
+#: parts/dashboard/dashboard-right-now.php:311
+msgid "Spam"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:151
+msgid "WordPress %1$s running %2$s theme."
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:156
+#: parts/dashboard/dashboard-right-now.php:433
+msgid "Your site is asking search engines not to index its content"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:157
+#: parts/dashboard/dashboard-right-now.php:434
+msgid "Search Engines Discouraged"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:377
+msgid ""
+"ERROR: The themes directory is either empty or doesn&#8217;t exist. Please "
+"check your installation."
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:409
+msgid ""
+"Theme <span class=\"b\">%1$s</span> with <span class=\"b\"><a href=\"widgets."
+"php\">%2$s Widget</a></span>"
+msgid_plural ""
+"Theme <span class=\"b\">%1$s</span> with <span class=\"b\"><a href=\"widgets."
+"php\">%2$s Widgets</a></span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: parts/dashboard/dashboard-right-now.php:413
+msgid ""
+"Theme <span class=\"b\">%1$s</span> with <span class=\"b\">%2$s Widget</span>"
+msgid_plural ""
+"Theme <span class=\"b\">%1$s</span> with <span class=\"b\">%2$s Widgets</"
+"span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: parts/dashboard/dashboard-right-now.php:420
+msgid "Theme <span class=\"b\"><a href=\"themes.php\">%1$s</a></span>"
+msgstr ""
+
+#: parts/dashboard/dashboard-right-now.php:424
+msgid "Theme <span class=\"b\">%1$s</span>"
+msgstr ""
+
+#: parts/fields/add-ons.php:35
+msgid "Disable"
+msgstr ""
+
+#: parts/fields/add-ons.php:35
+msgid "Activate"
+msgstr ""
+
+#: parts/fields/file.php:80 parts/fields/file.php:99
+msgid "Remove"
+msgstr ""
+
+#: parts/fields/post-relate.php:6
+msgid "Most Recent"
+msgstr ""
+
+#: parts/fields/post-relate.php:7
+msgid "All"
+msgstr ""
+
+#: parts/settings/add-ons.php:11
+msgid ""
+"Add-ons are Piklist plugins that are included with Piklist core, or another "
+"Piklist plugin. They allow you to turn on additional functionality."
+msgstr ""
+
+#: parts/settings/add-ons.php:20
+msgid "Plugin Add-ons"
+msgstr ""
+
+#: parts/settings/general.php:14
+msgid ""
+"WARNING: Deactivating Piklist may disable functionality on this website."
+msgstr ""
+
+#: parts/settings/general.php:18
+msgid ""
+"Before deactivating please make sure other Plugins or your Theme do not rely "
+"on Piklist."
+msgstr ""
+
+#: parts/settings/general.php:22
+msgid "If you still want to deactivate Piklist:"
+msgstr ""
+
+#: parts/settings/general.php:24
+msgid "Change the setting below to: Allow Deactivation."
+msgstr ""
+
+#: parts/settings/general.php:25
+msgid "SAVE the Settings."
+msgstr ""
+
+#: parts/settings/general.php:26
+msgid "Return to the %1$sPlugins page%2$s and disable Piklist normally."
+msgstr ""
+
+#: parts/settings/general.php:35
+msgid ""
+"Stops Piklist from being deactivated, and replaces the standard DEACTIVATE "
+"link for Piklist, with a link to this page."
+msgstr ""
+
+#: parts/settings/general.php:39
+msgid ""
+"When a user clicks on the new link on the plugins page, they will be brought "
+"here, and shown a warning."
+msgstr ""
+
+#: parts/settings/general.php:49
+msgid "Piklist Deactivation"
+msgstr ""
+
+#: parts/settings/general.php:50
+msgid "Deactivating Piklist may disable functionality on this website."
+msgstr ""
+
+#: parts/settings/general.php:55
+msgid "Allow Deactivation"
+msgstr ""
+
+#: parts/settings/general.php:56
+msgid "Lock"
+msgstr ""
+
+#: parts/settings/users.php:12
+msgid "Muliple User Roles"
+msgstr ""
+
+#: parts/settings/users.php:13
+msgid "Users can be assigned multiple roles."
+msgstr ""
+
+#: parts/settings/users.php:15
+msgid "Allow"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:30
+#: parts/shared/post-submit-meta-box.php:39
+msgid "Save"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:51
+msgid "Preview Changes"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:61
+msgid "Preview"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:86
+msgid "Status:"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:94
+#: parts/shared/post-submit-meta-box.php:149
+#: parts/shared/post-submit-meta-box.php:224
+msgid "Edit"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:106
+#: parts/shared/post-submit-meta-box.php:170
+msgid "OK"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:107
+#: parts/shared/post-submit-meta-box.php:171
+msgid "Cancel"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:122
+msgid "Visibility:"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:127
+#: parts/shared/post-submit-meta-box.php:167
+msgid "Private"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:132
+#: parts/shared/post-submit-meta-box.php:164
+msgid "Password protected"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:137
+msgid "Public, Sticky"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:142
+#: parts/shared/post-submit-meta-box.php:160
+msgid "Public"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:162
+msgid "Stick this post to the front page"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:166
+msgid "Password:"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:193
+#: parts/shared/post-submit-meta-box.php:205
+msgid "Scheduled for: <b>%1$s</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:197
+msgid "Published on: <b>%1$s</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:201
+#: parts/shared/post-submit-meta-box.php:209
+msgid "Publish"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:201
+#: parts/shared/post-submit-meta-box.php:209
+#: parts/shared/post-submit-meta-box.php:279
+#: parts/shared/post-submit-meta-box.php:280
+msgid "Schedule"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:201
+msgid " <b>immediately</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:209
+msgid " on: <b>%1$s</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:215
+msgid "Publish <b>immediately</b>"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:256
+msgid "Delete Permanently"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:260
+msgid "Move to Trash"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:291
+#: parts/shared/post-submit-meta-box.php:292
+msgid "Submit for Review"
+msgstr ""
+
+#: parts/shared/post-submit-meta-box.php:299
+msgid "Update"
+msgstr ""
+
+#: parts/shared/update-available.php:18
+msgid "Updating is recommended, here's why:"
+msgstr ""
+
+#: parts/shared/widget-select.php:6 parts/shared/widget-select.php:17
+msgid "Select a Widget"
+msgstr ""
+
+#: parts/shared/widget-select.php:66
+msgid "There are currently no Widgets available."
+msgstr ""
+
+#: parts/shared/widget-select.php:69
+msgid "Learn to make Widgets"
+msgstr ""
+
+#: parts/shared/widget-select.php:72
+msgid ""
+"Check out the documentation for how to easily build your own custom widgets!"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (Piklist 0.9.0)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  plugin.pot (Piklist 0.9.0)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://piklist.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A framework for building powerful websites with WordPress."
+msgstr ""
