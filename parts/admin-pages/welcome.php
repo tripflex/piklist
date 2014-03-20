@@ -327,6 +327,7 @@ get_currentuserinfo();
           <?php _e('Send to:', 'piklist');?>
         </label>
         <input type="email" value="<?php echo $current_user->user_email; ?>" name="EMAIL" class="regular-text email" id="mce-EMAIL" placeholder="Enter email address" required>
+        <input type="hidden" name="SIGNUP" id="SIGNUP" value="plugin-piklist" />
         <div class="clear">
         <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
         </div><!-- .clear -->
