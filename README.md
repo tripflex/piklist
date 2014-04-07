@@ -14,6 +14,9 @@ A rapid development framework for WordPress.
 
 ***
 
+**Automatic update from SVN is currently having issues, i'll try and fix it ASAP, but until then you can always get a copy from the WP Plugins clone:**
+https://github.com/wp-plugins/piklist
+
 ### Description
 
 **CURRENTLY IN BETA**
