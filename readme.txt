@@ -3,7 +3,7 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.9
 Requires at least: 3.6
-Stable tag: 0.9.3.1
+Stable tag: 0.9.3.2
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -93,6 +93,11 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.9.3.2 =
+* FIXED: User registrations emails no longer conflict with other plugins (i.e. BuddyPress)
+* FIXED: check_update function respects new plugins.
+* FIXED: notice from post_row_actions function.
 
 = 0.9.3.1 =
 * FIXED: Addmore field bug fix.
