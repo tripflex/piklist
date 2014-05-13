@@ -3,13 +3,12 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.9
 Requires at least: 3.6
-Stable tag: 0.9.3.2
+Stable tag: 0.9.3.3
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A rapid development framework for WordPress.
-
 
 == Description ==
 
@@ -32,21 +31,21 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 
 = Better Custom Post Types =
-*   Powerful Custom Post Types 
-*   Relate Custom Post Types to each other. 
-*   Add your own post statuses. 
+*   Powerful Custom Post Types
+*   Relate Custom Post Types to each other.
+*   Add your own post statuses.
 
 = Codeless Meta Boxes =
 *   Group fields in a meta box, by placing them all in one file.
-*   Add a comment block at the top of your file to define the meta box attributes 
-*   Hide/Show based on the post status. 
-*   Hide/Show based on the users capability. 
-*   Sort meta boxes with granular control. 
+*   Add a comment block at the top of your file to define the meta box attributes
+*   Hide/Show based on the post status.
+*   Hide/Show based on the users capability.
+*   Sort meta boxes with granular control.
 *   Lock the box, so users cannot move or hide them.
 *   Add meta box to a specific Page/Post ID.
 
 = Simple, Groupable Widgets =
-*   Group widgets into one widget to save space, and make finding them easier 
+*   Group widgets into one widget to save space, and make finding them easier
 *   Create one file for your Widget settings, and one for your output... all done!
 *   Use any Piklist field type in your widget settings page.
 
@@ -62,7 +61,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   post editor
 *   hidden
 *   html
-*   date chooser 
+*   date chooser
 *   color picker
 *   add more
 
@@ -79,7 +78,7 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   media_meta
 
 = Mix Field and Content types (i.e. Taxonomies as radio buttons) =
-*   Hide/Show based on another form field. 
+*   Hide/Show based on another form field.
 *   Hide/Show based on the post status.
 *   Hide/Show based on the users capability.
 *   Hide form fields, and just show field values
@@ -94,6 +93,9 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.9.3.3 =
+* FIXED: Update to class-piklist-user
 
 = 0.9.3.2 =
 * FIXED: User registrations emails no longer conflict with other plugins (i.e. BuddyPress)
