@@ -3,7 +3,7 @@
 Plugin Name: Piklist
 Plugin URI: http://piklist.com
 Description: A framework for building powerful websites with WordPress.
-Version: 0.9.3.3
+Version: 0.9.4
 Author: Piklist
 Author URI: http://piklist.com
 Text Domain: piklist
@@ -12,7 +12,7 @@ License: GPLv2
 */
 
 
-/*
+/*  
   Copyright (c) 2012-2014 Piklist, LLC.
   All rights reserved.
 
@@ -42,7 +42,7 @@ License: GPLv2
   {
     exit;
   }
-
+  
   if (!class_exists('Piklist'))
   {
     include_once 'includes/class-piklist.php';
