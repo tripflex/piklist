@@ -1,13 +1,5 @@
-<?php
 
-  if (is_admin())
-  {
-    wp_enqueue_media();
-  }
-  
-?>
-
-<?php if (isset($options['basic']) || !is_admin()): ?>
+<?php if ((isset($options['basic']) && $options['basic'] == true)  || !is_admin()): ?>
 
   <input 
     type="file"

@@ -229,7 +229,7 @@ class PikList_Taxonomy
   
   public static function user_taxonomy_column($columns) 
   {
-    $columns['users']  = __('Users');
+    $columns['users']  = __('Users', 'piklist');
 
     unset($columns['posts']);
   

@@ -130,6 +130,14 @@ Order: 40
     ,'choices' => array(
       'enable' => 'Enable'
     )
+    ,'conditions' => array(
+      array(
+        'field' => 'enable_description'
+        ,'value' => 'enable' 
+        ,'update' => 'enable' 
+        ,'type' => 'update'
+      )
+    )
   ));
   
   piklist('field', array(
@@ -140,20 +148,6 @@ Order: 40
       'rows' => 10
       ,'cols' => 50
       ,'class' => 'large-text code'
-    )
-    ,'conditions' => array(
-      array(
-        'field' => 'enable_field_below_0'
-        ,'value' => ':any' 
-        ,'update' => 'enable' 
-        ,'type' => 'update'
-      )
-      ,array(
-        'field' => 'enable_field_below_0'
-        ,'value' => ''
-        ,'update' => null 
-        ,'type' => 'update'
-      )
     )
   ));
 

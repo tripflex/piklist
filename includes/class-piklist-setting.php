@@ -13,17 +13,18 @@ class PikList_Setting
   
   private static $active_section = null;
   
+  private static $setting_section_callback_args = array();
+  
   public static function _construct()
   {    
     add_action('admin_init', array('piklist_setting', 'register_settings'));
-
     add_filter('piklist_admin_pages', array('piklist_setting', 'admin_pages'));
   }
 
   public static function admin_pages($pages) 
   {
     $pages[] = array(
-      'page_title' => 'About'
+      'page_title' => __('About', 'piklist')
       ,'menu_title' => 'Piklist'
       ,'capability' => defined('PIKLIST_SETTINGS_CAP') ? PIKLIST_SETTINGS_CAP : 'manage_options'
       ,'menu_slug' => 'piklist'
@@ -33,7 +34,7 @@ class PikList_Setting
     );
     
     $pages[] = array(
-      'page_title' => __('Piklist Settings', 'piklist')
+      'page_title' => __('Settings', 'piklist')
       ,'menu_title' => __('Settings', 'piklist')
       ,'capability' => defined('PIKLIST_SETTINGS_CAP') ? PIKLIST_SETTINGS_CAP : 'manage_options'
       ,'sub_menu' => 'piklist'
@@ -44,6 +45,20 @@ class PikList_Setting
       ,'default_tab' => 'General'
       ,'single_line' => true
     );
+
+    $pages[] = array(
+      'page_title' => __('Add-ons', 'piklist')
+      ,'menu_title' => __('Add-ons', 'piklist')
+      ,'capability' => defined('PIKLIST_SETTINGS_CAP') ? PIKLIST_SETTINGS_CAP : 'manage_options'
+      ,'sub_menu' => 'piklist'
+      ,'menu_slug' => 'piklist-core-addons'
+      ,'setting' => 'piklist_core_addons'
+      ,'menu_icon' => piklist_admin::responsive_admin() == true ? plugins_url('piklist/parts/img/piklist-icon.svg') : plugins_url('piklist/parts/img/piklist-icon.png') 
+      ,'page_icon' => plugins_url('piklist/parts/img/piklist-page-icon-32.png')
+      ,'default_tab' => 'Activate'
+      ,'single_line' => true
+    );
+
 
     return $pages;
   }
@@ -86,19 +101,9 @@ class PikList_Setting
 
         if ((isset($_REQUEST['tab']) && isset($section['tab']) && $_REQUEST['tab'] == $tab) || (!isset($_REQUEST['tab']) && empty($section['tab'])))
         {
-          self::$active_section = $section;
+          self::$setting_section_callback_args[$section['slug']] = $section;
           
-          ob_start();
-
-            include $section['path'] . '/parts/' . $section['folder'] . '/' . $section['part'];
-            
-            $output = trim(ob_get_contents());
-
-          ob_end_clean();
-        
-          self::$active_section = null;
-          
-          add_settings_section($section['slug'], $section['title'], create_function('', !empty($output) ? 'echo "' . addslashes($output) . '";' : 'return false;'), $setting);
+          add_settings_section($section['slug'], $section['title'], array('piklist_setting', 'register_settings_section_callback'), $setting);
         }
       }
     }
@@ -146,10 +151,23 @@ class PikList_Setting
       )
     );
   }
+  
+  public static function register_settings_section_callback($arguments)
+  {
+    extract($arguments);
+
+    $section = self::$setting_section_callback_args[$id];
+    
+    self::$active_section = $section;
+    
+    piklist::render($section['path'] . '/parts/' . $section['folder'] . '/' . $section['part']);
+  
+    self::$active_section = null;
+  }
 
   public static function pre_update_option($new, $old = false)
   {
-    if (piklist_validate::check())
+    if (piklist_validate::check($new))
     {
       $fields = get_transient(piklist::$prefix . $_REQUEST[piklist::$prefix]['fields_id']);
       $_old = $old;
@@ -166,7 +184,6 @@ class PikList_Setting
           $new[$field] = $new[$field][0];
         }
         
-        // TODO: Make recursive to account for infinite add-mores
         if (isset($new[$field]) && is_array($new[$field]) && count($new[$field]) > 1 && empty($new[$field][0]) && isset($new[$field][0]))
         {
           unset($new[$field][0]);

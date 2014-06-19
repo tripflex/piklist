@@ -44,7 +44,7 @@ class PikList_Widget
   
   public static function widgets_init()
   {
-    global $wp_widget_factory;
+    global $wp_widget_factory, $wp_version;
     
     $widget_class = 'piklist_universal_widget';
 
@@ -56,21 +56,19 @@ class PikList_Widget
       
         if (isset(piklist_add_on::$available_add_ons[$from]))
         {
-          $title = piklist_add_on::$available_add_ons[$from]['Name'] . ' ' . __('Widgets','piklist');
+          $title = piklist_add_on::$available_add_ons[$from]['Name'] . ' ' . __('Widgets', 'piklist');
           $description = strip_tags(piklist_add_on::$available_add_ons[$from]['Description']);
         }
-        else if ($from == 'piklist')
+        elseif ($from == 'piklist')
         {
-          $title = __('Piklist Widgets','piklist');
-          $description = __('Core Widgets for Piklist.','piklist');
+          $title = __('Piklist Widgets', 'piklist');
+          $description = __('Core Widgets for Piklist.', 'piklist');
         }
-        else if ($from == 'theme')
+        elseif ($from == 'theme')
         {
-          global $wp_version;
-          
           $current_theme = wp_get_theme();
 
-          $title = $current_theme . ' ' . __('Widgets','piklist');
+          $title = $current_theme . ' ' . __('Widgets', 'piklist');
           $description = sprintf(__('Widgets for the %s Theme', 'piklist'), $current_theme);
         }
 
@@ -82,7 +80,7 @@ class PikList_Widget
   public static function widget()
   {
     global $wp_widget_factory;
-
+    
     return isset($wp_widget_factory->widgets[self::$current_widget]) ? $wp_widget_factory->widgets[self::$current_widget] : null;
   }
 

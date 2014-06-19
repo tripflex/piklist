@@ -1,11 +1,11 @@
 
 <div class="<?php echo esc_attr($type); ?>">
 
-  <?php if (is_array($message)): ?>
+  <?php if (is_array($messages)): ?>
     
-    <?php foreach ($message as $line): ?>
+    <?php foreach ($messages as $message): ?>
 
-      <p><?php echo $line; ?></p>
+      <p><?php echo $message; ?></p>
 
     <?php endforeach; ?>
   

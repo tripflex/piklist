@@ -18,19 +18,25 @@ Collapse: false
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Piklist comes standard with two upload fields: Basic and Media. The Media field works just like the standard WordPress media field, while the Basic uploader is great for simple forms.','piklist');?>
-  <?php _e('The metabox "look" can be removed to provide a different look.','piklist');?>
+  <?php _e('Piklist comes standard with two upload fields: Basic and Media. The Media field works just like the standard WordPress media field, while the Basic uploader is great for simple forms.','piklist-demo');?>
+  <?php _e('The metabox "look" can be removed to provide a different look.','piklist-demo');?>
 </h3>
 
 <?php
+
   piklist('field', array(
     'type' => 'file'
     ,'field' => 'upload_basic'
     ,'scope' => 'post_meta'
-    ,'label' => __('Add File(s)','piklist')
-    ,'description' => __('This is the basic upload field.','piklist')
+    ,'label' => __('Basic Upload Field','piklist-demo')
     ,'options' => array(
-      'basic' => false
+      'basic' => true
+    )
+    ,'validate' => array(
+      'limit' => array(
+        'min' => 0
+        ,'max' => 2
+      )
     )
   ));
   
@@ -38,11 +44,17 @@ Collapse: false
     'type' => 'file'
     ,'field' => 'upload_media'
     ,'scope' => 'post_meta'
-    ,'label' => __('Add File(s)','piklist')
-    ,'description' => __('This is the uploader seen in the admin by default.','piklist')
+    ,'label' => __('Media Uploader','piklist-demo')
+    ,'description' => __('Validation rule set: Upload no more than two files.','piklist-demo')
     ,'options' => array(
-      'modal_title' => __('Add File(s)','piklist')
-      ,'button' => __('Add','piklist')
+      'modal_title' => __('Add File(s)','piklist-demo')
+      ,'button' => __('Add','piklist-demo')
+    )
+    ,'validate' => array(
+      'limit' => array(
+        'min' => 0
+        ,'max' => 2
+      )
     )
   ));
   

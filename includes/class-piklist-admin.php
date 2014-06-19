@@ -20,6 +20,8 @@ class PikList_Admin
   private static $redirect_post_location_allowed = array(
     'admin_hide_ui'
   );
+
+  public static $piklist_dependent = false;
   
   public static $page_icon = false;
   
@@ -30,11 +32,12 @@ class PikList_Admin
     add_action('admin_footer', array('piklist_admin', 'admin_footer'));
     add_action('admin_menu', array('piklist_admin', 'admin_menu'), -1);
     add_action('redirect_post_location', array('piklist_admin', 'redirect_post_location'), 10, 2);
-    add_action('load-plugins.php', array('piklist_admin', 'deactivation_link'));
     add_action('wp_scheduled_delete', array('piklist_admin', 'clear_transients'));
 
     add_filter('admin_footer_text', array('piklist_admin', 'admin_footer_text'));
     add_filter('admin_body_class', array('piklist_admin', 'admin_body_class'));
+
+    add_filter('plugin_action_links_piklist/piklist.php', array('piklist_admin', 'plugin_action_links'));
     
     if (is_admin())
     {
@@ -66,6 +69,8 @@ class PikList_Admin
 
   public static function admin_head()
   {
+    piklist::render('shared/admin-head');
+    
     if (self::hide_ui())
     {
       piklist::render('shared/admin-hide-ui');
@@ -121,7 +126,7 @@ class PikList_Admin
         ,'media' => 'screen, projection'
       ));
     }
-
+    
     return $assets;
   }
 
@@ -300,11 +305,16 @@ class PikList_Admin
     }
   }
   
-  public static function admin_body_class($classes)
+  public static function admin_body_class($classes = '')
   {
     global $typenow;
 
-    $classes .= ' ';
+    $classes .= $classes;
+
+    if (piklist_admin::$piklist_dependent == true)
+    {
+      $classes .= 'piklist-dependent' . ' ';
+    }
 
     if (piklist_admin::responsive_admin() == true)
     {
@@ -349,41 +359,29 @@ class PikList_Admin
 
   public static function deactivation_link()
   {
-    $deactivation_link = piklist::get_settings('piklist_core', 'deactivation_link');
-
-    if ($deactivation_link !== 'lock')
-    {
-      return;
-    }
-
-    foreach (self::$locked_plugins as $locked)
-    {
-      add_filter('plugin_action_links_' . plugin_basename($locked), array('piklist_admin', 'replace_deactivation_link'));
-    }
+    add_filter('plugin_action_links_piklist/piklist.php', array('piklist_admin', 'replace_deactivation_link'));
     
-    add_filter('option_active_plugins', array('piklist_admin', 'active_plugins')); 
+    $classes = 'piklist-dependent';
+
+    add_filter('admin_body_class', array('piklist_admin', 'admin_body_class'));
+
   }
 
   public static function replace_deactivation_link($actions)
   {
     unset($actions['deactivate']);
     
-    array_unshift($actions, '<a href="' . admin_url('admin.php?page=piklist-core-settings&referer=plugins.php') . '">' . __('Settings') . '</a>'); 
+    array_unshift($actions, '<p>' . sprintf(__('Dependent plugins or theme are active.', 'piklist'),'<br>') . '</p>Deactivate'); 
 
     return $actions;
   }
 
-  public static function active_plugins($plugins)
+  public static function plugin_action_links($links)
   {
-    foreach (self::$locked_plugins as $locked_plugin)
-    {
-      if (!array_search($locked_plugin, $plugins))
-      {
-        array_push($plugins, $locked_plugin);
-      }
-    }
-    
-    return $plugins;
+    $links[] = '<a href="' . get_admin_url(null, 'admin.php?page=piklist-core-settings') . '">' . __('Settings','piklist') . '</a>';
+    $links[] = '<a href="' . get_admin_url(null, 'admin.php?page=piklist-core-addons') . '">' . __('Demo','piklist') . '</a>';
+   
+    return $links;
   }
 
   public static function check_update($file, $version)
@@ -402,7 +400,7 @@ class PikList_Admin
       $versions = get_site_option('piklist_active_plugin_versions', array());
       $network_wide = true;
     }
-    else if (is_plugin_active($plugin))
+    elseif (is_plugin_active($plugin))
     {
       $versions = get_option('piklist_active_plugin_versions', array());
       $network_wide = false;
@@ -423,6 +421,7 @@ class PikList_Admin
     }
     
     $current_version = is_array($versions[$plugin]) ? current($versions[$plugin]) : $versions[$plugin];
+
 
     if (version_compare($version, $current_version, '>'))
     {

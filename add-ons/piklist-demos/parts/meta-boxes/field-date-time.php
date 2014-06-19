@@ -8,7 +8,7 @@ Collapse: true
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('DatePicker fields are easy to create and format.','piklist');?>
+  <?php _e('DatePicker fields are easy to create and format.','piklist-demo');?>
 </h3>
 
 <?php

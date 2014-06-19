@@ -52,8 +52,8 @@ class PikList_Dashboard
     {
       return;
     }
-
-    if ((empty($data['network']) || $data['network'] == 'false') && $current_screen->id == 'dashboard-network')
+    
+    if ((empty($data['network']) || $data['network'] == 'false') && (isset($current_screen) && $current_screen->id == 'dashboard-network'))
     {
       return;
     }

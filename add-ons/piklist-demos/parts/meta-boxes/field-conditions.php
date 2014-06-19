@@ -8,7 +8,7 @@ Collapse: true
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Hide or show one field or many. You can also update a field when a value is set in another.','piklist');?>
+  <?php _e('Hide or show one field or many. You can also update a field when a value is set in another.','piklist-demo');?>
 </h3>
 
 <?php

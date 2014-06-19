@@ -26,7 +26,7 @@ endif;
 
           <li>
 
-            <?php _e('No items', 'piklist'); ?>
+            <?php _e('No items', 'piklist-demo'); ?>
 
           </li>
 

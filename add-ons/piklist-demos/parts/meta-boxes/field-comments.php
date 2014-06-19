@@ -10,7 +10,7 @@ Collapse: true
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Inline comments fields are a snap to add.','piklist');?>
+  <?php _e('Inline comments fields are a snap to add.','piklist-demo');?>
 </h3>
 
 <?php
@@ -56,8 +56,8 @@ Collapse: true
 
                 <?php echo esc_html($comment->comment_author); ?>
 
-                <?php printf(__('on %s', 'piklist'), get_comment_date( 'l jS F, Y, g:ia', $comment->comment_ID)); ?><br>
-                <?php printf(__('Status: %s', 'piklist'), $wp_post_statuses[$post->post_status]->label); ?>
+                <?php printf(__('on %s', 'piklist-demo'), get_comment_date( 'l jS F, Y, g:ia', $comment->comment_ID)); ?><br>
+                <?php printf(__('Status: %s', 'piklist-demo'), $wp_post_statuses[$post->post_status]->label); ?>
 
               </small>
 

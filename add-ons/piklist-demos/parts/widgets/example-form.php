@@ -9,6 +9,8 @@ Width: 720
   <li><a href="#"><?php _e('Large Text'); ?></a></li>
   <li><a href="#"><?php _e('Selects'); ?></a></li>
   <li><a href="#"><?php _e('Advanced'); ?></a></li>
+  <li><a href="#"><?php _e('Conditionals'); ?></a></li>
+  <li><a href="#"><?php _e('Subscription'); ?></a></li>
 </ul>
 
 <div class="wp-tab-panel">
@@ -232,4 +234,293 @@ Width: 720
 
   ?>
   
+</div>
+
+<div class="wp-tab-panel">
+  
+  <?php
+    
+    piklist('field', array(
+      'type' => 'select'
+      ,'field' => 'show_hide_select'
+      ,'label' => 'Select: toggle a field'
+      ,'choices' => array(
+        'show' => 'Show'
+        ,'hide' => 'Hide'
+      )
+      ,'value' => 'hide'
+    ));
+
+    piklist('field', array(
+      'type' => 'text'
+      ,'field' => 'show_hide_field_select'
+      ,'label' => 'Show/Hide Field 1' 
+      ,'description' => 'This field is toggled by the Select field above'
+      ,'conditions' => array(
+        array(
+          'field' => 'show_hide_select'
+          ,'value' => 'show'
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'text'
+      ,'field' => 'show_hide_field_select_2'
+      ,'label' => 'Show/Hide Field 2'
+      ,'description' => 'This field is toggled by the Select field above'
+      ,'conditions' => array(
+        array(
+          'field' => 'show_hide_select'
+          ,'value' => 'show'
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'radio'
+      ,'field' => 'show_hide'
+      ,'label' => 'Radio: toggle a field'
+      ,'choices' => array(
+        'show' => 'Show'
+        ,'hide' => 'Hide'
+      )
+      ,'value' => 'hide'
+    ));
+
+    piklist('field', array(
+      'type' => 'text'
+      ,'field' => 'show_hide_field'
+      ,'label' => 'Show/Hide Field'
+      ,'description' => 'This field is toggled by the Radio field above'
+      ,'conditions' => array(
+        array(
+          'field' => 'show_hide'
+          ,'value' => 'show'
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'checkbox'
+      ,'field' => 'show_hide_checkbox'
+      ,'label' => 'Checkbox: toggle a field'
+      ,'choices' => array(
+        'show' => 'Show'
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'text'
+      ,'field' => 'show_hide_field_checkbox'
+      ,'label' => 'Show/Hide Field'
+      ,'description' => 'This field is toggled by the Checkbox field above'
+      ,'conditions' => array(
+        array(
+          'field' => 'show_hide_checkbox'
+          ,'value' => 'show'
+        )
+      )
+    ));
+  
+    piklist('field', array(
+      'type' => 'radio'
+      ,'field' => 'change'
+      ,'label' => 'Update a field'
+      ,'choices' => array(
+        'hello-world' => 'Hello World'
+        ,'clear' => 'Clear'
+      )
+      ,'value' => 'hello-world'
+      ,'conditions' => array(
+        array(
+          'field' => 'update_field'
+          ,'value' => 'hello-world' 
+          ,'update' => 'Hello World!' 
+          ,'type' => 'update'
+        )
+        ,array(
+          'field' => 'update_field'
+          ,'value' => 'clear' 
+          ,'update' => '' 
+          ,'type' => 'update'
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'text'
+      ,'field' => 'update_field'
+      ,'value' => 'Hello World!' 
+      ,'label' => 'Update This Field'
+      ,'description' => 'This field is updated by the field above'
+    ));
+  
+    piklist('field', array(
+      'type' => 'checkbox'
+      ,'field' => 'enable_field_below'
+      ,'label' => 'Auto Enable Example'
+      ,'description' => 'This field is updated by using the field below'
+      ,'choices' => array(
+        'enable' => 'Enable'
+      )
+      ,'conditions' => array(
+        array(
+          'field' => 'enable_description'
+          ,'value' => 'enable' 
+          ,'update' => 'enable' 
+          ,'type' => 'update'
+        )
+      )
+    ));
+  
+    piklist('field', array(
+      'type' => 'textarea'
+      ,'field' => 'enable_description'
+      ,'label' => 'Description'
+      ,'attributes' => array(
+        'rows' => 10
+        ,'cols' => 50
+        ,'class' => 'large-text code'
+      )
+    ));
+  
+  ?>
+  
+</div>
+
+<div class="wp-tab-panel">
+
+  <?php
+    
+    piklist('field', array(
+      'type' => 'select'
+      ,'field' => 'mode'
+      ,'label' => 'Mode'
+      ,'choices' => array(
+        'simple' => 'Simple'
+        ,'challenging' => 'Challenging'
+        ,'difficult' => 'Difficult'
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'checkbox'
+      ,'field' => 'already'
+      ,'label' => 'Already Visited'
+      ,'choices' => array(
+         'yes' => 'Yes'
+      )
+      ,'conditions' => array(
+        array(
+          'field' => 'mode'
+          ,'value' => 'simple'
+          ,'exclude' => true
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'select'
+      ,'field' => 'subscribe'
+      ,'label' => 'Subscribe'
+      ,'choices' => array(
+         '' => 'Don\'t subscribe'
+         ,'yes' => 'Subscribe to the service'
+      )
+      ,'conditions' => array(
+        array(
+          'field' => 'mode'
+          ,'value' => array( 
+            'challenging' 
+            ,'difficult'
+          )
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'textarea'
+      ,'field' => 'message'
+      ,'label' => 'Message'
+      ,'columns' => 12
+      ,'conditions' => array(
+        array(
+          'field' => 'subscribe'
+          ,'value' => 'yes'
+        )
+        ,array(
+          'field' => 'mode'
+          ,'value' => 'difficult'
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'textarea'
+      ,'field' => 'description'
+      ,'label' => 'Description'
+      ,'columns' => 12
+      ,'conditions' => array(
+        'relation' => 'or'
+        ,array(
+          'field' => 'mode'
+          ,'value' => 'simple'
+        )
+        ,array(
+          'field' => 'subscribe'
+          ,'value' => 'yes'
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'html'
+      ,'field' => '_example_hint'
+      ,'label' => 'Hint'
+      ,'value' => 'Etiam porta sem malesuada magna mollis euismod. Fusce dapibus tellus ac cursus commodo tortor mauris condimentum nibh ut fermentum massa justo sit amet risus.'
+      ,'columns' => 12
+      ,'conditions' => array(
+        'relation' => 'or'
+        ,array(
+          'field' => 'mode'
+          ,'value' => 'simple'
+        )
+        ,array(
+          'field' => 'subscribe'
+          ,'value' => 'yes'
+        )
+      )
+    ));
+
+    piklist('field', array(
+      'type' => 'group'
+      ,'field' => 'values'
+      ,'label' => 'Values'
+      ,'columns' => 12
+      ,'add_more' => TRUE
+      ,'fields' => array(
+        array(
+          'type' => 'text'
+          ,'field' => 'first_name'
+          ,'label' => 'First Name'
+          ,'columns' => 12
+        )
+        ,array(
+          'type' => 'text'
+          ,'field' => 'last_name'
+          ,'label' => 'Last Name'
+          ,'columns' => 12
+        )
+      )
+      ,'conditions' => array(
+        array(
+          'field' => 'mode'
+          ,'value' => 'difficult'
+        )
+      )
+    ));
+    
+  ?>
+
 </div>

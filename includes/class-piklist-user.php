@@ -57,7 +57,7 @@ class PikList_User
             ));
             
     $data = array_filter($data);
-    
+   
     $meta_box = array(
       'config' => $data
       ,'part' => $path . '/parts/' . $folder . '/' . $part

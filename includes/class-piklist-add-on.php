@@ -47,6 +47,10 @@ class PikList_Add_On
         {
           piklist::add_plugin(basename(dirname($plugin)), dirname($path));
 
+          add_action('load-plugins.php', array('piklist_admin', 'deactivation_link'));
+
+          piklist_admin::$piklist_dependent = true;
+
           if ($data['version'])
           {
             $file = $plugin;
@@ -100,7 +104,7 @@ class PikList_Add_On
   {
     if (file_exists($file))
     {
-      $active_add_ons = piklist::get_settings('piklist_core', 'add-ons');
+      $active_add_ons = piklist::get_settings('piklist_core_addons', 'add-ons');
       
       $data = get_plugin_data($file);
       $data['plugin'] = $plugin;
@@ -122,4 +126,19 @@ class PikList_Add_On
       }
     }
   }
+
+  public static function is_active($add_on = '')
+  {
+    $piklist_core_addons = get_option('piklist_core_addons');
+
+    if ((!empty($piklist_core_addons)) && in_array($add_on, is_array($piklist_core_addons['add-ons']) ? $piklist_core_addons['add-ons'] : array($piklist_core_addons['add-ons'])))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
 }

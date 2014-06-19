@@ -17,7 +17,7 @@ class PikList_Revision
   
   public static function save_post($post_id, $post) 
   {
-    if ($parent_id = wp_is_post_revision($post_id)) 
+    if ($parent_id = wp_is_post_revision($post_id) && !wp_is_post_autosave($post_id)) 
     {
       $parent = get_post($parent_id);
       $meta = piklist('post_custom', $parent->ID);

@@ -10,7 +10,7 @@ Collapse: true
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('With Piklist you can easily replicate the WordPress Featured Image field, with an added bonus. Piklist allows you to use multiple featured images.','piklist');?>
+  <?php _e('With Piklist you can easily replicate the WordPress Featured Image field, with an added bonus. Piklist allows you to use multiple featured images.','piklist-demo');?>
 </h3>
 
 <?php

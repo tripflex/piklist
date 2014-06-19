@@ -3,8 +3,8 @@
 <!-- TODO: Remove Relationships if unset on form element -->
 
 <ul class="wp-tab-bar">
-  <li class="wp-tab-active"><a href="#"><?php _e('Most Recent'); ?></a></li>
-  <li><a href="#"><?php _e('All'); ?></a></li>
+  <li class="wp-tab-active"><a href="#"><?php _e('Most Recent', 'piklist'); ?></a></li>
+  <li><a href="#"><?php _e('All', 'piklist'); ?></a></li>
 </ul>
 
 <div class="wp-tab-panel">

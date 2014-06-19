@@ -10,7 +10,7 @@ Collapse: true
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Create your own Taxonomy metabox, and display the terms as a checkbox, radio, select or any field you can imagine.','piklist');?>
+  <?php _e('Create your own Taxonomy metabox, and display the terms as a checkbox, radio, select or any field you can imagine.','piklist-demo');?>
 </h3>
 
 <?php

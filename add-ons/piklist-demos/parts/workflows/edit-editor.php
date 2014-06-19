@@ -8,7 +8,7 @@ Default: true
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('The WordPress post editor can be placed anywhere you like, since Piklist treats it like any other field. You can also use multiple editors per page.','piklist');?>
+  <?php _e('The WordPress post editor can be placed anywhere you like, since Piklist treats it like any other field. You can also use multiple editors per page.','piklist-demo');?>
 </h3>
 
 <?php

@@ -7,7 +7,7 @@ Page: piklist_demo,piklist_demo_page_piklist_demo_fields,profile
 ?>
 
 <p>
-  <?php _e('Piklist Demos are designed to show off Piklist features and demonstrate how to use them.', 'piklist');?>
+  <?php _e('Piklist Demos are designed to show off Piklist features and demonstrate how to use them.', 'piklist-demo');?>
 </p>
 
 <?php

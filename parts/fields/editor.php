@@ -1,22 +1,23 @@
 
 <?php 
+  
+  $name = piklist_form::get_field_name($field, $scope, false, $prefix);
+  
   wp_editor(
     isset($value) && !empty($value) ? $value : ''
-    ,isset($id) ? $id : ('piklisteditor' . piklist::unique_id())
+    ,isset($id) ? $id : (piklist::unique_id() . 'piklisteditor' . preg_replace('/[^a-z0-9]+/i', '', $name))
     ,array_merge(
       array(
-        'textarea_name' => piklist_form::get_field_name($field, $scope, false, $prefix) . ($add_more ? '" data-piklist-field-addmore="true' : null)
-        ,'wpautop' => true
-        ,'media_buttons' => true
+        'textarea_name' => $name . ($add_more ? '" data-piklist-field-addmore="true' : null)
         ,'tabindex' => ''
         ,'editor_css' => ''
         ,'editor_class' => ''
-        ,'teeny' => false
-        ,'dfw' => false
-        ,'tinymce' => true
-        ,'quicktags' => true
+        ,'editor_height' => 180
+        ,'quicktags' => false
+        ,'textarea_rows' => 5
       )
       ,isset($options) && is_array($options) ? $options : array()
     )
   );
+  
 ?>

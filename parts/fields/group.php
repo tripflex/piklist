@@ -1,7 +1,20 @@
 <?php 
+  
+  $rows = null;
+  
+  if (!empty($value))
+  {
+    $cardinalities = array();
+    foreach ($value as $nested)
+    {
+      $cardinalities[] = count($nested);
+    }
+    
+    $rows = max($cardinalities);
+  }
 
   $columns_to_render = array();
-
+  
   foreach ($fields as $column)
   {
     $index = $index ? $index : 0;
@@ -11,13 +24,18 @@
     
     if (isset($column['columns']) || !isset($column['label']))
     {
-      $column['template'] = 'field';
+      $column['template'] = isset($column['template']) ? $column['template'] : 'field';
       $column['child_field'] = true;
     }
     
     if (in_array($column['type'], piklist_form::$field_list_types) || (isset($column['attributes']) && in_array('multiple', $column['attributes'])))
     {
       $column['multiple'] = true;
+    }
+    
+    if ($column['type'] == 'html' && !isset($column['field']))
+    {
+      $column['field'] = md5(serialize($column));
     }
     
     if (!isset($column['scope']) || is_null($column['scope']))
@@ -33,11 +51,11 @@
         $field_name = $column['field'];
       }
 
-      if (isset($column['save_as']) && isset($value[$column['save_as']]))
+      if (isset($column['save_as']) && is_array($value) && isset($value[$column['save_as']]))
       {
         $stored_value = $value[$column['save_as']];
       }
-      else if (isset($value[$field_name]))
+      elseif (is_array($value) && isset($value[$field_name]))
       {
         $stored_value = $value[$field_name];
       }
@@ -82,17 +100,25 @@
     }
     else
     {
+      for ($i = 0; $i < $rows; $i++)
+      {
+        if (!isset($_values[$i]))
+        {
+          $_values[$i] = null;
+        }
+      }
+
       foreach ($_values as $_index => $_value)
       {
         if (!isset($columns_to_render[$_index]))
         {
           $columns_to_render[$_index] = array();
         }
-
+    
         $column['value'] = $_value;      
         $column['index'] = $_index;
         $column['group_field'] = true;
-
+    
         if (!empty($field) && !stristr($column['field'], ':'))
         {
           $column['field'] = $field . (substr_count($field, ':') == 1 ? ':' . $column['index'] . ':' : ':') . $column['field'];
@@ -139,8 +165,11 @@
         }
       }
       
+      if (!empty($conditions))
+      {
+        $column['conditions'] = $conditions;
+      }
+      
       piklist_form::render_field($column);
     }
   }
-  
-?>

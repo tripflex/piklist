@@ -7,7 +7,7 @@ Flow: Edit Demo
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Grouping fields saves all their data in one field array for convenience. If you need to search the individual field data then don\'t group the fields. Don\'t worry you can acheive the same layout either way.','piklist');?>
+  <?php _e('Grouping fields saves all their data in one field array for convenience. If you need to search the individual field data then don\'t group the fields. Don\'t worry you can acheive the same layout either way.','piklist-demo');?>
 </h3>
 
 <?php

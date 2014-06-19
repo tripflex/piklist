@@ -4,12 +4,12 @@ Title: Text Fields
 Description: this is the description
 Post Type: piklist_demo
 Order: 10
-Collapse: true
+Collapse: false
 */
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Text fields are at the core of most forms, and easily created with Piklist. Here a text field is marked REQUIRED, which will stop the entire form from saving unless filled in. Tooltip help can be added to any field with one line of code, and HTML fields can output your markup in the same format as other fields.','piklist');?>
+  <?php _e('Text fields are at the core of most forms, and easily created with Piklist. Here a text field is marked REQUIRED, which will stop the entire form from saving unless filled in. Tooltip help can be added to any field with one line of code, and HTML fields can output your markup in the same format as other fields.','piklist-demo');?>
 </h3>
 
 <?php
@@ -43,8 +43,6 @@ Collapse: true
     )
     ,'required' => true
   ));
-
-
   
   piklist('field', array(
     'type' => 'text'
@@ -60,7 +58,6 @@ Collapse: true
       'value' => 'lock'
     )
   ));
-  
   
   piklist('field', array(
     'type' => 'textarea'

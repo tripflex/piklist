@@ -43,7 +43,7 @@ Author URI: http://piklist.com/
         'slug'
         ,'author'
       )
-      ,'post_states' => true
+      //,'post_states' => true
       ,'status' => array(
         'draft' => array(
           'label' => 'New'
@@ -52,7 +52,10 @@ Author URI: http://piklist.com/
         ,'demo' => array(
           'label' => 'Demo'
           ,'public' => true
-        )
+          ,'exclude_from_search' => true
+          ,'show_in_admin_all_list' => true
+          ,'show_in_admin_status_list' => true
+       )
         ,'lock' => array(
           'label' => 'Lock'
           ,'public' => true
@@ -109,7 +112,7 @@ Author URI: http://piklist.com/
   {
     $pages[] = array(
       'page_title' => __('Demo Settings')
-      ,'menu_title' => __('Demo Settings', 'piklist')
+      ,'menu_title' => __('Demo Settings', 'piklist-demo')
       ,'sub_menu' => 'edit.php?post_type=piklist_demo'
       ,'capability' => 'manage_options'
       ,'menu_slug' => 'piklist_demo_fields'

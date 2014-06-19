@@ -45,11 +45,19 @@ class PikList_Theme
     if (is_dir($path = get_stylesheet_directory() . '/piklist'))
     {
       piklist::$paths['theme'] = $path;
+
+      add_action('load-plugins.php', array('piklist_admin', 'deactivation_link'));
+
+      piklist_admin::$piklist_dependent = true;
     }
     
     if (get_template_directory() != get_stylesheet_directory() && is_dir($path = get_template_directory() . '/piklist'))
     {
       piklist::$paths['parent-theme'] = $path;
+
+      add_action('load-plugins.php', array('piklist_admin', 'deactivation_link'));
+
+      piklist_admin::$piklist_dependent = true;
     }   
   }
   
@@ -152,7 +160,7 @@ class PikList_Theme
               $wp_scripts->add_data($asset['handle'], 'conditional', $asset['condition']);
             }
           }
-          else if ($type == 'styles')
+          elseif ($type == 'styles')
           {
             wp_register_style($asset['handle'], $asset['src'], isset($asset['deps']) ? $asset['deps'] : array(), isset($asset['ver']) ? $asset['ver'] : false, isset($asset['media']) ? $asset['media'] : false);
           
@@ -183,7 +191,7 @@ class PikList_Theme
           {
             wp_enqueue_script($asset['handle']);
           }
-          else if ($type == 'styles')
+          elseif ($type == 'styles')
           {
             wp_enqueue_style($asset['handle']);
           }
@@ -198,15 +206,15 @@ class PikList_Theme
     {
       $device = 'ipad';
     } 
-    else if (stristr($_SERVER['HTTP_USER_AGENT'], 'iphone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iphone')) 
+    elseif (stristr($_SERVER['HTTP_USER_AGENT'], 'iphone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iphone')) 
     {
       $device = 'iphone';
     } 
-    else if (stristr($_SERVER['HTTP_USER_AGENT'], 'blackberry')) 
+    elseif (stristr($_SERVER['HTTP_USER_AGENT'], 'blackberry')) 
     {
       $device = 'blackberry';
     } 
-    else if (stristr($_SERVER['HTTP_USER_AGENT'], 'android')) 
+    elseif (stristr($_SERVER['HTTP_USER_AGENT'], 'android')) 
     {
       $device = 'android';
     }

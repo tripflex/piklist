@@ -46,7 +46,7 @@
               $data['config']['redirect'] = apply_filters('piklist_workflow_redirect_url', $data['config']['redirect'], $workflow, $data);
               $url = admin_url($data['config']['redirect'] . (strstr($data['config']['redirect'], '?') ? '&' : '?') . http_build_query(array_filter($url)));
             }
-            else if (!isset($data['config']['disable']))
+            elseif (!isset($data['config']['disable']))
             {
               if ($url_arguments['post'])
               {

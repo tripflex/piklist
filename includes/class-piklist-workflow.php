@@ -68,7 +68,7 @@ class PikList_Workflow
     {
       $is_active = $_REQUEST['flow_page'] == $data['page_slug'];
     }
-    else if (!empty($data))
+    elseif (!empty($data))
     {
       global $post, $current_user, $pagenow;
       
@@ -166,7 +166,7 @@ class PikList_Workflow
     {
       array_unshift(self::$workflows[$data['flow']], $workflow);
     }
-    else if (!empty($data['order']))
+    elseif (!empty($data['order']))
     {
       self::$workflows[$data['flow']][$data['order']] = $workflow;
     }

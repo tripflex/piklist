@@ -8,7 +8,7 @@ Collapse: true
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('WordPress ColorPicker fields are super simple to create. Piklist handles all the Javascript.','piklist');?>
+  <?php _e('WordPress ColorPicker fields are super simple to create. Piklist handles all the Javascript.','piklist-demo');?>
 </h3>
 
 <?php

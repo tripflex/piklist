@@ -49,7 +49,7 @@ class PikList_Menu
         {
           $class = 'first-menu-item';
         }
-        else if ($i + 1 == count($matches[1]))
+        elseif ($i + 1 == count($matches[1]))
         {
           $class = 'last-menu-item';
         }

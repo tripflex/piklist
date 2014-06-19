@@ -8,7 +8,7 @@ Collapse: false
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Piklist AddMore fields are the repeater field you always dreamed of. Group together as many fields as you want and make them repeat indefinitely. Or place an Add-More within an Add-More within an Add-more...','piklist');?>
+  <?php _e('Piklist AddMore fields are the repeater field you always dreamed of. Group together as many fields as you want and make them repeat indefinitely. Or place an Add-More within an Add-More within an Add-more...','piklist-demo');?>
 </h3>
 
 <?php

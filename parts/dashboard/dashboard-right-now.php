@@ -26,7 +26,7 @@ function piklist_dashboard_right_now_new()
 
   <div class="main">
 
-    <h4><?php _e('Content'); ?></h4>
+    <h4><?php _e('Content','piklist'); ?></h4>
 
     <ul>
 
@@ -52,7 +52,7 @@ function piklist_dashboard_right_now_new()
 
     </ul>
 
-    <h4><?php _e('Organization'); ?></h4>
+    <h4><?php _e('Organization','piklist'); ?></h4>
 
     <ul>
 
@@ -80,7 +80,7 @@ function piklist_dashboard_right_now_new()
 
       <?php $comments = wp_count_comments(); ?>
 
-      <?php echo $comments->total_comments . '&nbsp;' . __('Comments'); ?>
+      <?php echo $comments->total_comments . '&nbsp;' . __('Comments','piklist'); ?>
 
     </h4>
 
@@ -90,7 +90,7 @@ function piklist_dashboard_right_now_new()
 
         <a href="edit-comments.php?comment_status=approved">
 
-          <span class="approved-count"><?php echo $comments->approved . '&nbsp;' . __('Approved'); ?></span>
+          <span class="approved-count"><?php echo $comments->approved . '&nbsp;' . __('Approved','piklist'); ?></span>
 
         </a>
 
@@ -100,7 +100,7 @@ function piklist_dashboard_right_now_new()
 
         <a href="edit-comments.php?comment_status=moderated">
 
-          <span class="pending-count"><?php echo $comments->moderated . '&nbsp;' . __('Pending'); ?></span>
+          <span class="pending-count"><?php echo $comments->moderated . '&nbsp;' . __('Pending','piklist'); ?></span>
 
         </a>
 
@@ -110,7 +110,7 @@ function piklist_dashboard_right_now_new()
 
         <a href="edit-comments.php?comment_status=spam">
 
-          <span class="spam-count"><?php echo $comments->spam . '&nbsp;' . __('Spam'); ?></span>
+          <span class="spam-count"><?php echo $comments->spam . '&nbsp;' . __('Spam','piklist'); ?></span>
 
         </a>
 
@@ -140,13 +140,13 @@ function piklist_dashboard_right_now_new()
 
     <?php endif; ?>
 
-    <p><?php printf( __( 'WordPress %1$s running %2$s theme.' ), get_bloginfo( 'version', 'display' ), $theme_name ); ?></p>
+    <p><?php printf(__('WordPress %1$s running %2$s theme.','piklist'), get_bloginfo( 'version', 'display' ), $theme_name ); ?></p>
 
     <?php 
       if (!is_network_admin() && !is_user_admin() && current_user_can('manage_options') && '1' != get_option('blog_public'))
       {
-        $title = apply_filters('privacy_on_link_title', __('Your site is asking search engines not to index its content'));
-        $content = apply_filters('privacy_on_link_text' , __('Search Engines Discouraged'));
+        $title = apply_filters('privacy_on_link_title', __('Your site is asking search engines not to index its content','piklist'));
+        $content = apply_filters('privacy_on_link_text' , __('Search Engines Discouraged','piklist'));
 
         echo "<p><a href='options-reading.php' title='$title'>$content</a></p>";
       }
@@ -181,7 +181,7 @@ function piklist_dashboard_right_now_new()
 
   <div class="table table_content">
 
-    <p class="sub"><?php _e('Content'); ?></p>
+    <p class="sub"><?php _e('Content','piklist'); ?></p>
 
       <table>
 
@@ -240,7 +240,7 @@ function piklist_dashboard_right_now_new()
 
             <td class="last t comments">
 
-              <a href="edit-comments.php"><?php _e('Comments'); ?></a>
+              <a href="edit-comments.php"><?php _e('Comments','piklist'); ?></a>
 
             </td>
 
@@ -260,7 +260,7 @@ function piklist_dashboard_right_now_new()
 
             <td class="last t">
 
-              <a href="edit-comments.php?comment_status=approved" class="approved"><?php _e('Approved'); ?></a>
+              <a href="edit-comments.php?comment_status=approved" class="approved"><?php _e('Approved','piklist'); ?></a>
 
             </td>
 
@@ -280,7 +280,7 @@ function piklist_dashboard_right_now_new()
 
             <td class="last t">
 
-              <a href="edit-comments.php?comment_status=moderated" class="waiting"><?php _e('Pending'); ?></a>
+              <a href="edit-comments.php?comment_status=moderated" class="waiting"><?php _e('Pending','piklist'); ?></a>
 
             </td>
 
@@ -300,7 +300,7 @@ function piklist_dashboard_right_now_new()
 
             <td class="last t">
 
-              <a href="edit-comments.php?comment_status=spam" class="spam"><?php _e('Spam'); ?></a>
+              <a href="edit-comments.php?comment_status=spam" class="spam"><?php _e('Spam','piklist'); ?></a>
 
             </td>
 
@@ -314,7 +314,7 @@ function piklist_dashboard_right_now_new()
 
   <div class="table table_discussion">
 
-    <p class="sub"><?php _e('Organization'); ?></p>
+    <p class="sub"><?php _e('Organization','piklist'); ?></p>
 
     <table>
 
@@ -366,7 +366,7 @@ function piklist_dashboard_right_now_new()
       {
         if (!is_multisite() || is_super_admin())
         {
-          echo '<span class="error-message">' . __('ERROR: The themes directory is either empty or doesn&#8217;t exist. Please check your installation.') . '</span>';
+          echo '<span class="error-message">' . __('ERROR: The themes directory is either empty or doesn&#8217;t exist. Please check your installation.','piklist') . '</span>';
         }
       }
       elseif  (!empty($wp_registered_sidebars))
@@ -409,11 +409,11 @@ function piklist_dashboard_right_now_new()
       {
         if (current_user_can('switch_themes'))
         {
-          printf(__('Theme <span class="b"><a href="themes.php">%1$s</a></span>'), $theme->display('Name') );
+          printf(__('Theme <span class="b"><a href="themes.php">%1$s</a></span>','piklist'), $theme->display('Name') );
         }
         else
         {
-          printf(__('Theme <span class="b">%1$s</span>'), $theme->display('Name'));
+          printf(__('Theme <span class="b">%1$s</span>','piklist'), $theme->display('Name'));
         }
       }
     ?>
@@ -422,8 +422,8 @@ function piklist_dashboard_right_now_new()
 
     <?php if (!is_network_admin() && !is_user_admin() && current_user_can('manage_options') && '1' != get_option('blog_public')) : ?>
 
-      <?php $title = apply_filters('privacy_on_link_title', __('Your site is asking search engines not to index its content')); ?>
-      <?php $content = apply_filters('privacy_on_link_text', __('Search Engines Discouraged')); ?>
+      <?php $title = apply_filters('privacy_on_link_title', __('Your site is asking search engines not to index its content','piklist')); ?>
+      <?php $content = apply_filters('privacy_on_link_text', __('Search Engines Discouraged','piklist')); ?>
 
       <p>
         <a href='options-reading.php' title='<?php echo $title;?> '><?php echo $content;?></a>

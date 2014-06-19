@@ -2,7 +2,6 @@
 /**
  * Code based on wp-admin/includes/meta-boxes.php
  *
- * TEXT DOMAINS: Do not add text domains to this file so the default WordPress translations will be used.
  */
 
   global $action, $wp_post_statuses, $pagenow;
@@ -16,7 +15,7 @@
     'status' => current(array_keys($statuses))
     ,'data' => current($statuses)
   );
-  $action_label = !isset($statuses['publish']) ? 'Save' : (isset($statuses['publish']->action) ? $statuses['publish']->action : 'Publish');
+  $action_label = !isset($statuses['publish']) ? __('Save','piklist') : (isset($statuses['publish']->action) ? $statuses['publish']->action : __('Publish','piklist'));
   $status_type = $post->post_status == 'auto-draft' ? $initial_status['status'] : $post->post_status;
 
 ?>
@@ -36,36 +35,38 @@
 
         <div id="save-action" <?php echo $action_label != 'Publish' ? 'class="hide-all"' : null; ?>>
       
-          <input type="submit" name="save" id="save-post" value="<?php esc_attr_e('Save'); ?>" tabindex="4" class="button button-highlighted" />
+          <input type="submit" name="save" id="save-post" value="<?php esc_attr_e('Save','piklist'); ?>" tabindex="4" class="button button-highlighted" />
 
           <img src="<?php echo esc_url(admin_url('images/wpspin_light.gif')); ?>" class="ajax-loading" id="draft-ajax-loading" alt="" />
       
         </div>
 
-        <div id="preview-action">
-      
-          <?php
-            if ('publish' == $post->post_status) 
-            {
-              $preview_link = esc_url(get_permalink($post->ID));
-              $preview_button = __('Preview Changes', 'piklist');
-            } 
-            else 
-            {
-              $preview_link = get_permalink($post->ID);
-              if (is_ssl())
+        <?php if ($post_type_object->public): ?>
+          <div id="preview-action">
+        
+            <?php
+              if ('publish' == $post->post_status) 
               {
-                $preview_link = str_replace('http://', 'https://', $preview_link);
+                $preview_link = esc_url(get_permalink($post->ID));
+                $preview_button = __('Preview Changes', 'piklist');
+              } 
+              else 
+              {
+                $preview_link = get_permalink($post->ID);
+                if (is_ssl())
+                {
+                  $preview_link = str_replace('http://', 'https://', $preview_link);
+                }
+                $preview_link = esc_url(apply_filters('preview_post_link', add_query_arg('preview', 'true', $preview_link)));
+                $preview_button = __('Preview', 'piklist');
               }
-              $preview_link = esc_url(apply_filters('preview_post_link', add_query_arg('preview', 'true', $preview_link)));
-              $preview_button = __('Preview', 'piklist');
-            }
-          ?>
+            ?>
 
-          <a class="preview button" href="<?php echo $preview_link; ?>" target="wp-preview" id="post-preview" tabindex="4"><?php echo $preview_button; ?></a>
-          <input type="hidden" name="wp-preview" id="wp-preview" value="" />
+            <a class="preview button" href="<?php echo $preview_link; ?>" target="wp-preview" id="post-preview" tabindex="4"><?php echo $preview_button; ?></a>
+            <input type="hidden" name="wp-preview" id="wp-preview" value="" />
 
-        </div>
+          </div>
+        <?php endif; ?>
 
         <div class="clear"></div>
     
@@ -91,7 +92,7 @@
 
             <?php if ('publish' == $post->post_status || 'private' == $post->post_status || $can_publish): ?>
     
-              <a href="#post_status" <?php if ('private' == $post->post_status): ?>style="display:none;" <?php endif; ?>class="edit-post-status hide-if-no-js" tabindex='4'><?php _e('Edit'); ?></a>
+              <a href="#post_status" <?php if ('private' == $post->post_status): ?>style="display:none;" <?php endif; ?>class="edit-post-status hide-if-no-js" tabindex='4'><?php _e('Edit','piklist'); ?></a>
 
               <div id="post-status-select" class="hide-if-js">
 
@@ -103,8 +104,8 @@
                   <?php endforeach; ?>
                 </select>
 
-                <a href="#post_status" class="save-post-status hide-if-no-js button"><?php _e('OK'); ?></a>
-                <a href="#post_status" class="cancel-post-status hide-if-no-js"><?php _e('Cancel'); ?></a>
+                <a href="#post_status" class="save-post-status hide-if-no-js button"><?php _e('OK','piklist'); ?></a>
+                <a href="#post_status" class="cancel-post-status hide-if-no-js"><?php _e('Cancel','piklist'); ?></a>
 
               </div>
 
@@ -157,14 +158,14 @@
                 <input type="hidden" name="hidden_post_visibility" id="hidden-post-visibility" value="<?php echo esc_attr($visibility); ?>" />
 
 
-                <input type="radio" name="visibility" id="visibility-radio-public" value="public" <?php checked($visibility, 'public'); ?> /> <label for="visibility-radio-public" class="selectit"><?php _e('Public'); ?></label><br />
+                <input type="radio" name="visibility" id="visibility-radio-public" value="public" <?php checked($visibility, 'public'); ?> /> <label for="visibility-radio-public" class="selectit"><?php _e('Public','piklist'); ?></label><br />
                 <?php if ($post_type == 'post' && current_user_can('edit_others_posts')) : ?>
-                  <span id="sticky-span"><input id="sticky" name="sticky" type="checkbox" value="sticky" <?php checked(is_sticky($post->ID)); ?> tabindex="4" /> <label for="sticky" class="selectit"><?php _e('Stick this post to the front page'); ?></label><br /></span>
+                  <span id="sticky-span"><input id="sticky" name="sticky" type="checkbox" value="sticky" <?php checked(is_sticky($post->ID)); ?> tabindex="4" /> <label for="sticky" class="selectit"><?php _e('Stick this post to the front page','piklist'); ?></label><br /></span>
                 <?php endif; ?>
-                <input type="radio" name="visibility" id="visibility-radio-password" value="password" <?php checked($visibility, 'password'); ?> /> <label for="visibility-radio-password" class="selectit"><?php _e('Password protected'); ?></label><br />
+                <input type="radio" name="visibility" id="visibility-radio-password" value="password" <?php checked($visibility, 'password'); ?> /> <label for="visibility-radio-password" class="selectit"><?php _e('Password protected','piklist'); ?></label><br />
 
                 <span id="password-span"><label for="post_password"><?php _e('Password:', 'piklist'); ?></label> <input type="text" name="post_password" id="post_password" value="<?php echo esc_attr($post->post_password); ?>" /><br /></span>
-                <input type="radio" name="visibility" id="visibility-radio-private" value="private" <?php checked($visibility, 'private'); ?> /> <label for="visibility-radio-private" class="selectit"><?php _e('Private'); ?></label><br />
+                <input type="radio" name="visibility" id="visibility-radio-private" value="private" <?php checked($visibility, 'private'); ?> /> <label for="visibility-radio-private" class="selectit"><?php _e('Private','piklist'); ?></label><br />
 
                 <p>
                   <a href="#visibility" class="save-post-visibility hide-if-no-js button"><?php _e('OK', 'piklist'); ?></a>
@@ -192,15 +193,15 @@
               { // scheduled for publishing at a future date
                 $stamp = __('Scheduled for: <b>%1$s</b>', 'piklist');
               } 
-              else if ('publish' == $post->post_status || 'private' == $post->post_status) 
+              elseif ('publish' == $post->post_status || 'private' == $post->post_status) 
               { // already published
                 $stamp = __('Published on: <b>%1$s</b>', 'piklist');
               } 
-              else if ('0000-00-00 00:00:00' == $post->post_date_gmt) 
+              elseif ('0000-00-00 00:00:00' == $post->post_date_gmt) 
               { // draft, 1 or more saves, no date specified
-                $stamp = (isset($statuses['publish']) ? __('Publish', 'piklist') : __('Schedule', 'piklist')) . __(' <b>immediately</b>', 'piklist');
+                $stamp = (isset($statuses['publish']) ? __('Publish', 'piklist') : __('Schedule', 'piklist')) . sprintf(__(' %simmediately%s', 'piklist'),'<b>','</b>');
               } 
-              else if (time() < strtotime($post->post_date_gmt . ' +0000')) 
+              elseif (time() < strtotime($post->post_date_gmt . ' +0000')) 
               { // draft, 1 or more saves, future date specified
                 $stamp = __('Scheduled for: <b>%1$s</b>', 'piklist');
               } 
@@ -212,7 +213,7 @@
             } 
             else 
             { // draft (no saves, and thus no date specified)
-              $stamp = __('Publish <b>immediately</b>', 'piklist');
+              $stamp = sprintf(__('Publish %simmediately%s', 'piklist'),'<b>','</b>');
               $date = date_i18n($datef, strtotime(current_time('mysql')));
             }
 

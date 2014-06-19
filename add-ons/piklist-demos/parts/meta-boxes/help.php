@@ -19,7 +19,7 @@ Locked: true
     <li><a href="http://piklist.com/user-guide/tutorials?#utm_source=wpadmin&utm_medium=piklistdemos&utm_campaign=piklistplugin" target="_blank"><?php _e('Tutorials'); ?></a></li>
     <li><a href="http://piklist.com/user-guide/docs?#utm_source=wpadmin&utm_medium=piklistdemos&utm_campaign=piklistplugin" target="_blank"><?php _e('Documentation'); ?></a></li>
     <li><a href="http://piklist.com/support?#utm_source=wpadmin&utm_medium=piklistdemos&utm_campaign=piklistplugin" target="_blank"><?php _e('Support Forum'); ?></a></li>
-  	<li><a href="<?php echo network_admin_url(); ?>admin.php?page=piklist-core-settings&tab=add-ons"><?php _e('Disable Piklist Demos'); ?></li>
+  	<li><a href="<?php echo network_admin_url(); ?>admin.php?page=piklist-core-settings&tab=add-ons"><?php _e('Disable Piklist Demos'); ?></a></li>
   </ol>
 
 </p>

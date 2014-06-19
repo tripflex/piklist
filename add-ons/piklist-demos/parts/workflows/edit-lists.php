@@ -7,7 +7,7 @@ Flow: Edit Demo
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Select, Radio and Checkbox fields have multiple configuration options. You can display them stacked, single line, as grouped lists and even use nested fields. ','piklist');?>
+  <?php _e('Select, Radio and Checkbox fields have multiple configuration options. You can display them stacked, single line, as grouped lists and even use nested fields. ','piklist-demo');?>
 </h3>
 
 <?php

@@ -7,7 +7,7 @@ Flow: Edit Demo
 ?>
 
 <h3 class="demo-highlight">
-  <?php _e('Fully customizable, sortable list tables can be created and placed anywhere with Piklist.','piklist');?>
+  <?php _e('Fully customizable, sortable list tables can be created and placed anywhere with Piklist.','piklist-demo');?>
 </h3>
 
 <?php
