@@ -199,7 +199,7 @@
               } 
               elseif ('0000-00-00 00:00:00' == $post->post_date_gmt) 
               { // draft, 1 or more saves, no date specified
-                $stamp = (isset($statuses['publish']) ? __('Publish', 'piklist') : __('Schedule', 'piklist')) . sprintf(__(' %simmediately%s', 'piklist'),'<b>','</b>');
+                $stamp = (isset($statuses['publish']) ? __('Publish', 'piklist') : __('Schedule', 'piklist')) . "&nbsp;" . sprintf(__('%simmediately%s', 'piklist'),'<b>','</b>');
               } 
               elseif (time() < strtotime($post->post_date_gmt . ' +0000')) 
               { // draft, 1 or more saves, future date specified
@@ -207,7 +207,7 @@
               } 
               else 
               { // draft, 1 or more saves, date specified
-                $stamp = (isset($statuses['publish']) ? __('Publish', 'piklist') : __('Schedule', 'piklist')) . __(' on: <b>%1$s</b>', 'piklist');
+                $stamp = (isset($statuses['publish']) ? __('Publish', 'piklist') : __('Schedule', 'piklist')) . "&nbsp;" . __('on: <b>%1$s</b>', 'piklist');
               }
               $date = date_i18n($datef, strtotime($post->post_date));
             } 
