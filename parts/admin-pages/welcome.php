@@ -240,7 +240,7 @@ get_currentuserinfo();
   <div class="feature-section col two-col">
     <div class="alt-feature">
       <h3><?php _e('Multiple user roles','piklist');?></h3>
-      <h4<?php _e('>Better security, more flexibility.','piklist');?></h4>
+      <h4><?php _e('Better security, more flexibility.','piklist');?></h4>
       <p><?php _e('Powerful web sites and applications require multiple user roles and Piklist supports this out of the box. Standard WordPress functions can be used to validate a user\'s permissions and provide appropriate access to data.','piklist');?></p>
     </div>
     <div class="last-feature about-colors-img">
@@ -368,12 +368,12 @@ get_currentuserinfo();
     <div class="col-1">
       <h2 class="about-headline-callout"><?php _e('Get Started','piklist');?></h2>
       <p class="about-description"><?php _e('The built in demos is a great way to see what Piklist can do, and comes with tons of sample code.','piklist');?></p>
-      <a href="<?php echo admin_url('admin.php?page=piklist-core-settings&tab=add-ons');?>"><?php printf(__('Activate Demos %s ','piklist'),'→');?></a>
+      <a href="<?php echo admin_url('admin.php?page=piklist-core-settings&tab=add-ons');?>"><?php printf(__('Activate Demos %s','piklist'),'→');?></a>
     </div>
     <div class="col-2">
       <h2 class="about-headline-callout"><?php _e('Get Help','piklist');?></h2>
       <p class="about-description"><?php _e('Visit the Piklist community forums to get answers to your questions, and suggest new features.','piklist');?></p>
-      <a href="http://piklist.com/support/"><?php printf(__('Visit Forums %s ','piklist'),'→');?></a>
+      <a href="http://piklist.com/support/"><?php printf(__('Visit Forums %s','piklist'),'→');?></a>
     </div>
     <div class="col-3 last-feature">
       <h2 class="about-headline-callout"><?php _e('Get News','piklist');?></h2>

@@ -11,7 +11,7 @@ ID: dashboard_right_now
 global $wp_registered_sidebars;
 
 
-if (version_compare($GLOBALS['wp_version'], '3.8-alpha', '>' ))
+if (version_compare($GLOBALS['wp_version'], '4.8-alpha', '>' ))
 {
   piklist_dashboard_right_now_new();
 }
@@ -366,7 +366,7 @@ function piklist_dashboard_right_now_new()
       {
         if (!is_multisite() || is_super_admin())
         {
-          echo '<span class="error-message">' . __('ERROR: The themes directory is either empty or doesn&#8217;t exist. Please check your installation.','piklist') . '</span>';
+          echo '<span class="error-message">' . __('ERROR: The themes directory is either empty or does not exist. Please check your installation.','piklist') . '</span>';
         }
       }
       elseif  (!empty($wp_registered_sidebars))
@@ -398,22 +398,22 @@ function piklist_dashboard_right_now_new()
           
         if (current_user_can('edit_theme_options'))
         {
-          printf(_n('Theme <span class="b">%1$s</span> with <span class="b"><a href="widgets.php">%2$s Widget</a></span>', 'Theme <span class="b">%1$s</span> with <span class="b"><a href="widgets.php">%2$s Widgets</a></span>', $num_widgets), $switch_themes, $num);
+          printf(_n('Theme %1$s with %2$s Widget', 'Theme %1$s with %2$s Widgets', $num_widgets), '<span class="b">' . $switch_themes . '</span>', '<span class="b"><a href="widgets.php">' . $num . '</a></span>');
         }
         else
         {
-          printf(_n('Theme <span class="b">%1$s</span> with <span class="b">%2$s Widget</span>', 'Theme <span class="b">%1$s</span> with <span class="b">%2$s Widgets</span>', $num_widgets), $switch_themes, $num);
+          printf(_n('Theme %1$s with %2$s Widget', 'Theme %1$s with %2$s Widgets', $num_widgets), '<span class="b">' . $switch_themes . '</span>', '<span class="b">' . $num . '</span>');
         }
       }
       else
       {
         if (current_user_can('switch_themes'))
         {
-          printf(__('Theme <span class="b"><a href="themes.php">%1$s</a></span>','piklist'), $theme->display('Name') );
+          printf(__('Theme %1$s','piklist'), '<span class="b"><a href="themes.php">' .$theme->display('Name') . '</a></span>' );
         }
         else
         {
-          printf(__('Theme <span class="b">%1$s</span>','piklist'), $theme->display('Name'));
+          printf(__('Theme %1$s','piklist'), '<span class="b">' . $theme->display('Name') . '</span>');
         }
       }
     ?>

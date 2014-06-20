@@ -122,7 +122,7 @@ class PikList_Validate
                    
             if (isset($field['required']) && $field['required'] && (isset($field['request_value']) && empty($field['request_value'])))
             {
-              self::add_error($field, __(' is a required field.', 'piklist'));
+              self::add_error($field, "&nbsp;" . __('is a required field.', 'piklist'));
             }
 
             if (isset($field['sanitize']))
