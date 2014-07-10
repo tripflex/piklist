@@ -52,11 +52,13 @@
     
     <?php 
       if ($widget):
+        
         do_action('piklist_widget_notices');
         
         piklist::render($widgets[$widget]['form']);
         
         piklist_form::save_fields();
+      
       endif;
     ?>
     

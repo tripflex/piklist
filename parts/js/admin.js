@@ -60,7 +60,7 @@
 
     thickbox: function()
     {
-      $(document).on('click', '.piklist-list-table-export-button', function() 
+      $('.piklist-list-table-export-button').on('click', function() 
       {
         setTimeout(function() 
         {
@@ -164,6 +164,11 @@
       {
         var button = $(this),
           widget_container = button.parents('.widget-control-actions:first').siblings('.widget-content:first');
+     
+        if (typeof tinyMCE != 'undefined')
+        {
+          tinyMCE.triggerSave();
+        }
         
         $('.piklist-universal-widget-form-container').on('remove', function() 
         {
@@ -239,7 +244,7 @@
           widget_form
             .hide()
             .empty();
-          
+
           $.ajax({
             type : 'POST',
             url : ajaxurl,
@@ -252,6 +257,12 @@
             ,success: function(response) 
             {
               response = $.parseJSON(response);
+              
+              if (response.tiny_mce != '' && response.quicktags != '')
+              {
+                tinyMCEPreInit.mceInit = $.extend(tinyMCEPreInit.mceInit, response.tiny_mce);
+                tinyMCEPreInit.qtInit = $.extend(tinyMCEPreInit.qtInit, response.quicktags);
+              }
               
               widget_title
                 .find('.in-widget-title')
@@ -354,7 +365,7 @@
         .sortable()
         .disableSelection();
         
-      $(document).on('click', '.piklist-list-table-export-submit', function(event)
+      $('.piklist-list-table-export-submit').on('click', function(event)
       {
         var form_id = $(this).attr('rel');
         
@@ -390,7 +401,7 @@
     {
       this.setup();
       
-      $(document).on('click', '.wp-tab-bar li a', function(event)
+      $('.wp-tab-bar li a').on('click', function(event)
       {
         event.preventDefault(); 
 

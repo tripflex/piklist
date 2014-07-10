@@ -3,12 +3,12 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.9
 Requires at least: 3.6
-Stable tag: 0.9.3.3
+Stable tag: 0.9.3.6
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A rapid development framework for WordPress.
+The most powerful framework available for WordPress.
 
 == Description ==
 
@@ -95,12 +95,27 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 == Changelog ==
 
 = 0.9.4 =
-* IMPROVED: Widget system.
+* NEW: Field validation.
+* NEW: Field sanitization.
 * NEW: label_class attribute
+* ENHANCED: Field conditions.
+* ENHANCED: Faster, reengineered Widget system.
+* ENHANCED: index.php files are ignored in parts folders.
+* FIXED: Language files load properly.
 * FIXED: Quick edit buttons work properly.
+* FIXED: Textarea values do not carry over in Add-Mores. Props Daniel Rampanelli
+* FIXED: Preview button only shows for Public Post Types. Props Daniel Rampanelli
+* FIXED: Adding fields to an already save Add-More works properly. Props Daniel Rampanelli
+* FIXED: Autosaves triggered by "Preview Changes". Props Daniel Rampanelli
 * FIXED: Field attributes properly accept a zero value. Props @jasontheadams
 * FIXED: piklist_empty_post_title filter now works as expected.
-* FIXED: Upgrade script works on older version of mysql.
+* Lots of bug fixes.
+
+= 0.9.3.4 =
+FIXED: Upgrade script works on older version of mysql.
+
+= 0.9.3.3 =
+FIXED: Update to class-piklist-user
 
 = 0.9.3.2 =
 * FIXED: User registrations emails no longer conflict with other plugins (i.e. BuddyPress)

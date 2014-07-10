@@ -69,6 +69,8 @@ class PikList_Admin
 
   public static function admin_head()
   {
+    piklist::render('shared/admin-head');
+    
     if (self::hide_ui())
     {
       piklist::render('shared/admin-hide-ui');
@@ -124,7 +126,7 @@ class PikList_Admin
         ,'media' => 'screen, projection'
       ));
     }
-
+    
     return $assets;
   }
 

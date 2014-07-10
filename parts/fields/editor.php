@@ -9,15 +9,12 @@
     ,array_merge(
       array(
         'textarea_name' => $name . ($add_more ? '" data-piklist-field-addmore="true' : null)
-        ,'wpautop' => true
-        ,'media_buttons' => true
         ,'tabindex' => ''
         ,'editor_css' => ''
         ,'editor_class' => ''
-        ,'teeny' => false
-        ,'dfw' => false
-        ,'tinymce' => true
-        ,'quicktags' => true
+        ,'editor_height' => 180
+        ,'quicktags' => false
+        ,'textarea_rows' => 5
       )
       ,isset($options) && is_array($options) ? $options : array()
     )

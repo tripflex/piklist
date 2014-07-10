@@ -336,7 +336,7 @@ class PikList_CPT
           {
             foreach ($wp_meta_boxes[$typenow][$context][$priority] as $meta_box => $data)
             {
-              if ($meta_box == 'submitdiv')
+              if ($meta_box == 'submitdiv' && $typenow != 'attachment')
               {
                 $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['title'] = apply_filters('piklist_post_submit_meta_box_title', $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['title'], $post);
                 $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
@@ -573,6 +573,7 @@ class PikList_CPT
             ));
 
     $types = empty($data['type']) ? get_post_types() : explode(',', $data['type']);
+
 
     foreach ($types as $type)
     {

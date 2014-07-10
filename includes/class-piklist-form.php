@@ -221,6 +221,11 @@ class PikList_Form
   
   private static $field_wrapper_ids = array();
     
+  public static $field_editor_settings = array(
+    'tiny_mce' => ''
+    ,'quicktags' => ''
+  );
+    
   public static $field_list_types = array(
     'checkbox'
     ,'radio'
@@ -237,6 +242,9 @@ class PikList_Form
     add_action('post_edit_form_tag', array('piklist_form', 'add_enctype'));
     add_action('init', array('piklist_form', 'save_fields_actions'), 100);
     add_action('wp_ajax_piklist_form', array('piklist_form', 'ajax'));
+    
+    add_filter('tiny_mce_before_init', array('piklist_form', 'tiny_mce_settings'), 100, 2);
+    add_filter('quicktags_settings', array('piklist_form', 'quicktags_settings'), 100, 2);
   }
   
   public static function get($variable)
@@ -262,6 +270,8 @@ class PikList_Form
   
   public static function wp_loaded()
   {
+    global $pagenow;
+    
     self::$templates = apply_filters('piklist_field_templates', self::$templates);
     
     add_shortcode('piklist_form', array('piklist_form', 'render_form'));
@@ -270,6 +280,22 @@ class PikList_Form
     {
       add_shortcode($template_shortcode, array('piklist_form', 'template_shortcode'));
     }
+    
+    if ($pagenow == 'widgets.php')
+    {
+      if (!class_exists('_WP_Editors'))
+      {
+        require(ABSPATH . WPINC . '/class-wp-editor.php');
+      }
+      
+      add_action('admin_print_footer_scripts', array('_WP_Editors', 'editor_js'), 50);
+      add_action('admin_footer', array('piklist_form', 'editor_proxy'));      
+    }
+  }
+  
+  public static function editor_proxy()
+  {
+    piklist::render('shared/editor-proxy');
   }
   
   public static function get_field_id($field, $scope = false, $index = false, $prefix = true)
@@ -414,15 +440,7 @@ class PikList_Form
         
         if (stristr($key, ':'))
         {
-          $value = $options;
-          $path = explode(':', $key);
-          foreach ($path as $key)
-          {
-            if (isset($value[$key]))
-            {
-              $value = $value[$key];
-            }
-          }
+          $value = piklist::array_path_get($options, explode(':', $key));
         }
         else
         {
@@ -503,7 +521,11 @@ class PikList_Form
             $meta = get_metadata($meta_type, $id, $meta_key, $unique);
           }
           
-          if (!metadata_exists($meta_type, $id, $meta_key))
+          if (metadata_exists('post', $id, $meta_key) && !$meta)
+          {
+            $meta = array();
+          }
+          elseif (!metadata_exists($meta_type, $id, $meta_key))
           {
             if (isset($field['value']))
             {
@@ -675,6 +697,8 @@ class PikList_Form
           echo json_encode(array(
             'field' => self::render_field($field, true)
             ,'config' => $field
+            ,'tiny_mce' => self::$field_editor_settings['tiny_mce']
+            ,'quicktags' => self::$field_editor_settings['quicktags']  
           ));
         }
       
@@ -772,6 +796,11 @@ class PikList_Form
       $field['multiple'] = true;
     }
     
+    if ($field['type'] == 'html' && !isset($field['field']))
+    {
+      $field['field'] = md5(serialize($field));
+    }
+    
     // Manage Classes
     if (isset($field['attributes']['class']))
     {
@@ -781,6 +810,7 @@ class PikList_Form
     {
       $field['attributes']['class'] = array();
     }
+    
     array_push($field['attributes']['class'], piklist_form::get_field_id($field['field'], $field['scope'], false, $field['prefix']));
     
     if (piklist_validate::errors($field['field'], $field['scope']))
@@ -887,12 +917,12 @@ class PikList_Form
       {
         $field['attributes']['placeholder'] = htmlspecialchars($field['value']);
       }
-      elseif ($stored_value)
+      elseif ($stored_value || (is_array($stored_value) && empty($stored_value)))
       {
         $field['value'] = $stored_value;
       }
     }
-
+    
     // Check for nested fields
     if ($field['description'])
     {
@@ -916,10 +946,19 @@ class PikList_Form
       
       foreach ($field['conditions'] as &$condition)
       {
-        $condition['scope'] = isset($condition['scope']) ? $condition['scope'] : $field['scope'];
-        $condition['id'] = piklist_form::get_field_id($condition['field'], $condition['scope'], false, $field['prefix']);
+        if (is_array($condition))
+        {
+          $condition['scope'] = isset($condition['scope']) ? $condition['scope'] : $field['scope'];
+          $condition['id'] = piklist_form::get_field_id($condition['field'], $condition['scope'], false, $field['prefix']);
+          $condition['name'] = piklist_form::get_field_name($condition['field'], $condition['scope'], false, $field['prefix']);
         
-        array_push($wrapper['class'], 'piklist-field-' . (isset($condition['type']) && $condition['type'] ? $condition['type'] : 'condition'));
+          if (!isset($condition['type']) || empty($condition['type']))
+          {
+            $condition['type'] = 'toggle';
+          }
+          
+          array_push($wrapper['class'], 'piklist-field-condition piklist-field-condition-' . $condition['type']);
+        }
       }
     }
   
@@ -990,7 +1029,17 @@ class PikList_Form
   {
     if (!empty(self::$fields_rendered))
     {
-      $fields_id = md5(serialize(self::$fields_defaults));
+      if (self::is_widget())
+      {
+        $fields_identifier = current(current(self::$fields_rendered));
+        $fields_identifier = substr($fields_identifier['id'], 0, strrpos($fields_identifier['id'], '-'));
+      }
+      else
+      {
+        $fields_identifier = self::$fields_defaults;
+      }
+      
+      $fields_id = md5(serialize($fields_identifier));
       
       if (current_user_can('manage_options'))
       {
@@ -1004,7 +1053,7 @@ class PikList_Form
       
       piklist::render('fields/fields', array(
         'fields_id' => $fields_id
-        ,'fields' => self::$fields_rendered // NOTE: Should we filter out any attributes?
+        ,'fields' => self::$fields_rendered
       ));
 
       self::$fields_defaults = self::$fields_rendered = array();
@@ -1080,6 +1129,8 @@ class PikList_Form
   
   public static function render_field_assets($type)
   {
+    global $pagenow;
+    
     if (is_admin())
     {
       wp_enqueue_media();
@@ -1182,7 +1233,7 @@ class PikList_Form
           }
         }
         
-        if (is_numeric(self::$field_rendering['columns'])) // && self::$field_rendering['child_field'])
+        if (is_numeric(self::$field_rendering['columns']))
         {
           self::$field_rendering['attributes']['data-piklist-field-columns'] = self::$field_rendering['columns'];
         }
@@ -1764,7 +1815,7 @@ class PikList_Form
     }
   }
   
-  public static function attributes_to_string($attributes = array(), $exclude = array())
+  public static function attributes_to_string($attributes = array(), $exclude = array('value'))
   {
     $attribute_string = '';
 
@@ -1790,4 +1841,98 @@ class PikList_Form
 
     return $attribute_string;
   }
+
+  public static function tiny_mce_settings($settings, $editor_id)
+  {
+    self::set_editor_settings('tiny_mce', $settings, $editor_id);
+    
+    return $settings;
+  }
+  
+  public static function quicktags_settings($settings, $editor_id)
+  {
+    self::set_editor_settings('quicktags', $settings, $editor_id);
+  
+    return $settings;
+  }
+
+  public static function set_editor_settings($type, $settings, $editor_id)
+  {
+    if (!empty($settings)) 
+    {
+      $settings = self::get_editor_settings($settings);
+      
+      $settings = "'$editor_id':{$settings},";
+      $settings = '{' . trim($settings, ',') . '}';
+    }
+    else 
+    {
+      $settings = '{}';
+    }
+    
+    self::$field_editor_settings[$type] = $settings;
+  }
+
+
+  public static function get_editor_settings($settings) 
+  {
+    $new_settings = '';
+    
+    foreach ($settings as $key => $value) 
+    {
+      if (is_bool($value)) 
+      {
+        $new_settings .= $key . ':' . ($value ? 'true' : 'false') . ',';
+      
+        continue;
+      }
+      elseif (!empty($value) && is_string($value) && (('{' == $value{0} && '}' == $value{strlen($value) - 1}) || ('[' == $value{0} && ']' == $value{strlen($value) - 1}) || preg_match('/^\(?function ?\(/', $value))) 
+      {
+        $new_settings .= $key . ':' . $value . ',';
+      
+        continue;
+      }
+      
+      $new_settings .= $key . ':"' . $value . '",';
+    }
+
+    return '{' . trim($new_settings, ' ,') . '}';
+  }
+  
 }
+
+
+
+
+
+
+
+
+class wp_editor_box {
+
+    /*
+    * AJAX Call Used to Generate the WP Editor
+    */
+
+    public static function editor_html() {
+        $content = stripslashes( $_POST['content'] );
+        wp_editor($content, $_POST['id'], array(
+            'textarea_name' => $_POST['textarea_name']
+        ) );
+        $mce_init = self::get_mce_init($_POST['id']);
+        $qt_init = self::get_qt_init($_POST['id']); ?>
+        <script type="text/javascript">
+            tinyMCEPreInit.mceInit = jQuery.extend( tinyMCEPreInit.mceInit, <?php echo $mce_init ?>);
+            tinyMCEPreInit.qtInit = jQuery.extend( tinyMCEPreInit.qtInit, <?php echo $qt_init ?>);
+        </script>
+        <?php
+        die();
+    }
+
+ 
+}
+
+
+
+
+

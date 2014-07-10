@@ -2,7 +2,7 @@
 /*
 Plugin Name: Piklist
 Plugin URI: http://piklist.com
-Description: A framework for building powerful websites with WordPress.
+Description: The most powerful framework available for WordPress.
 Version: 0.9.4
 Author: Piklist
 Author URI: http://piklist.com

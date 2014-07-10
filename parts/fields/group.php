@@ -1,7 +1,20 @@
 <?php 
+  
+  $rows = null;
+  
+  if (!empty($value))
+  {
+    $cardinalities = array();
+    foreach ($value as $nested)
+    {
+      $cardinalities[] = count($nested);
+    }
+    
+    $rows = max($cardinalities);
+  }
 
   $columns_to_render = array();
-
+  
   foreach ($fields as $column)
   {
     $index = $index ? $index : 0;
@@ -18,6 +31,11 @@
     if (in_array($column['type'], piklist_form::$field_list_types) || (isset($column['attributes']) && in_array('multiple', $column['attributes'])))
     {
       $column['multiple'] = true;
+    }
+    
+    if ($column['type'] == 'html' && !isset($column['field']))
+    {
+      $column['field'] = md5(serialize($column));
     }
     
     if (!isset($column['scope']) || is_null($column['scope']))
@@ -40,10 +58,6 @@
       elseif (is_array($value) && isset($value[$field_name]))
       {
         $stored_value = $value[$field_name];
-      }
-      else
-      {
-        $stored_value = $value;
       }
 
       $_values = $stored_value;
@@ -86,17 +100,25 @@
     }
     else
     {
+      for ($i = 0; $i < $rows; $i++)
+      {
+        if (!isset($_values[$i]))
+        {
+          $_values[$i] = null;
+        }
+      }
+
       foreach ($_values as $_index => $_value)
       {
         if (!isset($columns_to_render[$_index]))
         {
           $columns_to_render[$_index] = array();
         }
-
+    
         $column['value'] = $_value;      
         $column['index'] = $_index;
         $column['group_field'] = true;
-
+    
         if (!empty($field) && !stristr($column['field'], ':'))
         {
           $column['field'] = $field . (substr_count($field, ':') == 1 ? ':' . $column['index'] . ':' : ':') . $column['field'];
@@ -151,5 +173,3 @@
       piklist_form::render_field($column);
     }
   }
-  
-?>

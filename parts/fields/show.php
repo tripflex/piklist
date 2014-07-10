@@ -27,15 +27,22 @@
             echo implode('<br />', $value);
     
           else:
-
-            for ($i = 0; $i < count(current($value)); $i++):
             
+            $depth = count(current($value));
+            
+            for ($i = 0; $i < $depth; $i++):
+              
               foreach ($value as $_key => $_value):
-            
+                
                 echo $_value[$i] . '<br />';
             
               endforeach;
-        
+              
+              if ($depth != $i + 1)
+              {
+                echo '<hr />';
+              }
+              
             endfor;
       
           endif; 

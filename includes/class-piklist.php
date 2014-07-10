@@ -100,8 +100,8 @@ class PikList
 
     self::$version = current(get_file_data(self::$paths['piklist'] . '/piklist.php', array('version' => 'Version')));
 
-    load_plugin_textdomain('piklist', false, self::$paths['piklist'] . '/languages');
-    
+    load_plugin_textdomain('piklist', false, 'piklist/languages/');
+
     // TODO: what if included in theme?
     register_activation_hook('piklist/piklist.php', array('piklist', 'activate'));
    
@@ -317,17 +317,20 @@ class PikList
       $files = self::get_directory_list($path . '/parts/' . $folder);
       foreach ($files as $part)
       {
-        $file_prefix = substr($part, 0, strlen($prefix));
-        $file_suffix = substr($part, strlen($part) - strlen($suffix));
-        if ($file_prefix == $prefix && $file_suffix == $suffix)
+        if (strtolower($part) != 'index.php')
         {
-          call_user_func_array($callback, array(array(
-            'folder' => $folder
-            ,'part' => $part
-            ,'prefix' => $prefix
-            ,'add_on' => $display
-            ,'path' => $path
-          )));
+          $file_prefix = substr($part, 0, strlen($prefix));
+          $file_suffix = substr($part, strlen($part) - strlen($suffix));
+          if ($file_prefix == $prefix && $file_suffix == $suffix)
+          {
+            call_user_func_array($callback, array(array(
+              'folder' => $folder
+              ,'part' => $part
+              ,'prefix' => $prefix
+              ,'add_on' => $display
+              ,'path' => $path
+            )));
+          }
         }
       }
     }
@@ -340,9 +343,14 @@ class PikList
     print_r($output);
   
     echo "</pre>\r\n";
-    
-    @ob_flush();
-    @flush();
+
+    $output = ob_get_contents();
+ 
+    if (!empty($output))
+    {
+      @ob_flush();
+      @flush();
+    }
   }
   
   public static function get_prefixed_post_types($prefix)

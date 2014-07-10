@@ -1,3 +1,4 @@
+
 /* --------------------------------------------------------------------------------
   WordPress Style Updates
 --------------------------------------------------------------------------------- */  
@@ -298,6 +299,13 @@
       max-width: none !important;
     }
 
+  /* Conditions */
+  
+  .piklist-field-condition-toggle {
+    position: absolute;
+    left: -9999999px;
+    visibility: hidden;
+  }
   
   /* Add Mores & Sortables */
   
@@ -317,6 +325,19 @@
     float: left;
   }
     
+    .piklist-addmore-placeholder {
+      margin-bottom: 7px;
+      background: #444444;
+      border: 1px solid #444444;
+      border-left: none;
+      border-right: none;
+      float: left;
+      clear: left;
+      
+      opacity: 0.07;
+      filter: alpha(opacity=7);
+    }
+  
     .piklist-field-addmore-wrapper-vertical {
       padding-right: 45px;
     }
@@ -559,6 +580,20 @@
     .piklist-universal-widget-select-container p {
       margin: 0.3334em 0 0 0;
     }
+    
+    .piklist-universal-widget-form-container {
+      margin-bottom: 15px;
+    }
+    
+      .piklist-universal-widget-form-container div.error,
+      .piklist-universal-widget-form-container div.updated {
+        background-color: #fafafa;
+      }
+      
+      .piklist-universal-widget-form-container .wp-editor-wrap {
+        margin-top: 10px;
+      }
+    
 
 
 /* --------------------------------------------------------------------------------
@@ -823,6 +858,13 @@
       visibility: visible;
     }
 
+  body.post_type-attachment #post-body-content h3 {
+    color: #222;
+    font-size: 1.3em !important;
+    margin: 1em 0 1em 0 !important;
+    padding: 0 !important;
+  }
+  
   /* Workflow tabs on edit screens */
   #poststuff h2.nav-tab-wrapper,
   #poststuff h3.nav-tab-wrapper {
