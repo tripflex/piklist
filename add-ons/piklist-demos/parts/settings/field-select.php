@@ -16,9 +16,6 @@ Order: 30
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
   
   piklist('field', array(
@@ -32,9 +29,6 @@ Order: 30
       'first' => 'First Choice'
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
 

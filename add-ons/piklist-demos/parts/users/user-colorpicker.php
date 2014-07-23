@@ -10,9 +10,6 @@ Collapse: false
     'type' => 'colorpicker'
     ,'field' => 'color'
     ,'label' => 'Color Picker'
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('field', array(
@@ -20,9 +17,6 @@ Collapse: false
     ,'add_more' => true
     ,'field' => 'color_add_more'
     ,'label' => 'Color Picker Add More'
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('shared/code-locater', array(

@@ -3,7 +3,7 @@
 Title: Editor
 Setting: piklist_demo_fields
 Tab: Editor
-Tab Order: 2
+Tab Order: 20
 Order: 30
 */
 
@@ -25,9 +25,6 @@ Order: 30
       ,'tinymce' => true
       ,'quicktags' => true
       ,'drag_drop_upload' => true
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
   
@@ -63,9 +60,6 @@ Order: 30
       ,'tinymce' => true
       ,'quicktags' => true
       ,'drag_drop_upload' => true
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
 

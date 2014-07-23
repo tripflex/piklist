@@ -154,9 +154,6 @@ Order: 10
         )
       )
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
 
@@ -212,9 +209,6 @@ Order: 10
         )
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('shared/code-locater', array(

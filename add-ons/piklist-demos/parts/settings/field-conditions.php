@@ -3,7 +3,7 @@
 Title: Conditional Fields
 Setting: piklist_demo_fields
 Tab: Conditions
-Tab Order: 7
+Tab Order: 70
 Order: 30
 */
 
@@ -17,9 +17,6 @@ Order: 30
       ,'hide' => 'Hide all'
     )
     ,'value' => 'hide'
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -33,9 +30,6 @@ Order: 30
         ,'value' => 'show1'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -49,9 +43,6 @@ Order: 30
         ,'value' => 'show1'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -65,9 +56,6 @@ Order: 30
         ,'value' => 'show2'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -81,9 +69,6 @@ Order: 30
         ,'value' => 'show2'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -102,9 +87,6 @@ Order: 30
         ,'value' => 'show2'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -123,9 +105,6 @@ Order: 30
         ,'value' => 'show2'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
 
@@ -138,9 +117,6 @@ Order: 30
       ,'hide' => 'Hide'
     )
     ,'value' => 'hide'
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -154,9 +130,6 @@ Order: 30
         ,'value' => 'show'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -166,9 +139,6 @@ Order: 30
     ,'choices' => array(
       'show' => 'Show'
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -182,9 +152,6 @@ Order: 30
         ,'value' => 'show'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -210,9 +177,6 @@ Order: 30
         ,'type' => 'update'
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('field', array(
@@ -221,9 +185,6 @@ Order: 30
     ,'value' => 'Hello World!'
     ,'label' => 'Update This Field'
     ,'description' => 'This field is updated by the field above'
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   piklist('shared/code-locater', array(

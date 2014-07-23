@@ -24,9 +24,6 @@ Collapse: false
       ,'tinymce' => true
       ,'quicktags' => true
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('field', array(

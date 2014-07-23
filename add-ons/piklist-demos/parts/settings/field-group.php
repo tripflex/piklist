@@ -3,7 +3,7 @@
 Title: Field Groups
 Setting: piklist_demo_fields
 Tab: Groups
-Tab Order: 4
+Tab Order: 40
 Order: 30
 */
 
@@ -118,9 +118,6 @@ Order: 30
       )
 
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
   
   piklist('field', array(
@@ -221,9 +218,6 @@ Order: 30
         ,'columns' => 12
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
   if (!empty($meta['address_group_add_more']['address_1'])): 
@@ -333,9 +327,6 @@ Order: 30
         ,'columns' => 12
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
 
    piklist('field', array(
@@ -435,9 +426,6 @@ Order: 30
         ,'columns' => 12
       )
     )
-    ,'on_post_status' => array(
-        'value' => 'lock'
-      )
   ));
   
   if (!empty($meta['address_group_add_more']['address_1'])): 

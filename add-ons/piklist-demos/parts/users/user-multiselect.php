@@ -19,9 +19,6 @@ Collapse: false
     ,'attributes' => array(
       'multiple' => 'multiple'
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('field', array(

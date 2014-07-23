@@ -19,9 +19,6 @@ Order: 30
     ,'attributes' => array(
       'multiple'
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
   
   piklist('shared/code-locater', array(

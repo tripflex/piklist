@@ -15,22 +15,8 @@ Order: 10
     ,'attributes' => array(
       'class' => 'regular-text'
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
-  piklist('field', array(
-    'type' => 'text'
-    ,'field' => 'text_columns_element'
-    ,'label' => 'Columns Element'
-    ,'description' => 'columns="6"'
-    ,'value' => 'Lorem'
-    ,'columns' => 6
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
-  ));
 
   piklist('field', array(
     'type' => 'text'
@@ -39,9 +25,6 @@ Order: 10
     ,'label' => 'Text Add More'
     ,'description' => 'add_more="true"'
     ,'value' => 'Lorem'
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('field', array(
@@ -56,14 +39,11 @@ Order: 10
       ,'min' => 0
       ,'max' => 10
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('field', array(
     'type' => 'textarea'
-    ,'field' => 'demo_textarea_large'
+    ,'field' => 'textarea_large'
     ,'label' => 'Large Code'
     ,'description' => 'class="large-text code" rows="10" columns="50"'
     ,'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
@@ -71,9 +51,6 @@ Order: 10
       'rows' => 10
       ,'cols' => 50
       ,'class' => 'large-text code'
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
 

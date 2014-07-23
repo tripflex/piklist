@@ -129,8 +129,5 @@ piklist('field', array(
         ,'columns' => 12
       )
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 

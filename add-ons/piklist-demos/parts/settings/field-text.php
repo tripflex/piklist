@@ -16,9 +16,6 @@ Order: 30
       'class' => 'regular-text'
       ,'placeholder' => 'Enter some text'
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('field', array(
@@ -29,9 +26,6 @@ Order: 30
     ,'attributes' => array(
       'class' => 'regular-text'
       ,'placeholder' => 'Enter text or this page won\'t save.'
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
     ,'required' => true
   ));
@@ -46,9 +40,6 @@ Order: 30
       'columns' => 8
       ,'placeholder' => 'Enter some text'
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
   
   piklist('field', array(
@@ -61,9 +52,6 @@ Order: 30
       'rows' => 10
       ,'cols' => 50
       ,'class' => 'large-text code'
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
 

@@ -3,7 +3,7 @@
 Title: Radio Fields
 Setting: piklist_demo_fields
 Tab: Lists
-Tab Order: 3
+Tab Order: 30
 Order: 30
 */
 
@@ -18,9 +18,6 @@ Order: 30
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
   
   piklist('field', array(
@@ -32,9 +29,6 @@ Order: 30
     ,'choices' => array(
       'yes' => 'Yes'
       ,'no' => 'No'
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
   
@@ -70,9 +64,6 @@ Order: 30
         ,'columns' => 6
       )
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
   
   piklist('field', array(
@@ -96,9 +87,6 @@ Order: 30
           'class' => 'small-text'
         )
       )
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
 

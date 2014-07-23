@@ -131,7 +131,7 @@ Author URI: http://piklist.com/
   add_filter('piklist_field_templates', 'piklist_demo_field_templates');
   function piklist_demo_field_templates($templates)
   {
-    $templates['user_meta'] = array(
+    $templates['piklist_demo'] = array(
                                 'name' => __('User', 'piklist')
                                 ,'description' => __('Default layout for User fields from Piklist Demos.', 'piklist')
                                 ,'template' => '[field_wrapper]

@@ -18,9 +18,6 @@ Order: 30
       'size' => 12
     )
     ,'value' => date('M d, Y', time() + 604800)
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
   
   piklist('field', array(
@@ -36,9 +33,6 @@ Order: 30
       'size' => 12
     )
     ,'value' => date('M d, Y', time() + 604800)
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
     
   piklist('shared/code-locater', array(

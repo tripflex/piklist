@@ -17,9 +17,6 @@ Order: 30
       ,'second' => 'Second Choice'
       ,'third' => 'Third Choice'
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
   
   piklist('field', array(
@@ -31,9 +28,6 @@ Order: 30
     ,'choices' => array(
       'this' => 'This'
       ,'that' => 'That'
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
  
@@ -70,9 +64,6 @@ Order: 30
         ,'columns' => 6
       )
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
   
   piklist('field', array(
@@ -99,9 +90,6 @@ Order: 30
           'class' => 'small-text'
         )
       )
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
 

@@ -3,7 +3,7 @@
 Title: Validation Fields
 Setting: piklist_demo_fields
 Tab: Validate
-Tab Order: 6
+Tab Order: 60
 Order: 30
 */
 
@@ -127,9 +127,6 @@ Order: 30
         )
       )
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('field', array(
@@ -183,9 +180,6 @@ Order: 30
           ,'max' => 2
         )
       )
-    )
-    ,'on_post_status' => array(
-        'value' => 'lock'
     )
   ));
 

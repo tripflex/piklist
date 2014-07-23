@@ -8,7 +8,7 @@ if (!defined('ABSPATH'))
 class PikList_Help
 {
   public static function _construct()
-  { 
+  {
     add_action('admin_head', array('piklist_help', 'register_help_tabs'));
   }
 

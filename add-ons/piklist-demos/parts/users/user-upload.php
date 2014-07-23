@@ -66,9 +66,6 @@ Order: 10
         ,'columns' => 12
       )
     )
-    ,'on_post_status' => array(
-      'value' => 'lock'
-    )
   ));
 
   piklist('field', array(
@@ -93,9 +90,6 @@ Order: 10
         ,'label' => 'URL'
         ,'columns' => 12
       )
-    )
-    ,'on_post_status' => array(
-      'value' => 'lock'
     )
   ));
 
