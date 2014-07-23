@@ -1,5 +1,6 @@
 <?php
 /*
+Title: Users
 Setting: piklist_core
 Order: 20
 */

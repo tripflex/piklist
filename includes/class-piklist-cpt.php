@@ -34,7 +34,7 @@ class PikList_CPT
     add_action('init', array('piklist_cpt', 'init'));
     add_action('add_meta_boxes', array('piklist_cpt', 'register_meta_boxes'));
     add_action('do_meta_boxes', array('piklist_cpt', 'sort_meta_boxes'), 100, 3);
-    add_action('save_post', array('piklist_cpt', 'save_post'), -1);
+    add_action('save_post', array('piklist_cpt', 'save_post'), -1, 2);
     add_action('pre_get_posts', array('piklist_cpt', 'pre_get_posts'), 100);
     add_action('edit_page_form', array('piklist_cpt', 'edit_form'));
     add_action('edit_form_advanced', array('piklist_cpt', 'edit_form'));
@@ -194,9 +194,9 @@ class PikList_CPT
           }
           array_push(self::$meta_boxes_hidden[$post_type], $meta_box . (in_array($meta_box, self::$meta_boxes_builtin) ? 'div' : null));
         }
-
-        add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
       }
+      
+      add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
 
       if (isset($configuration['title']) && !empty($configuration['title']))
       {
@@ -228,7 +228,7 @@ class PikList_CPT
 
       if (isset($configuration['admin_body_class']) && !empty($configuration['admin_body_class']))
       {
-        add_filter('admin_body_class', array('piklist_cpt','admin_body_class'),999);
+        add_filter('admin_body_class', array('piklist_cpt', 'admin_body_class'),999);
       }
 
       if (isset($configuration['edit_manage']) && !empty($configuration['edit_manage']))
@@ -287,14 +287,15 @@ class PikList_CPT
           }
           array_push(self::$meta_boxes_hidden[$object_type], $taxonomy['configuration']['hierarchical'] ? $taxonomy['name'] . 'div' : 'tagsdiv-' . $taxonomy['name']);
         }
-        add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
       }
+
+      add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
 
       if (isset($taxonomy['configuration']['page_icon']) && !empty($taxonomy['configuration']['page_icon']))
       {
         global $pagenow;
 
-        if (($pagenow == 'edit-tags.php') && ($_GET['taxonomy'] == $taxonomy['name']))
+        if (($pagenow == 'edit-tags.php') && ($_REQUEST['taxonomy'] == $taxonomy['name']))
         {
           piklist_admin::$page_icon = array(
             'page_id' => isset($taxonomy['object_type']) && $taxonomy['object_type'] == 'user' ? '#icon-users.icon32' : '#icon-edit.icon32'
@@ -303,7 +304,7 @@ class PikList_CPT
         }
       }
     }
-
+    
     self::flush_rewrite_rules(md5(serialize($check)), 'piklist_taxonomy_rules_flushed');
   }
 
@@ -329,19 +330,18 @@ class PikList_CPT
 
       foreach (array('normal', 'advanced', 'side') as $context)
       {
-        // NOTE: remove_meta_box simply removes the meta configuration not the key, we need to wipe it...
         foreach (array('high', 'core', 'default', 'low') as $priority)
         {
           if (isset($wp_meta_boxes[$typenow][$context][$priority]))
           {
             foreach ($wp_meta_boxes[$typenow][$context][$priority] as $meta_box => $data)
             {
-              if ($meta_box == 'submitdiv' && $typenow != 'attachment')
+              if ($meta_box == 'submitdiv' && $typenow != 'attachment' && isset(self::$post_types[$typenow]['status']) && !empty(self::$post_types[$typenow]['status']))
               {
                 $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['title'] = apply_filters('piklist_post_submit_meta_box_title', $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['title'], $post);
                 $wp_meta_boxes[$typenow][$context][$priority][$meta_box]['callback'] = array('piklist_cpt', 'post_submit_meta_box');
               }
-              elseif (isset(self::$meta_boxes_hidden[$typenow]) && in_array($meta_box, self::$meta_boxes_hidden[$typenow]))
+              elseif ($meta_box != 'submitdiv' && isset(self::$meta_boxes_hidden[$typenow]) && in_array($meta_box, self::$meta_boxes_hidden[$typenow]))
               {
                 unset($wp_meta_boxes[$typenow][$context][$priority][$meta_box]);
               }
@@ -353,11 +353,14 @@ class PikList_CPT
       if (isset($wp_meta_boxes[$typenow]['side']['core']['submitdiv']))
       {
         $meta_boxes = array('submitdiv' => $wp_meta_boxes[$typenow]['side']['core']['submitdiv']);
+
         unset($wp_meta_boxes[$typenow]['side']['core']['submitdiv']);
+
         foreach ($wp_meta_boxes[$typenow]['side']['core'] as $id => $meta_box)
         {
           $meta_boxes[$id] = $meta_box;
         }
+
         $wp_meta_boxes[$typenow]['side']['core'] = $meta_boxes;
       }
     }
@@ -395,7 +398,7 @@ class PikList_CPT
     global $wp_post_types, $wp_post_statuses, $typenow;
 
     $statuses = array();
-    $_wp_post_statuses = $wp_post_statuses;
+    $_wp_post_statuses = array();
     $current_post_type = $typenow ? $typenow : (isset($_REQUEST['post_type']) ? $_REQUEST['post_type'] : null);
 
     foreach (self::$post_types as $post_type => $post_type_data)
@@ -406,23 +409,22 @@ class PikList_CPT
       }
     }
 
-    $statuses = array_unique($statuses);
-
-    foreach ($wp_post_statuses as $status => $status_data)
-    {
-      if (!$status_data->_builtin)
-      {
-        unset($wp_post_statuses[$status]);
-      }
-    }
+    $statuses = array_reverse(array_unique(array_reverse($statuses)));
 
     foreach ($statuses as $status)
     {
-      if (!isset($wp_post_statuses[$status]))
+      $_wp_post_statuses[$status] = $wp_post_statuses[$status];
+    }
+    
+    foreach ($wp_post_statuses as $status => $data)
+    {
+      if (!isset($_wp_post_statuses[$status]))
       {
-        $wp_post_statuses[$status] = $_wp_post_statuses[$status];
+        $_wp_post_statuses = array_merge(array($status => $data), $_wp_post_statuses);
       }
     }
+    
+    $wp_post_statuses = $_wp_post_statuses;
   }
 
   public static function manage_edit_columns($columns)
@@ -495,10 +497,8 @@ class PikList_CPT
     return $states;
   }
 
-  public static function save_post($post_id)
+  public static function save_post($post_id, $post)
   {
-    global $wpdb, $post;
-
     if (empty($_REQUEST) || !isset($_REQUEST[piklist::$prefix]['nonce']))
     {
       return $post_id;
@@ -530,12 +530,12 @@ class PikList_CPT
     {
       return $post_id;
     }
-
+    
     remove_action('save_post', array('piklist_cpt', 'save_post'), -1);
 
-      piklist_form::save(array(
-        'post' => $post_id
-      ));
+    piklist_form::save(array(
+      'post' => $post_id
+    ));
 
     add_action('save_post', array('piklist_cpt', 'save_post'), -1);
   }
@@ -553,7 +553,7 @@ class PikList_CPT
 
     $current_user = wp_get_current_user();
 
-    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, array(
+    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, apply_filters('piklist_get_file_data', array(
               'name' => 'Title'
               ,'context' => 'Context'
               ,'description' => 'Description'
@@ -570,11 +570,12 @@ class PikList_CPT
               ,'div' => 'DIV'
               ,'template' => 'Template'
               ,'box' => 'Meta Box'
-            ));
+            ), 'meta-boxes'));
+
+    $data = apply_filters('piklist_add_part', $data, 'meta-boxes');
 
     $types = empty($data['type']) ? get_post_types() : explode(',', $data['type']);
-
-
+    
     foreach ($types as $type)
     {
       $type = trim($type);
@@ -582,10 +583,10 @@ class PikList_CPT
       $statuses = !empty($data['status']) ? explode(',', $data['status']) : false;
       $ids = !empty($data['id']) ? explode(',', $data['id']) : false;
       $name = !empty($data['name']) ? $data['name'] : 'piklist_meta_' . piklist::slug($part);
-
+      
       if (post_type_exists($type)
         && (!$data['capability'] || ($data['capability'] && current_user_can(strtolower($data['capability']))))
-        && (!$data['role'] || in_array(strtolower($data['role']), $current_user->roles))
+        && (!$data['role'] || ($data['role'] && piklist_user::current_user_role($data['role'])))
         && (!$data['status'] || ($data['status'] && in_array($post->post_status, $statuses)))
         && (!$data['new'] || ($data['new'] && $pagenow != 'post-new.php'))
         && (!$data['id'] || ($data['id'] && in_array($post->ID, $ids)))
@@ -594,7 +595,7 @@ class PikList_CPT
       {
         $id = !empty($data['div']) ? $data['div'] : 'piklist_meta_' . piklist::slug($part);
         $textdomain = isset(piklist_add_on::$available_add_ons[$add_on]) && isset(piklist_add_on::$available_add_ons[$add_on]['TextDomain']) ? piklist_add_on::$available_add_ons[$add_on]['TextDomain'] : null;
-
+         
         add_meta_box(
           $id
           ,!empty($textdomain) ? __($name, $textdomain) : $name
@@ -652,11 +653,15 @@ class PikList_CPT
       self::$meta_box_nonce = true;
     }
 
+    do_action('piklist_pre_render_meta_box', $post, $meta_box);
+
     piklist::render(piklist::$paths[$meta_box['args']['add_on']] . '/parts/meta-boxes/' . $meta_box['args']['part'], array(
       'type' => $typenow
       ,'prefix' => 'piklist'
       ,'plugin' => 'piklist'
     ), false);
+    
+    do_action('piklist_post_render_meta_box', $post, $meta_box);
   }
 
   public static function sort_meta_boxes($post_type, $context, $post)
@@ -758,16 +763,16 @@ class PikList_CPT
 
     $messages[$post_type] = array(
       0 => ''
-      ,1 => sprintf(__($singular.' updated. <a href="%s">View '.strtolower($singular).'</a>'), esc_url(get_permalink($post_ID)))
+      ,1 => sprintf(__($singular . ' updated. <a href="%s">View ' . $singular . '</a>'), esc_url(get_permalink($post_ID)))
       ,2 => __('Custom field updated.')
       ,3 => __('Custom field deleted.')
       ,4 => __($singular.' updated.')
-      ,5 => isset($_GET['revision']) ? sprintf( __($singular.' restored to revision from %s'), wp_post_revision_title((int) $_GET['revision'], false )) : false
-      ,6 => sprintf(__($singular.' published. <a href="%s">View '.strtolower($singular).'</a>'), esc_url(get_permalink($post_ID)))
+      ,5 => isset($_GET['revision']) ? sprintf( __($singular . ' restored to revision from %s'), wp_post_revision_title((int) $_GET['revision'], false )) : false
+      ,6 => sprintf(__($singular.' published. <a href="%s">View ' . $singular . '</a>'), esc_url(get_permalink($post_ID)))
       ,7 => __('Page saved.')
-      ,8 => sprintf(__($singular.' submitted. <a target="_blank" href="%s">Preview '.strtolower($singular).'</a>'), esc_url( add_query_arg('preview', 'true', get_permalink($post_ID))))
-      ,9 => sprintf(__($singular.' scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview '.strtolower($singular).'</a>'), date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date)), esc_url(get_permalink($post_ID)))
-      ,10 => sprintf(__($singular.' draft updated. <a target="_blank" href="%s">Preview '.strtolower($singular).'</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID))))
+      ,8 => sprintf(__($singular . ' submitted. <a target="_blank" href="%s">Preview ' . $singular . '</a>'), esc_url( add_query_arg('preview', 'true', get_permalink($post_ID))))
+      ,9 => sprintf(__($singular.' scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview ' . $singular . '</a>'), date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date)), esc_url(get_permalink($post_ID)))
+      ,10 => sprintf(__($singular . ' draft updated. <a target="_blank" href="%s">Preview ' . $singular . '</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID))))
     );
 
     return $messages;
@@ -822,7 +827,7 @@ class PikList_CPT
   {
     if (($data['post_status'] != 'auto-draft') && (($data['post_title'] == 'Auto Draft') || empty($data['post_title'])))
     {
-      $data['post_title'] = apply_filters('piklist_empty_post_title', $data, $post_array);
+      $data['post_title'] = apply_filters('piklist_empty_post_title', $data['post_title'], $post_array);
     }
 
     return $data;

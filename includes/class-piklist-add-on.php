@@ -43,6 +43,7 @@ class PikList_Add_On
                   'type' => 'Plugin Type'
                   ,'version' => 'Version'
                 ));
+                
         if ($data['type'] && strtolower($data['type']) == 'piklist')
         {
           piklist::add_plugin(basename(dirname($plugin)), dirname($path));

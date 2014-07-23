@@ -101,13 +101,17 @@
 
         <?php settings_fields($setting); ?>
 
+        <?php do_action('piklist_pre_render_settings_form'); ?>
+
     <?php endif; ?>
 
       <?php do_settings_sections($setting); ?>
 
     <?php if ($save): ?>
     
-      <?php do_action('piklist_settings_form'); ?>
+        <?php do_action('piklist_post_render_settings_form'); ?>
+        
+        <?php do_action('piklist_settings_form'); ?>
        
         <?php submit_button(esc_html($save_text)); ?>
          

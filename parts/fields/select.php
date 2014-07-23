@@ -1,7 +1,7 @@
 
 <select 
   id="<?php echo piklist_form::get_field_id($field, $scope, $index, $prefix); ?>" 
-  name="<?php echo piklist_form::get_field_name($field, $scope, $index, $prefix); ?>"
+  name="<?php echo piklist_form::get_field_name($field, $scope, $index, $prefix, $multiple); ?>"
   <?php echo piklist_form::attributes_to_string($attributes); ?>
 >
   <?php foreach ($choices as $choice_value => $choice): ?>

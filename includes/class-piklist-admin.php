@@ -20,7 +20,7 @@ class PikList_Admin
   private static $redirect_post_location_allowed = array(
     'admin_hide_ui'
   );
-
+  
   public static $piklist_dependent = false;
   
   public static $page_icon = false;
@@ -29,11 +29,11 @@ class PikList_Admin
   {
     add_action('admin_init', array('piklist_admin', 'admin_init'));
     add_action('admin_head', array('piklist_admin', 'admin_head'));
+    add_action('wp_head', array('piklist_admin', 'admin_head'));
     add_action('admin_footer', array('piklist_admin', 'admin_footer'));
     add_action('admin_menu', array('piklist_admin', 'admin_menu'), -1);
     add_action('redirect_post_location', array('piklist_admin', 'redirect_post_location'), 10, 2);
-    add_action('wp_scheduled_delete', array('piklist_admin', 'clear_transients'));
-
+    
     add_filter('admin_footer_text', array('piklist_admin', 'admin_footer_text'));
     add_filter('admin_body_class', array('piklist_admin', 'admin_body_class'));
 
@@ -69,9 +69,7 @@ class PikList_Admin
 
   public static function admin_head()
   {
-    piklist::render('shared/admin-head');
-    
-    if (self::hide_ui())
+    if (is_admin() && self::hide_ui())
     {
       piklist::render('shared/admin-hide-ui');
     }
@@ -126,7 +124,7 @@ class PikList_Admin
         ,'media' => 'screen, projection'
       ));
     }
-    
+
     return $assets;
   }
 
@@ -160,7 +158,7 @@ class PikList_Admin
   
   public static function admin_footer_text($footer_text)
   {
-    return str_replace('</a>.', sprintf(__('%1$s and %2$sPiklist%1$s.','piklist'), '</a>', '<a href="http://piklist.com">'), $footer_text);
+    return str_replace('</a>.', sprintf(__('%1$s and %2$sPiklist%1$s.', 'piklist'), '</a>', '<a href="http://piklist.com">'), $footer_text);
   }
   
   public static function hide_ui()
@@ -228,8 +226,7 @@ class PikList_Admin
   {
     extract($arguments);
     
-    $file = $path . '/parts/' . $folder . '/' . $part;
-    $data = get_file_data($file, array(
+    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, apply_filters('piklist_get_file_data', array(
               'title' => 'Title'
               ,'page' => 'Page'
               ,'flow' => 'Flow'
@@ -237,7 +234,9 @@ class PikList_Admin
               ,'tab' => 'Tab'
               ,'order' => 'Order'
               ,'position' => 'Position'
-            ));
+            ), 'admin-pages'));
+
+    $data = apply_filters('piklist_add_part', $data, 'admin-pages');
 
     if (!empty($data['page']) && (!isset($_REQUEST['flow_page']) || (isset($_REQUEST['flow_page']) && $_REQUEST['flow_page'] === $data['flow_page'])))
     {
@@ -332,24 +331,6 @@ class PikList_Admin
     }
 
     return $classes;
-  }
-
-  public static function clear_transients()
-  {
-    global $wpdb, $_wp_using_ext_object_cache;
-
-    if ($_wp_using_ext_object_cache)
-    {
-      return false;
-    }
-
-    $time = isset($_SERVER['REQUEST_TIME']) ? (int) $_SERVER['REQUEST_TIME'] : time();
-    $expired = $wpdb->get_col($wpdb->prepare("SELECT option_name FROM $wpdb->options WHERE option_name LIKE %s AND CAST(option_value as SIGNED) < %d", '_transient_timeout_%', $time));
-    foreach ($expired as $transient) 
-    {
-      delete_transient($transient);
-      delete_transient(str_replace('_transient_timeout_', '', $transient));
-    }
   }
   
   public static function get($variable)
@@ -488,7 +469,7 @@ class PikList_Admin
 
   public static function responsive_admin()
   {
-    if (version_compare($GLOBALS['wp_version'], '3.8-alpha', '>' ))
+    if (version_compare($GLOBALS['wp_version'], '3.8', '>=' ))
     {
       return true;
     }

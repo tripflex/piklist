@@ -85,14 +85,17 @@
     {
       $('.piklist-meta-box-collapse:not(.piklist-meta-box-lock)').addClass('closed');
       
+      setTimeout(function()
+      {
+        $('.postbox.piklist-meta-box-lock h3, .postbox.piklist-meta-box-lock .handlediv').unbind('click.postboxes'); 
+      }, 700);
+      
       $('.piklist-meta-box-lock')
         .addClass('stuffbox')
         .css('box-shadow', 'none')
         .find('div.handlediv')
-          .removeClass('handlediv')
           .hide()
           .next('h3.hndle')
-            .removeClass('hndle')
             .css('cursor', 'default');
 
       $('.piklist-meta-box-lock').show();
@@ -168,6 +171,14 @@
         if (typeof tinyMCE != 'undefined')
         {
           tinyMCE.triggerSave();
+
+          widget_container.find('.wp-editor-area').each(function()
+          {
+            if (typeof switchEditors != 'undefined')
+            {
+              switchEditors.go($(this).attr('id'), 'tmce');
+            }
+          });
         }
         
         $('.piklist-universal-widget-form-container').on('remove', function() 
@@ -177,7 +188,7 @@
               'height': widget_container.outerHeight(),
               'overflow': 'hidden'
             });
-            
+
           widget_container
             .removeData('wptabs')
             .removeData('piklistgroups')
@@ -222,9 +233,59 @@
             .find('.in-widget-title')
             .text(':  ' + title);
         }
-            
+        
         piklist_admin.widget_dimensions(widget_container, height, width);
       });
+      
+      var current_widget = null;
+      
+      if ($('body.wp-customizer').length > 0)
+      {     
+        $(document).ajaxSuccess(function(event, jqxhr, settings) 
+        {
+          if (settings.data.indexOf('action=update-widget&wp_customize=on') != -1 && current_widget)
+          {
+            var widget_container = $(current_widget).find('.widget-content:eq(0)'),
+              widget_form = widget_container.find('.piklist-universal-widget-form-container'),
+              wptab_active = widget_container.attr('data-piklist-wptab-active');
+
+            widget_form
+              .removeData('wptabs')
+              .removeData('piklistgroups')
+              .removeData('piklistcolumns')
+              .removeData('piklistmediaupload')
+              .removeData('piklistaddmore')
+              .removeData('piklistfields');
+
+            widget_form
+              .wptabs()
+              .piklistgroups()
+              .piklistcolumns()
+              .piklistmediaupload()
+              .piklistaddmore({
+                sortable: true
+              })
+              .piklistfields();
+          
+            widget_container
+              .find('.wp-tab-bar > li')
+              .removeClass('wp-tab-active');
+          
+            widget_container
+              .find('.wp-tab-bar > li:first')
+              .addClass('wp-tab-active');
+              
+            if (widget_container.find('.wp-tab-bar').length > 0 && typeof wptab_active != 'undefined')
+            {
+              widget_container
+                .find('.wp-tab-bar > li')
+                .removeClass('wp-tab-active')
+                .get(2)
+                .addClass('wp-tab-active');
+            }  
+          }
+        });
+      }
       
       $(document).on('change', '.piklist-universal-widget-select', function()
       {
@@ -239,6 +300,8 @@
           widget_description = widget_container.find('.piklist-universal-widget-select-container p'),
           wptab_active = widget_container.attr('data-piklist-wptab-active');
         
+        current_widget = widget_container.parents('.widget-inside:eq(0)');
+          
         if (widget)
         {
           widget_form
@@ -249,6 +312,7 @@
             type : 'POST',
             url : ajaxurl,
             async: false,
+            dataType: 'json',
             data: {
               action: action,
               widget: widget,
@@ -256,20 +320,18 @@
             }
             ,success: function(response) 
             {
-              response = $.parseJSON(response);
-              
               if (response.tiny_mce != '' && response.quicktags != '')
               {
                 tinyMCEPreInit.mceInit = $.extend(tinyMCEPreInit.mceInit, response.tiny_mce);
                 tinyMCEPreInit.qtInit = $.extend(tinyMCEPreInit.qtInit, response.quicktags);
               }
-              
+
               widget_title
                 .find('.in-widget-title')
                 .text(':  ' + response.widget.data.title)
-                
+              
               widget_description.text(response.widget.data.description);
-             
+
               widget_form
                 .removeData('wptabs')
                 .removeData('piklistgroups')
@@ -277,7 +339,7 @@
                 .removeData('piklistmediaupload')
                 .removeData('piklistaddmore')
                 .removeData('piklistfields');
-              
+
               widget_form
                 .html(response.form)
                 .wptabs()
@@ -288,15 +350,15 @@
                   sortable: true
                 })
                 .piklistfields();
-              
+            
               widget_container
                 .find('.wp-tab-bar > li')
                 .removeClass('wp-tab-active');
-              
+            
               widget_container
                 .find('.wp-tab-bar > li:first')
                 .addClass('wp-tab-active');
-                  
+                
               if (widget_container.find('.wp-tab-bar').length > 0 && typeof wptab_active != 'undefined')
               {
                 widget_container
@@ -305,7 +367,7 @@
                   .get(2)
                   .addClass('wp-tab-active');
               }
-                          
+            
               piklist_admin.widget_dimensions(widget_container, response.widget.form_data.height, response.widget.form_data.width);
             }
           });
@@ -330,7 +392,7 @@
         inside = container.find('.widget-inside'),
         toggle = container.find('.widget-action:first'),
         toggled = false;
-        
+
       if (inside.is(':visible'))
       {
         toggle.trigger('click');
@@ -345,13 +407,23 @@
       widget
         .siblings('input[name="widget-height"]')
         .val(height ? height : 200);
-
+      
+      if ($('body.wp-customizer').length > 0)
+      {
+        inside
+          .find('.widget-content')
+          .css({
+            'width': width,
+            'max-width': width
+          });
+      }
+        
       setTimeout(function()
       {
         widget
           .find('.piklist-universal-widget-form-container')
           .show();
-        
+
         if (toggled)
         {
           toggle.trigger('click');

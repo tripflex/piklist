@@ -112,7 +112,7 @@ class PikList_Workflow
     
     extract($arguments);
     
-    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, array(
+    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, apply_filters('piklist_get_file_data', array(
               'name' => 'Title'
               ,'description' => 'Description'
               ,'capability' => 'Capability'
@@ -127,52 +127,59 @@ class PikList_Workflow
               ,'disable' => 'Disable'
               ,'position' => 'Position'
               ,'default' => 'Default'
-            ));
+            ), 'workflows'));
+
+    $data = apply_filters('piklist_add_part', $data, 'workflows');
 
     if (!isset($data['flow']))
     {
       return null;
-    }   
-
-    if (!empty($data['page']))
-    {
-      $data['page'] = strstr($data['page'], ',') ? piklist::explode(',', $data['page']) : array($data['page']);
     }
 
-    $data['page_slug'] = piklist::slug($data['name']);
-    $data['flow_slug'] = piklist::slug($data['flow']);
-    
-    if (!$data['header'])
+    if (((!isset($data['capability']) || empty($data['capability'])) || ($data['capability'] && current_user_can(strtolower($data['capability']))))
+      && ((!isset($data['role']) || empty($data['role'])) || piklist_user::current_user_role($data['role']))
+    )
     {
-      $data = self::is_active($data);
-    }
-    
-    if (in_array($pagenow, array('admin.php', 'users.php', 'plugins.php', 'options-general.php')) && $data['position'] == 'title')
-    {
-      $data['position'] = 'header';
-    }
-    
-    $workflow = array(
-      'config' => $data
-      ,'part' => $path . '/parts/' . $folder . '/' . $part
-    );
-    
-    if (!isset(self::$workflows[$data['flow']]))
-    {
-      self::$workflows[$data['flow']] = array();
-    }
-    
-    if ($data['header'] == 'true')
-    {
-      array_unshift(self::$workflows[$data['flow']], $workflow);
-    }
-    elseif (!empty($data['order']))
-    {
-      self::$workflows[$data['flow']][$data['order']] = $workflow;
-    }
-    else
-    {
-      array_push(self::$workflows[$data['flow']], $workflow);
+      if (!empty($data['page']))
+      {
+        $data['page'] = strstr($data['page'], ',') ? piklist::explode(',', $data['page']) : array($data['page']);
+      }
+
+      $data['page_slug'] = piklist::slug($data['name']);
+      $data['flow_slug'] = piklist::slug($data['flow']);
+      
+      if (!$data['header'])
+      {
+        $data = self::is_active($data);
+      }
+      
+      if (in_array($pagenow, array('admin.php', 'users.php', 'plugins.php', 'options-general.php')) && $data['position'] == 'title')
+      {
+        $data['position'] = 'header';
+      }
+      
+      $workflow = array(
+        'config' => $data
+        ,'part' => $path . '/parts/' . $folder . '/' . $part
+      );
+      
+      if (!isset(self::$workflows[$data['flow']]))
+      {
+        self::$workflows[$data['flow']] = array();
+      }
+      
+      if ($data['header'] == 'true')
+      {
+        array_unshift(self::$workflows[$data['flow']], $workflow);
+      }
+      elseif (!empty($data['order']))
+      {
+        self::$workflows[$data['flow']][$data['order']] = $workflow;
+      }
+      else
+      {
+        array_push(self::$workflows[$data['flow']], $workflow);
+      }
     }
   }
   

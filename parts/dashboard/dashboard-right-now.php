@@ -11,7 +11,7 @@ ID: dashboard_right_now
 global $wp_registered_sidebars;
 
 
-if (version_compare($GLOBALS['wp_version'], '4.8-alpha', '>' ))
+if (version_compare($GLOBALS['wp_version'], '3.8', '>=' ))
 {
   piklist_dashboard_right_now_new();
 }
@@ -36,7 +36,7 @@ function piklist_dashboard_right_now_new()
 
       <?php foreach ($post_types  as $post_type) : ?>
 
-            <li class="<?php echo strtolower($post_type->name); ?>">
+            <li class="<?php echo mb_strtolower($post_type->name); ?>">
 
               <?php $num_pages = wp_count_posts ($post_type->name); ?>
 
@@ -60,7 +60,7 @@ function piklist_dashboard_right_now_new()
 
         <?php foreach ($taxonomies as $taxonomy) : ?>
 
-          <li class="<?php echo strtolower($post_type->name); ?>">
+          <li class="<?php echo mb_strtolower($post_type->name); ?>">
 
             <?php $num_pages = wp_count_terms($taxonomy->name); ?>
 
@@ -193,7 +193,7 @@ function piklist_dashboard_right_now_new()
 
             <tr>
 
-              <td class="first b b-<?php echo strtolower($post_type->label); ?>">
+              <td class="first b b-<?php echo mb_strtolower($post_type->label); ?>">
 
                 <a href="edit.php">
                   <?php $num_pages = wp_count_posts ($post_type->name); ?>
@@ -202,7 +202,7 @@ function piklist_dashboard_right_now_new()
 
               </td>
 
-                <td class="t <?php echo strtolower($post_type->label); ?>">
+                <td class="t <?php echo mb_strtolower($post_type->label); ?>">
 
                     <a href="<?php echo $post_type->name == 'attachment' ? 'upload.php' : 'edit.php?post_type=' . $post_type->name;?>">
                       <?php echo $post_type->label; ?>
@@ -326,7 +326,7 @@ function piklist_dashboard_right_now_new()
 
           <tr>
 
-            <td class="first b b-<?php echo strtolower($taxonomy->name); ?>">
+            <td class="first b b-<?php echo mb_strtolower($taxonomy->name); ?>">
 
               <a href="edit.php">
                 <?php $num_pages = wp_count_terms($taxonomy->name); ?>
@@ -335,7 +335,7 @@ function piklist_dashboard_right_now_new()
 
             </td>
 
-            <td class="t <?php echo strtolower($taxonomy->name); ?>">
+            <td class="t <?php echo mb_strtolower($taxonomy->name); ?>">
 
                 <a href="edit-tags.php?taxonomy=<?php echo $taxonomy->name; ?>">
                   <?php echo $taxonomy->label; ?>

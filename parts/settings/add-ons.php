@@ -7,7 +7,7 @@ Order: 10
 ?>
 
   <p>
-    <?php _e('Add-ons are Piklist plugins that are included with Piklist core, or another Piklist plugin. They allow you to turn on additional functionality.', 'piklist'); ?>
+    <?php _e('Add-ons are plugins that are included with Piklist, or another Piklist plugin. They allow you to turn on additional functionality.', 'piklist'); ?>
   </p>
   
 <?php

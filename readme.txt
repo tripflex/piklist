@@ -95,13 +95,17 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 == Changelog ==
 
 = 0.9.4 =
+* The most stable version of Piklist yet.
+* Tons of performance updates.
 * NEW: Field validation.
 * NEW: Field sanitization.
 * NEW: label_class attribute
 * ENHANCED: Field conditions.
 * ENHANCED: Faster, reengineered Widget system.
+* ENHANCED: Piklist Widgets work better in Theme Customizer.
+* ENHANCED: Filter everything by user role.
+* ENHANCED: Tooltips match WordPress default themes.
 * ENHANCED: index.php files are ignored in parts folders.
-* FIXED: Language files load properly.
 * FIXED: Quick edit buttons work properly.
 * FIXED: Textarea values do not carry over in Add-Mores. Props Daniel Rampanelli
 * FIXED: Preview button only shows for Public Post Types. Props Daniel Rampanelli
@@ -109,7 +113,11 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 * FIXED: Autosaves triggered by "Preview Changes". Props Daniel Rampanelli
 * FIXED: Field attributes properly accept a zero value. Props @jasontheadams
 * FIXED: piklist_empty_post_title filter now works as expected.
-* Lots of bug fixes.
+* Lots and lots and lots and lots of bug fixes.
+
+= 0.9.3.5 =
+* FIXED: Language files load properly.
+* FIXED: Menu icon size no longer conflicts with other plugins.
 
 = 0.9.3.4 =
 FIXED: Upgrade script works on older version of mysql.

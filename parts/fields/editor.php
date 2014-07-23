@@ -1,6 +1,6 @@
 
 <?php 
-  
+
   $name = piklist_form::get_field_name($field, $scope, false, $prefix);
   
   wp_editor(
@@ -9,15 +9,12 @@
     ,array_merge(
       array(
         'textarea_name' => $name . ($add_more ? '" data-piklist-field-addmore="true' : null)
-        ,'tabindex' => ''
-        ,'editor_css' => ''
-        ,'editor_class' => ''
         ,'editor_height' => 180
-        ,'quicktags' => false
+        ,'quicktags' => true
         ,'textarea_rows' => 5
       )
       ,isset($options) && is_array($options) ? $options : array()
     )
   );
-  
+
 ?>

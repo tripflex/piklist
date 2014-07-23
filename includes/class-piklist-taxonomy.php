@@ -23,9 +23,6 @@ class PikList_Taxonomy
     
     add_filter('parent_file', array('piklist_taxonomy', 'parent_file'));
     add_filter('sanitize_user', array('piklist_taxonomy', 'restrict_username'));
-    
-    // TODO: This isn't working
-    // add_filter('wp_redirect', array('piklist_taxonomy', 'redirect'), 10, 2);
  }
   
   public static function init()
@@ -52,47 +49,49 @@ class PikList_Taxonomy
   {
     extract($arguments);
     
-    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, array(
+    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, apply_filters('piklist_get_file_data', array(
               'name' => 'Title'
               ,'description' => 'Description'
               ,'capability' => 'Capability'
+              ,'role' => 'Role'
               ,'order' => 'Order'
               ,'taxonomy' => 'Taxonomy'
               ,'new' => 'New'
-            ));
+            ), 'terms'));
     
+    $data = apply_filters('piklist_add_part', $data, 'terms');
+
     $taxonomies = empty($data['taxonomy']) ? get_taxonomies() : explode(',', $data['taxonomy']);
 
     foreach ($taxonomies as $taxonomy)
     {
       $data['taxonomy'] = trim($taxonomy);
 
-      if (!isset(self::$meta_boxes[$data['taxonomy']]))
+      if (((!isset($data['capability']) || empty($data['capability'])) || ($data['capability'] && current_user_can(strtolower($data['capability']))))
+        && ((!isset($data['role']) || empty($data['role'])) || piklist_user::current_user_role($data['role']))
+      )
       {
-        self::$meta_boxes[$data['taxonomy']] = array();
-
-        add_action($data['taxonomy'] . '_edit_form_fields', array('piklist_taxonomy', 'meta_box'), 10, 2);
-        add_action('edited_' . $data['taxonomy'], array('piklist_taxonomy', 'process_form'), 10, 2);
-
-        if (!$data['new'])
+        if (!isset(self::$meta_boxes[$data['taxonomy']]))
         {
-          add_action($data['taxonomy'] . '_add_form_fields', array('piklist_taxonomy', 'meta_box_add'), 10, 2);
-          add_action('created_' . $data['taxonomy'], array('piklist_taxonomy', 'process_form'), 10, 2);
-        }
-      }
+          self::$meta_boxes[$data['taxonomy']] = array();
 
-      $meta_box = array(
-        'config' => $data
-        ,'part' => $path . '/parts/' . $folder . '/' . $part
-      );
-      
-      if (isset($order))
-      {
-        self::$meta_boxes[$data['taxonomy']][$order] = $meta_box;
-      }
-      else
-      {
-        array_push(self::$meta_boxes[$data['taxonomy']], $meta_box);
+          add_action($data['taxonomy'] . '_edit_form_fields', array('piklist_taxonomy', 'meta_box'), 10, 2);
+          add_action('edited_' . $data['taxonomy'], array('piklist_taxonomy', 'process_form'), 10, 2);
+        }
+
+        $meta_box = array(
+          'config' => $data
+          ,'part' => $path . '/parts/' . $folder . '/' . $part
+        );
+        
+        if (isset($order))
+        {
+          self::$meta_boxes[$data['taxonomy']][$order] = $meta_box;
+        }
+        else
+        {
+          array_push(self::$meta_boxes[$data['taxonomy']], $meta_box);
+        }
       }
     }
   }
@@ -118,7 +117,7 @@ class PikList_Taxonomy
         self::$meta_box_nonce = true;
       }
     
-      $wrapper = isset($_REQUEST['action']) && $_REQUEST['action'] == 'edit' ? 'term_meta' : 'term_meta_new';
+      $wrapper = 'term_meta';
       
       foreach (self::$meta_boxes[$taxonomy] as $taxonomy => $meta_box)
       {

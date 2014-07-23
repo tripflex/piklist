@@ -1,7 +1,7 @@
 
 <?php if ($field || (!$field && $type == 'group')): ?>
   
-  <div id="<?php echo piklist_form::get_field_id($field, $scope, $index, $prefix); ?>" class="piklist-field-display">
+  <div id="<?php echo piklist_form::get_field_id($field, $scope, $index, $prefix); ?>"  class="piklist-field-display">
 
     <?php
       if ((!$field && $type == 'group')):
@@ -31,11 +31,23 @@
             $depth = count(current($value));
             
             for ($i = 0; $i < $depth; $i++):
-              
+
               foreach ($value as $_key => $_value):
                 
-                echo $_value[$i] . '<br />';
-            
+                if (piklist::is_flat($_value)):
+                  
+                  echo $_value[$i] . '<br />';
+                
+                else:
+                  
+                  foreach ($_value[$i] as $__value):
+
+                    echo $__value . '<br />';
+                    
+                  endforeach;
+                  
+                endif;
+                  
               endforeach;
               
               if ($depth != $i + 1)

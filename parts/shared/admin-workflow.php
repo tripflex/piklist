@@ -1,6 +1,6 @@
 <?php if ($position == 'header'): ?> 
   
-  <div class="wrap">
+  <div class="piklist-workflow">
 
 <?php endif; ?>
 
@@ -77,11 +77,15 @@
     </h2>
 
     <?php
-      if ($active_data)
+      if (isset($active_data) && $active_data)
       {
+        do_action('piklist_pre_render_workflow', $active_data);
+        
         piklist::render($active_data['part'], array(
           'data' => $active_data
         ));
+        
+        do_action('piklist_post_render_workflow', $active_data);
       }
     ?>
 

@@ -41,12 +41,15 @@ class PikList_Dashboard
     
     $file = $path . '/parts/' . $folder . '/' . $part;
     
-    $data = get_file_data($file, array(
+    $data = get_file_data($file, apply_filters('piklist_get_file_data', array(
               'title' => 'Title'
               ,'capability' => 'Capability'
+              ,'role' => 'Role'
               ,'id' => 'ID'
               ,'network' => 'Network'
-            ));
+            ), 'dashboard'));
+
+    $data = apply_filters('piklist_add_part', $data, 'dashboard');
 
     if (($data['network'] == 'only') && ($current_screen->id != 'dashboard-network'))
     {
@@ -58,7 +61,9 @@ class PikList_Dashboard
       return;
     }
 
-    if ((isset($data['capability']) && current_user_can($data['capability'])) || empty($data['capability']))
+    if ((isset($data['capability']) && current_user_can($data['capability']))
+        || (isset($data['role']) && piklist_user::current_user_role($data['role']))
+    )
     {
       $id = empty($data['id']) ? piklist::dashes($add_on . '-' . $part) : $data['id'];    
 
