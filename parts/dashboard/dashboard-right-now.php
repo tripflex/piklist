@@ -36,7 +36,7 @@ function piklist_dashboard_right_now_new()
 
       <?php foreach ($post_types  as $post_type) : ?>
 
-            <li class="<?php echo mb_strtolower($post_type->name); ?>">
+            <li class="<?php echo mb_strtolower($post_type->name); ?><?php _e('_right_now', 'piklist');?>">
 
               <?php $num_pages = wp_count_posts ($post_type->name); ?>
 

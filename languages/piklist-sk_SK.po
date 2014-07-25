@@ -1,3 +1,5 @@
+# Copyright (C) 2012 Piklist
+# This file is distributed under the same license as the Piklist package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Piklist\n"
@@ -5,19 +7,13 @@ msgstr ""
 "POT-Creation-Date: 2014-06-20 01:13:27+00:00\n"
 "PO-Revision-Date: 2014-07-23 21:19-0500\n"
 "Last-Translator: Piklist <support@piklist.com>\n"
-"Language-Team: \n"
-"Language: fr_FR\n"
+"Language-Team: LANGUAGE\n"
+"Language: sk_SK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
-"X-Poedit-Basepath: ../\n"
-"X-Textdomain-Support: yes\n"
 "X-Generator: Poedit 1.6.7\n"
-"X-Poedit-SearchPath-0: .\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: assets/class-piklist-checker.php:125
 msgid "The following plugin(s) require Piklist, and have been deactivated:"
@@ -35,7 +31,6 @@ msgstr ""
 msgid "Network Activate Piklist for all sites."
 msgstr ""
 
-# @ piklist
 #: assets/class-piklist-checker.php:163
 #, fuzzy
 msgid "Install Piklist"
@@ -45,34 +40,30 @@ msgstr "Piklist"
 msgid "%1$s %2$sDismiss this message"
 msgstr ""
 
-# @ piklist
 #: includes/class-piklist-admin.php:163
 msgid "%1$s and %2$sPiklist%1$s."
-msgstr "%1$s et %2$sPiklist%1$s."
+msgstr ""
 
-# @ piklist
 #: includes/class-piklist-admin.php:218 includes/class-piklist-setting.php:86
 msgid "General"
-msgstr "Général"
+msgstr "Všeobecné"
 
-# @ piklist
 #: includes/class-piklist-admin.php:302
 msgid "Save Changes"
-msgstr "Enregistrer les modifications"
+msgstr "Uložiť zmeny"
 
 #: includes/class-piklist-admin.php:374
 msgid "Dependent plugins or theme are active."
 msgstr ""
 
-# @ piklist
 #: includes/class-piklist-admin.php:381 includes/class-piklist-setting.php:37
 #: includes/class-piklist-setting.php:38 parts/fields/add-ons.php:41
 msgid "Settings"
-msgstr "Réglages"
+msgstr "Nastavenia"
 
 #: includes/class-piklist-admin.php:382
 msgid "Demo"
-msgstr ""
+msgstr "Demo"
 
 #: includes/class-piklist-cpt.php:762
 msgid "Custom field updated."
@@ -86,12 +77,11 @@ msgstr ""
 msgid "Page saved."
 msgstr ""
 
-# @ piklist
 #. translators: Publish box date format, see http:php.net/date
 #: includes/class-piklist-cpt.php:769
 #: parts/shared/post-submit-meta-box.php:189
 msgid "M j, Y @ G:i"
-msgstr "j M Y à G:i"
+msgstr "M j, Y @ G:i"
 
 #: includes/class-piklist-list-table.php:216
 msgid "1 item"
@@ -99,11 +89,10 @@ msgid_plural "%s items"
 msgstr[0] ""
 msgstr[1] ""
 
-# @ piklist
 #: includes/class-piklist-list-table.php:240
 #, fuzzy
 msgid "Go to the first page"
-msgstr "Epingler ce billet sur la page d'accueil"
+msgstr "Držať tento post na prednej strane"
 
 #: includes/class-piklist-list-table.php:248
 msgid "Go to the previous page"
@@ -118,26 +107,23 @@ msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
 
-# @ piklist
 #: includes/class-piklist-list-table.php:266
 #, fuzzy
 msgid "Go to the next page"
-msgstr "Epingler ce billet sur la page d'accueil"
+msgstr "Držať tento post na prednej strane"
 
 #: includes/class-piklist-list-table.php:274
 msgid "Go to the last page"
 msgstr ""
 
-# @ piklist
 #: includes/class-piklist-setting.php:27
 msgid "About"
-msgstr "À propos"
+msgstr "O"
 
-# @ piklist
 #: includes/class-piklist-setting.php:50 includes/class-piklist-setting.php:51
 #, fuzzy
 msgid "Add-ons"
-msgstr "Extensions Piklist"
+msgstr "Plugin Doplnky"
 
 #: includes/class-piklist-taxonomy.php:232
 msgid "Users"
@@ -151,11 +137,10 @@ msgstr ""
 msgid "is not valid input"
 msgstr ""
 
-# @ piklist
 #: includes/class-piklist-validate.php:202
 #, fuzzy
 msgid "Field"
-msgstr "Types de champs"
+msgstr "Pole dema"
 
 #: includes/class-piklist-validate.php:259
 msgid "is not valid HTML"
@@ -194,8 +179,9 @@ msgid "added"
 msgstr ""
 
 #: includes/class-piklist-validate.php:365
+#, fuzzy
 msgid "selected"
-msgstr ""
+msgstr "Vyberte"
 
 #: includes/class-piklist-validate.php:369
 msgid "must have at least %1$s %2$s."
@@ -209,34 +195,32 @@ msgstr ""
 msgid "contains a value that is not between %s and %s"
 msgstr ""
 
-# @ piklist
 #: includes/class-piklist-widget.php:59 includes/class-piklist-widget.php:71
+#, fuzzy
 msgid "Widgets"
-msgstr "Widgets"
+msgstr " Widgety"
 
-# @ piklist
 #: includes/class-piklist-widget.php:64
 msgid "Piklist Widgets"
-msgstr "Widgets Piklist"
+msgstr "Piklist widgety"
 
-# @ piklist
 #: includes/class-piklist-widget.php:65
 msgid "Core Widgets for Piklist."
-msgstr "Widgets des plugins"
+msgstr "Jadro widgety pre Piklist."
 
-# @ piklist
 #: includes/class-piklist-widget.php:72
 msgid "Widgets for the %s Theme"
-msgstr "Widgets du thème %s"
-
-#: includes/class-piklist.php:477
-msgid "Add New"
 msgstr ""
 
-# @ piklist
+#: includes/class-piklist.php:477
+#, fuzzy
+msgid "Add New"
+msgstr "Pridať viac"
+
 #: parts/admin-pages/welcome.php:166
+#, fuzzy
 msgid "Welcome to Piklist"
-msgstr "Bienvenue dans Piklist"
+msgstr "Jadro widgety pre Piklist."
 
 #. Description of the plugin/theme
 #: parts/admin-pages/welcome.php:168
@@ -270,11 +254,10 @@ msgid ""
 "%sget_posts%s function."
 msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:212
 #, fuzzy
 msgid "Add-Mores"
-msgstr "Champs répétables"
+msgstr "Pridať viac"
 
 #: parts/admin-pages/welcome.php:213
 msgid "The infinite repeater field."
@@ -331,12 +314,14 @@ msgid "Conditional Logic"
 msgstr ""
 
 #: parts/admin-pages/welcome.php:263
+#, fuzzy
 msgid "Hide/show fields based on another fields value."
-msgstr ""
+msgstr "Pole sa aktualizuje pole vyššie"
 
 #: parts/admin-pages/welcome.php:264
+#, fuzzy
 msgid "Auto-update another field."
-msgstr ""
+msgstr "Aktualizovať pole"
 
 #: parts/admin-pages/welcome.php:269
 msgid "Validate data"
@@ -376,10 +361,10 @@ msgid ""
 "Dashboard, Contextual Help, and more..."
 msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:300
+#, fuzzy
 msgid "Fields"
-msgstr "Types de champs"
+msgstr "Pole dema"
 
 #: parts/admin-pages/welcome.php:302
 msgid "Lock field values."
@@ -393,22 +378,17 @@ msgstr ""
 msgid "Add Tooltip Help."
 msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:305
-#, fuzzy
 msgid "Customize field templates."
-msgstr "Templates de champs"
+msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:310
 msgid "Meta Boxes"
-msgstr "Metaboxes"
+msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:312
-#, fuzzy
 msgid "Lock meta boxes"
-msgstr "Metaboxes"
+msgstr ""
 
 #: parts/admin-pages/welcome.php:313
 msgid "Show/hide by user capability or role"
@@ -422,11 +402,9 @@ msgstr ""
 msgid "Hide meta box when creating a new post/term"
 msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:320
-#, fuzzy
 msgid "Post Types"
-msgstr "Types de contenus personnalisés"
+msgstr ""
 
 #: parts/admin-pages/welcome.php:322
 msgid "Create custom post statuses"
@@ -440,17 +418,13 @@ msgstr ""
 msgid "Custom admin body classes"
 msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:325
-#, fuzzy
 msgid "Hide meta boxes"
-msgstr "Metaboxes"
+msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:334
-#, fuzzy
 msgid "List Tables"
-msgstr "Désactiver"
+msgstr ""
 
 #: parts/admin-pages/welcome.php:336
 msgid "Change column headings"
@@ -506,11 +480,9 @@ msgid ""
 "tons of sample code."
 msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:371
-#, fuzzy
 msgid "Activate Demos %s"
-msgstr "Activer"
+msgstr ""
 
 #: parts/admin-pages/welcome.php:374
 msgid "Get Help"
@@ -526,17 +498,13 @@ msgstr ""
 msgid "Visit Forums %s"
 msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:379
-#, fuzzy
 msgid "Get News"
-msgstr "Newsletter"
+msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:380
-#, fuzzy
 msgid "Piklist updates in your inbox."
-msgstr "Inscrivez-vous à la newsletter Piklist"
+msgstr ""
 
 #: parts/admin-pages/welcome.php:383
 msgid "Send to:"
@@ -562,16 +530,16 @@ msgstr ""
 msgid "Contributing Developers"
 msgstr ""
 
-# @ piklist
 #: parts/admin-pages/welcome.php:456
 #, fuzzy
 msgid "Follow Piklist"
-msgstr "Suivre Piklist sur Twitter"
+msgstr "Piklist"
 
 #: parts/dashboard/dashboard-right-now.php:29
 #: parts/dashboard/dashboard-right-now.php:184
+#, fuzzy
 msgid "Content"
-msgstr ""
+msgstr "Obsahu HTML"
 
 #: parts/dashboard/dashboard-right-now.php:55
 #: parts/dashboard/dashboard-right-now.php:317
@@ -630,127 +598,99 @@ msgstr[1] ""
 msgid "Theme %1$s"
 msgstr ""
 
-# @ piklist
 #: parts/fields/add-ons.php:35
 msgid "Disable"
-msgstr "Désactiver"
+msgstr ""
 
-# @ piklist
 #: parts/fields/add-ons.php:35
+#, fuzzy
 msgid "Activate"
-msgstr "Activer"
+msgstr "Súkromné"
 
 #: parts/fields/file.php:73 parts/fields/file.php:92
 msgid "Remove"
 msgstr ""
 
-# @ piklist
 #: parts/fields/post-relate.php:6
-#, fuzzy
 msgid "Most Recent"
-msgstr "Champs personnalisés"
+msgstr ""
 
 #: parts/fields/post-relate.php:7
 msgid "All"
 msgstr ""
 
-# @ piklist
 #: parts/settings/add-ons.php:10
 msgid ""
 "Add-ons are Piklist plugins that are included with Piklist core, or another "
 "Piklist plugin. They allow you to turn on additional functionality."
 msgstr ""
-"Les add-ons sont des extensions Piklist qui sont fournies par Piklist ou un "
-"autre plugin. Ils vous permettent de disposer de fonctionnalités "
-"supplémentaires."
+"Doplnky sú Piklist pluginy, ktoré sú súčasťou Piklist core, alebo iný "
+"Piklist plugin. Umožňujú vám zapnúť ďalšie funkcie."
 
-# @ piklist
 #: parts/settings/add-ons.php:19
 msgid "Plugin Add-ons"
-msgstr "Extensions Piklist"
+msgstr "Plugin Doplnky"
 
 #: parts/settings/add-ons.php:20
 msgid "Check to activate."
-msgstr ""
+msgstr "Kontrola aktivovať."
 
-# @ piklist
 #: parts/settings/general.php:14
 msgid ""
 "WARNING: Deactivating Piklist may disable functionality on this website."
 msgstr ""
-"ATTENTION : si vous désactivez Piklist, il se peut que certaines parties de "
-"votre site ne fonctionnent plus."
 
-# @ piklist
 #: parts/settings/general.php:18
 msgid ""
 "Before deactivating please make sure other Plugins or your Theme do not rely "
 "on Piklist."
 msgstr ""
-"Avant de désactiver cette extension, assurez-vous que les autres plugins et "
-"votre thème ne dépendent pas de Piklist pour fonctionner."
 
-# @ piklist
 #: parts/settings/general.php:22
 msgid "If you still want to deactivate Piklist:"
-msgstr "Si vous voulez toujours désactiver Piklist :"
+msgstr ""
 
-# @ piklist
 #: parts/settings/general.php:24
 msgid "Change the setting below to: Allow Deactivation."
-msgstr "Dans le menu ci-dessous, sélectionnez : Permettre la désactivation."
+msgstr ""
 
-# @ piklist
 #: parts/settings/general.php:25
+#, fuzzy
 msgid "SAVE the Settings."
-msgstr "ENREGISTREZ les modifications."
+msgstr "Nastavenia"
 
-# @ piklist
 #: parts/settings/general.php:26
 msgid "Return to the %1$sPlugins page%2$s and disable Piklist normally."
 msgstr ""
-"Retournez sur la %1$spage Extensions%2$s et désactivez Piklist normallement."
 
-# @ piklist
 #: parts/settings/general.php:35
 msgid ""
 "Stops Piklist from being deactivated, and replaces the standard DEACTIVATE "
 "link for Piklist, with a link to this page."
 msgstr ""
-"Interdire la désactivation de Piklist et remplacer le lien désactiver de la "
-"page extensions par un lien vers cette page."
 
-# @ piklist
 #: parts/settings/general.php:39
 msgid ""
 "When a user clicks on the new link on the plugins page, they will be brought "
 "here, and shown a warning."
 msgstr ""
-"En cliquant ce lien, les utilisateurs arriveront içi et verront un "
-"avertissement."
 
-# @ piklist
 #: parts/settings/general.php:49
-msgid "Piklist Deactivation"
-msgstr "Désactivation de Piklist"
-
-# @ piklist
-#: parts/settings/general.php:50
 #, fuzzy
+msgid "Piklist Deactivation"
+msgstr "Piklist nastavenia"
+
+#: parts/settings/general.php:50
 msgid "Deactivating Piklist may disable functionality on this website."
 msgstr ""
-"ATTENTION : si vous désactivez Piklist, il se peut que certaines parties de "
-"votre site ne fonctionnent plus."
 
-# @ piklist
 #: parts/settings/general.php:55
 msgid "Allow Deactivation"
-msgstr "Permettre la désactivation"
+msgstr ""
 
-# @ piklist
 #: parts/settings/general.php:56
 msgid "Lock"
-msgstr "Verrouiller"
+msgstr ""
 
 #: parts/settings/users.php:11
 msgid "Muliple User Roles"
@@ -764,192 +704,299 @@ msgstr ""
 msgid "Changes the user role dropdown to a select box."
 msgstr ""
 
-# @ piklist
 #: parts/settings/users.php:15
-#, fuzzy
 msgid "Allow"
-msgstr "Suivre"
+msgstr ""
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:18
 #: parts/shared/post-submit-meta-box.php:29
 #: parts/shared/post-submit-meta-box.php:38
 msgid "Save"
-msgstr "Enregistrer"
+msgstr "Uložiť"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:18
 #: parts/shared/post-submit-meta-box.php:202
 #: parts/shared/post-submit-meta-box.php:210
+#, fuzzy
 msgid "Publish"
-msgstr "Publier"
+msgstr "Verejnosti"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:51
 msgid "Preview Changes"
-msgstr "Prévisualiser les modifications"
+msgstr "Náhľad zmeny"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:61
 msgid "Preview"
-msgstr "Prévisualiser"
+msgstr "Náhľad"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:87
 msgid "Status:"
-msgstr "Statut :"
+msgstr "Stav:"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:95
 #: parts/shared/post-submit-meta-box.php:150
 #: parts/shared/post-submit-meta-box.php:225
 msgid "Edit"
-msgstr "Modifier"
+msgstr "Upraviť"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:107
 #: parts/shared/post-submit-meta-box.php:171
 msgid "OK"
-msgstr "OK"
+msgstr "ok"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:108
 #: parts/shared/post-submit-meta-box.php:172
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Zrušiť"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:123
 msgid "Visibility:"
-msgstr "Visibilité :"
+msgstr "Viditeľnosť:"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:128
 #: parts/shared/post-submit-meta-box.php:168
 msgid "Private"
-msgstr "Privé"
+msgstr "Súkromné"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:133
 #: parts/shared/post-submit-meta-box.php:165
 msgid "Password protected"
-msgstr "Protégé par mot de passe"
+msgstr "Chránené heslom"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:138
 msgid "Public, Sticky"
-msgstr "Public, épinglé"
+msgstr "Verejnosti, lepkavé"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:143
 #: parts/shared/post-submit-meta-box.php:161
 msgid "Public"
-msgstr "Public"
+msgstr "Verejnosti"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:163
 msgid "Stick this post to the front page"
-msgstr "Epingler ce billet sur la page d'accueil"
+msgstr "Držať tento post na prednej strane"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:167
 msgid "Password:"
-msgstr "Mot de passe :"
+msgstr "Heslo:"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:194
 #: parts/shared/post-submit-meta-box.php:206
 msgid "Scheduled for: <b>%1$s</b>"
-msgstr "Plannifié pour le : <b>%1$s</b>"
+msgstr "Naplánované na: <b>%1$ s</b>"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:198
 msgid "Published on: <b>%1$s</b>"
-msgstr "Publié le : <b>%1$s</b>"
+msgstr "Zverejnené na: <b>%1$ s</b>"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:202
 #: parts/shared/post-submit-meta-box.php:210
 #: parts/shared/post-submit-meta-box.php:280
 #: parts/shared/post-submit-meta-box.php:281
 msgid "Schedule"
-msgstr "Plannifier"
+msgstr "Harmonogram"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:202
-#, fuzzy
 msgid "%simmediately%s"
-msgstr " <b>immédiatement</b>"
+msgstr ""
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:210
 #, fuzzy
 msgid "on: <b>%1$s</b>"
-msgstr " le : <b>%1$s</b>"
+msgstr "Zverejnené na: <b>%1$ s</b>"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:216
 #, fuzzy
 msgid "Publish %simmediately%s"
-msgstr "Publier <b>immédiatement</b>"
+msgstr "Publikovať <b>okamžite</b>"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:257
 msgid "Delete Permanently"
-msgstr "Supprimer définitivement"
+msgstr "Natrvalo odstrániť"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:261
 msgid "Move to Trash"
-msgstr "Mettre à la corbeille"
+msgstr "Premiestniť do koša"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:292
 #: parts/shared/post-submit-meta-box.php:293
 msgid "Submit for Review"
-msgstr "Soumettre pour relecture"
+msgstr "Odoslať na revíziu"
 
-# @ piklist
 #: parts/shared/post-submit-meta-box.php:300
 msgid "Update"
-msgstr "Mettre à jour"
+msgstr "Aktualizácia"
 
-# @ piklist
 #: parts/shared/update-available.php:18
 msgid "Updating is recommended, here's why:"
-msgstr "Vous devriez mettre à jour Piklist :"
+msgstr ""
 
-# @ piklist
 #: parts/shared/widget-select.php:8 parts/shared/widget-select.php:26
 msgid "Select a Widget"
-msgstr "Choisissez un widget"
+msgstr "Vyberte Widget"
 
-# @ piklist
 #: parts/shared/widget-select.php:70
 msgid "There are currently no Widgets available."
-msgstr "Aucun widget n'est disponible actuellement."
+msgstr "V súčasnosti neexistujú žiadne widgety k dispozícii."
 
-# @ piklist
 #: parts/shared/widget-select.php:73
 msgid "Learn to make Widgets"
-msgstr "Apprenez à créer des widgets"
+msgstr "Naučte sa robiť widgety"
 
-# @ piklist
 #: parts/shared/widget-select.php:76
 msgid ""
 "Check out the documentation for how to easily build your own custom widgets!"
 msgstr ""
-"Consultez la documentation pour voir à quel point c'est facile de créer vos "
-"propres widgets !"
+"Pozrite si dokumentáciu ako ľahko vytvoriť svoj vlastný vlastné widgety!"
 
-# @ piklist
 #. Plugin Name of the plugin/theme
 #. Author of the plugin/theme
 msgid "Piklist"
 msgstr "Piklist"
 
-# @ piklist
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
 msgid "http://piklist.com"
 msgstr "http://piklist.com"
+
+#~ msgid "%1$sOrder Status:%2$s %3$s"
+#~ msgstr "%1$ sOrder stav: % 2$ s %3$ s"
+
+#~ msgid "Group ~ List Example"
+#~ msgstr "Skupina ~ príklad zoznamu"
+
+#~ msgid ""
+#~ "This is an example of how to build a list with multiple element types."
+#~ msgstr "Toto je príklad toho, ako vytvoriť zoznam s viacerými typmi prvok."
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "class=\"small-text\""
+#~ msgstr "trieda = \" &quot;small-text\""
+
+#~ msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+#~ msgstr "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+
+#~ msgid "Color Picker"
+#~ msgstr "Color Picker"
+
+#~ msgid "Date"
+#~ msgstr "Dátum"
+
+#~ msgid "Choose a date"
+#~ msgstr "Vyberte dátum"
+
+#~ msgid "Time"
+#~ msgstr "Čas"
+
+#~ msgid "Choose a time"
+#~ msgstr "Vyberte čas"
+
+#~ msgid "Toggle a field"
+#~ msgstr "Zobraziť/Skryť pole"
+
+#~ msgid "Show/Hide Field"
+#~ msgstr "Zobraziť/Skryť pole"
+
+#~ msgid "This field is toggled by the field above"
+#~ msgstr "Toto pole je prepnuté do poľa vyššie"
+
+#~ msgid "Update This Field"
+#~ msgstr "Aktualizovať toto pole"
+
+#~ msgid "Address"
+#~ msgstr "Adresa"
+
+#~ msgid ""
+#~ "This is an example of how to build a simple address field using the group "
+#~ "type."
+#~ msgstr ""
+#~ "Toto je príklad ako sa stavia jednoduchý adresu poľa pomocou skupiny typ."
+
+#~ msgid "Street Address"
+#~ msgstr "Adresu ulice"
+
+#~ msgid "PO Box, Suite, etc."
+#~ msgstr "P.O. Box, Suite, atď."
+
+#~ msgid "City"
+#~ msgstr "Mesto"
+
+#~ msgid "State"
+#~ msgstr "Štát"
+
+#~ msgid "Zip Code"
+#~ msgstr "smerovacie číslo"
+
+#~ msgid "Radio"
+#~ msgstr "Rádio"
+
+#~ msgid "Checkbox"
+#~ msgstr "Začiarkavacie políčko"
+
+#~ msgid "Text ~ small-text"
+#~ msgstr "Text ~ malý-text"
+
+#~ msgid "ipsum dolor sit amet, consectetur adipiscing elit."
+#~ msgstr "ipsum dolor sit amet, consectetur adipiscing elit."
+
+#~ msgid "Text ~ regular-text"
+#~ msgstr "Text ~ pravidelný-text"
+
+#~ msgid "Text ~ large-text"
+#~ msgstr "Text ~ veľký-text"
+
+#~ msgid "Number ~ small-text"
+#~ msgstr "Číslo ~ malý-text"
+
+#~ msgid "Textarea ~ 10x50 ~ large-text code"
+#~ msgstr "Textarea ~ 10 x 50 ~ veľký text kód"
+
+#~ msgid "The code that built this meta box can be found here:"
+#~ msgstr "Kód, ktorý postavil tento meta box možno nájsť tu:"
+
+#~ msgid "Textarea ~ large-text code"
+#~ msgstr "Textarea ~ veľký text kód"
+
+#~ msgid "Example Display Widget"
+#~ msgstr "Príklad zobrazenia Widget"
+
+#~ msgid "Text ~ Small"
+#~ msgstr "Text ~ malý"
+
+#~ msgid "Text ~ Large"
+#~ msgstr "Text ~ veľký"
+
+#~ msgid "Textarea"
+#~ msgstr "Textarea"
+
+#~ msgid "Date Picker"
+#~ msgstr "Výber dátumu"
+
+#~ msgid "From"
+#~ msgstr "Od"
+
+#~ msgid "Hello World from "
+#~ msgstr "Hello World od "
+
+#~ msgid "This is a sample widget from"
+#~ msgstr "Toto je vzorka widget z"
+
+#~ msgid "Person"
+#~ msgstr "Osoba"
+
+#~ msgid "</a> and <a href=\"%s\">Piklist</a>."
+#~ msgstr "a <a href=&quot;\"%s\"&quot;>Piklist</a>."
+
+#~ msgid "Upload or View"
+#~ msgstr "Upload alebo zobrazenie"
+
+#~ msgid "ERROR:"
+#~ msgstr "CHYBA:"
+
+#~ msgid "Schedule for: <b>%1$s</b>"
+#~ msgstr "Harmonogram: <b>%1$ s</b>"
+
+#~ msgid "A Framework for Building Powerful Websites with WordPress."
+#~ msgstr "Rámec pre budovanie silný webové stránky s WordPress."

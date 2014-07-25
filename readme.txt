@@ -3,7 +3,7 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.9
 Requires at least: 3.6
-Stable tag: 0.9.4
+Stable tag: 0.9.4.1
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -83,16 +83,21 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Hide/Show based on the users capability.
 *   Hide form fields, and just show field values
 
-= Translators =
-* French (fr) - Daniel Ménard
-* Slovak (sk) - Branco
-
 == Installation ==
 
 *   Install and activate Piklist like any other plugin.
 *   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
 
 == Changelog ==
+
+= 0.9.4.1 =
+* FIXED: Removed object_id from fields.
+* FIXED: Language files load properly.
+* FIXED: Locked notice works correctly on Multisite.
+* ENHANCED: Field conditions support add-mores.
+* ENHANCED: Field conditions support serialize groups.
+* ENHANCED: Field Columns switch to right margins.
+* ENHANCED: Right Now widget css update.
 
 = 0.9.4 =
 * The most stable version of Piklist yet.
@@ -120,10 +125,10 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 * FIXED: Menu icon size no longer conflicts with other plugins.
 
 = 0.9.3.4 =
-FIXED: Upgrade script works on older version of mysql.
+* FIXED: Upgrade script works on older version of mysql.
 
 = 0.9.3.3 =
-FIXED: Update to class-piklist-user
+* FIXED: Update to class-piklist-user
 
 = 0.9.3.2 =
 * FIXED: User registrations emails no longer conflict with other plugins (i.e. BuddyPress)

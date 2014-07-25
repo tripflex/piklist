@@ -231,7 +231,25 @@
       
       if (!empty($conditions))
       {
-        $column['conditions'] = $conditions;
+        if (isset($column['conditions']) && is_array($column['conditions']))
+        {
+          $column['conditions'] = array_merge($column['conditions'], $conditions);
+          
+          if (!isset($column['attributes']['class']))
+          {
+            $column['attributes']['class'] = array();
+          }
+          elseif (isset($column['attributes']['class']) && !is_array($column['attributes']['class']))
+          {
+            $column['attributes']['class'] = array($column['attributes']['class']);
+          }
+          
+          array_push($column['attributes']['class'], 'piklist-field-condition');
+        }
+        else
+        {
+          $column['conditions'] = $conditions;
+        }
       }
 
       piklist_form::render_field($column);

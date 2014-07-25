@@ -337,11 +337,20 @@
     background-color: #ffebe8 !important;
     border-color: #c00 !important;
   }
-  
-  .wp-editor-container {
-    border: 1px solid #dedede;
-  }
 
+
+/* --------------------------------------------------------------------------------
+  Basic Front-end Field Template
+--------------------------------------------------------------------------------- */
+
+  .piklist-theme-field-container {
+    margin-bottom: 1em;
+    clear: both;
+  }
+    
+    .piklist-theme-field-container .piklist-field-description {
+      font-size: 0.8em;
+    }
 
 
 /* --------------------------------------------------------------------------------

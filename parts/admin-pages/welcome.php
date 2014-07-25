@@ -268,9 +268,9 @@ get_currentuserinfo();
     <div class="col-2">
       <h3><?php _e('Validate data','piklist');?></h3>
         <ul>
-          <li><?php _e('Built in validation rules','piklist');?></li>
-          <li><?php _e('Easily add your own','piklist');?></li>
-          <li><?php _e('Apply multiple rules','piklist');?></li>
+          <li><?php _e('Built in validation rules.','piklist');?></li>
+          <li><?php _e('Easily add your own.','piklist');?></li>
+          <li><?php _e('Apply multiple rules.','piklist');?></li>
         </ul>
     </div>
 
@@ -278,7 +278,7 @@ get_currentuserinfo();
       <h3><?php _e('Sanitize before saving','piklist');?></h3>
         <ul>
           <li><?php _e('Use WordPress sanitization functions.','piklist');?></li>
-          <li><?php _e('Create your own','piklist');?></li>
+          <li><?php _e('Create your own.','piklist');?></li>
         </ul>
     </div>
 

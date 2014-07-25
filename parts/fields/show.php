@@ -10,7 +10,7 @@
         
         foreach ($fields as $f):
 
-          $value[$f['field']] = piklist_form::get_field_value($scope, $f, $scope, $object_id);
+          $value[$f['field']] = piklist_form::get_field_value($scope, $f, $scope, piklist_form::get_field_object_id(array('field' => $field, 'scope' => $scope)));
           
         endforeach;
       
