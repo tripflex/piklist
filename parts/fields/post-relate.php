@@ -20,7 +20,7 @@
 
     $values = empty($query->posts) ? null : piklist(
       $query->posts
-      ,array('ID', 'post_title')
+      ,'ID'
     );
   
     piklist('field', array(
