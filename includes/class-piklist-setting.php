@@ -197,7 +197,7 @@ class PikList_Setting
         
           if (((isset($data['add_more']) && !$data['add_more']) || !isset($data['add_more'])) && (isset($new[$field]) && isset($new[$field][0]) && count($new[$field]) == 1))
           {
-            $new[$field] = $new[$field][0];
+            $new[$field] = is_array($new[$field][0]) && count($new[$field][0]) == 1 ? $new[$field][0][0] : $new[$field][0];
           }
         
           if (isset($new[$field]) && is_array($new[$field]) && count($new[$field]) > 1 && empty($new[$field][0]) && isset($new[$field][0]))
