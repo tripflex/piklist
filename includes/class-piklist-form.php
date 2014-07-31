@@ -1685,6 +1685,8 @@ class PikList_Form
                   {
                     if (!empty($terms))
                     {
+                      $terms = !is_array($terms) ? array($terms) : $terms;
+                      
                       foreach ($terms as $term)
                       {
                         if (!in_array($term, $taxonomies[$taxonomy]))
