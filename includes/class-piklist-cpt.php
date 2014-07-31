@@ -34,7 +34,7 @@ class PikList_CPT
     add_action('init', array('piklist_cpt', 'init'));
     add_action('add_meta_boxes', array('piklist_cpt', 'register_meta_boxes'));
     add_action('do_meta_boxes', array('piklist_cpt', 'sort_meta_boxes'), 100, 3);
-    add_action('save_post', array('piklist_cpt', 'save_post'), -1, 2);
+    add_action('save_post', array('piklist_cpt', 'save_post'), -1, 3);
     add_action('pre_get_posts', array('piklist_cpt', 'pre_get_posts'), 100);
     add_action('edit_page_form', array('piklist_cpt', 'edit_form'));
     add_action('edit_form_advanced', array('piklist_cpt', 'edit_form'));
@@ -497,7 +497,7 @@ class PikList_CPT
     return $states;
   }
 
-  public static function save_post($post_id, $post)
+  public static function save_post($post_id, $post, $update)
   {
     if (empty($_REQUEST) || !isset($_REQUEST[piklist::$prefix]['nonce']))
     {
@@ -537,7 +537,7 @@ class PikList_CPT
       'post' => $post_id
     ));
 
-    add_action('save_post', array('piklist_cpt', 'save_post'), -1);
+    add_action('save_post', array('piklist_cpt', 'save_post'), -1, 3);
   }
 
   public static function register_meta_boxes()
