@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Draggable Editor
-Post Type: piklist_demo
+Post Type: piklist_demo,piklist_lite_demo
 Order: 100
 */
 

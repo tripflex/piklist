@@ -1,40 +1,79 @@
 <?php
-/*
-Title: Validation Fields
-Capability: manage_options
-Order: 10
+/*  
+Title: Post Submit
+Method: post
+Message: Test Entry Saved.
 */
+
+  // [piklist_form form="new-post-validation" add_on="piklist-demos"]
+
+  piklist('field', array(
+    'type' => 'hidden'
+    ,'scope' => 'post'
+    ,'field' => 'post_type'
+    ,'value' => 'piklist_demo_entry'
+  ));
+
+  piklist('field', array(
+    'type' => 'hidden'
+    ,'scope' => 'post'
+    ,'field' => 'post_status'
+    ,'value' => 'pending'
+  ));
 
   piklist('field', array(
     'type' => 'text'
-    ,'field' => 'text_required'
+    ,'scope' => 'post'
+    ,'field' => 'post_title'
+    ,'label' => 'Title'
+  ));
+
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'text_required_validate'
+    ,'scope' => 'post_meta'
     ,'label' => 'Text Required'
     ,'description' => "required => true"
-    ,'attributes' => array(
-      'class' => 'large-text'
-    )
     ,'required' => true
   ));
 
- piklist('field', array(
+  piklist('field', array(
+    'type' => 'text'
+    ,'field' => 'text_limit_validate'
+    ,'scope' => 'post_meta'
+    ,'label' => 'Text Limit Validate'
+    ,'add_more' => true
+    ,'validate' => array(
+      array(
+        'type' => 'limit'
+        ,'options' => array(
+          'min' => 1
+          ,'max' => 2
+        )
+      )
+    )
+  ));
+
+  piklist('field', array(
     'type'    => 'group'
-    ,'field'   => 'group_required'
+    ,'field'   => 'group_required_validate'
+    ,'scope' => 'post_meta'
     ,'label'   => 'Group Required'
     ,'add_more'=> true
     ,'fields'  => array(
       array(
         'type' => 'text'
         ,'field' => 'name'
-        ,'required' => true
-        ,'label' => 'Name'
-        ,'columns' => 12
+        ,'columns' => 8
+        ,'attributes' => array(
+          'placeholder' => 'Name'
+        )
       )
       ,array(
         'type' => 'checkbox'
-        ,'field' => 'hierarchical'
-        ,'label' => 'Type'
+        ,'field' => 'hierarchical_validate'
         ,'required' => true
-        ,'columns' => 12
+        ,'columns' => 4
         ,'choices' => array(
           'true' => 'Hierarchical'
         )
@@ -45,26 +84,22 @@ Order: 10
   piklist('field', array(
     'type' => 'text'
     ,'label' => 'File Name'
-    ,'field' => 'file_name'
+    ,'field' => 'file_name_validate'
+    ,'scope' => 'post_meta'
     ,'description' => 'Converts multiple words to a valid file name'
     ,'sanitize' => array(
       array(
         'type' => 'file_name'
       )
     )
-    ,'attributes' => array(
-      'class' => 'large-text'
-    )
   ));
 
   piklist('field', array(
     'type' => 'text'
-    ,'field' => 'validate_emaildomain'
+    ,'field' => 'emaildomain_validate'
+    ,'scope' => 'post_meta'
     ,'label' => 'Email address'
     ,'description' => __('Validate Email and Email Domain')
-    ,'attributes' => array(
-      'class' => 'large-text'
-    )
     ,'validate' => array(
       array(
         'type' => 'email'
@@ -77,12 +112,10 @@ Order: 10
 
   piklist('field', array(
     'type' => 'text'
-    ,'field' => 'validate_file_exists'
+    ,'field' => 'file_exists_validate'
+    ,'scope' => 'post_meta'
     ,'label' => __('File exists?')
     ,'description' => 'Test with: http://wordpress.org/plugins/about/readme.txt'
-    ,'attributes' => array(
-      'class' => 'large-text'
-    )
     ,'validate' => array(
       array(
         'type' => 'file_exists'
@@ -90,15 +123,12 @@ Order: 10
     )
   ));
 
-
   piklist('field', array(
     'type' => 'text'
-    ,'field' => 'validate_image'
+    ,'field' => 'image_validate'
+    ,'scope' => 'post_meta'
     ,'label' => __('Image')
     ,'description' => 'Test with: http://piklist.com/wp-content/themes/piklistcom-base/images/piklist-logo@2x.png'
-    ,'attributes' => array(
-      'class' => 'large-text'
-    )
     ,'validate' => array(
       array(
         'type' => 'image'
@@ -106,37 +136,10 @@ Order: 10
     )
   ));
 
-
-  // piklist('field', array(
-  //   'type' => 'text'
-  //   ,'field' => 'text_class_small'
-  //   ,'label' => 'Text'
-  //   ,'value' => '<em>Click</em> <a href=\'http://wp.tutsplus.com\'>here</a> to visit <strong> wptuts+</strong>'
-  //   ,'sanitize' => array(
-  //     array(
-  //       'type' => 'wp_kses'
-  //       ,'options' => array(
-  //         'allowed_html' => array(
-  //           'strong' => array()
-  //           ,'a' => array(
-  //             'href' => array()
-  //             ,'title' => array()
-  //           )
-  //         )
-  //         ,'allowed_protocols' => array('http')
-  //       )
-  //     )
-  //   )
-  //   ,'help' => 'You can easily add tooltips to your fields with the help parameter.'
-  //   ,'attributes' => array(
-  //     'class' => 'regular-text'
-  //   )
-  // ));
-  // 
-
   piklist('field', array(
     'type' => 'checkbox'
-    ,'field' => 'checkbox_validation'
+    ,'field' => 'checkbox_validate'
+    ,'scope' => 'post_meta'
     ,'label' => 'Checkbox'
     ,'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'value' => 'third'
@@ -156,17 +159,14 @@ Order: 10
     )
   ));
 
-
   piklist('field', array(
     'type' => 'file'
-    ,'field' => 'upload_media'
-    ,'label' => __('Add File(s)','piklist')
+    ,'field' => 'upload_media_validate'
+    ,'scope' => 'post_meta'
+    ,'label' => __('Add File','piklist')
     ,'options' => array(
-      'modal_title' => __('Add File(s)','piklist')
+      'modal_title' => __('Add File','piklist')
       ,'button' => __('Add','piklist')
-    )
-    ,'attributes' => array(
-      'class' => 'large-text'
     )
     ,'validate' => array(
       array(
@@ -179,10 +179,10 @@ Order: 10
     )
   ));
 
-
-    piklist('field', array(
+  piklist('field', array(
     'type' => 'group'
-    ,'field' => 'address_group_add_more'
+    ,'field' => 'address_group_add_more_validate'
+    ,'scope' => 'post_meta'
     ,'add_more' => true
     ,'label' => 'Grouped/Add-More with Limit'
     ,'description' => 'No more than 2'
@@ -210,10 +210,40 @@ Order: 10
       )
     )
   ));
-
-  piklist('shared/code-locater', array(
-    'location' => __FILE__
-    ,'type' => 'Meta Box'
+  
+  piklist('field', array(
+    'type' => 'group'
+    ,'add_more' => true
+    ,'label' => 'UnGrouped/Add-More with Limit'
+    ,'scope' => 'post_meta'
+    ,'description' => 'No more than 2'
+    ,'fields' => array(
+      array(
+        'type' => 'text'
+        ,'field' => 'group_field_1_test'
+        ,'label' => 'Field 1'
+        ,'columns' => 12
+      )
+      ,array(
+        'type' => 'text'
+        ,'field' => 'group_field_2_test'
+        ,'label' => 'Field 2'
+        ,'columns' => 12
+      )
+    )
+    ,'validate' => array(
+      array(
+        'type' => 'limit'
+        ,'options' => array(
+          'min' => 1
+          ,'max' => 2
+        )
+      )
+    )
   ));
 
-?>
+  piklist('field', array(
+    'type' => 'submit'
+    ,'field' => 'submit'
+    ,'value' => 'Submit'
+  ));

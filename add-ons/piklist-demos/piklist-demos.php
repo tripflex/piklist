@@ -43,7 +43,6 @@ Author URI: http://piklist.com/
         'slug'
         ,'author'
       )
-      //,'post_states' => true
       ,'status' => array(
         'draft' => array(
           'label' => 'New'
@@ -60,6 +59,28 @@ Author URI: http://piklist.com/
           'label' => 'Lock'
           ,'public' => true
         )
+      )
+    );
+    
+    $post_types['piklist_lite_demo'] = array(
+      'labels' => piklist('post_type_labels', 'Lite Demo')
+      ,'title' => __('Enter a new Demo Title')
+      ,'menu_icon' => piklist_admin::responsive_admin() == true ? plugins_url('piklist/parts/img/piklist-menu-icon.svg') : plugins_url('piklist/parts/img/piklist-menu-icon.png')
+      ,'page_icon' => plugins_url('piklist/parts/img/piklist-page-icon-32.png')
+      ,'show_in_menu' => 'edit.php?post_type=piklist_demo'
+      ,'supports' => array(
+        'title'
+        ,'revisions'
+      )
+      ,'public' => true
+      ,'has_archive' => true
+      ,'capability_type' => 'post'
+      ,'edit_columns' => array(
+        'title' => __('Title')
+      )
+      ,'hide_meta_box' => array(
+        'slug'
+        ,'author'
       )
     );
     

@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Taxonomies
-Post Type: piklist_demo
+Post Type: piklist_demo,piklist_lite_demo
 Order: 20
 Priority: default
 Context: side
@@ -16,7 +16,7 @@ Collapse: true
 <?php
 
   piklist('field', array(
-    'type' => 'checkbox'
+    'type' => 'radio'
     ,'scope' => 'taxonomy'
     ,'field' => 'piklist_demo_type'
     ,'label' => 'Demo Types'

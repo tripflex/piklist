@@ -1,4 +1,4 @@
-<?php
+dv<?php
 /*
 Title: Multiselect Fields
 Capability: manage_options
@@ -22,24 +22,19 @@ Collapse: false
   ));
 
   piklist('field', array(
-    'type' => 'group'
+    'type' => 'select'
     ,'field' => 'multiselect_add_more'
     ,'label' => 'Multiselect Add More'
     ,'add_more' => true
     ,'description' => 'A grouped field. Data is not searchable, since it is saved in an array.'
-    ,'fields' => array(
-      array(
-        'type' => 'select'
-        ,'field' => 'multiselect_add_more_field'
-        ,'choices' => array(
-          'first' => 'First Choice'
-          ,'second' => 'Second Choice'
-          ,'third' => 'Third Choice'
-        )
-        ,'attributes' => array(
-          'multiple' => 'multiple'
-        )
-      )
+    ,'field' => 'multiselect_add_more_field'
+    ,'choices' => array(
+      'first' => 'First Choice'
+      ,'second' => 'Second Choice'
+      ,'third' => 'Third Choice'
+    )
+    ,'attributes' => array(
+      'multiple' => 'multiple'
     )
   ));
 
