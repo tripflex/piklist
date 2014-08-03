@@ -6,7 +6,6 @@ Width: 720
   piklist('field', array(
     'type' => 'editor'
     ,'field' => 'post_content'
-    ,'scope' => 'post'
     ,'label' => 'Post Content'
     ,'description' => 'This is the standard post box, now placed in a Piklist WorkFlow.'
     ,'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
@@ -40,7 +39,6 @@ Width: 720
   piklist('field', array(
     'type' => 'editor'
     ,'field' => 'post_content_draggable'
-    ,'scope' => 'post_meta'
     ,'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     ,'options' => array (
       'wpautop' => true
