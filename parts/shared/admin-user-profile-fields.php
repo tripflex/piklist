@@ -5,11 +5,11 @@
   {
     $(document).ready(function()
     {      
-      var sections = ['<?php echo implode("', '", $sections); ?>'];
+      var meta_boxes = ['<?php echo implode("', '", $meta_boxes); ?>'];
       
       $('#your-profile h3').each(function()
       {
-        if ($.inArray($(this).text(), sections) == -1)
+        if ($.inArray($(this).text(), meta_boxes) == -1)
         {
           $(this)
             .hide()

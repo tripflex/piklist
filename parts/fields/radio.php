@@ -7,18 +7,18 @@
 
   <?php 
     $_index = 0;
-    $value = is_array($value) && count($value) == 1 && !empty($value[0]) ? $value[0] : $value;
+    $value = is_array($value) && count($value) == 1 ? current($value) : $value;
     foreach ($choices as $_value => $choice): 
   ?>
   
     <?php echo $list ? '<li>' : ''; ?>
-  
-      <label class="piklist-field-list-item <?php echo isset($attributes['class']) ? implode(' ', $attributes['class']) : null; ?>">
-  
+
+      <label class="piklist-field-list-item">
+
         <input 
           type="radio"
           id="<?php echo piklist_form::get_field_id($field, $scope, $_index, $prefix); ?>" 
-          name="<?php echo piklist_form::get_field_name($field, $scope, false, $prefix);; ?>"
+          name="<?php echo piklist_form::get_field_name($field, $scope, $index, $prefix, $multiple); ?>"
           value="<?php echo esc_attr($_value); ?>"
           <?php echo $value == $_value ? 'checked="checked"' : ''; ?>
           <?php echo piklist_form::attributes_to_string($attributes); ?>

@@ -24,6 +24,7 @@
         'type' => 'select'
         ,'field' => 'widget'
         ,'label' => __('Select a Widget', 'piklist')
+        ,'editable' => false
         ,'attributes' => array(
           'class' => array(
             'widefat'
@@ -55,7 +56,9 @@
         
         do_action('piklist_widget_notices');
         
-        piklist::render($widgets[$widget]['form']);
+        piklist::render($widgets[$widget]['form'], array(
+          'instance' => $instance
+        ));
         
         piklist_form::save_fields();
       

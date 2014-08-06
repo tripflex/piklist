@@ -53,6 +53,8 @@ class Piklist_List_Table_Template extends WP_List_Table
   
   function __construct($arguments)
   {
+    global $wpdb;
+    
     extract($arguments);
     
     // TODO: Require fields

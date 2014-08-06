@@ -1,15 +1,20 @@
 
 <?php 
   
+  $values = array_keys($choices);
+  
+  foreach ($choices as $_add_on => $_name):
+    if (piklist_add_on::$available_add_ons[$_add_on]['plugin']):
+      unset($choices[$_add_on]);
+    endif;
+  endforeach;
+  
   $settings = piklist_setting::get('settings');
   $values = array_keys($choices);
   $attributes['style'] = 'display: none !important;';
   
   for ($index = 0; $index < count($choices); $index++):
-  
     $active = (!is_array($value) && $value == $values[$index]) || (is_array($value) && in_array($values[$index], $value));
-  
-    if (!piklist_add_on::$available_add_ons[$values[$index]]['plugin']):
 ?>
     
     <div class="piklist-field-add-on">  
@@ -44,8 +49,6 @@
       <?php endif; ?>
     
     </div>
-  
-  <?php endif; ?>
 
 <?php endfor; ?>
 

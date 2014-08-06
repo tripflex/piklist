@@ -53,10 +53,17 @@ class PikList_Widget
       if (!piklist::directory_empty($path . '/parts/widgets'))
       {
         $widget_class_name = $widget_class . '_' . piklist::slug($from);
+
+        $suffix = '';
       
         if (isset(piklist_add_on::$available_add_ons[$from]))
         {
-          $title = piklist_add_on::$available_add_ons[$from]['Name'] . ' ' . __('Widgets', 'piklist');
+          if (stripos(piklist_add_on::$available_add_ons[$from]['Name'], 'widget') === false)
+          {
+            $suffix = ' ' . __('Widgets', 'piklist');
+          }
+
+          $title = piklist_add_on::$available_add_ons[$from]['Name'] . $suffix;
           $description = strip_tags(piklist_add_on::$available_add_ons[$from]['Description']);
         }
         elseif ($from == 'piklist')

@@ -8,7 +8,7 @@ if (!defined('ABSPATH'))
 class PikList_Help
 {
   public static function _construct()
-  { 
+  {
     add_action('admin_head', array('piklist_help', 'register_help_tabs'));
   }
 
@@ -25,17 +25,23 @@ class PikList_Help
     
     $file = $path . '/parts/' . $folder . '/' . $part;
     
-    $data = get_file_data($file, array(
+    $data = get_file_data($file, apply_filters('piklist_get_file_data', array(
               'title' => 'Title'
               ,'capability' => 'Capability'
+              ,'role' => 'Role'
               ,'page' => 'Page'
               ,'sidebar' => 'Sidebar'
-            ));
+            ), 'help'));
+
+    $data = apply_filters('piklist_add_part', $data, 'help');
 
     $pages = isset($data['page']) ? explode(',', $data['page']) : false;
     
     if (((($screen->id == $data['page']) || empty($data['page']) || in_array($screen->id, $pages)))
-      && (((isset($data['capability']) && current_user_can($data['capability'])) || empty($data['capability'])))
+      && (
+          (isset($data['capability']) && current_user_can($data['capability']))
+          || (isset($data['role']) && piklist_user::current_user_role($data['role']))
+      )
     )
     {
       if ($data['sidebar'] == 'true')

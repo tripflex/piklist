@@ -50,7 +50,7 @@ class PikList_Media
     
     $current_user = wp_get_current_user();
     
-    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, array(
+    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, apply_filters('piklist_get_file_data', array(
               'name' => 'Title'
               ,'description' => 'Description'
               ,'capability' => 'Capability'
@@ -59,15 +59,18 @@ class PikList_Media
               ,'Status' => 'Status'
               ,'new' => 'New'
               ,'id' => 'ID'
-            ));
+            ), 'media'));
+    
+    $data = apply_filters('piklist_add_part', $data, 'media');
     
     $meta_box = array(
-      'config' => $data
+      'id' => piklist::slug($data['name'])
+      ,'config' => $data
       ,'part' => $path . '/parts/' . $folder . '/' . $part
     );
     
     if ((!$data['capability'] || ($data['capability'] && current_user_can(strtolower($data['capability']))))
-      && (!$data['role'] || in_array(strtolower($data['role']), $current_user->roles))
+      && (!$data['role']) || piklist_user::current_user_role($data['role'])
       && (!$data['new'] || ($data['new'] && !in_array($pagenow, array('async-upload.php', 'media-new.php'))))
     )
     {    
@@ -108,12 +111,16 @@ class PikList_Media
           'meta_box' => $meta_box
           ,'wrapper' => 'media_meta'
         ), false);
-  
+        
+        do_action('piklist_pre_render_media_meta_box', $post, $meta_box);
+        
         piklist::render($meta_box['part'], array(
           'post_id' => $post->ID
           ,'prefix' => 'piklist'
           ,'plugin' => 'piklist'
         ), false);
+                
+        do_action('piklist_post_render_media_meta_box', $post, $meta_box);
                 
         piklist::render('shared/meta-box-end', array(
           'meta_box' => $meta_box

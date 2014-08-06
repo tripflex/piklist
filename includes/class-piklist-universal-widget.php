@@ -19,9 +19,17 @@ class PikList_Universal_Widget extends WP_Widget
   
   public function PikList_Universal_Widget($name, $title, $description, $path = array(), $control_options = array()) 
   {
+    global $pagenow;
+    
     $this->widget_name = $name;
     $this->widgets_path = $path;
     
+    if ($pagenow == 'customize.php')
+    {
+      $control_options['width'] = 300;
+      $control_options['height'] = 200;
+    }
+      
     $this->WP_Widget(
       ucwords(piklist::dashes($this->widget_name))
       ,__($title)
@@ -78,23 +86,27 @@ class PikList_Universal_Widget extends WP_Widget
         $instances = get_option('widget_' . piklist::dashes($this->widget_name));
       
         piklist_widget::widget()->_set($_REQUEST['number']);
-        piklist_widget::widget()->instance = $instances[$_REQUEST['number']];
+        
+        if (isset($instances[$_REQUEST['number']]))
+        {
+          piklist_widget::widget()->instance = $instances[$_REQUEST['number']];
+        }
       }
 
       if (isset($this->widgets[$widget]))
       {
         ob_start();
         
-          do_action('piklist_widget_notices');
-        
-          piklist::render($this->widgets[$widget]['form'], null);
-          
-          piklist_form::save_fields();
-        
+        do_action('piklist_widget_notices');
+      
+        piklist::render($this->widgets[$widget]['form'], null);
+
+        piklist_form::save_fields();
+
         $output = ob_get_contents();
   
         ob_end_clean();
-            
+        
         echo json_encode(array(
           'form' => $output
           ,'widget' => $this->widgets[$widget]
@@ -109,7 +121,7 @@ class PikList_Universal_Widget extends WP_Widget
 
   public function update($new_instance, $old_instance)
   {
-    if (piklist_validate::check($new_instance))
+    if (false !== ($fields = piklist_validate::check($new_instance)))
     { 
       $instance = array();
     
@@ -120,10 +132,10 @@ class PikList_Universal_Widget extends WP_Widget
           $instance[$key] = is_array($value) ? maybe_serialize($value) : stripslashes($value);
         }
       }
-    
+      
       return $instance;
     }
-    else if (count($old_instance) <= 1)
+    elseif (count($old_instance) <= 1)
     {
       return array(
         'widget' => $new_instance['widget']
@@ -138,24 +150,33 @@ class PikList_Universal_Widget extends WP_Widget
   public function widget($arguments, $instance) 
   {
     extract($arguments);
-
+    
+    $this->register_widgets();
+    
     $instance = piklist::object_value($instance);
     $widget = $instance['widget'];
-
-    unset($instance['widget']);
     
-    $this->widgets[$widget]['instance'] = $instance;
-
-    piklist_widget::$current_widget = $this->widget_name;
+    if (!empty($widget))
+    {
+      unset($instance['widget']);
     
-    piklist::render($this->widgets[$widget]['path'], array(
-      'instance' => $instance
-      ,'settings' => $instance
-      ,'before_widget' => $before_widget
-      ,'after_widget' => $after_widget
-      ,'before_title' => $before_title
-      ,'after_title' => $after_title
-    ));
+      $this->widgets[$widget]['instance'] = $instance;
+
+      piklist_widget::$current_widget = $this->widget_name;
+    
+      do_action('piklist_pre_render_widget', $this->widgets[$widget]);
+      
+      piklist::render($this->widgets[$widget]['path'], array(
+        'instance' => $instance
+        ,'settings' => $instance
+        ,'before_widget' => str_replace('class="', 'class="' . piklist::dashes($this->widgets[$widget]['add_on'] . ' ' . $this->widgets[$widget]['name']) . ' ', $before_widget)
+        ,'after_widget' => $after_widget
+        ,'before_title' => $before_title
+        ,'after_title' => $after_title
+      ));
+    
+      do_action('piklist_post_render_widget', $this->widgets[$widget]);
+    }
   }
   
   public function register_widgets()
@@ -176,15 +197,26 @@ class PikList_Universal_Widget extends WP_Widget
       $name = piklist::dashes(strtolower(str_replace('.php', '', $part)));
       $form = file_exists($path . $name . '-form.php') ? $path . $name . '-form' : false;
       
+      if ($form)
+      {
+        $data = get_file_data($form . '.php', apply_filters('piklist_get_file_data', array(
+          'height' => 'Height'
+          ,'width' => 'Width'
+        ), 'widgets'));
+        
+        $data = apply_filters('piklist_add_part', $data, 'widgets');
+      }
+      else
+      {
+        $data = null;
+      }
+      
       $this->widgets[$name] = array(
         'name' => $name
         ,'add_on' => $add_on
         ,'path' => $path . $name
         ,'form' => $form
-        ,'form_data' => !$form ? false : get_file_data($form . '.php', array(
-          'height' => 'Height'
-          ,'width' => 'Width'
-        ))
+        ,'form_data' => $data
         ,'data' => get_file_data($path . $part, array(
           'title' => 'Title'
           ,'description' => 'Description'

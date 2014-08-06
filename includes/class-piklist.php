@@ -102,7 +102,6 @@ class PikList
 
     load_plugin_textdomain('piklist', false, 'piklist/languages/');
 
-    // TODO: what if included in theme?
     register_activation_hook('piklist/piklist.php', array('piklist', 'activate'));
    
     self::auto_load();
@@ -141,7 +140,7 @@ class PikList
   
   public static function add_plugin($type, $path)
   {
-    self::$paths[$type] = $path;        
+    self::$paths[$type] = stristr($path, ':\\') || stristr($path, ':/') ? str_ireplace('/', '\\', $path) : $path;   
 
     $path = str_replace(chr(92), '/', $path);
 
@@ -150,10 +149,10 @@ class PikList
   
   public static function render($view, $arguments = array(), $return = false, $loop = null) 
   {
-    global $post, $posts, $post_id, $current_user, $wpdb, $wp_query, $pagenow, $typenow, $hook_suffix, $current_screen, $wp_version, $wp_did_header, $wp_rewrite, $wp, $id, $comment, $user_ID;
+    global $post, $posts, $post_id, $current_user, $wpdb, $wp_query, $pagenow, $typenow, $hook_suffix, $current_screen, $wp_version, $wp_did_header, $wp_rewrite, $wp, $wp_post_statuses, $comment, $user_ID;
 
     $_windows_os = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
-    $_path_seperator = $_windows_os ? '\\' : '/';
+    $_path_seperator = '/';
 
     $_backtrace = debug_backtrace();
 
@@ -174,7 +173,6 @@ class PikList
         }
       }
     }
-    
     
     if (!isset($_file))
     {
@@ -201,14 +199,21 @@ class PikList
           }
         }
         
-        foreach (array('theme', 'parent-theme') as $_theme)
+        if (!path_is_absolute($_file))
         {
-          if (isset(self::$paths[$_theme]))
+          foreach (array('theme', 'parent-theme') as $_theme)
           {
-            if (file_exists(self::$paths[$_theme] . $_part))
-            {
-              $_file = self::$paths[$_theme] . $_part;
-              break;
+            $_path = isset(self::$paths[$_theme]) ? self::$paths[$_theme] : null;
+
+            if (isset(self::$paths[$_theme]) && isset($_path)) 
+            {          
+              $_path = substr($_path, 0, strlen($_path) - 8);
+              
+              if (file_exists($_path . $_part))
+              {
+                $_file = $_path . $_part;
+                break;
+              }
             }
           }
         }
@@ -219,7 +224,7 @@ class PikList
         }
       }   
     }
-    
+
     if ($return)
     {
       ob_start();
@@ -241,7 +246,7 @@ class PikList
     }
     
     $_file = apply_filters('piklist_render', $_file, $view, $arguments);
-    
+
     if ($_file)
     {
       if ($loop && self::is_associative_array($arguments[$loop]))
@@ -313,14 +318,21 @@ class PikList
     $paths = $path ? $path : self::$paths;
 
     foreach ($paths as $display => $path)
-    {   
+    {  
       $files = self::get_directory_list($path . '/parts/' . $folder);
+
+      if (empty($files) && in_array($display, array('theme', 'parent-theme')))
+      {
+        $files = self::get_directory_list($path . '/' . $folder);
+      }
+      
       foreach ($files as $part)
       {
         if (strtolower($part) != 'index.php')
         {
           $file_prefix = substr($part, 0, strlen($prefix));
           $file_suffix = substr($part, strlen($part) - strlen($suffix));
+          
           if ($file_prefix == $prefix && $file_suffix == $suffix)
           {
             call_user_func_array($callback, array(array(
@@ -338,6 +350,11 @@ class PikList
   
   public static function pre($output, $source = false)
   {
+    if ($output === '-')
+    {
+      $output = '--------------------------------------------------';
+    }
+    
     echo "<pre " . ($source ? 'style="display: none !important;"' : null) . ">\r\n";
   
     print_r($output);
@@ -480,8 +497,8 @@ class PikList
       ,'new_item' => __('Add New ' . self::singularize($label), 'piklist')
       ,'view_item' => __('View ' . self::singularize($label), 'piklist')
       ,'search_items' => __('Search ' . self::pluralize($label), 'piklist')
-      ,'not_found' => __('No ' . self::pluralize(strtolower($label)) . ' found', 'piklist')
-      ,'not_found_in_trash' => __('No ' . self::pluralize(strtolower($label)) . ' found in trash', 'piklist')
+      ,'not_found' => __('No ' . self::pluralize($label) . ' found', 'piklist')
+      ,'not_found_in_trash' => __('No ' . self::pluralize($label) . ' found in trash', 'piklist')
       ,'parent_item_colon' => __('Parent ' . self::pluralize($label) . ':', 'piklist')
       ,'menu_name' => __(self::pluralize($label), 'piklist')
     );
@@ -650,7 +667,13 @@ class PikList
 
   public static function array_path_set(&$array, $path, $value)
   {
-    if (!$path)
+    if (is_array($path) && empty($path))
+    {
+      $array = $value;
+      
+      return null;
+    }
+    elseif (!$path)
     {
       return null;
     }
@@ -669,6 +692,18 @@ class PikList
     }
 
     $found = $value;
+  }
+  
+  public static function array_values_cast(&$value, $key)
+  {
+    if (is_numeric($value))
+    {
+      $value = $value + 0;
+    }
+    elseif (in_array(strtolower($value), array('true', 'false')))
+    {
+      $value = strtolower($value) == 'true' ? true : false;
+    }
   }
   
   public static function xml_to_array($xml) 
@@ -751,9 +786,9 @@ class PikList
     return true;
   }
   
-  public static function unique_id()
+  public static function unique_id($object = null)
   {
-    return substr(md5(rand()), 0, 7);
+    return substr(md5(is_object($object) || is_array($object) ? serialize($object) : rand()), 0, 7);
   }
 
   public static function object_id($object)
@@ -789,7 +824,7 @@ class PikList
   
   public static function is_associative_array($array)
   {
-      return array_keys($array) !== range(0, count($array) - 1);
+    return array_keys($array) !== range(0, count($array) - 1);
   }
   
   public static function get_settings($option, $setting)
@@ -807,6 +842,16 @@ class PikList
   public static function sort_by_order($a, $b) 
   {
     return $a['order'] - $b['order'];
+  }
+
+  public static function sort_by_name_order($a, $b) 
+  {
+    return $a['name'] - $b['name'];
+  }
+  
+  public static function sort_by_tab_order($a, $b) 
+  {
+    return $a['tab_order'] - $b['tab_order'];
   }
   
   public static function sort_by_args_order($a, $b) 
@@ -944,80 +989,6 @@ class PikList
     }    
   }
   
-  public static function include_user_profile_fields($arguments)
-  {
-    global $wp_filter;
-    
-    $tags = array(
-      'show_user_profile'
-      ,'edit_user_profile'
-      ,'personal_options_update'
-      ,'edit_user_profile_update'
-    );
-    
-    if (isset($arguments['actions']))
-    {
-      foreach ($tags as $tag)
-      {
-        foreach ($wp_filter[$tag] as $priority => $callback)
-        {
-          foreach ($callback as $id => $config)
-          {
-            foreach ($arguments['actions'] as $action)
-            {
-              if (strstr($id, $action))
-              {
-                $idx = _wp_filter_build_unique_id($action, $id, $priority);
-                if ($idx == $id)
-                {
-                  array_push($arguments['actions'], $id);
-                }
-              }
-            }
-
-            if (!in_array($id, $arguments['actions']) && ($wp_filter[$tag][$priority][$id]['function'][0] != 'piklist_form' && $wp_filter[$tag][$priority][$id]['function'][0] != 'save_fields'))
-            {
-              unset($wp_filter[$tag][$priority][$id]);
-            }
-          }
-        
-          if (empty($wp_filter[$tag][$priority]))
-          {
-            unset($wp_filter[$tag][$priority]);
-          }
-        }
-      
-        if (empty($wp_filter[$tag]))
-        {
-          unset($wp_filter[$tag]);
-        }
-      }
-    }
-    
-    // if ($arguments['sections'])
-    // {
-    //   $sections = array(
-    //     'Personal Options'
-    //     ,'Name'
-    //     ,'Contact Info'
-    //     ,'About the user'
-    //     ,'About Yourself'
-    //   );
-    //   
-    //   foreach ($sections as $section)
-    //   {
-    //     if (in_array($section, $arguments['sections']))
-    //     {
-    //       unset($sections[array_search($section, $sections)]);
-    //     }
-    //   }
-    // }
-    
-    piklist('shared/admin-user-profile-fields', array(
-      'sections' => isset($arguments['sections']) ? $arguments['sections'] : array()
-    ));
-  }
-  
   public function get_ip_address() 
   {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) 
@@ -1072,10 +1043,10 @@ function piklist($option, $arguments = array())
         else
         {
           $__key = $arguments[0];
-          $_key = is_object($value) ? $value->$__key : $value[$__key];
+          $_key = is_object($value) ? $value->$__key : (isset($value[$__key]) ? $value[$__key] : null);
 
           $_value = $arguments[1];
-          $list[$_key] = is_object($value) ? $value->$_value : $value[$_value];
+          $list[$_key] = is_object($value) ? $value->$_value : (isset($value[$_value]) ? $value[$_value] : null);
         }
       }
       else
@@ -1220,7 +1191,7 @@ function piklist($option, $arguments = array())
       
       case 'include_user_profile_fields':
       
-        piklist::include_user_profile_fields($arguments);
+        piklist_user::include_user_profile_fields($arguments);
         
       break;
       

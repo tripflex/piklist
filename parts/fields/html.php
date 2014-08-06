@@ -7,7 +7,7 @@
     <?php echo piklist_form::attributes_to_string($attributes); ?>
   >
 
-    <?php echo !empty($value) ? $value : null; ?>
+    <?php echo $value ?>
 
 <?php 
   if (!in_array($tag, array(

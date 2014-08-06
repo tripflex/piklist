@@ -19,8 +19,7 @@ class PikList_Revision
   {
     if ($parent_id = wp_is_post_revision($post_id) && !wp_is_post_autosave($post_id)) 
     {
-      $parent = get_post($parent_id);
-      $meta = piklist('post_custom', $parent->ID);
+      $meta = piklist('post_custom', $parent_id);
 
       foreach ($meta as $key => $value)
       {

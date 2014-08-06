@@ -3,7 +3,7 @@ Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
 Tested up to: 3.9
 Requires at least: 3.6
-Stable tag: 0.9.3.6
+Stable tag: 0.9.4.9
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -83,10 +83,6 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Hide/Show based on the users capability.
 *   Hide form fields, and just show field values
 
-= Translators =
-* French (fr) - Daniel Ménard
-* Slovak (sk) - Branco
-
 == Installation ==
 
 *   Install and activate Piklist like any other plugin.
@@ -94,14 +90,51 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 == Changelog ==
 
+= 0.9.4.9 =
+* NEW: Pointers!
+
+= 0.9.4.8 =
+* FIXED: Typo in Demos
+
+= 0.9.4.7 =
+* ENHANCED: Updated Widgets
+
+= 0.9.4.6 =
+* ENHANCED: Editor enhancement for group fields.
+
+= 0.9.4.5 =
+* FIXED: Added Taxonomy support for non-multiple fields.
+
+= 0.9.4.4 =
+* FIXED: Update to save_post action.
+
+= 0.9.4.3 =
+* FIXED: Post Relationships work as expected.
+
+= 0.9.4.2 =
+* FIXED: Radio buttons save properly in Settings.
+
+= 0.9.4.1 =
+* FIXED: Removed object_id from fields.
+* FIXED: Language files load properly.
+* FIXED: Locked notice works correctly on Multisite.
+* ENHANCED: Field conditions support add-mores.
+* ENHANCED: Field conditions support serialize groups.
+* ENHANCED: Field Columns switch to right margins.
+* ENHANCED: Right Now widget css update.
+
 = 0.9.4 =
+* The most stable version of Piklist yet.
+* Tons of performance updates.
 * NEW: Field validation.
 * NEW: Field sanitization.
 * NEW: label_class attribute
 * ENHANCED: Field conditions.
 * ENHANCED: Faster, reengineered Widget system.
+* ENHANCED: Piklist Widgets work better in Theme Customizer.
+* ENHANCED: Filter everything by user role.
+* ENHANCED: Tooltips match WordPress default themes.
 * ENHANCED: index.php files are ignored in parts folders.
-* FIXED: Language files load properly.
 * FIXED: Quick edit buttons work properly.
 * FIXED: Textarea values do not carry over in Add-Mores. Props Daniel Rampanelli
 * FIXED: Preview button only shows for Public Post Types. Props Daniel Rampanelli
@@ -109,13 +142,17 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 * FIXED: Autosaves triggered by "Preview Changes". Props Daniel Rampanelli
 * FIXED: Field attributes properly accept a zero value. Props @jasontheadams
 * FIXED: piklist_empty_post_title filter now works as expected.
-* Lots of bug fixes.
+* Lots and lots and lots and lots of bug fixes.
+
+= 0.9.3.5 =
+* FIXED: Language files load properly.
+* FIXED: Menu icon size no longer conflicts with other plugins.
 
 = 0.9.3.4 =
-FIXED: Upgrade script works on older version of mysql.
+* FIXED: Upgrade script works on older version of mysql.
 
 = 0.9.3.3 =
-FIXED: Update to class-piklist-user
+* FIXED: Update to class-piklist-user
 
 = 0.9.3.2 =
 * FIXED: User registrations emails no longer conflict with other plugins (i.e. BuddyPress)

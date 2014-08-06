@@ -1,13 +1,8 @@
-
 <div class="hidden" id="role_stub">
   
+  <input type="hidden" value="<?php echo esc_attr($user_roles[0]); ?>" name="role"/>
+
   <?php
-    piklist('field', array(
-      'type' => 'hidden'
-      ,'scope' => false
-      ,'field' => 'role'
-      ,'value' => $user_roles[0]
-    ));
     
     piklist('field', array(
       'type' => 'checkbox'
